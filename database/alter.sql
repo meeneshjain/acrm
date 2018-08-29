@@ -1,9 +1,5 @@
-MANISH 29-08-2018
+-- MANISH 29-08-2018
 
--- Adminer 4.2.5 MySQL dump
-
-SET NAMES utf8;
-SET time_zone = '+00:00';
 
 DROP TABLE IF EXISTS `companies`;
 CREATE TABLE `companies` (
