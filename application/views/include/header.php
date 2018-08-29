@@ -19,6 +19,11 @@ sessionStorage.fonts = true;
 }
 });
 </script>
+
+<script type="text/javascript">
+    base_url = '<?php echo base_url();?>';
+</script>
+
 <!--end::Web font -->
 <!--begin::Base Styles -->
 <link href="<?php echo base_url('assets/vendors/custom/datatables/datatables.bundle.css'); ?>" rel="stylesheet" type="text/css" />
@@ -912,12 +917,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 				</button>
 				<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
 					<!-- BEGIN: Aside Menu -->
-	<div 
-		id="m_ver_menu" 
-		class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " 
-		m-menu-vertical="1"
-		 m-menu-scrollable="0" m-menu-dropdown-timeout="500"  
-		>
+	            <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
 						<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 							<li class="m-menu__item " aria-haspopup="true" >
 								<a  href="index.html" class="m-menu__link ">
@@ -936,12 +936,14 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 									</span>
 								</a>
 							</li>
+
 							<li class="m-menu__section ">
 								<h4 class="m-menu__section-text">
 									Components
 								</h4>
 								<i class="m-menu__section-icon flaticon-more-v3"></i>
 							</li>
+
 							<li class="m-menu__item  m-menu__item--submenu m-menu__item--open m-menu__item--expanded" aria-haspopup="true"  m-menu-submenu-toggle="hover">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
 									<i class="m-menu__link-icon flaticon-layers"></i>
@@ -974,6 +976,19 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 									</ul>
 								</div>
 							</li>
+
+                            <li class="m-menu__item " aria-haspopup="true" >
+                                <a  href="<?php echo base_url('company');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Company
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
 							
 							
 							
