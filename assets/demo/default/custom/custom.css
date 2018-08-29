@@ -1,0 +1,10 @@
+[data-notify='icon'] {
+    margin: 10px;
+    float: left;
+    padding-top: 11px;
+}
+
+.modal-xlg{
+    max-width: 100%;
+    width:95%
+}
