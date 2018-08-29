@@ -56,9 +56,9 @@ function notify_alert(type, message, title) {
 
 //ready goes here 
 
+var table_object = []
 $(document).ready(function () {
     if ($(".dt_table").length > 0) {
-        var table_object = []
         var i = 0;
         $(".dt_table").each(function () {
             var $obj = $(this);

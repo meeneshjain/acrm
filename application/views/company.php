@@ -76,7 +76,7 @@
                                                         <label class="form-control-label">
                                                             * Cardholder Name:
                                                         </label>
-                                                        <input type="text" name="billing_card_name" class="form-control m-input" placeholder="" value="">
+                                                        <input required type="text" name="billing_card_name" class="form-control m-input" placeholder="" value="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -84,7 +84,7 @@
                                                         <label class="form-control-label">
                                                             * Card Number:
                                                         </label>
-                                                        <input type="text" name="billing_card_number" class="form-control m-input" placeholder="" value="">
+                                                        <input required type="text" name="billing_card_number" class="form-control m-input" placeholder="" value="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -169,7 +169,7 @@
                                                         <label class="form-control-label">
                                                             * CVV:
                                                         </label>
-                                                        <input type="number" class="form-control m-input" name="billing_card_cvv" placeholder="" value="">
+                                                        <input required type="number" class="form-control m-input" name="billing_card_cvv" placeholder="" value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,7 +188,7 @@
                                                         <label class="form-control-label">
                                                             * Address 1:
                                                         </label>
-                                                        <input type="text" name="billing_address_1" class="form-control m-input" placeholder="" value="">
+                                                        <input required type="text" name="billing_address_1" class="form-control m-input" placeholder="" value="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -196,7 +196,7 @@
                                                         <label class="form-control-label">
                                                             Address 2:
                                                         </label>
-                                                        <input type="text" name="billing_address_2" class="form-control m-input" placeholder="" value="">
+                                                        <input required type="text" name="billing_address_2" class="form-control m-input" placeholder="" value="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -204,19 +204,19 @@
                                                         <label class="form-control-label">
                                                             * City:
                                                         </label>
-                                                        <input type="text" class="form-control m-input" name="billing_city" placeholder="" value="">
+                                                        <input required type="text" class="form-control m-input" name="billing_city" placeholder="" value="">
                                                     </div>
                                                     <div class="col-lg-5 m-form__group-sub">
                                                         <label class="form-control-label">
                                                             * State:
                                                         </label>
-                                                        <input type="text" class="form-control m-input" name="billing_state" placeholder="" value="">
+                                                        <input required type="text" class="form-control m-input" name="billing_state" placeholder="" value="">
                                                     </div>
                                                     <div class="col-lg-2 m-form__group-sub">
                                                         <label  class="form-control-label">
                                                             * ZIP:
                                                         </label>
-                                                        <input type="text" class="form-control m-input" name="billing_zip" placeholder="" value="">
+                                                        <input required type="text" class="form-control m-input" name="billing_zip" placeholder="" value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,7 +235,7 @@
                                                             <label class="m-option">
                                                                 <span class="m-option__control">
                                                                     <span class="m-radio m-radio--state-brand">
-                                                                        <input type="radio" name="billing_delivery" value="">
+                                                                        <input required type="radio" name="billing_delivery" value="">
                                                                         <span></span>
                                                                     </span>
                                                                 </span>
@@ -258,7 +258,7 @@
                                                             <label class="m-option">
                                                                 <span class="m-option__control">
                                                                     <span class="m-radio m-radio--state-brand">
-                                                                        <input type="radio" name="billing_delivery" value="">
+                                                                        <input required type="radio" name="billing_delivery" value="">
                                                                         <span></span>
                                                                     </span>
                                                                 </span>
@@ -320,7 +320,7 @@
                                         <div class="m-portlet__head-tools">
                                             <ul class="m-portlet__nav">
                                                 <li class="m-portlet__nav-item">
-                                                    <a href="javascript:;" data-toggle="modal" data-target="#extra_large_modal" onclick="$('#extra_large_modal').modal({ backdrop: 'static' }, 'show');" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
+                                                    <a href="javascript:;" data-toggle="modal" data-target="#company_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </li>
@@ -365,10 +365,10 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="extra_large_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="company_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
-                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="company_form">
+                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="company_form"  data-parsley-validate>
                                 <div class="modal-header">
                                     <h4 class="modal-title" id="exampleModalLabel">
                                         ADD NEW COMPANY
@@ -380,14 +380,13 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">    
-                                    <!-- three column :1 start -->
                                     <h5 class="m-section__heading">Basic Information</h5>  
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-4">
                                             <label>
                                                 Company Name:
                                             </label>
-                                            <input type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
+                                            <input required type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
                                             <span class="m-form__help">
                                                 Please enter company name
                                             </span>
@@ -396,7 +395,7 @@
                                             <label>
                                                 Email:
                                             </label>
-                                            <input type="email" id="email_1" name="email_1" class="form-control m-input" placeholder="Enter your email">
+                                            <input required type="email" id="email_1" name="email_1" class="form-control m-input" placeholder="Enter your email">
                                             <span class="m-form__help">
                                                 Please enter your email
                                             </span>
@@ -405,7 +404,7 @@
                                             <label>
                                                 Another Email:
                                             </label>
-                                            <input type="email" id="email_2" name="email_2" class="form-control m-input" placeholder="Enter your another email">
+                                            <input required type="email" data-parsley-required-message="Enter A Valid Email Address"   id="email_2" name="email_2" class="form-control m-input" placeholder="Enter your another email">
                                             <span class="m-form__help">
                                                 Please enter your email
                                             </span>
@@ -416,7 +415,7 @@
                                             <label>
                                                 Contact:
                                             </label>
-                                            <input type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
+                                            <input required type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
                                             <span class="m-form__help">
                                                 Please enter your contact
                                             </span>
@@ -425,7 +424,7 @@
                                             <label>
                                                 Another Contact:
                                             </label>
-                                            <input type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
+                                            <input required type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
                                             <span class="m-form__help">
                                                 Please enter your contact
                                             </span>
@@ -435,7 +434,7 @@
                                                 Subscription:
                                             </label>
                                             <div class="m-input-icon m-input-icon--right">
-                                                <select class="form-control m-input" id="subscription" name="subscription">
+                                                <select required class="form-control m-input" id="subscription" name="subscription">
                                                     <option value=""> --Select Subscription Type--</option>
                                                     <option value="1">For 1-10 users</option>
                                                     <option value="2">For 11-30 users</option>
@@ -455,7 +454,7 @@
                                                 About Company:
                                             </label>
                                             <div class="m-input-icon m-input-icon--right">
-                                                <textarea class="form-control m-input" placeholder="Describe about the company" id="about_company" name="about_company"></textarea>
+                                                <textarea required class="form-control m-input" placeholder="Describe about the company" id="about_company" name="about_company"></textarea>
                                             </div>
                                             <span class="m-form__help">
                                                 Describe about company
@@ -467,7 +466,7 @@
                                                 Address:
                                             </label>
                                             <div class="m-input-icon m-input-icon--right">
-                                                <textarea class="form-control m-input" placeholder="Describe about the company" id="address" name="address"></textarea>
+                                                <textarea required class="form-control m-input" placeholder="Describe about the company" id="address" name="address"></textarea>
                                             </div>
                                             <span class="m-form__help">
                                                 Address of your company
@@ -475,14 +474,14 @@
                                         </div>
 
                                     </div>
-                                    <!-- three column :1 end -->
                                 </div>
                                 <div class="modal-footer">
+                                    <button type="button" onclick="companyInsert()"  class="btn btn-primary">
+                                        Save
+                                    </button>
+                                    
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         Close
-                                    </button>
-                                    <button type="button" onclick="companyInsert()"  class="btn btn-primary">
-                                        Save Detail
                                     </button>
                                 </div>
                             </form>
@@ -492,55 +491,28 @@
  
                 <script type="text/javascript">
                     function companyInsert(){
-                        $.ajax({
-                            beforeSend: function() { 
-                                $(".btn").attr("disabled", true);
-                            },
-                            complete: function (status) {
-                               $(".btn").attr("disabled", false);
-                            },
-                            type : 'POST',
-                            url : base_url+'company/insert',
-                            data : $("form#company_form").serialize(),
-                            async: false,
-                            success:function(response, status){
-                                $('#company_list_dt_table').DataTable().ajax.reload();
-                                /*        
-                                try {
-                                    var res = jQuery.parseJSON(response);
-                                    if(res['status'] == 'SUCCESS')
-                                    {
-                                        if(typeof callback === "function") 
-                                        {
-                                            //callback();
-                                        }
-                                    }
-                                    if(res['status'] == 'ERROR')
-                                    {
-                                        if(res['message'] != '')
-                                        {
-                                            if(document.getElementById("warning"))
-                                            {
-                                                document.getElementById("warning").play();
-                                            }
-                                            showErrorMsg(res['message']);
-                                            //$('#errpopup').html('<i class="fa fa-warning"></i> '+res['message']+'<span class=\'pull-right\'>X</span>').show().delay(3000).fadeOut();
-                                        }
-                                    }
-                                } catch(error) {
-                                    if(document.getElementById("warning"))
-                                    {
-                                        document.getElementById("warning").play();
-                                    }
-                                    showErrorMsg('Something went wrong please try again later.');
-                                } 
-                                
-                                $(".loadingContainer").fadeOut('slow');*/
-                            },
-                            error: function (status, err) {
-                               //showErrorMsg('Server Not Responding please contact to Administrator');
-                            }
-                        });
+                       if($('#company_form').parsley().validate()) {
+                            $.ajax({
+                                beforeSend: function() { 
+                                    $(".btn").attr("disabled", true);
+                                },
+                                complete: function (status) {
+                                   $(".btn").attr("disabled", false);
+                                },
+                                type : 'POST',
+                                url : base_url+'company/insert',
+                                data : $("form#company_form").serialize(),
+                                async: false,
+                                success:function(response, status){
+                                    notify_alert('success', 'New Company Created.', "Error")
+                                    $('#company_list_dt_table').DataTable().ajax.reload();
+                                    $("#company_modal").modal('hide');
+                                },
+                                error: function (status, err) {
+                                   notify_alert('danger', 'There was some error, Please try again.', "Error");
+                                }
+                            });
+                        }
                     }
 
                     function companyEdit(){
