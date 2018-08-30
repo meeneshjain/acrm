@@ -96,9 +96,9 @@ define('DATETIME',date(DEFAULT_DATE_FORMAT . ' H:i:s'));
 define('TIMESTAMP', DATETIME);
 
 // company and app 
-define('APP_NAME','AkshatCRM');
-define('POWERED_BY','Akshat Softwares ');
-define('POWERED_BY_FULL','Akshat Softwares Pvt. Ltd');
+define('APP_NAME','AkshayCRM');
+define('POWERED_BY','Akshay Softwares ');
+define('POWERED_BY_FULL','Akshay Softwares Pvt. Ltd');
 define('COMPANY_URL','');
 
 // email account

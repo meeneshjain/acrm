@@ -82,7 +82,7 @@
         								<table class="table table-striped- table-bordered table-hover table-checkable dt_table" id="company_list_dt_table" data-source="<?php echo base_url('company/companylist'); ?>">
         									<thead>
         										<tr>
-        											<th>
+        											<th class="no-sort">
         												<input type="checkbox" class="compckbxAll" onclick="checkAll('compckbxAll','compckbx')" name="">
         											</th>
         											<th>
@@ -97,7 +97,7 @@
                                                     <th>
                                                         Create Date
                                                     </th>
-                                                    <th>
+                                                   <th class="no-sort">
                                                         Action
                                                     </th>
         										</tr>
@@ -330,10 +330,11 @@
                                 data : $("form#company_form").serialize(),
                                 async: false,
                                 success:function(response, status){
-                                    notify_alert('success', 'New Company Created.', "Error")
-                                    reloadTable();
-                                    $("#company_modal").modal('hide');
+                                    notify_alert('success', 'New Company Created.', "Error");
+                                    $('#company_form').parsley().reset();
                                     $("#company_form")[0].reset();
+                                    $("#company_modal").modal('hide');
+                                    reloadTable();
                                 },
                                 error: function (status, err) {
                                    notify_alert('danger', 'There was some error, Please try again.', "Error");
@@ -345,7 +346,6 @@
 
                     function getDetail(obj,id){
                         $("#edit_company_modal").modal('show');
-
                         $.get(base_url+"company/edit_detail/"+id,function(response,status){
                             var res = $.parseJSON(response);
                             var data_res = res['data'][0];

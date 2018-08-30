@@ -30,7 +30,7 @@ class Company extends CI_Controller {
 		}
 		else
 		{
-			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
 
@@ -41,16 +41,16 @@ class Company extends CI_Controller {
 			if(is_numeric($id) && !empty($id))
 			{
 				$data = $this->company_model->edit_detail($id);
-				echo json_encode(array("status" => "SUCCESS","message" => 'Company Id doesn\'t exist.', "data" => $data));
+				echo json_encode(array("status" => "success","message" => 'Company Id doesn\'t exist.', "data" => $data));
 			}
 			else
 			{
-				echo json_encode(array("status" => "ERROR","message" => 'Company Id doesn\'t exist.', "data" => ""));
+				echo json_encode(array("status" => "error","message" => 'Company Id doesn\'t exist.', "data" => ""));
 			}
 		}
 		else
 		{
-			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
 
@@ -58,12 +58,12 @@ class Company extends CI_Controller {
 		if($this->input->is_ajax_request())
 		{
 			$this->company_model->update_detail();
-			echo json_encode(array("status" => "SUCCESS","message" => 'Company Detail Updated', "data" => ""));
+			echo json_encode(array("status" => "success","message" => 'Company Detail Updated', "data" => ""));
 
 		}
 		else
 		{
-			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
 
@@ -74,16 +74,16 @@ class Company extends CI_Controller {
 			if(is_numeric($id) && !empty($id))
 			{
 				$data = $this->company_model->delete_detail($id);
-				echo json_encode(array("status" => "SUCCESS","message" => 'Company Deleted Successfully!!', "data" => ''));
+				echo json_encode(array("status" => "success","message" => 'Company Deleted Successfully!!', "data" => ''));
 			}
 			else
 			{
-				echo json_encode(array("status" => "ERROR","message" => 'Company Id doesn\'t exist.', "data" => ""));
+				echo json_encode(array("status" => "error","message" => 'Company Id doesn\'t exist.', "data" => ""));
 			}
 		}
 		else
 		{
-			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
 
