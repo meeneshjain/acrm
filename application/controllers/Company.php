@@ -30,11 +30,63 @@ class Company extends CI_Controller {
 		}
 		else
 		{
-			echo json_encode(array("status" => "ERROR","message" => '<div class="alertmsg error"><span class="closeb">x</span><i class="fa fa-warning"></i> Unauthorized Access!</div>', "responseText" => ""));
+			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
-    
-	
+
+    public function edit_detail(){
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->uri->segment(3);
+			if(is_numeric($id) && !empty($id))
+			{
+				$data = $this->company_model->edit_detail($id);
+				echo json_encode(array("status" => "SUCCESS","message" => 'Company Id doesn\'t exist.', "data" => $data));
+			}
+			else
+			{
+				echo json_encode(array("status" => "ERROR","message" => 'Company Id doesn\'t exist.', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
+
+    public function update_detail(){
+		if($this->input->is_ajax_request())
+		{
+			$this->company_model->update_detail();
+			echo json_encode(array("status" => "SUCCESS","message" => 'Company Detail Updated', "data" => ""));
+
+		}
+		else
+		{
+			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
+
+    public function delete_company(){
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->uri->segment(3);
+			if(is_numeric($id) && !empty($id))
+			{
+				$data = $this->company_model->delete_detail($id);
+				echo json_encode(array("status" => "SUCCESS","message" => 'Company Deleted Successfully!!', "data" => ''));
+			}
+			else
+			{
+				echo json_encode(array("status" => "ERROR","message" => 'Company Id doesn\'t exist.', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "ERROR","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
+
 	public function companylist(){
 		$response =  $this->company_model->companylist();
 		echo json_encode($response);

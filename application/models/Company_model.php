@@ -1,24 +1,13 @@
 <?php 
 class Company_model extends CI_Model {	
 
-	public function insert()
-	{
-		$_POST['created_date'] = DATETIME;
-		$_POST['updated_date'] = DATETIME;
-		$_POST['pan_no'] = '';
-		$_POST['gstin_no'] = '';
-		$_POST['status'] = '0';
-		$_POST['is_deleted'] = '0';
-		$this->db->insert('`companies`', $_POST);
-	}
-	
 	public function companylist()
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		$get_data = $this->input->get(NULL, TRUE);
 		$dt_table = "companies as c";
-		$dt_col_searchable = array(false, true, true, false, false, false);
+		$sort_column = array(false, true, true, false, false, false);
 		
 		$dt_columns = array( 'c.id', 'c.company_name', 'c.email_1', 'c.contact_1', 'c.created_date');
 		
@@ -29,7 +18,7 @@ class Company_model extends CI_Model {
 
        //Sorting
 		if(isset($get_data['order'])) {
-					 $sort_column = $dt_columns[$get_data['order'][0]['column']];
+				$sort_column = $dt_columns[$get_data['order'][0]['column']];
 				if(strstr($sort_column, "as") !== false) {
 					$temp_sort_column = explode(" as ", $sort_column);
 					$this->db->order_by($temp_sort_column[1], ($get_data['order'][0]['dir'] === 'asc' ? 'asc' : 'desc'));
@@ -61,6 +50,7 @@ class Company_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
+		$this->db->where(array('status' => '0', 'is_deleted' => '0'));
         // $this->db->join('project_participants as pp', 'p.id=pp.project_id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
 		// last_query(1);
@@ -77,18 +67,52 @@ class Company_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            //$row[] = '<input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="chlid_check">';
-            $row[] = $aRow['id'];
+            $row[] = '<input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx">';
         	$row[] = $aRow['company_name'];
         	$row[] = $aRow['email_1'];
         	$row[] = $aRow['contact_1'];
         	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
-       		$row[] = '<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button> <button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-edit"></i></button>';
+       		$row[] = '<button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button> <button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="getDetail(this,'.$aRow['id'].')"><i class="fa fa-edit"></i></button>';
 
         	$output['data'][] = $row;
         }
         return $output;
     }
+
+    public function insert()
+	{
+		$_POST['created_date'] = DATETIME;
+		$_POST['updated_date'] = DATETIME;
+		$_POST['pan_no'] = '';
+		$_POST['gstin_no'] = '';
+		$_POST['status'] = '0';
+		$_POST['is_deleted'] = '0';
+		$this->db->insert('`companies`', $_POST);
+	}
+
+	public function edit_detail($id)
+	{
+		return $this->db->query("SELECT * FROM `companies` WHERE `status` = '0' AND `id` = '$id'")->result_array();
+	}
+
+	public function update_detail()
+	{
+		$_POST['updated_date'] = DATETIME;
+		$where = array('id' => $_POST['id']);
+		unset($_POST['id']);
+		$this->db->where($where);
+		$this->db->update('`companies`',$_POST);
+	}
+
+	public function delete_detail($id)
+	{
+		$data['status'] = '1';
+		$data['is_deleted'] = '1';
+		$data['updated_date'] = DATETIME;
+		$where = array('id' => $id);
+		$this->db->where($where);
+		$this->db->update('`companies`',$data);
+	}
 }
 
 ?>

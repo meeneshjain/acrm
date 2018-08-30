@@ -5,7 +5,7 @@
 						<div class="d-flex align-items-center">
 							<div class="mr-auto">
 								<h3 class="m-subheader__title m-subheader__title--separator">
-									State Colors
+									Company List
 								</h3>
 							</div>
 							<div>
@@ -49,261 +49,6 @@
 						</div>
 					</div>
 					<!-- END: Subheader -->
-					<div class="m-content" style="display: none;">
-						<div class="row">
-							<div class="col-lg-12">
-                                <div class="-portlet m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--bordered m-portlet--mobile">
-                                    <div class="m-portlet__head">
-                                        <div class="m-portlet__head-caption">
-                                            <div class="m-portlet__head-title">
-                                                <h3 class="m-portlet__head-text">
-                                                    Company Form
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--begin::Form-->
-                                    <form class="m-form m-form--state m-form--fit m-form--label-align-right" id="m_form_3">
-                                        <div class="m-portlet__body">
-                                            <div class="m-form__section m-form__section--first">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">
-                                                        Billing Information
-                                                    </h3>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-lg-12">
-                                                        <label class="form-control-label">
-                                                            * Cardholder Name:
-                                                        </label>
-                                                        <input required type="text" name="billing_card_name" class="form-control m-input" placeholder="" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-lg-12">
-                                                        <label class="form-control-label">
-                                                            * Card Number:
-                                                        </label>
-                                                        <input required type="text" name="billing_card_number" class="form-control m-input" placeholder="" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-lg-4 m-form__group-sub">
-                                                        <label class="form-control-label">
-                                                            * Exp Month:
-                                                        </label>
-                                                        <select class="form-control m-input" name="billing_card_exp_month">
-                                                            <option value="">
-                                                                Select
-                                                            </option>
-                                                            <option value="01">
-                                                                01
-                                                            </option>
-                                                            <option value="02">
-                                                                02
-                                                            </option>
-                                                            <option value="03">
-                                                                03
-                                                            </option>
-                                                            <option value="04">
-                                                                04
-                                                            </option>
-                                                            <option value="05">
-                                                                05
-                                                            </option>
-                                                            <option value="06">
-                                                                06
-                                                            </option>
-                                                            <option value="07">
-                                                                07
-                                                            </option>
-                                                            <option value="08">
-                                                                08
-                                                            </option>
-                                                            <option value="09">
-                                                                09
-                                                            </option>
-                                                            <option value="10">
-                                                                10
-                                                            </option>
-                                                            <option value="11">
-                                                                11
-                                                            </option>
-                                                            <option value="12">
-                                                                12
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-4 m-form__group-sub">
-                                                        <label class="form-control-label">
-                                                            * Exp Year:
-                                                        </label>
-                                                        <select class="form-control m-input" name="billing_card_exp_year">
-                                                            <option value="">
-                                                                Select
-                                                            </option>
-                                                            <option value="2018">
-                                                                2018
-                                                            </option>
-                                                            <option value="2019">
-                                                                2019
-                                                            </option>
-                                                            <option value="2020">
-                                                                2020
-                                                            </option>
-                                                            <option value="2021">
-                                                                2021
-                                                            </option>
-                                                            <option value="2022">
-                                                                2022
-                                                            </option>
-                                                            <option value="2023">
-                                                                2023
-                                                            </option>
-                                                            <option value="2024">
-                                                                2024
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-4 m-form__group-sub">
-                                                        <label class="form-control-label">
-                                                            * CVV:
-                                                        </label>
-                                                        <input required type="number" class="form-control m-input" name="billing_card_cvv" placeholder="" value="">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-
-                                            <div class="m-form__section">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">
-                                                        Billing Address
-                                                        <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="If different than the corresponding address"></i>
-                                                    </h3>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-lg-12">
-                                                        <label class="form-control-label">
-                                                            * Address 1:
-                                                        </label>
-                                                        <input required type="text" name="billing_address_1" class="form-control m-input" placeholder="" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Address 2:
-                                                        </label>
-                                                        <input required type="text" name="billing_address_2" class="form-control m-input" placeholder="" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-lg-5 m-form__group-sub">
-                                                        <label class="form-control-label">
-                                                            * City:
-                                                        </label>
-                                                        <input required type="text" class="form-control m-input" name="billing_city" placeholder="" value="">
-                                                    </div>
-                                                    <div class="col-lg-5 m-form__group-sub">
-                                                        <label class="form-control-label">
-                                                            * State:
-                                                        </label>
-                                                        <input required type="text" class="form-control m-input" name="billing_state" placeholder="" value="">
-                                                    </div>
-                                                    <div class="col-lg-2 m-form__group-sub">
-                                                        <label  class="form-control-label">
-                                                            * ZIP:
-                                                        </label>
-                                                        <input required type="text" class="form-control m-input" name="billing_zip" placeholder="" value="">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-
-                                            <div class="m-form__section">
-                                                <div class="m-form__heading">
-                                                    <h3 class="m-form__heading-title">
-                                                        Delivery Type
-                                                    </h3>
-                                                </div>
-                                                <div class="form-group m-form__group">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <label class="m-option">
-                                                                <span class="m-option__control">
-                                                                    <span class="m-radio m-radio--state-brand">
-                                                                        <input required type="radio" name="billing_delivery" value="">
-                                                                        <span></span>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="m-option__label">
-                                                                    <span class="m-option__head">
-                                                                        <span class="m-option__title">
-                                                                            Standart Delevery
-                                                                        </span>
-                                                                        <span class="m-option__focus">
-                                                                            Free
-                                                                        </span>
-                                                                    </span>
-                                                                    <span class="m-option__body">
-                                                                        Estimated 14-20 Day Shipping (&nbsp;Duties end taxes may be due upon delivery&nbsp;)
-                                                                    </span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label class="m-option">
-                                                                <span class="m-option__control">
-                                                                    <span class="m-radio m-radio--state-brand">
-                                                                        <input required type="radio" name="billing_delivery" value="">
-                                                                        <span></span>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="m-option__label">
-                                                                    <span class="m-option__head">
-                                                                        <span class="m-option__title">
-                                                                            Fast Delevery
-                                                                        </span>
-                                                                        <span class="m-option__focus">
-                                                                            $&nbsp;8.00
-                                                                        </span>
-                                                                    </span>
-                                                                    <span class="m-option__body">
-                                                                        Estimated 2-5 Day Shipping (&nbsp;Duties end taxes may be due upon delivery&nbsp;)
-                                                                    </span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="m-form__help">
-                                                        <!--must use this helper element to display error message for the options-->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="m-portlet__foot m-portlet__foot--fit">
-                                            <div class="m-form__actions m-form__actions">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <button type="submit" class="btn btn-accent">
-                                                            Validate
-                                                        </button>
-                                                        <button type="reset" class="btn btn-secondary">
-                                                            Cancel
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <!--end::Form-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="m-content">
                         <div class="row">
@@ -338,7 +83,7 @@
         									<thead>
         										<tr>
         											<th>
-        												#
+        												<input type="checkbox" class="compckbxAll" onclick="checkAll('compckbxAll','compckbx')" name="">
         											</th>
         											<th>
         												Company Name
@@ -365,12 +110,12 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="company_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal fade" id="company_modal" tabindex="-1" role="dialog" aria-labelledby="add_company_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="company_form"  data-parsley-validate>
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">
+                                    <h4 class="modal-title" id="add_company_modal_lable">
                                         ADD NEW COMPANY
                                     </h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -380,34 +125,25 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">    
-                                    <h5 class="m-section__heading">Basic Information</h5>  
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-4">
                                             <label>
                                                 Company Name:
                                             </label>
-                                            <input required type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
-                                            <span class="m-form__help">
-                                                Please enter company name
-                                            </span>
+                                            <input required type="text" name="company_name" class="form-control m-input" placeholder="Enter Company name">
+                                        
                                         </div>
                                         <div class="col-lg-4">
                                             <label>
                                                 Email:
                                             </label>
-                                            <input required type="email" id="email_1" name="email_1" class="form-control m-input" placeholder="Enter your email">
-                                            <span class="m-form__help">
-                                                Please enter your email
-                                            </span>
+                                            <input required type="email" name="email_1" class="form-control m-input" placeholder="Enter your email">
                                         </div>
                                         <div class="col-lg-4">
                                             <label>
                                                 Another Email:
                                             </label>
-                                            <input required type="email" data-parsley-required-message="Enter A Valid Email Address"   id="email_2" name="email_2" class="form-control m-input" placeholder="Enter your another email">
-                                            <span class="m-form__help">
-                                                Please enter your email
-                                            </span>
+                                            <input type="email" name="email_2" class="form-control m-input" placeholder="Enter your another email">
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -415,26 +151,20 @@
                                             <label>
                                                 Contact:
                                             </label>
-                                            <input required type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
-                                            <span class="m-form__help">
-                                                Please enter your contact
-                                            </span>
+                                            <input required type="text" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
                                         </div>
                                         <div class="col-lg-4">
                                             <label>
                                                 Another Contact:
                                             </label>
-                                            <input required type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
-                                            <span class="m-form__help">
-                                                Please enter your contact
-                                            </span>
+                                            <input type="text" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
                                         </div>
                                         <div class="col-lg-4">
                                             <label>
                                                 Subscription:
                                             </label>
                                             <div class="m-input-icon m-input-icon--right">
-                                                <select required class="form-control m-input" id="subscription" name="subscription">
+                                                <select required class="form-control m-input" name="subscription">
                                                     <option value=""> --Select Subscription Type--</option>
                                                     <option value="1">For 1-10 users</option>
                                                     <option value="2">For 11-30 users</option>
@@ -443,9 +173,6 @@
                                                 </select>
                     
                                             </div>
-                                            <span class="m-form__help">
-                                                Please enter your address
-                                            </span>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -454,11 +181,8 @@
                                                 About Company:
                                             </label>
                                             <div class="m-input-icon m-input-icon--right">
-                                                <textarea required class="form-control m-input" placeholder="Describe about the company" id="about_company" name="about_company"></textarea>
+                                                <textarea required class="form-control m-input" placeholder="Describe about the company" name="about_company"></textarea>
                                             </div>
-                                            <span class="m-form__help">
-                                                Describe about company
-                                            </span>
                                         </div>
 
                                         <div class="col-lg-6">
@@ -466,11 +190,9 @@
                                                 Address:
                                             </label>
                                             <div class="m-input-icon m-input-icon--right">
-                                                <textarea required class="form-control m-input" placeholder="Describe about the company" id="address" name="address"></textarea>
+                                                <textarea required class="form-control m-input" placeholder="Describe about the company" name="address"></textarea>
                                             </div>
-                                            <span class="m-form__help">
-                                                Address of your company
-                                            </span>
+        
                                         </div>
 
                                     </div>
@@ -488,6 +210,110 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="edit_company_modal" tabindex="-1" role="dialog" aria-labelledby="edit_company_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="edit_company_form"  data-parsley-validate>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="edit_company_modal_lable">
+                                        EDIT COMPANY DETAIL
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">
+                                            &times;
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Company Name:
+                                            </label>
+                                            <input type="hidden" id="company_id" name="id" value="0">
+                                            <input required type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
+                                        
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Email:
+                                            </label>
+                                            <input required type="email" id="email_1" name="email_1" class="form-control m-input" placeholder="Enter your email">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Another Email:
+                                            </label>
+                                            <input type="email" id="email_2" name="email_2" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Contact:
+                                            </label>
+                                            <input required type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Another Contact:
+                                            </label>
+                                            <input type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Subscription:
+                                            </label>
+                                            <div class="m-input-icon m-input-icon--right">
+                                                <select required class="form-control m-input" id="subscription" name="subscription">
+                                                    <option value=""> --Select Subscription Type--</option>
+                                                    <option value="1">For 1-10 users</option>
+                                                    <option value="2">For 11-30 users</option>
+                                                    <option value="3">For 30-50 users</option>
+                                                    <option value="4">For 50+ users</option>
+                                                </select>
+                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-lg-6">
+                                            <label>
+                                                About Company:
+                                            </label>
+                                            <div class="m-input-icon m-input-icon--right">
+                                                <textarea required class="form-control m-input" id="about_company" name="about_company" placeholder="Describe about the company" ></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label>
+                                                Address:
+                                            </label>
+                                            <div class="m-input-icon m-input-icon--right">
+                                                <textarea required class="form-control m-input" id="address" name="address" placeholder="Describe about the company" ></textarea>
+                                            </div>
+        
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="companyUpdate(this)"  class="btn btn-primary">
+                                        Update
+                                    </button>
+                                    
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
  
                 <script type="text/javascript">
                     function companyInsert(){
@@ -505,8 +331,9 @@
                                 async: false,
                                 success:function(response, status){
                                     notify_alert('success', 'New Company Created.', "Error")
-                                    $('#company_list_dt_table').DataTable().ajax.reload();
+                                    reloadTable();
                                     $("#company_modal").modal('hide');
+                                    $("#company_form")[0].reset();
                                 },
                                 error: function (status, err) {
                                    notify_alert('danger', 'There was some error, Please try again.', "Error");
@@ -515,8 +342,89 @@
                         }
                     }
 
-                    function companyEdit(){
 
+                    function getDetail(obj,id){
+                        $("#edit_company_modal").modal('show');
+
+                        $.get(base_url+"company/edit_detail/"+id,function(response,status){
+                            var res = $.parseJSON(response);
+                            var data_res = res['data'][0];
+                            console.log(data_res);
+                            if(res['status'] == 'SUCCESS')
+                            {
+                                $("#company_id").val(data_res.id);
+                                $("#company_name").val(data_res.company_name);
+                                $("#email_1").val(data_res.email_1);
+                                $("#email_2").val(data_res.email_2);
+                                $("#contact_1").val(data_res.contact_1);
+                                $("#contact_2").val(data_res.contact_2);
+                                $("#subscription").val(data_res.subscription);
+                                $("#about_company").val(data_res.about_company);
+                                $("#address").val(data_res.address);
+                            }
+                        });
                     }
+
+                    function companyUpdate(obj){
+                        show_loading(obj,'Updating..');
+                        if($('#edit_company_form').parsley().validate()) {
+                            $.ajax({
+                                beforeSend: function() { 
+                                    $(".btn").attr("disabled", true);
+                                },
+                                complete: function (status) {
+                                   $(".btn").attr("disabled", false);
+                                },
+                                type : 'POST',
+                                url : base_url+'company/update_detail',
+                                data : $("form#edit_company_form").serialize(),
+                                async: false,
+                                success:function(response, status){
+                                    var res = $.parseJSON(response);
+                                    hide_loading(obj,'Update');
+                                    notify_alert('success', res['message'], "Success")
+                                    reloadTable();
+                                    $("#edit_company_modal").modal('hide');
+                                },
+                                error: function (status, err) {
+                                   notify_alert('danger', 'There was some error, Please try again.', "Error");
+                                }
+                            });
+                        }
+                    }
+
+                    function  deleteCompany(obj,id)
+                    {
+                        var result = confirm("Want to delete?");
+                        if (result) {
+                            $.get(base_url+"company/delete_company/"+id,function(response,status){
+                                var res = $.parseJSON(response);
+                                if(res['status'] == 'SUCCESS')
+                                {
+                                    reloadTable();
+                                    notify_alert('success', res['message'], "Success")
+                                }
+                                else
+                                {
+                                   notify_alert('danger', res['message'], "Error");
+                                }
+                            });
+                        }
+                    }
+
+                    function checkAll(clsAll,cls)
+                    {
+                        $("."+clsAll).change(function () {
+                            $("."+cls).prop('checked', $(this).prop("checked"));
+                        });
+                    }
+
+                    function reloadTable()
+                    {
+                        $('#company_list_dt_table').DataTable().ajax.reload();
+                    }
+
+
+
                 </script>
 
