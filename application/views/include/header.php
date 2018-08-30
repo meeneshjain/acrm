@@ -1,10 +1,11 @@
+<?php $sesion_data = $this->session->userdata(); ?>
 <!DOCTYPE html>
 <html lang="en" >
 <!-- begin::Head -->
 <head>
 <meta charset="utf-8" />
 <title>
-<?php echo APP_NAME; ?> | <?php echo $page_title?>
+<?php echo $page_title?> | <?php echo APP_NAME; ?>
 </title>
 <meta name="description" content="State colors">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +48,7 @@ sessionStorage.fonts = true;
 <div class="m-stack m-stack--ver m-stack--general">
 <div class="m-stack__item m-stack__item--middle m-brand__logo" style="width: 80%;">
     <h4>
-    <a href="index.html" class="m-brand__logo-wrapper">
+    <a href="<?php echo base_url(); ?>" class="m-brand__logo-wrapper">
             Akshay CRM 
         </a>
     </h4>
@@ -805,7 +806,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
         <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
             <a href="#" class="m-nav__link m-dropdown__toggle">
                 <span class="m-topbar__userpic">
-                    <img src="<?php echo base_url('assets/app/media/img/users/user4.jpg'); ?>" class="m--img-rounded m--marginless m--img-centered" alt=""/>
+                    <img src="<?php echo base_url('assets/images/avatar-grey.png'); ?>" class="m--img-rounded m--marginless m--img-centered" alt=""/>
                 </span>
                 <span class="m-topbar__username m--hide">
                     Nick
@@ -814,17 +815,17 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
             <div class="m-dropdown__wrapper">
                 <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                 <div class="m-dropdown__inner">
-                    <div class="m-dropdown__header m--align-center" style="background: url(<?php echo base_url('assets/app/media/img/misc/user_profile_bg.jpg'); ?>); background-size: cover;">
+                    <div class="m-dropdown__header m--align-center" style="background: #282733;">
                         <div class="m-card-user m-card-user--skin-dark">
                             <div class="m-card-user__pic">
-                                <img src="<?php echo base_url('assets/app/media/img/users/user4.jpg'); ?>" class="m--img-rounded m--marginless" alt=""/>
+                                <img src="<?php echo base_url('assets/images/avatar-grey.png'); ?>" class="m--img-rounded m--marginless" alt=""/>
                             </div>
                             <div class="m-card-user__details">
                                 <span class="m-card-user__name m--font-weight-500">
-                                    Mark Andre
+                                    <?php echo $sesion_data['full_name']; ?>
                                 </span>
                                 <a href="" class="m-card-user__email m--font-weight-300 m-link">
-                                    mark.andre@gmail.com
+                                    <?php echo  $sesion_data['email']; ?>
                                 </a>
                             </div>
                         </div>
@@ -855,44 +856,23 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </a>
                                 </li>
                                 <li class="m-nav__item">
-                                    <a href="<?php echo base_url('header/profile.html'); ?>" class="m-nav__link">
-                                        <i class="m-nav__link-icon flaticon-share"></i>
+                                    <a href="<?php echo base_url('settings/all'); ?>" class="m-nav__link">
+                                        <i class="m-nav__link-icon flaticon-settings"></i>
                                         <span class="m-nav__link-text">
-                                            Activity
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="m-nav__item">
-                                    <a href="<?php echo base_url('header/profile.html'); ?>" class="m-nav__link">
-                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                        <span class="m-nav__link-text">
-                                            Messages
+                                           <i class=""></i> Preferences
                                         </span>
                                     </a>
                                 </li>
                                 <li class="m-nav__separator m-nav__separator--fit"></li>
                                 <li class="m-nav__item">
-                                    <a href="<?php echo base_url('header/profile.html'); ?>" class="m-nav__link">
-                                        <i class="m-nav__link-icon flaticon-info"></i>
+                                    <a href="<?php echo base_url('home/logout'); ?>" class="m-nav__link">
+                                        <i class="m-nav__link-icon flaticon-logout"></i>
                                         <span class="m-nav__link-text">
-                                            FAQ
+                                             Logout
                                         </span>
                                     </a>
                                 </li>
-                                <li class="m-nav__item">
-                                    <a href="<?php echo base_url('header/profile.html'); ?>" class="m-nav__link">
-                                        <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                        <span class="m-nav__link-text">
-                                            Support
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="m-nav__separator m-nav__separator--fit"></li>
-                                <li class="m-nav__item">
-                                    <a href="<?php echo base_url('home/logout'); ?>" class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-                                        Logout
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -920,7 +900,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 	            <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
 						<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 							<li class="m-menu__item " aria-haspopup="true" >
-								<a  href="index.html" class="m-menu__link ">
+								<a  href="<?php echo base_url(); ?>" class="m-menu__link ">
 									<i class="m-menu__link-icon flaticon-line-graph"></i>
 									<span class="m-menu__link-title">
 										<span class="m-menu__link-wrap">

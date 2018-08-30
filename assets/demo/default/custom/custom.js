@@ -54,6 +54,42 @@ function notify_alert(type, message, title) {
     });
 }
 
+function form_submit(form_id, callback, error_callback) {
+    var form_obj = $("#" + form_id);
+    if (form_obj.parsley().validate()) {
+        $.ajax({
+            url: form_obj.attr("action"),
+            data: form_obj.serialize(),
+            type: 'POST',
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                callback(response);
+            },
+            error: function (response) {
+                error_callback(response);
+                notify_alert('danger', 'There was some error, Please try again.', "Error");
+            }
+        });
+    }
+}
+
+function call_service(url, callback, error_callback) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "JSON",
+        success: function (response) {
+            console.log(response);
+            callback(response);
+        },
+        error: function (response) {
+            error_callback(response);
+            notify_alert('danger', 'There was some error, Please try again.', "Error")
+        }
+    });
+}
+
 //ready goes here 
 
 var table_object = []

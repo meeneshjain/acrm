@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>
-			<?php echo APP_NAME; ?> | <?php echo $page_title?>
+			<?php echo $page_title?> | <?php echo APP_NAME; ?>
 		</title>
 		<meta name="description" content="Latest updates and statistic charts">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">

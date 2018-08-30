@@ -10,10 +10,10 @@ class Company extends CI_Controller {
 		$this->load->model("home_model");
 		$this->load->model("company_model");
 		$this->sessionData = $this->session->userdata();
+		check_session();
 	}
     
     public function index() {
-		check_session();
          $data['page_title'] = 'Dashboard';
          $data['breadcum_title'] = 'home';
          $data['active_sidemenu'] = "home";
