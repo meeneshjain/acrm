@@ -41,7 +41,7 @@ class Company extends CI_Controller {
 			if(is_numeric($id) && !empty($id))
 			{
 				$data = $this->company_model->edit_detail($id);
-				echo json_encode(array("status" => "success","message" => 'Company Id doesn\'t exist.', "data" => $data));
+				echo json_encode(array("status" => "success","message" => '', "data" => $data));
 			}
 			else
 			{

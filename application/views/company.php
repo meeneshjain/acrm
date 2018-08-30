@@ -350,7 +350,7 @@
                             var res = $.parseJSON(response);
                             var data_res = res['data'][0];
                             console.log(data_res);
-                            if(res['status'] == 'SUCCESS')
+                            if(res['status'] == 'success')
                             {
                                 $("#company_id").val(data_res.id);
                                 $("#company_name").val(data_res.company_name);
@@ -399,7 +399,7 @@
                         if (result) {
                             $.get(base_url+"company/delete_company/"+id,function(response,status){
                                 var res = $.parseJSON(response);
-                                if(res['status'] == 'SUCCESS')
+                                if(res['status'] == 'success')
                                 {
                                     reloadTable();
                                     notify_alert('success', res['message'], "Success")
