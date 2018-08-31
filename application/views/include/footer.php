@@ -85,76 +85,116 @@
 		<div class="tab-content">
 			<!-- tab 1 start -->
 			<div class="tab-pane active m-scrollable" id="notes_tab" role="tabpanel">
-				<div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5" role="tablist">
-											<!--begin::Item-->
-					<div class="m-accordion__item m-accordion__item--danger">
-						<div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_5_item_1_head" data-toggle="collapse" href="#m_accordion_5_item_1_body" aria-expanded="  false">
-							<span class="m-accordion__item-icon">
-								<i class="fa flaticon-user-ok"></i>
-							</span>
-							<span class="m-accordion__item-title">
-								Password
-							</span>
-							<span class="m-accordion__item-mode"></span>
-						</div>
-						<div class="m-accordion__item-body collapse" id="m_accordion_5_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_5_item_1_head" data-parent="#m_accordion_5">
-							<div class="m-accordion__item-content">
-								<p>
-									<ul>
-										<li>Gmail</li>
-										<li>Yahoo</li>
-										<li>Facebook</li>
-									</ul>
-								</p>
+				<div class="button_section row">
+					<div class="pull-right">
+						<div class="m-demo__preview m-demo__preview--btn">
+							<a href="#" class="btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+								<i class="fa fa-plus-circle"></i>
+							</a>
+					   </div>
+					</div>
+				</div>
+				
+				<div class="clearfix"></div>
+				<hr>
+				<div class="clearfix"></div>
+			
+				
+				<div class="custom_portlet_container">
+					<div class="m-portlet m-portlet--skin-dark m-portlet--bordered-semi custom_portlet" data-open="1">
+					<div class="m-portlet__head">
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<span class="m-portlet__head-icon">
+									<i class="flaticon-statistics"></i>
+								</span>
+								<h3 class="m-portlet__head-text" contenteditable="true">
+									Dark Skin
+								</h3>
 							</div>
 						</div>
-					</div>
-					<!--end::Item--> 
-<!--begin::Item-->
-					<div class="m-accordion__item m-accordion__item--info">
-						<div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_5_item_2_head" data-toggle="collapse" href="#m_accordion_5_item_2_body" aria-expanded="    false">
-							<span class="m-accordion__item-icon">
-								<i class="fa  flaticon-placeholder"></i>
-							</span>
-							<span class="m-accordion__item-title">
-								Links 
-							</span>
-							<span class="m-accordion__item-mode"></span>
+						<div class="m-portlet__head-tools">
+							<ul class="m-portlet__nav">
+								<li class="m-portlet__nav-item">
+									<a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
+										<i class="fa fa-trash"></i>
+									</a>
+								</li>
+								
+								<li class="m-portlet__nav-item">
+									<a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
+										<i class="fa fa-save"></i>
+									</a>
+								</li>
+								<li class="m-portlet__nav-item">
+								<a href="#"  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_portlet_toggle">
+									<i class="la la-angle-down"></i>
+								</a>
+							</li>
+							</ul>
 						</div>
-						<div class="m-accordion__item-body collapse" id="m_accordion_5_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_5_item_2_head" data-parent="#m_accordion_5">
-							<div class="m-accordion__item-content">
-								<p>
-									<ul>
-										<li> WEb portal</li>
-										<li> Customer Portal</li>
-										<li> Leave Manager</li>
-										<li> Attendence</li>
-								</ul>
-								</p>
+					</div>
+					<div class="m-portlet__body" contenteditable="true">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+					</div>
+					<div class="m-portlet__foot text-white">
+						<div class="col-md-12">
+									<div class="col-sm-6 ">
+									Edited By : Meenesh
+								</div>
+								<div class="col-sm-6">
+									2018-09-31 11:70
+								</div>
+						</div>
+					</div>
+				</div>
+				<div class="m-portlet m-portlet--skin-dark m-portlet--bordered-semi m--bg-brand custom_portlet"  data-open="1">
+					<div class="m-portlet__head">
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<span class="m-portlet__head-icon">
+									<i class="flaticon-statistics"></i>
+								</span>
+								<h3 class="m-portlet__head-text" contenteditable="true">
+									Dark Skin
+								</h3>
 							</div>
 						</div>
-					</div>
-					<!--end::Item--> 
-<!--begin::Item-->
-					<div class="m-accordion__item m-accordion__item--brand">
-						<div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_5_item_3_head" data-toggle="collapse" href="#m_accordion_5_item_3_body" aria-expanded="    false">
-							<span class="m-accordion__item-icon">
-								<i class="fa  flaticon-alert-2"></i>
-							</span>
-							<span class="m-accordion__item-title">
-								Extra Info
-							</span>
-							<span class="m-accordion__item-mode"></span>
+						<div class="m-portlet__head-tools">
+							<ul class="m-portlet__nav">
+								<li class="m-portlet__nav-item">
+									<a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
+										<i class="fa fa-trash"></i>
+									</a>
+								</li>
+								
+								<li class="m-portlet__nav-item">
+									<a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
+										<i class="fa fa-save"></i>
+									</a>
+								</li>
+								<li class="m-portlet__nav-item">
+								<a href="#"  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_portlet_toggle">
+									<i class="la la-angle-down"></i>
+								</a>
+							</li>
+							</ul>
 						</div>
-						<div class="m-accordion__item-body collapse" id="m_accordion_5_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_5_item_3_head" data-parent="#m_accordion_5">
-							<div class="m-accordion__item-content">
-								<p>
-									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-								</p>
-							</div>
+					</div>
+					<div class="m-portlet__body" contenteditable="true">
+						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+					</div>
+					<div class="m-portlet__foot text-white">
+						<div class="col-md-12">
+									<div class="col-sm-6 ">
+									Edited By : Meenesh
+								</div>
+								<div class="col-sm-6">
+									2018-09-31 11:70
+								</div>
 						</div>
 					</div>
-					<!--end::Item-->
+				</div>
 				</div>
 			</div>
 			
@@ -244,6 +284,18 @@
 			<!-- tab 3 end -->
 			<!-- tab 4 start -->
 			<div class="tab-pane m-scrollable" id="task_tab" role="tabpanel">
+				<div class="row button_section ">
+					<div class="pull-right">
+						<div class="m-demo__preview m-demo__preview--btn">
+							<a href="#" class="btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+								<i class="fa fa-plus-circle"></i>
+							</a>
+					   </div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<hr> 
+				<div class="clearfix"></div>
 				<div class="tab-pane" id="m_widget2_tab1_content">
 					<div class="m-widget2">
 					<div class="m-widget2__item m-widget2__item--primary">
@@ -371,16 +423,37 @@
 </div>
 
 
-    	<!--begin::Base Scripts -->
 <script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/base/scripts.bundle.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.js'); ?>"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/components/base/bootstrap-notify.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/custom/datatables/datatables.bundle.js'); ?>"></script>
-		<!-- end:Plugins  -->
-        <!--begin::Page Snippets -->
-		<script src="<?php echo base_url('/assets/demo/default/custom/custom.js'); ?>"></script>
-<!--end::Base Scripts -->
+<script src="<?php echo base_url('/assets/demo/default/custom/custom.js'); ?>"></script>
+<script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>"></script>
+
+
 </body>
-<!-- end::Body -->
+
 </html>
+<script>
+$(document).ready(function () {
+	$(document).on("click", ".custom_portlet_toggle", function(){
+		var cobj = $(this);
+	/* 	
+		$(".custom_portlet_container").find(".custom_portlet").each(function(){
+			if($(this).data("show") == 1){
+				
+			}
+		});
+		
+		cobj.parents(".custom_portlet").find(".m-portlet__body").slideTogle();
+		cobj.parents(".custom_portlet").find(".m-portlet__foot").slideTogle();
+		 */
+		$(".custom_portlet_container").find(".custom_portlet").not($(this)).find(".m-portlet__body").slideUp('fast');
+		$(".custom_portlet_container").find(".custom_portlet").not($(this)).find(".m-portlet__foot").slideUp('fast');
+		  cobj.parents(".custom_portlet").find(".m-portlet__body").slideToggle();
+		cobj.parents(".custom_portlet").find(".m-portlet__foot").slideToggle();
+	
+	});
+});
+</script>
