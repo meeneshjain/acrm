@@ -85,7 +85,7 @@
 		<div class="tab-content">
 			<!-- tab 1 start -->
 			<div class="tab-pane active m-scrollable" id="notes_tab" role="tabpanel">
-				<div class="button_section row">
+				<div class="button_section col-md-12">
 					<div class="pull-right">
 						<div class="m-demo__preview m-demo__preview--btn">
 							<a href="#" class="btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
@@ -101,7 +101,7 @@
 			
 				
 				<div class="custom_portlet_container">
-					<div class="m-portlet m-portlet--skin-dark m-portlet--bordered-semi custom_portlet" data-open="1">
+					<div class="m-portlet m-portlet--skin-dark m-portlet--bordered-semi custom_portlet" data-status="0">
 					<div class="m-portlet__head">
 						<div class="m-portlet__head-caption">
 							<div class="m-portlet__head-title">
@@ -134,28 +134,32 @@
 							</ul>
 						</div>
 					</div>
-					<div class="m-portlet__body" contenteditable="true">
+					<div class="m-portlet__body" contenteditable="true"  style="display:none">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 					</div>
-					<div class="m-portlet__foot text-white">
-						<div class="col-md-12">
+					<div class="m-portlet__foot text-white" style="display:none">
+						<div class="row">
 									<div class="col-sm-6 ">
-									Edited By : Meenesh
+									<div class="pull-left text-sm">
+										Edited By : Meenesh
+									</div>
 								</div>
 								<div class="col-sm-6">
-									2018-09-31 11:70
+									<div class="pull-right text-sm">
+										2018-09-31 11:70
+									</div>
 								</div>
 						</div>
 					</div>
 				</div>
-				<div class="m-portlet m-portlet--skin-dark m-portlet--bordered-semi m--bg-brand custom_portlet"  data-open="1">
+				<div class="m-portlet m-portlet--skin-dark m-portlet--bordered-semi m--bg-brand custom_portlet"  data-status="0">
 					<div class="m-portlet__head">
 						<div class="m-portlet__head-caption">
 							<div class="m-portlet__head-title">
 								<span class="m-portlet__head-icon">
 									<i class="flaticon-statistics"></i>
 								</span>
-								<h3 class="m-portlet__head-text" contenteditable="true">
+								<h3 class="m-portlet__head-text" contenteditable="true" maxlength="20" >
 									Dark Skin
 								</h3>
 							</div>
@@ -181,16 +185,20 @@
 							</ul>
 						</div>
 					</div>
-					<div class="m-portlet__body" contenteditable="true">
+					<div class="m-portlet__body" contenteditable="true" style="display:none">
 						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 					</div>
-					<div class="m-portlet__foot text-white">
-						<div class="col-md-12">
+					<div class="m-portlet__foot text-white" style="display:none">
+						<div class="row">
 									<div class="col-sm-6 ">
-									Edited By : Meenesh
+									<div class="pull-left text-sm">
+										<em>Edited By : Meenesh</em>
+									</div>
 								</div>
 								<div class="col-sm-6">
-									2018-09-31 11:70
+									<div class="pull-right text-sm">
+										<em>2018-09-31 11:70</em>
+									</div>
 								</div>
 						</div>
 					</div>
@@ -284,7 +292,7 @@
 			<!-- tab 3 end -->
 			<!-- tab 4 start -->
 			<div class="tab-pane m-scrollable" id="task_tab" role="tabpanel">
-				<div class="row button_section ">
+				<div class="button_section col-md-12 ">
 					<div class="pull-right">
 						<div class="m-demo__preview m-demo__preview--btn">
 							<a href="#" class="btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
@@ -439,21 +447,21 @@
 $(document).ready(function () {
 	$(document).on("click", ".custom_portlet_toggle", function(){
 		var cobj = $(this);
-	/* 	
-		$(".custom_portlet_container").find(".custom_portlet").each(function(){
-			if($(this).data("show") == 1){
-				
-			}
-		});
+		var current_el = cobj.parents(".custom_portlet");
+		if(current_el.attr("data-status") == 0){
+			$(".custom_portlet_container").find(".custom_portlet").each(function(){
+				if($(this).attr("data-status") == 1){
+					$(this).find(".m-portlet__body, .m-portlet__foot").slideUp();
+					$(this).attr("data-status", 0)
+				}
+			});
+			current_el.find(".m-portlet__body, .m-portlet__foot").slideDown();
+			current_el.attr("data-status", 1);
+		} else if(current_el.attr("data-status") == 1){
+			current_el.find(".m-portlet__body, .m-portlet__foot").slideUp();
+			current_el.attr("data-status", 0)
 		
-		cobj.parents(".custom_portlet").find(".m-portlet__body").slideTogle();
-		cobj.parents(".custom_portlet").find(".m-portlet__foot").slideTogle();
-		 */
-		$(".custom_portlet_container").find(".custom_portlet").not($(this)).find(".m-portlet__body").slideUp('fast');
-		$(".custom_portlet_container").find(".custom_portlet").not($(this)).find(".m-portlet__foot").slideUp('fast');
-		  cobj.parents(".custom_portlet").find(".m-portlet__body").slideToggle();
-		cobj.parents(".custom_portlet").find(".m-portlet__foot").slideToggle();
-	
+		}
 	});
 });
 </script>
