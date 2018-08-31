@@ -8,3 +8,11 @@
     max-width: 100%;
     width:95%
 }
+
+.m-quick-sidebar {
+    padding: 3px 15px 7px 10px !important;
+}
+
+.m-quick-sidebar.m-quick-sidebar--tabbed .m-tabs.m-tabs-line {
+    margin: 0 0 10px 0 !important;
+}
