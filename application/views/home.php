@@ -1,456 +1,833 @@
 
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
-					<!-- BEGIN: Subheader -->
-					<div class="m-subheader ">
-						<div class="d-flex align-items-center">
-							<div class="mr-auto">
-								<h3 class="m-subheader__title m-subheader__title--separator">
-									State Colors
-								</h3>
-							</div>
-							<div>
-								<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
-									<a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-										<i class="la la-plus m--hide"></i>
-										<i class="la la-ellipsis-h"></i>
-									</a>
-									<div class="m-dropdown__wrapper">
-										<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-										<div class="m-dropdown__inner">
-											<div class="m-dropdown__body">
-												<div class="m-dropdown__content">
-													<ul class="m-nav">
-														<li class="m-nav__section m-nav__section--first m--hide">
-															<span class="m-nav__section-text">
-																Quick Actions
-															</span>
-														</li>
-														<li class="m-nav__item">
-															<a href="" class="m-nav__link">
-																<i class="m-nav__link-icon flaticon-share"></i>
-																<span class="m-nav__link-text">
-																	Activity
-																</span>
-															</a>
-														</li>
-														<li class="m-nav__separator m-nav__separator--fit"></li>
-														<li class="m-nav__item">
-															<a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-																Submit
-															</a>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- END: Subheader -->
-					<div class="m-content">
-						<div class="row">
-							<div class="col-lg-12">
-                                <div class="-portlet m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--bordered m-portlet--mobile">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h3 class="m-portlet__head-text">
-                                    Multi Column Form Validation State
+                    <!-- BEGIN: Subheader -->
+                    <div class="m-subheader ">
+                        <div class="d-flex align-items-center">
+                            <div class="mr-auto">
+                                <h3 class="m-subheader__title ">
+                                    Dashboard
                                 </h3>
                             </div>
+                            <div>
+                                <span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+                                    <span class="m-subheader__daterange-label">
+                                        <span class="m-subheader__daterange-title"></span>
+                                        <span class="m-subheader__daterange-date m--font-brand"></span>
+                                    </span>
+                                    <a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+                                        <i class="la la-angle-down"></i>
+                                    </a>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <!--begin::Form-->
-                    <form class="m-form m-form--state m-form--fit m-form--label-align-right" id="m_form_3">
-                        <div class="m-portlet__body">
-                            <div class="m-form__section m-form__section--first">
-                                <div class="m-form__heading">
-                                    <h3 class="m-form__heading-title">
-                                        Billing Information
-                                    </h3>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-lg-12">
-                                        <label class="form-control-label">
-                                            * Cardholder Name:
-                                        </label>
-                                        <input type="text" name="billing_card_name" class="form-control m-input" placeholder="" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-lg-12">
-                                        <label class="form-control-label">
-                                            * Card Number:
-                                        </label>
-                                        <input type="text" name="billing_card_number" class="form-control m-input" placeholder="" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-lg-4 m-form__group-sub">
-                                        <label class="form-control-label">
-                                            * Exp Month:
-                                        </label>
-                                        <select class="form-control m-input" name="billing_card_exp_month">
-                                            <option value="">
-                                                Select
-                                            </option>
-                                            <option value="01">
-                                                01
-                                            </option>
-                                            <option value="02">
-                                                02
-                                            </option>
-                                            <option value="03">
-                                                03
-                                            </option>
-                                            <option value="04">
-                                                04
-                                            </option>
-                                            <option value="05">
-                                                05
-                                            </option>
-                                            <option value="06">
-                                                06
-                                            </option>
-                                            <option value="07">
-                                                07
-                                            </option>
-                                            <option value="08">
-                                                08
-                                            </option>
-                                            <option value="09">
-                                                09
-                                            </option>
-                                            <option value="10">
-                                                10
-                                            </option>
-                                            <option value="11">
-                                                11
-                                            </option>
-                                            <option value="12">
-                                                12
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-4 m-form__group-sub">
-                                        <label class="form-control-label">
-                                            * Exp Year:
-                                        </label>
-                                        <select class="form-control m-input" name="billing_card_exp_year">
-                                            <option value="">
-                                                Select
-                                            </option>
-                                            <option value="2018">
-                                                2018
-                                            </option>
-                                            <option value="2019">
-                                                2019
-                                            </option>
-                                            <option value="2020">
-                                                2020
-                                            </option>
-                                            <option value="2021">
-                                                2021
-                                            </option>
-                                            <option value="2022">
-                                                2022
-                                            </option>
-                                            <option value="2023">
-                                                2023
-                                            </option>
-                                            <option value="2024">
-                                                2024
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-4 m-form__group-sub">
-                                        <label class="form-control-label">
-                                            * CVV:
-                                        </label>
-                                        <input type="number" class="form-control m-input" name="billing_card_cvv" placeholder="" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                            <div class="m-form__section">
-                                <div class="m-form__heading">
-                                    <h3 class="m-form__heading-title">
-                                        Billing Address
-                                        <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="If different than the corresponding address"></i>
-                                    </h3>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-lg-12">
-                                        <label class="form-control-label">
-                                            * Address 1:
-                                        </label>
-                                        <input type="text" name="billing_address_1" class="form-control m-input" placeholder="" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-lg-12">
-                                        <label class="form-control-label">
-                                            Address 2:
-                                        </label>
-                                        <input type="text" name="billing_address_2" class="form-control m-input" placeholder="" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-lg-5 m-form__group-sub">
-                                        <label class="form-control-label">
-                                            * City:
-                                        </label>
-                                        <input type="text" class="form-control m-input" name="billing_city" placeholder="" value="">
-                                    </div>
-                                    <div class="col-lg-5 m-form__group-sub">
-                                        <label class="form-control-label">
-                                            * State:
-                                        </label>
-                                        <input type="text" class="form-control m-input" name="billing_state" placeholder="" value="">
-                                    </div>
-                                    <div class="col-lg-2 m-form__group-sub">
-                                        <label  class="form-control-label">
-                                            * ZIP:
-                                        </label>
-                                        <input type="text" class="form-control m-input" name="billing_zip" placeholder="" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                            <div class="m-form__section">
-                                <div class="m-form__heading">
-                                    <h3 class="m-form__heading-title">
-                                        Delivery Type
-                                    </h3>
-                                </div>
-                                <div class="form-group m-form__group">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <label class="m-option">
-                                                <span class="m-option__control">
-                                                    <span class="m-radio m-radio--state-brand">
-                                                        <input type="radio" name="billing_delivery" value="">
-                                                        <span></span>
-                                                    </span>
-                                                </span>
-                                                <span class="m-option__label">
-                                                    <span class="m-option__head">
-                                                        <span class="m-option__title">
-                                                            Standart Delevery
+                    <!-- END: Subheader -->
+                    <div class="m-content">
+                         
+                        <div class="m-portlet">
+                            <div class="m-portlet__body  m-portlet__body--no-padding">
+                                <div class="row m-row--no-padding m-row--col-separator-xl">
+                                    <div class="col-xl-4">
+                                        <!--begin:: Widgets/Stats2-1 -->
+                                        <div class="m-widget1">
+                                            <div class="m-widget1__item">
+                                                <div class="row m-row--no-padding align-items-center">
+                                                    <div class="col">
+                                                        <h3 class="m-widget1__title">
+                                                            Member Profit
+                                                        </h3>
+                                                        <span class="m-widget1__desc">
+                                                            Awerage Weekly Profit
                                                         </span>
-                                                        <span class="m-option__focus">
-                                                            Free
+                                                    </div>
+                                                    <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-brand">
+                                                            +$17,800
                                                         </span>
-                                                    </span>
-                                                    <span class="m-option__body">
-                                                        Estimated 14-20 Day Shipping 
-                    (&nbsp;Duties end taxes may be due 
-                    upon delivery&nbsp;)
-                                                    </span>
-                                                </span>
-                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-widget1__item">
+                                                <div class="row m-row--no-padding align-items-center">
+                                                    <div class="col">
+                                                        <h3 class="m-widget1__title">
+                                                            Orders
+                                                        </h3>
+                                                        <span class="m-widget1__desc">
+                                                            Weekly Customer Orders
+                                                        </span>
+                                                    </div>
+                                                    <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-danger">
+                                                            +1,800
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-widget1__item">
+                                                <div class="row m-row--no-padding align-items-center">
+                                                    <div class="col">
+                                                        <h3 class="m-widget1__title">
+                                                            Issue Reports
+                                                        </h3>
+                                                        <span class="m-widget1__desc">
+                                                            System bugs and issues
+                                                        </span>
+                                                    </div>
+                                                    <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-success">
+                                                            -27,49%
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <label class="m-option">
-                                                <span class="m-option__control">
-                                                    <span class="m-radio m-radio--state-brand">
-                                                        <input type="radio" name="billing_delivery" value="">
-                                                        <span></span>
-                                                    </span>
-                                                </span>
-                                                <span class="m-option__label">
-                                                    <span class="m-option__head">
-                                                        <span class="m-option__title">
-                                                            Fast Delevery
-                                                        </span>
-                                                        <span class="m-option__focus">
-                                                            $&nbsp;8.00
-                                                        </span>
-                                                    </span>
-                                                    <span class="m-option__body">
-                                                        Estimated 2-5 Day Shipping
-                    (&nbsp;Duties end taxes may be due
-                    upon delivery&nbsp;)
-                                                    </span>
-                                                </span>
-                                            </label>
-                                        </div>
+                                        <!--end:: Widgets/Stats2-1 -->
                                     </div>
-                                    <div class="m-form__help">
-                                        <!--must use this helper element to display error message for the options-->
+                                    <div class="col-xl-4">
+                                        <!--begin:: Widgets/Daily Sales-->
+                                        <div class="m-widget14">
+                                            <div class="m-widget14__header m--margin-bottom-30">
+                                                <h3 class="m-widget14__title">
+                                                    Daily Sales
+                                                </h3>
+                                                <span class="m-widget14__desc">
+                                                    Check out each collumn for more details
+                                                </span>
+                                            </div>
+                                            <div class="m-widget14__chart" style="height:120px;">
+                                                <canvas  id="m_chart_daily_sales"></canvas>
+                                            </div>
+                                        </div>
+                                        <!--end:: Widgets/Daily Sales-->
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <!--begin:: Widgets/Profit Share-->
+                                        <div class="m-widget14">
+                                            <div class="m-widget14__header">
+                                                <h3 class="m-widget14__title">
+                                                    Profit Share
+                                                </h3>
+                                                <span class="m-widget14__desc">
+                                                    Profit Share between customers
+                                                </span>
+                                            </div>
+                                            <div class="row  align-items-center">
+                                                <div class="col">
+                                                    <div id="m_chart_profit_share" class="m-widget14__chart" style="height: 160px">
+                                                        <div class="m-widget14__stat">
+                                                            45
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="m-widget14__legends">
+                                                        <div class="m-widget14__legend">
+                                                            <span class="m-widget14__legend-bullet m--bg-accent"></span>
+                                                            <span class="m-widget14__legend-text">
+                                                                37% Sport Tickets
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget14__legend">
+                                                            <span class="m-widget14__legend-bullet m--bg-warning"></span>
+                                                            <span class="m-widget14__legend-text">
+                                                                47% Business Events
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget14__legend">
+                                                            <span class="m-widget14__legend-bullet m--bg-brand"></span>
+                                                            <span class="m-widget14__legend-text">
+                                                                19% Others
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end:: Widgets/Profit Share-->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-portlet__foot m-portlet__foot--fit">
-                            <div class="m-form__actions m-form__actions">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-accent">
-                                            Validate
-                                        </button>
-                                        <button type="reset" class="btn btn-secondary">
-                                            Cancel
-                                        </button>
+                        
+                        
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <!--begin:: Widgets/Tasks -->
+                                <div class="m-portlet m-portlet--full-height ">
+                                    <div class="m-portlet__head">
+                                        <div class="m-portlet__head-caption">
+                                            <div class="m-portlet__head-title">
+                                                <h3 class="m-portlet__head-text">
+                                                    Tasks
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="m-portlet__head-tools">
+                                            <ul class="nav nav-pills nav-pills--brand m-nav-pills--align-right m-nav-pills--btn-pill m-nav-pills--btn-sm" role="tablist">
+                                                <li class="nav-item m-tabs__item">
+                                                    <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_widget2_tab1_content" role="tab">
+                                                        Today
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item m-tabs__item">
+                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget2_tab2_content1" role="tab">
+                                                        Week
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item m-tabs__item">
+                                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget2_tab3_content1" role="tab">
+                                                        Month
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="m_widget2_tab1_content">
+                                                <div class="m-widget2">
+                                                    <div class="m-widget2__item m-widget2__item--primary">
+                                                        <div class="m-widget2__checkbox">
+                                                            <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                                                                <input type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-widget2__desc">
+                                                            <span class="m-widget2__text">
+                                                                Make Metronic Great  Again.Lorem Ipsum Amet
+                                                            </span>
+                                                            <br>
+                                                            <span class="m-widget2__user-name">
+                                                                <a href="#" class="m-widget2__link">
+                                                                    By Bob
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget2__actions">
+                                                            <div class="m-widget2__actions-nav">
+                                                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                                                                    <a href="#" class="m-dropdown__toggle">
+                                                                        <i class="la la-ellipsis-h"></i>
+                                                                    </a>
+                                                                    <div class="m-dropdown__wrapper">
+                                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                                        <div class="m-dropdown__inner">
+                                                                            <div class="m-dropdown__body">
+                                                                                <div class="m-dropdown__content">
+                                                                                    <ul class="m-nav">
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Activity
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Messages
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    FAQ
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Support
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-widget2__item m-widget2__item--warning">
+                                                        <div class="m-widget2__checkbox">
+                                                            <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                                                                <input type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-widget2__desc">
+                                                            <span class="m-widget2__text">
+                                                                Prepare Docs For Metting On Monday
+                                                            </span>
+                                                            <br>
+                                                            <span class="m-widget2__user-name">
+                                                                <a href="#" class="m-widget2__link">
+                                                                    By Sean
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget2__actions">
+                                                            <div class="m-widget2__actions-nav">
+                                                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                                                                    <a href="#" class="m-dropdown__toggle">
+                                                                        <i class="la la-ellipsis-h"></i>
+                                                                    </a>
+                                                                    <div class="m-dropdown__wrapper">
+                                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                                        <div class="m-dropdown__inner">
+                                                                            <div class="m-dropdown__body">
+                                                                                <div class="m-dropdown__content">
+                                                                                    <ul class="m-nav">
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Activity
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Messages
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    FAQ
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Support
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-widget2__item m-widget2__item--brand">
+                                                        <div class="m-widget2__checkbox">
+                                                            <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                                                                <input type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-widget2__desc">
+                                                            <span class="m-widget2__text">
+                                                                Make Widgets Great Again.Estudiat Communy Elit
+                                                            </span>
+                                                            <br>
+                                                            <span class="m-widget2__user-name">
+                                                                <a href="#" class="m-widget2__link">
+                                                                    By Aziko
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget2__actions">
+                                                            <div class="m-widget2__actions-nav">
+                                                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                                                                    <a href="#" class="m-dropdown__toggle">
+                                                                        <i class="la la-ellipsis-h"></i>
+                                                                    </a>
+                                                                    <div class="m-dropdown__wrapper">
+                                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                                        <div class="m-dropdown__inner">
+                                                                            <div class="m-dropdown__body">
+                                                                                <div class="m-dropdown__content">
+                                                                                    <ul class="m-nav">
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Activity
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Messages
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    FAQ
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Support
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-widget2__item m-widget2__item--success">
+                                                        <div class="m-widget2__checkbox">
+                                                            <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                                                                <input type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-widget2__desc">
+                                                            <span class="m-widget2__text">
+                                                                Make Metronic Great Again.Lorem Ipsum
+                                                            </span>
+                                                            <br>
+                                                            <span class="m-widget2__user-name">
+                                                                <a href="#" class="m-widget2__link">
+                                                                    By James
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget2__actions">
+                                                            <div class="m-widget2__actions-nav">
+                                                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                                                                    <a href="#" class="m-dropdown__toggle">
+                                                                        <i class="la la-ellipsis-h"></i>
+                                                                    </a>
+                                                                    <div class="m-dropdown__wrapper">
+                                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                                        <div class="m-dropdown__inner">
+                                                                            <div class="m-dropdown__body">
+                                                                                <div class="m-dropdown__content">
+                                                                                    <ul class="m-nav">
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Activity
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Messages
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    FAQ
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Support
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-widget2__item m-widget2__item--danger">
+                                                        <div class="m-widget2__checkbox">
+                                                            <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                                                                <input type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-widget2__desc">
+                                                            <span class="m-widget2__text">
+                                                                Completa Financial Report For Emirates Airlines
+                                                            </span>
+                                                            <br>
+                                                            <span class="m-widget2__user-name">
+                                                                <a href="#" class="m-widget2__link">
+                                                                    By Bob
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget2__actions">
+                                                            <div class="m-widget2__actions-nav">
+                                                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                                                                    <a href="#" class="m-dropdown__toggle">
+                                                                        <i class="la la-ellipsis-h"></i>
+                                                                    </a>
+                                                                    <div class="m-dropdown__wrapper">
+                                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                                        <div class="m-dropdown__inner">
+                                                                            <div class="m-dropdown__body">
+                                                                                <div class="m-dropdown__content">
+                                                                                    <ul class="m-nav">
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Activity
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Messages
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    FAQ
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Support
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-widget2__item m-widget2__item--info">
+                                                        <div class="m-widget2__checkbox">
+                                                            <label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
+                                                                <input type="checkbox">
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="m-widget2__desc">
+                                                            <span class="m-widget2__text">
+                                                                Completa Financial Report For Emirates Airlines
+                                                            </span>
+                                                            <br>
+                                                            <span class="m-widget2__user-name">
+                                                                <a href="#" class="m-widget2__link">
+                                                                    By Sean
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="m-widget2__actions">
+                                                            <div class="m-widget2__actions-nav">
+                                                                <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">
+                                                                    <a href="#" class="m-dropdown__toggle">
+                                                                        <i class="la la-ellipsis-h"></i>
+                                                                    </a>
+                                                                    <div class="m-dropdown__wrapper">
+                                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                                        <div class="m-dropdown__inner">
+                                                                            <div class="m-dropdown__body">
+                                                                                <div class="m-dropdown__content">
+                                                                                    <ul class="m-nav">
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Activity
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Messages
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    FAQ
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="m-nav__item">
+                                                                                            <a href="" class="m-nav__link">
+                                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                                <span class="m-nav__link-text">
+                                                                                                    Support
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="m_widget2_tab2_content"></div>
+                                            <div class="tab-pane" id="m_widget2_tab3_content"></div>
+                                        </div>
                                     </div>
                                 </div>
+                                <!--end:: Widgets/Tasks -->
                             </div>
+                            <div class="col-xl-6 col-lg-12">
+                                <!--Begin::Portlet-->
+                                <div class="m-portlet  m-portlet--full-height ">
+                                    <div class="m-portlet__head">
+                                        <div class="m-portlet__head-caption">
+                                            <div class="m-portlet__head-title">
+                                                <h3 class="m-portlet__head-text">
+                                                    Recent Activities
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="m-portlet__head-tools">
+                                            <ul class="m-portlet__nav">
+                                                <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
+                                                    <a href="#" class="m-portlet__nav-link m-portlet__nav-link--icon m-portlet__nav-link--icon-xl m-dropdown__toggle">
+                                                        <i class="la la-ellipsis-h m--font-brand"></i>
+                                                    </a>
+                                                    <div class="m-dropdown__wrapper">
+                                                        <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                                        <div class="m-dropdown__inner">
+                                                            <div class="m-dropdown__body">
+                                                                <div class="m-dropdown__content">
+                                                                    <ul class="m-nav">
+                                                                        <li class="m-nav__section m-nav__section--first">
+                                                                            <span class="m-nav__section-text">
+                                                                                Quick Actions
+                                                                            </span>
+                                                                        </li>
+                                                                        <li class="m-nav__item">
+                                                                            <a href="" class="m-nav__link">
+                                                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                                                <span class="m-nav__link-text">
+                                                                                    Activity
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="m-nav__item">
+                                                                            <a href="" class="m-nav__link">
+                                                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                                                <span class="m-nav__link-text">
+                                                                                    Messages
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="m-nav__item">
+                                                                            <a href="" class="m-nav__link">
+                                                                                <i class="m-nav__link-icon flaticon-info"></i>
+                                                                                <span class="m-nav__link-text">
+                                                                                    FAQ
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="m-nav__item">
+                                                                            <a href="" class="m-nav__link">
+                                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                                <span class="m-nav__link-text">
+                                                                                    Support
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="m-nav__separator m-nav__separator--fit"></li>
+                                                                        <li class="m-nav__item">
+                                                                            <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
+                                                                                Cancel
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__body">
+                                        <div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="380" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
+                                            <!--Begin::Timeline 2 -->
+                                            <div class="m-timeline-2">
+                                                <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
+                                                    <div class="m-timeline-2__item">
+                                                        <span class="m-timeline-2__item-time">
+                                                            10:00
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-danger"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text  m--padding-top-5">
+                                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                                                            <br>
+                                                            incididunt ut labore et dolore magna
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-timeline-2__item m--margin-top-30">
+                                                        <span class="m-timeline-2__item-time">
+                                                            12:45
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-success"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text m-timeline-2__item-text--bold">
+                                                            AEOL Meeting With
+                                                        </div>
+                                                        <div class="m-list-pics m-list-pics--sm m--padding-left-20">
+                                                            <a href="#">
+                                                                <img src="assets/app/media/img/users/100_4.jpg" title="">
+                                                            </a>
+                                                            <a href="#">
+                                                                <img src="assets/app/media/img/users/100_13.jpg" title="">
+                                                            </a>
+                                                            <a href="#">
+                                                                <img src="assets/app/media/img/users/100_11.jpg" title="">
+                                                            </a>
+                                                            <a href="#">
+                                                                <img src="assets/app/media/img/users/100_14.jpg" title="">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-timeline-2__item m--margin-top-30">
+                                                        <span class="m-timeline-2__item-time">
+                                                            14:00
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-brand"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text m--padding-top-5">
+                                                            Make Deposit
+                                                            <a href="#" class="m-link m-link--brand m--font-bolder">
+                                                                USD 700
+                                                            </a>
+                                                            To ESL.
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-timeline-2__item m--margin-top-30">
+                                                        <span class="m-timeline-2__item-time">
+                                                            16:00
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-warning"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text m--padding-top-5">
+                                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                                                            <br>
+                                                            incididunt ut labore et dolore magna elit enim at minim
+                                                            <br>
+                                                            veniam quis nostrud
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-timeline-2__item m--margin-top-30">
+                                                        <span class="m-timeline-2__item-time">
+                                                            17:00
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-info"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text m--padding-top-5">
+                                                            Placed a new order in
+                                                            <a href="#" class="m-link m-link--brand m--font-bolder">
+                                                                SIGNATURE MOBILE
+                                                            </a>
+                                                            marketplace.
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-timeline-2__item m--margin-top-30">
+                                                        <span class="m-timeline-2__item-time">
+                                                            16:00
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-brand"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text m--padding-top-5">
+                                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor
+                                                            <br>
+                                                            incididunt ut labore et dolore magna elit enim at minim
+                                                            <br>
+                                                            veniam quis nostrud
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-timeline-2__item m--margin-top-30">
+                                                        <span class="m-timeline-2__item-time">
+                                                            17:00
+                                                        </span>
+                                                        <div class="m-timeline-2__item-cricle">
+                                                            <i class="fa fa-genderless m--font-danger"></i>
+                                                        </div>
+                                                        <div class="m-timeline-2__item-text m--padding-top-5">
+                                                            Received a new feedback on
+                                                            <a href="#" class="m-link m-link--brand m--font-bolder">
+                                                                FinancePro App
+                                                            </a>
+                                                            product.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--End::Timeline 2 -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End::Portlet-->
+                            </div>
+
                         </div>
-                    </form>
-                    <!--end::Form-->
+                            
+                    </div>
                 </div>
-                            </div>
-
-</div>
-</div>
-
-<div class="m-content">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="-portlet m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--bordered m-portlet--mobile">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">
-                                Ajax Sourced Server-side Processing
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                                <ul class="m-portlet__nav">
-                                    <li class="m-portlet__nav-item">
-                                        <a href="javascript:;" data-toggle="modal" data-target="#extra_large_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
-                                            <i class="fa fa-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li class="m-portlet__nav-item">
-                                        <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-							</div>
-							<div class="m-portlet__body">
-                                <!-- search start -->
-                                <form class="m-form m-form--fit m--margin-bottom-20">
-									<div class="row m--margin-bottom-20">
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												RecordID:
-											</label>
-											<input type="text" class="form-control m-input" placeholder="E.g: 4590" data-col-index="0">
-										</div>
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												OrderID:
-											</label>
-											<input type="text" class="form-control m-input" placeholder="E.g: 37000-300" data-col-index="1">
-										</div>
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												Country:
-											</label>
-											<select class="form-control m-input" data-col-index="2">
-												<option value="">
-													Select
-												</option>
-											</select>
-										</div>
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												Agent:
-											</label>
-											<input type="text" class="form-control m-input" placeholder="Agent ID or name" data-col-index="4">
-										</div>
-									</div>
-									<div class="row m--margin-bottom-20">
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												Ship Date:
-											</label>
-											<div class="input-daterange input-group" id="m_datepicker">
-												<input type="text" class="form-control m-input" name="start" placeholder="From" data-col-index="5"/>
-												<div class="input-group-append">
-													<span class="input-group-text">
-														<i class="la la-ellipsis-h"></i>
-													</span>
-												</div>
-												<input type="text" class="form-control m-input" name="end" placeholder="To" data-col-index="5"/>
-											</div>
-										</div>
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												Status:
-											</label>
-											<select class="form-control m-input" data-col-index="6">
-												<option value="">
-													Select
-												</option>
-											</select>
-										</div>
-										<div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-											<label>
-												Type:
-											</label>
-											<select class="form-control m-input" data-col-index="7">
-												<option value="">
-													Select
-												</option>
-											</select>
-										</div>
-									</div>
-									<div class="m-separator m-separator--md m-separator--dashed"></div>
-									<div class="row">
-										<div class="col-lg-12">
-											<button class="btn btn-brand m-btn m-btn--icon" id="m_search">
-												<span>
-													<i class="la la-search"></i>
-													<span>
-														Search
-													</span>
-												</span>
-											</button>
-											&nbsp;&nbsp;
-											<button class="btn btn-secondary m-btn m-btn--icon" id="m_reset">
-												<span>
-													<i class="la la-close"></i>
-													<span>
-														Reset
-													</span>
-												</span>
-											</button>
-										</div>
-									</div>
-								</form>
-                                <!-- search end  -->
-								<!--begin: Datatable -->
-								<table class="table table-striped- table-bordered table-hover table-checkable dt_table" id="m_table_1" data-source="<?php echo base_url('home/server_side_example'); ?>">
-									<thead>
-										<tr>
-											<th>
-												RecordID
-											</th>
-											<th>
-												OrderID
-											</th>
-											<th>
-												Country
-											</th>
-											<th>
-												ShipCity
-											</th>
-										</tr>
-									</thead>
-								</table>
-							</div>
-						</div>
-        </div>
-    </div>
-</div>
-</div>
 
 <!-- model -->
 

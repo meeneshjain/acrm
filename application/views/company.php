@@ -1,5 +1,10 @@
 
+
+
+                
+
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
+
 					<!-- BEGIN: Subheader -->
 					<div class="m-subheader ">
 						<div class="d-flex align-items-center">
@@ -8,6 +13,7 @@
 									Company List
 								</h3>
 							</div>
+
 							<div>
 								<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
 									<a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
@@ -70,7 +76,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="m-portlet__nav-item">
-                                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
+                                                    <a onclick="deleteMultiple()" href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </li>
@@ -419,10 +425,25 @@
                         });
                     }
 
+                    function deleteMultiple()
+                    {
+                        var result = confirm("Want to delete?");
+                        if (result) {
+                            idArr = [];
+                            $('.compckbx').each(function(index,value){
+                                if(this.checked == true){
+                                    idArr.push(this.value);
+                                }
+                            });
+                            console.log(idArr);
+                        }
+                    }
+
                     function reloadTable()
                     {
                         $('#company_list_dt_table').DataTable().ajax.reload();
                     }
+
 
 
 
