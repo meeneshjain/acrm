@@ -67,7 +67,9 @@ function form_submit(form_id, callback, error_callback) {
                 callback(response);
             },
             error: function (response) {
-                error_callback(response);
+                if(error_callback != 'undefined' && error_callback !== undefined){
+                    error_callback(response);
+                }
                 notify_alert('danger', 'There was some error, Please try again.', "Error");
             }
         });
