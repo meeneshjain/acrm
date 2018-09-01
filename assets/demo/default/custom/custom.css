@@ -56,3 +56,14 @@
         padding: 0%;
     }
 }
+
+.cust_notes .cust_notes_foot{
+	padding: 5px 10px;
+    font-size: 10px;
+    font-style: italic;
+}
+
+a.btn.btn-black {
+    background-color: #2c2e3e;
+    color: white;
+}
