@@ -46,10 +46,10 @@ sessionStorage.fonts = true;
 <!-- BEGIN: Brand -->
 <div class="m-stack__item m-brand  m-brand--skin-dark ">
 <div class="m-stack m-stack--ver m-stack--general">
-<div class="m-stack__item m-stack__item--middle m-brand__logo" style="width: 80%;">
+<div class="m-stack__item m-stack__item--middle m-brand__logo" style="width: 95%;padding: 0%;">
     <h4>
-    <a href="<?php echo base_url(); ?>" class="m-brand__logo-wrapper">
-            Akshay CRM 
+        <a href="<?php echo base_url(); ?>" class="m-brand__logo-wrapper">
+           <img src="<?php echo base_url('assets/images/company_logo_light.png'); ?>" style="width: 50px;" alt=""> <?php echo APP_NAME?>
         </a>
     </h4>
 </div>
@@ -976,14 +976,6 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
-							
-							
-							
-							
-							
-							
-							
-							
 							
 							<li class="m-menu__section ">
 								<h4 class="m-menu__section-text">
