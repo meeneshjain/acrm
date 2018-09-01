@@ -16,3 +16,43 @@
 .m-quick-sidebar.m-quick-sidebar--tabbed .m-tabs.m-tabs-line {
     margin: 0 0 10px 0 !important;
 }
+
+.rem-3{
+    font-size:3rem;
+}
+
+.m-form.m-form--group-seperator .m-form__group, .m-form.m-form--group-seperator-dashed .m-form__group {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.modal .modal-content .modal-footer {
+    padding: 10px !important;
+}
+
+.modal .modal-content .modal-header {
+    padding: 10px !important;
+}
+
+.modal .modal-content .modal-body {
+    padding: 10px !important;
+}
+
+.modal-header .close {
+    padding: 0.5rem !important;
+    margin: 0 !important;
+}
+
+.logo_css {
+     width: 90%;
+    padding: 0%;
+}
+
+
+@media (max-width: 1024px){
+    
+    .logo_css {
+        width: 60%;
+        padding: 0%;
+    }
+}

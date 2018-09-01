@@ -151,7 +151,13 @@
             if(response.status != "success"){
 			  notify_alert('danger', 'Wrong username and password. Please try again', "Error")
             } else {
-              window.location.href =base_url+ 'home/dashboard';
+			<?php  $get_data = $this->input->get();
+				if(isset($get_data['return_url']) && $get_data['return_url']!== "") { ?>
+				base_url = base_url + '<?php echo $get_data['return_url']; ?>';
+			<?php } else { ?>
+				base_url = base_url+ 'home/dashboard';
+				<?php } ?>
+				window.location.href = base_url;
             }
           }, 
           error : function(response){

@@ -15,6 +15,7 @@
 
 <!-- END: Subheader -->
 
+<?php echo '<br>';; ?>
 <div class="m-content">
     <div class="row">
         <div class="col-lg-4">
@@ -38,13 +39,13 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon" data-toggle="modal" data-target="#user_role_modal">
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -52,11 +53,9 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <?php foreach($user_role as $role){ ?>
+                            <li class="list-group-item"> <b><?php echo $role;  ?> </b></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -79,27 +78,25 @@
                         </div>
                     </div>
                     <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
+                        <!-- <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <?php foreach($subscription_plan as $plans){ ?>
+                            <li class="list-group-item"> <b><?php echo $plans;  ?> </b></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -125,12 +122,12 @@
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -138,11 +135,11 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <li class="list-group-item"> <b>Cras justo odio </b></li>
+                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
+                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
+                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
+                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
                     </ul>
                 </div>
             </div> -->
@@ -169,13 +166,13 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                <a href="javascript:;" id="fetch_sale_stages" class="m-portlet__nav-link m-portlet__nav-link--icon" data-toggle="modal" data-target="#sale_Stages_modal">
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -183,11 +180,9 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <?php foreach($sales_stages as $sale){ ?>
+                            <li class="list-group-item"> <b><?php echo $sale;  ?> </b></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -213,12 +208,12 @@
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -226,11 +221,11 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <li class="list-group-item"> <b>Cras justo odio </b></li>
+                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
+                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
+                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
+                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
                     </ul>
                 </div>
             </div> -->
@@ -255,12 +250,12 @@
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -268,11 +263,11 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <li class="list-group-item"> <b>Cras justo odio </b></li>
+                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
+                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
+                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
+                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
                     </ul>
                 </div>
             </div> -->
@@ -297,27 +292,25 @@
                         </div>
                     </div>
                     <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
+                      <!--   <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <?php foreach($target_duration as $duration){ ?>
+                            <li class="list-group-item"> <b><?php echo $duration;  ?> </b></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -343,12 +336,12 @@
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -356,11 +349,11 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <li class="list-group-item"> <b>Cras justo odio </b></li>
+                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
+                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
+                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
+                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
                     </ul>
                 </div>
             </div> -->
@@ -385,12 +378,12 @@
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-cog"></i>
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
                             <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="la la-share-alt-square"></i>
+                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -398,11 +391,11 @@
                 </div>
                 <div class="m-portlet__body">
                     <ul class="list-group">
-                        <li class="list-group-item"> Cras justo odio </li>
-                        <li class="list-group-item"> Dapibus ac facilisis in </li>
-                        <li class="list-group-item"> Morbi leo risus </li>
-                        <li class="list-group-item"> Porta ac consectetur ac </li>
-                        <li class="list-group-item"> Vestibulum at eros </li>
+                        <li class="list-group-item"> <b>Cras justo odio </b></li>
+                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
+                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
+                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
+                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
                     </ul>
                 </div>
             </div> -->
@@ -412,13 +405,13 @@
 </div>
 </div>
 
-<div class="modal fade" id="edit_company_modal" tabindex="-1" role="dialog" aria-labelledby="edit_company_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="sale_Stages_modal" tabindex="-1" role="dialog" aria-labelledby="sale_Stages_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
-        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="edit_company_form"  data-parsley-validate>
+        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="edit_sale_stages"  data-parsley-validate action="<?php echo base_url('settings/update_sale_stages'); ?>">
             <div class="modal-header">
-                <h4 class="modal-title" id="edit_company_modal_lable">
-                    EDIT COMPANY DETAIL
+                <h4 class="modal-title" id="sale_Stages_modal_lable">
+                    <b>Update Sales Stage Probabity</b>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
@@ -427,87 +420,78 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                        <label>
-                            Company Name:
-                        </label>
-                        <input type="hidden" id="company_id" name="id" value="0">
-                        <input required type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
-                    
-                    </div>
-                    <div class="col-lg-4">
-                        <label>
-                            Email:
-                        </label>
-                        <input required type="email" id="email_1" name="email_1" class="form-control m-input" placeholder="Enter your email">
-                    </div>
-                    <div class="col-lg-4">
-                        <label>
-                            Another Email:
-                        </label>
-                        <input type="email" id="email_2" name="email_2" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
+                <div class="col-md-12 sale_stages_loader" style="display:none">
+                    <div class="text-center">
+                        <i class="fa fa-superpowersfa-spin rem-3" ></i>
                     </div>
                 </div>
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                        <label>
-                            Contact:
-                        </label>
-                        <input required type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
-                    </div>
-                    <div class="col-lg-4">
-                        <label>
-                            Another Contact:
-                        </label>
-                        <input type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
-                    </div>
-                    <div class="col-lg-4">
-                        <label>
-                            Subscription:
-                        </label>
-                        <div class="m-input-icon m-input-icon--right">
-                            <select required class="form-control m-input" id="subscription" name="subscription">
-                                <option value=""> --Select Subscription Type--</option>
-                                <option value="1">For 1-10 users</option>
-                                <option value="2">For 11-30 users</option>
-                                <option value="3">For 30-50 users</option>
-                                <option value="4">For 50+ users</option>
-                            </select>
-
+                <div class="col-sm-12">
+                    <div class="form-group m-form__group row sale_stages_data">
+                        <div class="col-lg-2">
+                            <b>#</b>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group m-form__group row">
-                    <div class="col-lg-6">
-                        <label>
-                            About Company:
-                        </label>
-                        <div class="m-input-icon m-input-icon--right">
-                            <textarea required class="form-control m-input" id="about_company" name="about_company" placeholder="Describe about the company" ></textarea>
+                        <div class="col-lg-5">
+                            <b>Name</b>
                         </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <label>
-                            Address:
-                        </label>
-                        <div class="m-input-icon m-input-icon--right">
-                            <textarea required class="form-control m-input" id="address" name="address" placeholder="Describe about the company" ></textarea>
+                        <div class="col-lg-5">
+                            <b>Probability</b>
                         </div>
-
+                        </div>   
+                    <?php foreach($all_stages as $key => $stage){  ?>
+                    <div class="form-group m-form__group row sale_stages_data">
+                        <div class="col-lg-2">
+                            <label>
+                                <?php echo $stage['id']; ?>
+                            </label>
+                        </div>
+                        <div class="col-lg-5">
+                        <input type="text" readonly id="sale_stages_input_<?php echo $stage['id']; ?>" value="<?php echo $stage['name']; ?>" name="sale_stage[<?php echo $stage['id']; ?>][name]" class="form-control m-input" placeholder="name">
                     </div>
-
+                    <div class="col-lg-5">
+                        <input type="text" id="sale_stages_input_<?php echo $stage['id']; ?>" value="<?php echo $stage['probability']; ?>"  name="sale_stage[<?php echo $stage['id']; ?>][probability]" class="form-control m-input" placeholder="10">
+                    </div>
+                        
+                    </div>    
+                    <?php } ?>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="companyUpdate(this)"  class="btn btn-primary">
-                    Update
+                <button type="submit" id="update_note_btn"  class="btn btn-primary">
+                   <i class="fa fa-check"></i> Update
                 </button>
                 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-times"></i> Close
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="user_role_modal" tabindex="-1" role="dialog" aria-labelledby="user_role_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="edit_sale_stages"  data-parsley-validate action="<?php echo base_url('settings/update_user_permissions'); ?>">
+            <div class="modal-header">
+                <h4 class="modal-title" id="user_role_modal_lable">
+                    <b>User Role & Permissions</b>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+          </div>
+            <div class="modal-footer">
+                <button type="submit" id="update_user_btn"  class="btn btn-primary">
+                   <i class="fa fa-check"></i> Update
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-times"></i> Close
                 </button>
             </div>
         </form>

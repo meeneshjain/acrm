@@ -46,7 +46,7 @@ sessionStorage.fonts = true;
 <!-- BEGIN: Brand -->
 <div class="m-stack__item m-brand  m-brand--skin-dark ">
 <div class="m-stack m-stack--ver m-stack--general">
-<div class="m-stack__item m-stack__item--middle m-brand__logo" style="width: 95%;padding: 0%;">
+<div class="m-stack__item m-stack__item--middle m-brand__logo logo_css">
     <h4>
         <a href="<?php echo base_url(); ?>" class="m-brand__logo-wrapper">
            <img src="<?php echo base_url('assets/images/company_logo_light.png'); ?>" style="width: 50px;" alt=""> <?php echo APP_NAME?>

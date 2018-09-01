@@ -129,8 +129,24 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 	}
 }
 
-function get_company_list($type, $selected_value){
-	return generate_drop_down('id', 'company_name', 'companies', $type = 'html',$selected_value=null);
+function get_company_list($type, $selected_value = NULL){
+	return generate_drop_down('id', 'company_name', 'companies', $type,$selected_value);
+}
+
+function get_user_role_list($type, $selected_value = NULL){
+	return generate_drop_down('id', 'name', 'user_roles', $type,$selected_value);
+}
+
+function get_target_duration_list($type, $selected_value = NULL){
+	return generate_drop_down('id', 'name', 'target_duration', $type,$selected_value);
+}
+
+function get_subscription_plan_list($type, $selected_value = NULL){
+	return generate_drop_down('id', 'name', 'subscription_plan', $type,$selected_value);
+}
+
+function get_sales_stages_list($type, $selected_value = NULL){
+	return generate_drop_down('id', 'name', 'sales_stages', $type,$selected_value);
 }
 
 function active_inactive_dp($type="html", $selectedstats = null ){
@@ -176,6 +192,18 @@ function aes_decypt($string) {
 	return $output;
 }
 
+
+function load_required_js($page_name){
+	$js_list =  array(
+		"dashboard" => array('dashboard_activity.js'),
+		"setting" => array('settings_page.js'),
+		"sidebar" => array('sidebar_activities.js'),
+		"" => array(),
+		"" => array(),
+		
+	);
+	return $js_list[$page_name];
+}
 
 
 ?>

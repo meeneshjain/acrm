@@ -429,17 +429,18 @@
 <div id="m_scroll_top" class="m-scroll-top">
 	<i class="la la-arrow-up"></i>
 </div>
-
-
 <script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/base/scripts.bundle.js') ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.js'); ?>"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/components/base/bootstrap-notify.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/custom/datatables/datatables.bundle.js'); ?>"></script>
-<script src="<?php echo base_url('/assets/demo/default/custom/custom.js'); ?>"></script>
-<script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
+<script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>" type="text/javascript"></script>
 
-
+<?php  if(isset($load_js) && $load_js!=""){
+	foreach(load_required_js($load_js) as $js_files){ ?>
+	<script src="<?php echo base_url('assets/demo/default/custom/'.$js_files); ?>"></script>
+	<?php  } } ?>
 </body>
 
 </html>

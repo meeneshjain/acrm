@@ -20,8 +20,9 @@ function notify_alert(type, message, title) {
         content.icon = 'fa 	fa-check-circle ';
     } else if (type == "warning") {
         content.icon = 'fa fa-warning ';
-    } else if (type == "danger") {
+    } else if (type == "danger" || type == "error") {
         content.icon = 'fa fa-times ';
+        type = 'danger';
     }
 
     content.message = message;
