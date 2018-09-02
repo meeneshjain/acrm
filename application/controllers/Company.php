@@ -6,8 +6,6 @@ class Company extends CI_Controller {
     public $sessionData;
 	public function __construct(){
 		parent::__construct();
-
-		$this->load->model("home_model");
 		$this->load->model("company_model");
 		$this->sessionData = $this->session->userdata();
 		check_session();
@@ -16,7 +14,7 @@ class Company extends CI_Controller {
     public function index() {
          $data['page_title'] = 'Dashboard';
          $data['breadcum_title'] = 'home';
-         $data['active_sidemenu'] = "home";
+         $data['active_sidemenu'] = "company";
          $data['load_js'] = 'company';
          $this->load->view('include/header',$data);
          $this->load->view('company',$data);
