@@ -879,7 +879,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                 </div>
             </div>
         </li>
-        <li id="m_quick_sidebar_toggle" class="m-nav__item">
+        <li id="m_quick_sidebar_toggle" class="m-nav__item get_notes_list">
             <a href="#" class="m-nav__link m-dropdown__toggle">
                 <span class="m-nav__link-icon">
                     <i class="flaticon-grid-menu"></i>

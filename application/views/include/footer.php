@@ -62,7 +62,7 @@
 		</span>
 		<ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
 			<li class="nav-item m-tabs__item">
-				<a class="nav-link m-tabs__link active get_notes_list" data-toggle="tab" href="#notes_tab" role="tab">
+				<a class="nav-link m-tabs__link active" data-toggle="tab" href="#notes_tab" role="tab">
 					Notes
 				</a>
 			</li>
@@ -88,7 +88,7 @@
 				<div class="button_section col-md-12">
 					<div class="pull-right">
 						<div class="m-demo__preview m-demo__preview--btn">
-							<a href="#" data-toggle="modal" data-target="#add_notes_modal" class="btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+							<a href="#" class="btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill notes_modal_open_btn">
 								<i class="fa fa-plus-circle"></i>
 							</a>
 					   </div>
@@ -99,64 +99,7 @@
 				<hr>
 				<div class="clearfix"></div>
 			
-				
-
-
-				<div class="custom_portlet_container">
-					<div class="m-scrollable added_notes_list" data-scrollbar-shown="true" data-scrollable="true" data-max-height="450">
-						<div class="cust_notes m-portlet m-portlet--skin-dark m-portlet--bordered-semi m--bg-brand custom_portlet"  data-status="0">
-							<div class="m-portlet__head">
-								<div class="m-portlet__head-caption">
-									<div class="m-portlet__head-title">
-										<span class="m-portlet__head-icon">
-											<i class="flaticon-statistics"></i>
-										</span>
-										<h3 class="m-portlet__head-text" contenteditable="true" maxlength="20" >
-											Dark Skin
-										</h3>
-									</div>
-								</div>
-								<div class="m-portlet__head-tools">
-									<ul class="m-portlet__nav">
-										<li class="m-portlet__nav-item">
-											<a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-												<i class="fa fa-trash"></i>
-											</a>
-										</li>
-										
-										<li class="m-portlet__nav-item">
-											<a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-												<i class="fa fa-save"></i>
-											</a>
-										</li>
-										<li class="m-portlet__nav-item">
-										<a href="#"  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_portlet_toggle">
-											<i class="la la-angle-down"></i>
-										</a>
-									</li>
-									</ul>
-								</div>
-							</div>
-							<div class="m-portlet__body" contenteditable="true" style="display:none">
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-							</div>
-							<div class="m-portlet__foot cust_notes_foot text-white" style="display:none">
-								<div class="row">
-											<div class="col-sm-6 ">
-											<div class="pull-left text-sm">
-												<em>Edited By : Meenesh</em>
-											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="pull-right text-sm">
-												<em>2018-09-31 11:70</em>
-											</div>
-										</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div class="custom_portlet_container"></div>
 			</div>
 			
 			<!-- tab 1 end -->
@@ -379,12 +322,12 @@
 </div>
 
 <!-- MODAL FOR NOTES, MEETINGS, TASK, CALLS -->
-		<div class="modal fade" id="add_notes_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal fade" id="notes_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="add_notes_form" action="<?php echo base_url('schedule/add_notes');?>"  data-parsley-validate >
+                    <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="notes_form" action="<?php echo base_url('schedule/add_notes');?>"  data-parsley-validate >
                         <div class="modal-header">
-                            <h4 class="modal-title">
+                            <h4 class="modal-title notes_modal_heading">
                                 ADD NEW NOTES
                             </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -395,18 +338,19 @@
                         </div>
                         <div class="modal-body">
 							<div class="form-group">
-								<label for="a_notes_title" class="form-control-label">
+								<label for="notes_title" class="form-control-label">
 									Title:
 								</label>
-								<input required="" type="text" name="subject" id="a_notes_title" class="form-control" placeholder="Enter your subject" >
+								<input required="" type="text" name="subject" id="notes_title" class="form-control" placeholder="Enter your subject" >
 							</div>
 							<div class="form-group">
-								<label for="a_notes_message" class="form-control-label">
+								<label for="notes_message" class="form-control-label">
 									Message:
 								</label>
-								<textarea name="message" required id="a_notes_message" class="form-control" placeholder="Enter you message" rows="5"></textarea>
+								<textarea name="message" required id="notes_message" class="form-control" placeholder="Enter you message" rows="5"></textarea>
 							</div>
 							<div class="form-group">
+								<input type="hidden" name="notes_id" value="0">
 								<input type="hidden" name="color" id="notes_color" class="form-control" value="m--bg-metal"  >
 								<div class="">
 									<a href="#" data-note_color="m--bg-metal" class="btn btn-metal m-btn m-btn--icon btn-lg m-btn--icon-only m-btn--pill m-btn--air btn-sm check_button_element">
@@ -440,7 +384,7 @@
 							</div>
 						</div>
                         <div class="modal-footer">
-                            <button type="button"  id="note_click" class="btn btn-primary">
+                            <button type="button"  id="notes_action_btn" class="btn btn-primary">
                                 Save
                             </button>
                             
@@ -515,18 +459,20 @@ $(document).ready(function () {
 	 	$("#notes_color").val($(this).attr('data-note_color'));
 	});
 
-	$("#note_click").click(function(){
+	//$(".")
+
+	$("#notes_action_btn").click(function(){
 		var obj = $(this);
-		 if ($("#add_notes_form").parsley().validate()) {
-			show_loading("#note_click", 'Saving..!');
-			form_submit('add_notes_form', function(res){
+		 if ($("#notes_form").parsley().validate()) {
+			show_loading("#notes_action_btn", 'Saving..!');
+			form_submit('notes_form', function(res){
 				if(res.status == 'success')
 				{
 					notify_alert('success', res.message, "Success");
-					hide_loading("#note_click", 'Save');
-					$("#add_notes_form").parsley().reset();
-					$("#add_notes_form")[0].reset();
-					$("#add_notes_modal").modal('hide');
+					hide_loading("#notes_action_btn", 'Save');
+					$("#notes_form").parsley().reset();
+					$("#notes_form")[0].reset();
+					$("#notes_modal").modal('hide');
 					$(".get_notes_list").trigger( "click" );
 				}
 			});
@@ -608,7 +554,7 @@ $(document).ready(function () {
 							</div>\
 						</div>';
 				});
-				$('.added_notes_list').html(html);
+				$('.custom_portlet_container').html(html);
 			}
 			},function(res){
 				notify_alert('error', res.message, "Error");
