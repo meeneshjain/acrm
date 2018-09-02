@@ -28,7 +28,7 @@ class Company extends CI_Controller {
 		{
 			if($id == ""){
 				$this->company_model->insert();
-				echo json_encode(array("status" => "success","message" => 'Company Detail Updated', "data" => ""));
+				echo json_encode(array("status" => "success","message" => 'Company Inserted', "data" => ""));
 			} else {
 				$this->company_model->update_detail();
 				echo json_encode(array("status" => "success","message" => 'Company Detail Updated', "data" => ""));
