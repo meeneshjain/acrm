@@ -72,7 +72,11 @@ class Company_model extends CI_Model {
         	$row[] = $aRow['email_1'];
         	$row[] = $aRow['contact_1'];
         	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
-       		$row[] = '<button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button> <button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air" onclick="getDetail(this,'.$aRow['id'].')"><i class="fa fa-edit"></i></button>';
+			$row[] = '
+			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company"  data-toggle="modal" data-target="#add_update_company_modal" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button>
+			
+			<button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>
+			';
 
         	$output['data'][] = $row;
         }
@@ -87,6 +91,7 @@ class Company_model extends CI_Model {
 		$_POST['gstin_no'] = '';
 		$_POST['status'] = '0';
 		$_POST['is_deleted'] = '0';
+		unset($_POST['id']);
 		$this->db->insert('`companies`', $_POST);
 	}
 

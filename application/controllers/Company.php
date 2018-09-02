@@ -17,22 +17,28 @@ class Company extends CI_Controller {
          $data['page_title'] = 'Dashboard';
          $data['breadcum_title'] = 'home';
          $data['active_sidemenu'] = "home";
-         
+         $data['load_js'] = 'company';
          $this->load->view('include/header',$data);
          $this->load->view('company',$data);
          $this->load->view('include/footer');
 	 }
-    
-    public function insert(){
-		if($this->input->is_ajax_request())
+	 
+	 public function save_update($id = NULL){
+		 if($this->input->is_ajax_request())
 		{
-			$this->company_model->insert();
+			if($id == ""){
+				$this->company_model->insert();
+				echo json_encode(array("status" => "success","message" => 'Company Detail Updated', "data" => ""));
+			} else {
+				$this->company_model->update_detail();
+				echo json_encode(array("status" => "success","message" => 'Company Detail Updated', "data" => ""));
+			}
 		}
 		else
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
-    }
+	 }
 
     public function edit_detail(){
 		if($this->input->is_ajax_request())
@@ -54,18 +60,6 @@ class Company extends CI_Controller {
 		}
     }
 
-    public function update_detail(){
-		if($this->input->is_ajax_request())
-		{
-			$this->company_model->update_detail();
-			echo json_encode(array("status" => "success","message" => 'Company Detail Updated', "data" => ""));
-
-		}
-		else
-		{
-			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
-		}
-    }
 
     public function delete_company(){
 		if($this->input->is_ajax_request())

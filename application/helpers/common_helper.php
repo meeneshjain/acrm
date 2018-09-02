@@ -198,7 +198,7 @@ function load_required_js($page_name){
 		"dashboard" => array('dashboard_activity.js'),
 		"setting" => array('settings_page.js'),
 		"sidebar" => array('sidebar_activities.js'),
-		"" => array(),
+		"company" => array('company.js'),
 		"" => array(),
 		
 	);

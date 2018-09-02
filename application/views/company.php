@@ -71,7 +71,7 @@
                                         <div class="m-portlet__head-tools">
                                             <ul class="m-portlet__nav">
                                                 <li class="m-portlet__nav-item">
-                                                    <a href="javascript:;" data-toggle="modal" data-target="#company_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
+                                                    <a href="javascript:;" data-toggle="modal" data-target="#add_update_company_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill add_update_click" data-form_type="adddata-form_type="add">
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </li>
@@ -116,123 +116,25 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="company_modal" tabindex="-1" role="dialog" aria-labelledby="add_company_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
+                <div class="modal fade" id="add_update_company_modal" tabindex="-1" role="dialog" aria-labelledby="add_update_company_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
-                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="company_form"  data-parsley-validate>
+                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="company_form" action=""  data-parsley-validate>
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="add_company_modal_lable">
-                                        ADD NEW COMPANY
-                                    </h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">
-                                            &times;
-                                        </span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">    
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Company Name:
-                                            </label>
-                                            <input required type="text" name="company_name" class="form-control m-input" placeholder="Enter Company name">
-                                        
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Email:
-                                            </label>
-                                            <input required type="email" name="email_1" class="form-control m-input" placeholder="Enter your email">
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Another Email:
-                                            </label>
-                                            <input type="email" name="email_2" class="form-control m-input" placeholder="Enter your another email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Contact:
-                                            </label>
-                                            <input required type="text" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Another Contact:
-                                            </label>
-                                            <input type="text" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Subscription:
-                                            </label>
-                                            <div class="m-input-icon m-input-icon--right">
-                                                <select required class="form-control m-input" name="subscription">
-                                                    <option value=""> --Select Subscription Type--</option>
-                                                    <option value="1">For 1-10 users</option>
-                                                    <option value="2">For 11-30 users</option>
-                                                    <option value="3">For 30-50 users</option>
-                                                    <option value="4">For 50+ users</option>
-                                                </select>
-                    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-6">
-                                            <label>
-                                                About Company:
-                                            </label>
-                                            <div class="m-input-icon m-input-icon--right">
-                                                <textarea required class="form-control m-input" placeholder="Describe about the company" name="about_company"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label>
-                                                Address:
-                                            </label>
-                                            <div class="m-input-icon m-input-icon--right">
-                                                <textarea required class="form-control m-input" placeholder="Describe about the company" name="address"></textarea>
-                                            </div>
-        
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" onclick="companyInsert()"  class="btn btn-primary">
-                                        Save
-                                    </button>
-                                    
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                        Close
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="edit_company_modal" tabindex="-1" role="dialog" aria-labelledby="edit_company_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="edit_company_form"  data-parsley-validate>
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="edit_company_modal_lable">
+                                    <h4 class="modal-title" id="add_update_company_modal_lable">
                                         EDIT COMPANY DETAIL
                                     </h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close close_modal_common" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">
                                             &times;
                                         </span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
+                                    <div class="col-md-12">
+                                        
+                                    <h5 class="m-section__heading">Company Details </h5>
                                     <div class="form-group m-form__group row">
                                         <div class="col-lg-4">
                                             <label>
@@ -305,147 +207,73 @@
                                         </div>
 
                                     </div>
+                                    <div class="clearfix"></div>    
+                                    
+                                  <div class="manager_section_block">
+                                        <br>
+                                        <h5 class="m-section__heading">Company Manager / Admin Details </h5>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-lg-4">
+                                                <label>
+                                                    First Name
+                                                </label>
+                                                <input required type="text" id="first_name" name="first_name" class="form-control m-input only_number" placeholder="Enter First Name">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label>
+                                                    Last Name
+                                                </label>
+                                                <input type="text" id="last_name" name="last_name" class="form-control m-input only_number" placeholder="Enter Last Name">
+                                            </div>
+                                            
+                                            <div class="col-lg-4">
+                                                <label>
+                                                    Email ID
+                                                </label>
+                                                <input type="text" id="email_address" name="email_address" class="form-control m-input only_number" placeholder="Enter Email">
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-lg-4">
+                                                <label>
+                                                   User Name
+                                                </label>
+                                                <input required type="text" id="user_name" name="user_name" class="form-control m-input only_number" placeholder="Enter User Name">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <label>
+                                                    Password
+                                                </label>
+                                                <input type="text" id="password" name="password" class="form-control m-input only_number" placeholder="Enter Password">
+                                            </div>
+                                            
+                                            <div class="col-lg-4">
+                                                <label>
+                                                    Contact No
+                                                </label>
+                                                <input type="text" id="user_contact_no" name="user_contact_no" class="form-control m-input only_number" placeholder="Enter Contact No">
+                                            </div>
+                                            
+                                        </div>
+                                    </div> 
+                                    
+                                
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" onclick="companyUpdate(this)"  class="btn btn-primary">
-                                        Update
+                                    <!--  onclick="companyUpdate(this)" id="save_update_button" -->
+                                    <input type="hidden" name="company_id" id="company_edit_id" value="0">
+                                    <button type="button" id="save_update_button_click"  class="btn btn-primary">
+                                       <i class="fa fa-check"></i> Update
                                     </button>
                                     
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                        Close
+                                    <button type="button" class="btn btn-danger close_modal_common" data-dismiss="modal">
+                                       <i class="fa fa-times"></i> Close
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                
- 
-                <script type="text/javascript">
-                    function companyInsert(){
-                       if($('#company_form').parsley().validate()) {
-                            $.ajax({
-                                beforeSend: function() { 
-                                    $(".btn").attr("disabled", true);
-                                },
-                                complete: function (status) {
-                                   $(".btn").attr("disabled", false);
-                                },
-                                type : 'POST',
-                                url : base_url+'company/insert',
-                                data : $("form#company_form").serialize(),
-                                async: false,
-                                success:function(response, status){
-                                    notify_alert('success', 'New Company Created.', "Error");
-                                    $('#company_form').parsley().reset();
-                                    $("#company_form")[0].reset();
-                                    $("#company_modal").modal('hide');
-                                    reloadTable();
-                                },
-                                error: function (status, err) {
-                                   notify_alert('danger', 'There was some error, Please try again.', "Error");
-                                }
-                            });
-                        }
-                    }
-
-
-                    function getDetail(obj,id){
-                        $("#edit_company_modal").modal('show');
-                        $.get(base_url+"company/edit_detail/"+id,function(response,status){
-                            var res = $.parseJSON(response);
-                            var data_res = res['data'][0];
-                            console.log(data_res);
-                            if(res['status'] == 'success')
-                            {
-                                $("#company_id").val(data_res.id);
-                                $("#company_name").val(data_res.company_name);
-                                $("#email_1").val(data_res.email_1);
-                                $("#email_2").val(data_res.email_2);
-                                $("#contact_1").val(data_res.contact_1);
-                                $("#contact_2").val(data_res.contact_2);
-                                $("#subscription").val(data_res.subscription);
-                                $("#about_company").val(data_res.about_company);
-                                $("#address").val(data_res.address);
-                            }
-                        });
-                    }
-
-                    function companyUpdate(obj){
-                        show_loading(obj,'Updating..');
-                        if($('#edit_company_form').parsley().validate()) {
-                            $.ajax({
-                                beforeSend: function() { 
-                                    $(".btn").attr("disabled", true);
-                                },
-                                complete: function (status) {
-                                   $(".btn").attr("disabled", false);
-                                },
-                                type : 'POST',
-                                url : base_url+'company/update_detail',
-                                data : $("form#edit_company_form").serialize(),
-                                async: false,
-                                success:function(response, status){
-                                    var res = $.parseJSON(response);
-                                    hide_loading(obj,'Update');
-                                    notify_alert('success', res['message'], "Success")
-                                    reloadTable();
-                                    $("#edit_company_modal").modal('hide');
-                                },
-                                error: function (status, err) {
-                                   notify_alert('danger', 'There was some error, Please try again.', "Error");
-                                }
-                            });
-                        }
-                    }
-
-                    function  deleteCompany(obj,id)
-                    {
-                        var result = confirm("Want to delete?");
-                        if (result) {
-                            $.get(base_url+"company/delete_company/"+id,function(response,status){
-                                var res = $.parseJSON(response);
-                                if(res['status'] == 'success')
-                                {
-                                    reloadTable();
-                                    notify_alert('success', res['message'], "Success")
-                                }
-                                else
-                                {
-                                   notify_alert('danger', res['message'], "Error");
-                                }
-                            });
-                        }
-                    }
-
-                    function checkAll(clsAll,cls)
-                    {
-                        $("."+clsAll).change(function () {
-                            $("."+cls).prop('checked', $(this).prop("checked"));
-                        });
-                    }
-
-                    function deleteMultiple()
-                    {
-                        var result = confirm("Want to delete?");
-                        if (result) {
-                            idArr = [];
-                            $('.compckbx').each(function(index,value){
-                                if(this.checked == true){
-                                    idArr.push(this.value);
-                                }
-                            });
-                            console.log(idArr);
-                        }
-                    }
-
-                    function reloadTable()
-                    {
-                        $('#company_list_dt_table').DataTable().ajax.reload();
-                    }
-
-
-
-
-                </script>
-
