@@ -7,11 +7,11 @@ $(document).ready(function () {
         var form_action = '';
         if (obj.attr('data-form_type') == "add") {
             title = "ADD COMPANY DETAIL";
-            button_title = "Save";
+            button_title = '<i class="fa fa-save"></i> Save';
             form_action = base_url + "company/save_update";
         } else if (obj.attr('data-form_type') == "edit") {
             title = "EDIT COMPANY DETAIL";
-            button_title = "Update";
+            button_title = '<i class="fa fa-save"></i> Update';
             form_action = base_url + "company/save_update/" + obj.attr('data-el_id');
         }
         $('#company_form').attr('action', form_action);

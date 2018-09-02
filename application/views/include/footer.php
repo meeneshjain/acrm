@@ -380,10 +380,6 @@
 									<a href="#" data-note_color="m--bg-accent" class="btn btn-accent m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
 										<i class=""></i>
 									</a>
-									
-									<a href="#" data-note_color="m--bg-black" class="btn btn-black m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
-										<i class=""></i>
-									</a>
 								</div>
 							</div>
 						</div>

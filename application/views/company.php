@@ -71,7 +71,7 @@
                                         <div class="m-portlet__head-tools">
                                             <ul class="m-portlet__nav">
                                                 <li class="m-portlet__nav-item">
-                                                    <a href="javascript:;" data-toggle="modal" data-target="#add_update_company_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill add_update_click" data-form_type="adddata-form_type="add">
+                                                    <a href="javascript:;" data-toggle="modal" data-target="#add_update_company_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill add_update_click" data-form_type="add">
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </li>
