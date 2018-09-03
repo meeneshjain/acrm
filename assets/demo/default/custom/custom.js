@@ -121,15 +121,15 @@ $(document).ready(function () {
         });
     }
 
-    $("#meeting_start_date,#meeting_end_date,#meeting_alert_datetime").datetimepicker({
+    $(".crm_datetimepicker").datetimepicker({
         todayHighlight: !0,
         pickerPosition: "top-left",
         autoclose: !0,
         format: "yyyy-mm-dd hh:ii"
     });
 
-    $("#meeting_invitees").select2({
-        placeholder: "Please select invitees"
+    $(".select2_selectbox").select2({
+        placeholder: ""
     });
 
 
