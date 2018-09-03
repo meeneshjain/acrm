@@ -9,16 +9,17 @@ $(document).ready(function () {
             title = "ADD COMPANY DETAIL";
             button_title = '<i class="fa fa-save"></i> Save';
             form_action = base_url + "company/save_update";
+            $(".manager_section_block").show();
         } else if (obj.attr('data-form_type') == "edit") {
             title = "EDIT COMPANY DETAIL";
             button_title = '<i class="fa fa-save"></i> Update';
             form_action = base_url + "company/save_update/" + obj.attr('data-el_id');
+            $(".manager_section_block").hide();
         }
         $('#company_form').attr('action', form_action);
         $("#add_update_company_modal_lable").html(title);
         $("#save_update_button_click").html(button_title);
         $("#add_update_company_modal").modal('show');
-        $(".manager_section_block").show();
     });
 
     $(document).on("click", ".close_modal_common", function () {
@@ -62,7 +63,6 @@ function getDetail(obj, id) {
             $("#subscription").val(data_res.subscription);
             $("#about_company").val(data_res.about_company);
             $("#address").val(data_res.address);
-            $(".manager_section_block").hide();
         }
     }, function (res) {
     });

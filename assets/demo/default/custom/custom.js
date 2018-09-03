@@ -120,4 +120,20 @@ $(document).ready(function () {
             i++;
         });
     }
-});
+
+    $("#meeting_start_date,#meeting_end_date,#meeting_alert_datetime").datetimepicker({
+        todayHighlight: !0,
+        pickerPosition: "top-left",
+        autoclose: !0,
+        format: "yyyy-mm-dd hh:ii"
+    });
+
+    $("#meeting_invitees").select2({
+        placeholder: "Please select invitees"
+    });
+
+
+    $("form").parsley({
+        excluded: "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+    });
+}); // jquery end 
