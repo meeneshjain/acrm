@@ -177,10 +177,7 @@
                                             <div class="m-input-icon m-input-icon--right">
                                                 <select required class="form-control m-input" id="subscription" name="subscription">
                                                     <option value=""> --Select Subscription Type--</option>
-                                                    <option value="1">For 1-10 users</option>
-                                                    <option value="2">For 11-30 users</option>
-                                                    <option value="3">For 30-50 users</option>
-                                                    <option value="4">For 50+ users</option>
+                                                    <?php echo $subscription_plan;?>
                                                 </select>
                     
                                             </div>
@@ -217,13 +214,13 @@
                                                 <label>
                                                     First Name
                                                 </label>
-                                                <input required type="text" id="first_name" name="first_name" class="form-control m-input only_number" placeholder="Enter First Name">
+                                                <input required type="text" id="first_name" name="first_name" class="form-control m-input" placeholder="Enter First Name">
                                             </div>
                                             <div class="col-lg-4">
                                                 <label>
                                                     Last Name
                                                 </label>
-                                                <input type="text" id="last_name" name="last_name" class="form-control m-input only_number" placeholder="Enter Last Name">
+                                                <input required type="text" id="last_name" name="last_name" class="form-control m-input" placeholder="Enter Last Name">
                                             </div>
                                             
                                             <div class="col-lg-4">
@@ -240,13 +237,13 @@
                                                 <label>
                                                    User Name
                                                 </label>
-                                                <input required type="text" id="user_name" name="user_name" class="form-control m-input only_number" placeholder="Enter User Name">
+                                                <input required type="text" id="user_name" name="user_name" class="form-control m-input" placeholder="Enter User Name">
                                             </div>
                                             <div class="col-lg-4">
                                                 <label>
                                                     Password
                                                 </label>
-                                                <input type="text" id="password" name="password" class="form-control m-input only_number" placeholder="Enter Password">
+                                                <input required="" type="text" id="password" name="password" class="form-control m-input" placeholder="Enter Password">
                                             </div>
                                             
                                             <div class="col-lg-4">
