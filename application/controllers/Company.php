@@ -16,6 +16,7 @@ class Company extends CI_Controller {
          $data['breadcum_title'] = 'home';
          $data['active_sidemenu'] = "company";
          $data['load_js'] = 'company';
+         $data['subscription_plan'] = get_subscription_plan_list("html", $selected_value = NULL);
          $this->load->view('include/header',$data);
          $this->load->view('company',$data);
          $this->load->view('include/footer');
@@ -24,7 +25,7 @@ class Company extends CI_Controller {
 	 public function save_update($id = NULL){
 		 if($this->input->is_ajax_request())
 		{
-			if($id == ""){
+			if(empty($id) && $id == ""){
 				$this->company_model->insert();
 				echo json_encode(array("status" => "success","message" => 'Company Inserted', "data" => ""));
 			} else {
@@ -66,6 +67,31 @@ class Company extends CI_Controller {
 			if(is_numeric($id) && !empty($id))
 			{
 				$data = $this->company_model->delete_detail($id);
+				echo json_encode(array("status" => "success","message" => 'Company Deleted Successfully!!', "data" => ''));
+			}
+			else
+			{
+				echo json_encode(array("status" => "error","message" => 'Company Id doesn\'t exist.', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
+
+    public function multiple_delete_company(){
+		if($this->input->is_ajax_request())
+		{
+			$get_data = $this->input->get('ids', TRUE);
+			
+			if(!empty($get_data))
+			{
+				$ids = explode(',', $get_data);
+				foreach ($ids as $key => $value) 
+				{
+					$data = $this->company_model->delete_detail($value);
+				}
 				echo json_encode(array("status" => "success","message" => 'Company Deleted Successfully!!', "data" => ''));
 			}
 			else
