@@ -34,7 +34,7 @@ $(document).ready(function () {
             form_submit(obj.attr("id"),
                 function (res) {
                     notify_alert(res.status, res.message)
-                    reloadTable();
+                    reloadTable('#company_list_dt_table');
                     setTimeout(function () {
                         hide_loading('#save_update_button_click', '<i class="fa fa-check"></i> Save');
                         $(".close_modal_common").trigger('click');
@@ -46,7 +46,6 @@ $(document).ready(function () {
         }
     });
 }); // dom end 
-
 
 function getDetail(obj, id) {
     $("#add_update_company_modal").modal('show');
@@ -71,7 +70,7 @@ function deleteCompany(obj, id) {
     if (confirm("Are you sure, You want to delete this company?")) {
         call_service(base_url + "company/delete_company/" + id, function (response) {
             if (response.status == 'success') {
-                reloadTable();
+                reloadTable('#company_list_dt_table');
                 notify_alert('success', response.message, "Success")
             } else {
                 notify_alert('danger', response.message, "Error");
@@ -81,12 +80,6 @@ function deleteCompany(obj, id) {
         });
 
     }
-}
-
-function checkAll(clsAll, cls) {
-    $("." + clsAll).change(function () {
-        $("." + cls).prop('checked', $(this).prop("checked"));
-    });
 }
 
 function deleteMultiple() {
@@ -99,8 +92,4 @@ function deleteMultiple() {
         });
         console.log(idArr);
     }
-}
-
-function reloadTable() {
-    $('#company_list_dt_table').DataTable().ajax.reload();
 }

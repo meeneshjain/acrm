@@ -68,7 +68,7 @@ function form_submit(form_id, callback, error_callback) {
                 callback(response);
             },
             error: function (response) {
-                if(error_callback != 'undefined' && error_callback !== undefined){
+                if (error_callback != 'undefined' && error_callback !== undefined) {
                     error_callback(response);
                 }
                 notify_alert('danger', 'There was some error, Please try again.', "Error");
@@ -93,8 +93,17 @@ function call_service(url, callback, error_callback) {
     });
 }
 
-//ready goes here 
+function reloadTable(table_id) {
+    $(table_id).DataTable().ajax.reload();
+}
 
+function checkAll(clsAll, cls) {
+    $("." + clsAll).change(function () {
+        $("." + cls).prop('checked', $(this).prop("checked"));
+    });
+}
+
+//ready goes here 
 var table_object = []
 $(document).ready(function () {
     if ($(".dt_table").length > 0) {

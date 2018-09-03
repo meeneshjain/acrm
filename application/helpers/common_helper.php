@@ -199,7 +199,7 @@ function load_required_js($page_name){
 		"setting" => array('settings_page.js'),
 		"sidebar" => array('sidebar_activities.js'),
 		"company" => array('company.js'),
-		"" => array(),
+		"user" => array('user.js'),
 		
 	);
 	return $js_list[$page_name];
