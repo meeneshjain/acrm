@@ -262,16 +262,19 @@ $(document).ready(function () {
 	$("#meeting_action_btn").click(function () {
 		var obj = $(this);
 		if ($("#meeting_form").parsley().validate()) {
+			var btn_text = $("#meeting_action_btn").html();
 			show_loading("#meeting_action_btn", 'Loading..!');
 			form_submit('meeting_form', function (res) {
 				if (res.status == 'success') {
 					notify_alert('success', res.message, "Success");
-					hide_loading("#meeting_action_btn", $(this).text());
+					hide_loading("#meeting_action_btn", btn_text);
 					$("#meeting_form").parsley().reset();
 					$("#meeting_form")[0].reset();
 					$("#meeting_modal").modal('hide');
 					$(".get_meeting_list_on_tab").trigger("click");
 				}
+			}, function () {
+				hide_loading("#meeting_action_btn", btn_text);
 			});
 		}
 	});
