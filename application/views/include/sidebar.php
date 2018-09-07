@@ -312,35 +312,35 @@
 								<input type="hidden" name="id" id="notes_id" value="0">
 								<input type="hidden" name="color" id="notes_color" class="form-control" value="m--bg-metal"  >
 								<div class="">
-									<a href="#" data-note_color="m--bg-metal" class="btn btn-metal m-btn m-btn--icon btn-lg m-btn--icon-only m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-metal" class="btn btn-metal m-btn m-btn--icon btn-lg m-btn--icon-only m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class="fa fa-check"></i>
 									</a>
 
-									<a href="#" data-note_color="m--bg-info" class="btn btn-info m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-info" class="btn btn-info m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class=""></i>
 									</a>
 
-									<a href="#" data-note_color="m--bg-primary" class="btn btn-primary m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-primary" class="btn btn-primary m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class=""></i>
 									</a>
 
-									<a href="#" data-note_color="m--bg-brand" class="btn btn-brand m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-brand" class="btn btn-brand m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class=""></i>
 									</a>
 
-									<a href="#" data-note_color="m--bg-warning" class="btn btn-warning m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-warning" class="btn btn-warning m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class=""></i>
 									</a>
 									
-									<a href="#" data-note_color="m--bg-danger" class="btn btn-danger m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-danger" class="btn btn-danger m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class=""></i>
 									</a>
 									
-									<a href="#" data-note_color="m--bg-accent" class="btn btn-accent m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-accent" class="btn btn-accent m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 										<i class=""></i>
 									</a>
 
-									<a href="#" data-note_color="m--bg-black" class="btn btn-black m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_button_element">
+									<a href="#" data-note_color="m--bg-black" class="btn btn-black m-btn m-btn--icon btn-lg m-btn--icon-only  m-btn--pill m-btn--air btn-sm check_notes_button_element">
 							          <i class=""></i>
 							         </a>
 

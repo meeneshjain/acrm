@@ -200,6 +200,7 @@ function load_required_js($page_name){
 		"sidebar" => array('sidebar_activities.js'),
 		"company" => array('company.js'),
 		"user" => array('user.js'),
+		"items" => array('items.js'),
 		
 	);
 	return $js_list[$page_name];

@@ -185,7 +185,7 @@ $(document).ready(function () {
 	/*
 	 ******** TOGGLE MEETING PORTLET *******
 	*/
-	$(document).on("click", ".custom_note_portlet_toggle", function () {
+	$(document).on("click", ".custom_meeting_portlet_toggle", function () {
 		var cobj = $(this);
 		var current_el = cobj.parents(".custom_portlet");
 		if (current_el.attr("data-status") == 0) {
@@ -301,7 +301,7 @@ $(document).ready(function () {
 
 
 	/*
-	 ******* GET LIST OF meeting ********
+	 ******* GET LIST OF MEETING ********
 	*/
 	$(".get_meeting_list,.get_meeting_list_on_tab").click(function () {
 		call_service(base_url + 'schedule/get_meeting', function (res) {
@@ -331,7 +331,7 @@ $(document).ready(function () {
 											</a>\
 										</li>\
 										<li class="m-portlet__nav-item">\
-										<a  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_note_portlet_toggle">\
+										<a  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_meeting_portlet_toggle">\
 											<i class="la la-angle-down"></i>\
 										</a>\
 									</li>\

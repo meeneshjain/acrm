@@ -178,6 +178,26 @@ class Schedule extends CI_Controller {
 		}
     }
 
+    public function delete_meeting(){
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->uri->segment(3);
+			if(is_numeric($id) && !empty($id))
+			{
+				$data = $this->common_model->delete_data('meeting',array('id' => $id));
+				echo json_encode(array("status" => "success","message" => 'Meeting Deleted Successfully!!', "data" => ''));
+			}
+			else
+			{
+				echo json_encode(array("status" => "error","message" => 'Meeting Id doesn\'t exist.', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
+
 	public function get_meeting(){
 		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = false, $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
 		echo json_encode(array("status" => "success","message" => '', "data" => $response));
