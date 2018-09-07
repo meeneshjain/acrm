@@ -132,8 +132,15 @@ $(document).ready(function () {
         placeholder: ""
     });
 
-
     $("form").parsley({
         excluded: "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+    });
+
+    $.listen('parsley:field:validated', function (fieldInstance) {
+        if (fieldInstance.$element.is(":hidden")) {
+            fieldInstance._ui.$errorsWrapper.css('display', 'none');
+            fieldInstance.validationResult = true;
+            return true;
+        }
     });
 }); // jquery end 

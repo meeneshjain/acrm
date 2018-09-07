@@ -56,3 +56,5 @@ INSERT INTO `notes` (`id`, `user_id`, `related_to`, `subject`, `message`, `color
 (3,	0,	0,	'test2',	'test2 notes',	'm--bg-primary',	0,	0,	'2018-09-01 18:28:18',	'0000-00-00 00:00:00'),
 (4,	0,	0,	'test purple',	'test purple color notes',	'm--bg-brand',	0,	0,	'2018-09-01 18:49:21',	'0000-00-00 00:00:00'),
 (5,	0,	0,	'Test Black ',	'Black Missing',	'm--bg-danger',	0,	0,	'2018-09-02 01:00:00',	'0000-00-00 00:00:00');
+
+UPDATE `user_roles` SET `name` = 'User' WHERE `id` = '4';

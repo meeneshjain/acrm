@@ -117,9 +117,9 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 				if($selected_value == $table_data[$value]){
 					$selected = 'selected';
 				}
-				$output.='<option value="'.$table_data[$value].'" '.$selected.'>'.$table_data[$text].'</option>';
+				$output.='<option value="'.$table_data[$value].'" '.$selected.'>'.ucfirst($table_data[$text]).'</option>';
 			} else {
-				$output[$table_data[$value]] = $table_data[$text];
+				$output[$table_data[$value]] = ucfirst($table_data[$text]);
 			}
 			
 		}

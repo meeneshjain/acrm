@@ -84,3 +84,9 @@ a.btn.btn-black {
 .m-portlet .m-portlet__body {
     padding: 1.8rem 1.8rem !important;
 }
+
+.m-checkbox>span, .m-radio>span{
+    top: -10px;
+    left: 10px;
+}
+

@@ -6,7 +6,7 @@
 					<div class="m-login__container">
 						<div class="m-login__logo">
 							<a href="#">
-								<img src="<?php echo base_url('assets/images/company_logo_light.png'); ?>">
+								<img src="<?php echo base_url(COMPANY_LOGO); ?>">
 							</a>
 						</div>
 						<div class="m-login__signin">

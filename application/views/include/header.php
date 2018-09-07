@@ -49,7 +49,7 @@ sessionStorage.fonts = true;
 <div class="m-stack__item m-stack__item--middle m-brand__logo logo_css">
     <h4>
         <a href="<?php echo base_url(); ?>" class="m-brand__logo-wrapper">
-           <img src="<?php echo base_url('assets/images/company_logo_light.png'); ?>" style="width: 50px;" alt=""> <?php echo APP_NAME?>
+           <img src="<?php echo base_url(COMPANY_LOGO); ?>" style="width: 50px;" alt=""> <?php echo APP_NAME?>
         </a>
     </h4>
 </div>

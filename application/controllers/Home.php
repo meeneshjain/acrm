@@ -47,11 +47,13 @@ class Home extends CI_Controller {
 		if($login_check['status'] == 1){
 			
 			$session_data = array(
-				"is_admin"     => $login_check['is_super_admin'],
-				// "user_role"     => $login_check['row']['user_role'],
-				'full_name'    => $login_check['row']['first_name']. ' '. $login_check['row']['first_name'],
-				'email'        => $login_check['row']['username'],
-				'logged_in'    => '1',
+				"is_admin"       => $login_check['is_super_admin'],
+				// "user_role"   => $login_check['row']['user_role'],
+				'full_name'      => $login_check['row']['first_name']. ' '. $login_check['row']['first_name'],
+				'user_role_id'   => (isset($login_check['row']['user_role_id']) && $login_check['row']['user_role_id']!="") ? $login_check['row']['user_role_id'] : "",
+				'company_id'     => (isset($login_check['row']['company_id']) && $login_check['row']['company_id']!="") ? $login_check['row']['company_id'] : "",
+				'email'          => $login_check['row']['username'],
+				'logged_in'      => '1',
 			);
 
 			$this->session->set_userdata($session_data);
