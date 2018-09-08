@@ -1,109 +1,109 @@
-                <style type="text/css">
-                    .btn-file {
-                      position: relative;
-                      overflow: hidden;
-                      vertical-align: middle;
-                    }
-                    .btn-file > input {
-                      position: absolute;
-                      top: 0;
-                      right: 0;
-                      width: 100%;
-                      height: 100%;
-                      margin: 0;
-                      font-size: 23px;
-                      cursor: pointer;
-                      filter: alpha(opacity=0);
-                      opacity: 0;
+            <style type="text/css">
+                .btn-file {
+                  position: relative;
+                  overflow: hidden;
+                  vertical-align: middle;
+                }
+                .btn-file > input {
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  width: 100%;
+                  height: 100%;
+                  margin: 0;
+                  font-size: 23px;
+                  cursor: pointer;
+                  filter: alpha(opacity=0);
+                  opacity: 0;
 
-                      direction: ltr;
-                    }
-                    .fileinput {
-                      display: inline-block;
-                      margin-bottom: 9px;
-                    }
-                    .fileinput .form-control {
-                      display: inline-block;
-                      padding-top: 7px;
-                      padding-bottom: 5px;
-                      margin-bottom: 0;
-                      vertical-align: middle;
-                      cursor: text;
-                    }
-                    .fileinput .thumbnail {
-                      display: inline-block;
-                      margin-bottom: 5px;
-                      overflow: hidden;
-                      text-align: center;
-                      vertical-align: middle;
-                    }
-                    .fileinput .thumbnail > img {
-                      max-height: 100%;
-                    }
-                    .fileinput .btn {
-                      vertical-align: middle;
-                    }
-                    .fileinput-exists .fileinput-new,
-                    .fileinput-new .fileinput-exists {
-                      display: none;
-                    }
-                    .fileinput-inline .fileinput-controls {
-                      display: inline;
-                    }
-                    .fileinput-filename {
-                      display: inline-block;
-                      overflow: hidden;
-                      vertical-align: middle;
-                    }
-                    .form-control .fileinput-filename {
-                      vertical-align: bottom;
-                    }
-                    .fileinput.input-group {
-                      display: table;
-                    }
-                    .fileinput.input-group > * {
-                      position: relative;
-                      z-index: 2;
-                    }
-                    .fileinput.input-group > .btn-file {
-                      z-index: 1;
-                    }
-                    .fileinput-new.input-group .btn-file,
-                    .fileinput-new .input-group .btn-file {
-                      border-radius: 0 4px 4px 0;
-                    }
-                    .fileinput-new.input-group .btn-file.btn-xs,
-                    .fileinput-new .input-group .btn-file.btn-xs,
-                    .fileinput-new.input-group .btn-file.btn-sm,
-                    .fileinput-new .input-group .btn-file.btn-sm {
-                      border-radius: 0 3px 3px 0;
-                    }
-                    .fileinput-new.input-group .btn-file.btn-lg,
-                    .fileinput-new .input-group .btn-file.btn-lg {
-                      border-radius: 0 6px 6px 0;
-                    }
-                    .form-group.has-warning .fileinput .fileinput-preview {
-                      color: #8a6d3b;
-                    }
-                    .form-group.has-warning .fileinput .thumbnail {
-                      border-color: #faebcc;
-                    }
-                    .form-group.has-error .fileinput .fileinput-preview {
-                      color: #a94442;
-                    }
-                    .form-group.has-error .fileinput .thumbnail {
-                      border-color: #ebccd1;
-                    }
-                    .form-group.has-success .fileinput .fileinput-preview {
-                      color: #3c763d;
-                    }
-                    .form-group.has-success .fileinput .thumbnail {
-                      border-color: #d6e9c6;
-                    }
-                    .input-group-addon:not(:first-child) {
-                      border-left: 0;
-                    }
-                </style>
+                  direction: ltr;
+                }
+                .fileinput {
+                  display: inline-block;
+                  margin-bottom: 9px;
+                }
+                .fileinput .form-control {
+                  display: inline-block;
+                  padding-top: 7px;
+                  padding-bottom: 5px;
+                  margin-bottom: 0;
+                  vertical-align: middle;
+                  cursor: text;
+                }
+                .fileinput .thumbnail {
+                  display: inline-block;
+                  margin-bottom: 5px;
+                  overflow: hidden;
+                  text-align: center;
+                  vertical-align: middle;
+                }
+                .fileinput .thumbnail > img {
+                  max-height: 100%;
+                }
+                .fileinput .btn {
+                  vertical-align: middle;
+                }
+                .fileinput-exists .fileinput-new,
+                .fileinput-new .fileinput-exists {
+                  display: none;
+                }
+                .fileinput-inline .fileinput-controls {
+                  display: inline;
+                }
+                .fileinput-filename {
+                  display: inline-block;
+                  overflow: hidden;
+                  vertical-align: middle;
+                }
+                .form-control .fileinput-filename {
+                  vertical-align: bottom;
+                }
+                .fileinput.input-group {
+                  display: table;
+                }
+                .fileinput.input-group > * {
+                  position: relative;
+                  z-index: 2;
+                }
+                .fileinput.input-group > .btn-file {
+                  z-index: 1;
+                }
+                .fileinput-new.input-group .btn-file,
+                .fileinput-new .input-group .btn-file {
+                  border-radius: 0 4px 4px 0;
+                }
+                .fileinput-new.input-group .btn-file.btn-xs,
+                .fileinput-new .input-group .btn-file.btn-xs,
+                .fileinput-new.input-group .btn-file.btn-sm,
+                .fileinput-new .input-group .btn-file.btn-sm {
+                  border-radius: 0 3px 3px 0;
+                }
+                .fileinput-new.input-group .btn-file.btn-lg,
+                .fileinput-new .input-group .btn-file.btn-lg {
+                  border-radius: 0 6px 6px 0;
+                }
+                .form-group.has-warning .fileinput .fileinput-preview {
+                  color: #8a6d3b;
+                }
+                .form-group.has-warning .fileinput .thumbnail {
+                  border-color: #faebcc;
+                }
+                .form-group.has-error .fileinput .fileinput-preview {
+                  color: #a94442;
+                }
+                .form-group.has-error .fileinput .thumbnail {
+                  border-color: #ebccd1;
+                }
+                .form-group.has-success .fileinput .fileinput-preview {
+                  color: #3c763d;
+                }
+                .form-group.has-success .fileinput .thumbnail {
+                  border-color: #d6e9c6;
+                }
+                .input-group-addon:not(:first-child) {
+                  border-left: 0;
+                }
+            </style>
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
 					<div class="m-subheader ">
 						<div class="d-flex align-items-center">
@@ -183,12 +183,15 @@
                                         </div>
                     				</div>
         							<div class="m-portlet__body">
-        								<table class="table table-striped- table-bordered table-hover table-checkable dt_table" id="item_list_dt_table" data-source="<?php echo base_url('items/itemlist'); ?>">
+        								<table class="table table-striped- table-bordered table-hover table-checkable dt_table m-table--head-separator-primary" id="item_list_dt_table" data-source="<?php echo base_url('items/itemlist'); ?>">
         									<thead>
         										<tr>
         											<th class="no-sort">
-        												<input type="checkbox" class="itmckbxAll" onclick="checkAll('itmckbxAll','itmckbx')" name="">
-        											</th>
+                                                        <label class="m-checkbox m-checkbox--state-primary">
+        											     <input type="checkbox" class="itmckbxAll" onclick="checkAll('itmckbxAll','itmckbx')" name="">
+        											     <span></span>
+                                                        </label>
+                                                    </th>
         											<th>
         												Image
         											</th>
@@ -205,13 +208,13 @@
                                                         Unit
                                                     </th>
                                                     <th>
-                                                        GST
+                                                    GST
                                                     </th>
                                                     <th>
                                                         Create Date
                                                     </th>
-                                                   <th class="no-sort">
-                                                        Action
+                                                    <th class="no-sort">
+                                                          Action
                                                     </th>
         										</tr>
         									</thead>

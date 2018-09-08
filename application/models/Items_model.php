@@ -67,7 +67,7 @@ class Items_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx">';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx"><span></span></label>';
         	$row[] = '<img class="m-widget7__img" src="assets/app/media/img/products/product6.jpg" alt="" style="width:100px">';
         	$row[] = $aRow['code'];
         	$row[] = $aRow['name'];
