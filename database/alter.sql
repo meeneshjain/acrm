@@ -128,3 +128,15 @@ ALTER TABLE `task` ADD `company_id` int(11) NOT NULL AFTER `id`;
 ALTER TABLE `uom` ADD `company_id` int(11) NOT NULL AFTER `id`;
 ALTER TABLE `activity_logs` ADD `company_id` int(11) NOT NULL AFTER `id`;
 ALTER TABLE `account` ADD `company_id` int(11) NOT NULL AFTER `id`;
+
+
+/* ----  */
+ALTER TABLE `items`
+CHANGE `group_id` `group_type` int(11) NOT NULL AFTER `description`,
+DROP `price_id`
+
+ALTER TABLE `items`
+CHANGE `unit` `unit` varchar(50) NOT NULL AFTER `type`;
+
+ALTER TABLE `items`
+CHANGE `group_type` `group_type` enum('SERVICE','INVENTORY') NOT NULL AFTER `description`;

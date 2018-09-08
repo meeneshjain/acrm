@@ -6,6 +6,7 @@ $(document).ready(function () {
 	$(".item_modal_open_btn").on("click", function () {
 		$("#item_form")[0].reset();
 		$("#item_modal").modal('show');
+		$(".is_gst_rate_apply").show();
 		$("#item_form").attr('action', base_url + 'items/add_update_item')
 		$(".item_modal_heading").html('ADD NEW ITEM');
 		$("#item_action_btn").html('<i class="fa fa-save"></i> Save');
@@ -25,7 +26,7 @@ $(document).ready(function () {
 					hide_loading("#item_action_btn", btn_text);
 					$("#item_form").parsley().reset();
 					$("#item_form")[0].reset();
-					$("#item_modal").modal('hide');
+					$("#item_modal").modal('hide');					
 					reloadTable("#item_list_dt_table");
 				}
 			}, function (res) {
@@ -53,18 +54,27 @@ $(document).ready(function () {
 					$("#item_name").val(res.data[0].name);
 					$("#item_code").val(res.data[0].code);
 					$("#item_type").val(res.data[0].type);
-					$("#item_group").val(res.data[0].group_id);
-					$("#item_price").val(res.data[0].price_id);
+					$("#item_group").val(res.data[0].group_type);
 					$("#item_unit").val(res.data[0].unit);
 					$("#item_description").val(res.data[0].description);
 					if(res.data[0].is_gst == '1')
 					{
-						$("#item_gst").attr('checked','checked');
+						$('#item_gst').prop('checked', true);
+						$("#item_gst_rate").val(res.data[0].gst_tax_rate);
+						$(".is_gst_rate_apply").show();
 					}
 					else
 					{
-						$("#item_gst").removeAttr('checked');
+						$('#item_gst').prop('checked', false);
+						$("#item_gst_rate").val('');
+            			$(".is_gst_rate_apply").hide();
 					}
+					$("#itm_price1").val(res.data[0].price1);
+					$("#itm_price2").val(res.data[0].price2);
+					$("#itm_price3").val(res.data[0].price3);
+					$("#itm_price4").val(res.data[0].price4);
+					$("#itm_price5").val(res.data[0].price5);
+
 					$(".check_item_button_element").children('i').removeClass('fa fa-check');
 					$(".check_item_button_element[data-note_color='" + res.data[0].color + "']").children('').addClass('fa fa-check');
 				}
@@ -98,4 +108,26 @@ $(document).ready(function () {
 		}
 	});
 
+
+	/*
+	************************
+	*/
+
+	$("#item_price_list").on("change",function(){
+        id = $(this).val();
+        $('.itm_prc_input').hide();
+        $("#itm_"+id).show();
+
+    });
+
+    $("#item_gst").on('change',function(){
+    	if($(this).prop("checked") == true){
+    		$(".is_gst_rate_apply").show();
+
+        }
+        else if($(this).prop("checked") == false){
+        	$("#item_gst_rate").val('');
+            $(".is_gst_rate_apply").hide();
+        }
+    });
 });
