@@ -114,38 +114,63 @@
                                 </select>
                             </div>
                         </div>
-                        <br>
+                       
                     </div>
                         
                     <h5 class="m-section__heading">User Details </h5>
-                    <div class="form-group m-form__group row">
+                    <div class="row">
                     <div class="col-lg-4">
-                            <label>
-                                Designation
-                            </label>
-                            <input type="text" id="designation" name="designation" class="form-control m-input" placeholder="Enter Designation">
+                        <div class="form-group" style="margin-top: 7px;">
+                            <label class="">Profile photo</label>
+                            <div class="col-sm-4 col-md-3 col-lg-2">
+                            <div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
+                                <img data-folder_name="company" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" style="max-width: 220px;" >
+                                </div>
+                                <a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
+                            </div>
+                            </div>
+                            <div class="col-sm-12">
+                            <input type="file" id="upload_images_single" data-displayname="Profile Photo"  name="..." accept="image/*"   >
+                            <input type="hidden" name="uploaded_images" value="">
+                            
+                            </div>
                         </div>
-                        <div class="col-lg-4">
-                            <label>
-                                First Name
-                            </label>
-                            <input required type="text" id="first_name" name="first_name" class="form-control m-input" placeholder="Enter  First Name">
                         </div>
-                        <div class="col-lg-4">
-                            <label>
-                                Last Name
-                            </label>
-                            <input required type="text" id="last_name" name="last_name" class="form-control m-input" placeholder="Enter Last Name">
+                        <div class="col-lg-8">
+                            <div class="form-group m-form__group row">
+                            <div class="col-lg-6">
+                                    <label>
+                                        Designation
+                                    </label>
+                                    <input type="text" id="designation" name="designation" class="form-control m-input" placeholder="Enter Designation">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>
+                                        First Name
+                                    </label>
+                                    <input required type="text" id="first_name" name="first_name" class="form-control m-input" placeholder="Enter  First Name">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-6">
+                                    <label>
+                                        Last Name
+                                    </label>
+                                    <input required type="text" id="last_name" name="last_name" class="form-control m-input" placeholder="Enter Last Name">
+                                </div>
+                                <div class="col-lg-6">
+                                        <label>
+                                            Email
+                                        </label>
+                                        <input type="email" id="email" name="email" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <div class="form-group m-form__group row">
-                    <div class="col-lg-4">
-                            <label>
-                                Email
-                            </label>
-                            <input type="email" id="email" name="email" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
-                        </div>
-                        <div class="col-lg-4">
+                          <div class="col-lg-6">
                             <label>
                                 User Name
                             </label>
@@ -153,14 +178,14 @@
                             <input required type="text" id="username" name="username" class="form-control m-input" placeholder="Enter  User-Name">
                         
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <label>
-                               Password
+                            Password
                             </label>
                             <input required type="text" id="password" name="password" class="form-control m-input" placeholder="Enter Last Name">
                         </div>
-                        
                     </div>
+                    
                     <div class="form-group m-form__group row">
                     <div class="col-lg-4">
                             <label>

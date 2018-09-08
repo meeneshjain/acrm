@@ -104,7 +104,9 @@ function checkAll(clsAll, cls) {
 }
 
 //ready goes here 
-var table_object = []
+var table_object = [];
+var default_image = base_url + "assets/images/no.jpg";
+
 $(document).ready(function () {
     if ($(".dt_table").length > 0) {
         var i = 0;
@@ -143,4 +145,71 @@ $(document).ready(function () {
             return true;
         }
     });
+
+    if ($("#upload_images_single").length > 0) {
+        var button_text = $("#upload_images_single").attr("data-displayname");
+
+        $("#upload_images_single").uploadifive({
+            'auto': true,
+            'multi': false,
+            'buttonText': "<i class='fa fa-upload'></i> " + button_text,
+            'buttonClass': 'btn btn-primary ',
+            'fileType': ["image\/gif", "image\/jpeg", "image\/png"],
+            'fileObjName': 'image_upload',
+            'uploadScript': base_url + 'home/upload/' + $("#changed_images").data("folder_name"),
+            'onUploadComplete': function (file, data) {
+                if (data != "e2") {
+                    var obj = $(this);
+                    setTimeout(function () {
+                        $("div.uploadifive-queue-item.complete").fadeOut("linear", function () {
+                            $(this).remove()
+                        });
+                    }, 2000);
+                    $("#changed_images").attr("src", "");
+                    $("input[name='uploaded_images']").val(data);
+                    $("#changed_images").attr("src", base_url + "" + $.trim(data));
+                    $(".deleteImage").show();
+
+                } else {
+                    notify_alert('danger', 'There was some error, Please try again.', "Error");
+                }
+            },
+            'onError': function (errorType) {
+                setTimeout(function () {
+                    $("div.uploadifive-queue-item.error").fadeOut("linear", function () {
+                        $(this).remove()
+                    });
+                }, 2000);
+            }
+        });
+
+
+        $(document).on("click", ".deleteImage", function (event) {
+            event.preventDefault();
+            var obj = $(this);
+            var link = obj.attr("href");
+            if ($("#changed_images").attr("src") != default_image) {
+                if (confirm('Remove this image')) {
+                    $.ajax({
+                        url: link,
+                        type: 'GET',
+                        data: {
+                            'filepath': $("input[name='uploaded_images']").val()
+                        },
+                        success: function (data) {
+                            $("#changed_images").attr("src", default_image);
+                            $("input[name='uploaded_images']").val('');
+                            notify_alert('success', 'Picture removed, please save the changes before closing.', "Success");
+                            obj.hide();
+                        },
+                        error: function (data) {
+                            notify_alert('danger', 'There was some error, please try again.', "Error");
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 }); // jquery end 

@@ -72,7 +72,7 @@
 <script src="<?php echo base_url('assets/demo/default/custom/components/base/bootstrap-notify.js'); ?>"></script>
 <script src="<?php echo base_url('assets/vendors/custom/datatables/datatables.bundle.js'); ?>"></script>
 <script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/uploadifive/uploadifive.min.js'); ?>" type="text/javascript"></script>
 
 <script src="<?php echo base_url('assets/demo/default/custom/sidebar_activities.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
@@ -87,14 +87,3 @@
 </body>
 
 </html>
-<script>
-
-
-$(document).ready(function() {
-	
-
-});
-
-
-
-</script>

@@ -12,7 +12,7 @@ class Company extends CI_Controller {
 	}
     
     public function index() {
-         $data['page_title'] = 'Dashboard';
+         $data['page_title'] = 'View Company';
          $data['breadcum_title'] = 'home';
          $data['active_sidemenu'] = "company";
          $data['load_js'] = 'company';

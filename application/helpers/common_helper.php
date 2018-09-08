@@ -73,6 +73,14 @@ function check_session(){
 	}
 }
 
+function allowed_video_ext(){
+	return array("mp4",'3gp','avi','mov','mpeg');
+}
+
+function allowed_image_ext(){
+	return array('jpg','jpeg','gif','bmp','png','');
+}
+
 function upload_images($filename = null, $folder_name){
 	$min_width = 400;
 	$min_height = 400;
@@ -82,11 +90,10 @@ function upload_images($filename = null, $folder_name){
 	$tmp_name = $_FILES[$filename]['tmp_name'];
 	$ext = pathinfo($name,PATHINFO_EXTENSION);
 
-    $rand = generateRandomStr();
+    $rand = generate_random_string();
 	$renamedfile = $rand.".".$ext;
 	$target_path = UPLOAD_IMAGES."$folder_name/".$renamedfile;
 	if(move_uploaded_file($tmp_name,$target_path))	{
-		resize_image($target_path, $min_width, $min_height );
 		return trim($target_path);
 	}
 }

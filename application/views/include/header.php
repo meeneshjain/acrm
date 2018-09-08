@@ -31,6 +31,7 @@ sessionStorage.fonts = true;
 <link href="<?php echo base_url('assets/vendors/base/vendors.bundle.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/base/style.bundle.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
 <!--end::Base Styles -->
 <link rel="shortcut icon" href="<?php echo base_url('assets/demo/default/media/img/logo/favicon.ico'); ?>" />

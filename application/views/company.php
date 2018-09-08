@@ -132,45 +132,54 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="col-md-12">
-                                        
-                                    <h5 class="m-section__heading">Company Details </h5>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Company Name:
-                                            </label>
-                                            <input type="hidden" id="company_id" name="id" value="0">
-                                            <input required type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
-                                        
+                                <h5 class="m-section__heading">Company Details </h5>
+                                <div class="">
+                                <div class="row">
+                                    
+                                    <div class="col-lg-4">
+                                        <div class="form-group" style="margin-top: 7px;">
+                                            <label class="">Company Logo</label>
+                                            <div class="col-sm-4 col-md-3 col-lg-2">
+                                            <div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
+                                                <div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
+                                                <img data-folder_name="company" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" style="max-width: 220px;" >
+                                                </div>
+                                                <a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                            <input type="file" id="upload_images_single" data-displayname="Choose Logo"  name="..." accept="image/*"   >
+                                            <input type="hidden" name="uploaded_images" value="">
+                                            
+                                            </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        </div>
+                                       <div class="col-lg-8">
+                                        <div class="form-group m-form__group row" style="margin-top: 7px;">
+                                       <div class="col-lg-6">
+                                                <label>
+                                                    Company Name:
+                                                </label>
+                                                <input type="hidden" id="company_id" name="id" value="0">
+                                                <input required type="text" id="company_name" name="company_name" class="form-control m-input" placeholder="Enter Company name">
+                                            
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>
+                                                    Contact:
+                                                </label>
+                                                <input required type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                        
+                                        <div class="col-lg-6">
                                             <label>
                                                 Email:
                                             </label>
                                             <input required type="email" id="email_1" name="email_1" class="form-control m-input" placeholder="Enter your email">
                                         </div>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Another Email:
-                                            </label>
-                                            <input type="email" id="email_2" name="email_2" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Contact:
-                                            </label>
-                                            <input required type="text" id="contact_1" name="contact_1" class="form-control m-input only_number" placeholder="Enter contact number">
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label>
-                                                Another Contact:
-                                            </label>
-                                            <input type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
-                                        </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <label>
                                                 Subscription:
                                             </label>
@@ -182,9 +191,9 @@
                     
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-6">
+                                     </div>
+                                      <div class="form-group m-form__group row">
+                                        <div class="col-lg-12">
                                             <label>
                                                 About Company:
                                             </label>
@@ -192,8 +201,29 @@
                                                 <textarea required class="form-control m-input" id="about_company" name="about_company" placeholder="Describe about the company" ></textarea>
                                             </div>
                                         </div>
-
-                                        <div class="col-lg-6">
+                                        </div>
+                                     
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-12">
+                                        
+                                    
+                                    <div class="form-group m-form__group row">
+                                        
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Another Email:
+                                            </label>
+                                            <input type="email" id="email_2" name="email_2" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label>
+                                                Another Contact:
+                                            </label>
+                                            <input type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
+                                        </div>
+                                        <div class="col-lg-4">
                                             <label>
                                                 Address:
                                             </label>
@@ -202,8 +232,8 @@
                                             </div>
         
                                         </div>
-
                                     </div>
+                                   
                                     <div class="clearfix"></div>    
                                     
                                   <div class="manager_section_block">

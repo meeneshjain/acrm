@@ -82,4 +82,21 @@ class Home extends CI_Controller {
 		echo json_encode($response);
 		die;
 	}
+	
+	public function upload($folder_name) {
+		check_session();
+		echo upload_images('image_upload', $folder_name);
+	}
+
+	public function remove_image() {
+		check_session();
+		$fileName = $this->input->get('filepath');
+		if (unlink($fileName)) {
+			echo 1;
+		}
+		else {
+			echo 0;
+		}
+	}
+
 }
