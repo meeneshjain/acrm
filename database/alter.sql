@@ -58,3 +58,73 @@ INSERT INTO `notes` (`id`, `user_id`, `related_to`, `subject`, `message`, `color
 (5,	0,	0,	'Test Black ',	'Black Missing',	'm--bg-danger',	0,	0,	'2018-09-02 01:00:00',	'0000-00-00 00:00:00');
 
 UPDATE `user_roles` SET `name` = 'User' WHERE `id` = '4';
+
+-- 09-08-2018
+
+CREATE TABLE `uom` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `code` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `length` double NOT NULL,
+  `width` double NOT NULL,
+  `height` double NOT NULL,
+  `volumne` double NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int NOT NULL,
+  `updated_by` datetime NOT NULL,
+  `updated_date` int NOT NULL
+);
+
+CREATE TABLE `items_price_list` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `item_id` int NOT NULL,
+  `price1` double NOT NULL,
+  `price2` double NOT NULL,
+  `price3` double NOT NULL,
+  `price4` double NOT NULL,
+  `price5` double NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_by` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+
+ALTER TABLE `items`
+ADD `gst_tax_rate` double NOT NULL AFTER `is_gst`;
+
+
+CREATE TABLE `system_settings` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(200) NOT NULL,
+  `sys_value` longtext NOT NULL,
+  `sys_group` varchar(20) NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` int NOT NULL
+);
+
+INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`)
+VALUES ('default_currency', 'INR', 'currency ', '', '', '', '');
+
+INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`)
+VALUES ('system_email', 'info@akshaycrm.com', 'email', '', '', '', '');
+
+
+ALTER TABLE `contact` ADD `company_id` int(11) NOT NULL AFTER `id`;
+
+ALTER TABLE `items` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `categories` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `meeting` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `notes` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `subscription` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `task` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `uom` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `activity_logs` ADD `company_id` int(11) NOT NULL AFTER `id`;
+ALTER TABLE `account` ADD `company_id` int(11) NOT NULL AFTER `id`;

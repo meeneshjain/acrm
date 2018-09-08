@@ -149,6 +149,10 @@ function get_sales_stages_list($type, $selected_value = NULL){
 	return generate_drop_down('id', 'name', 'sales_stages', $type,$selected_value);
 }
 
+function get_uom_list($type, $selected_value = NULL){
+	return generate_drop_down('code', 'name', 'uom', $type,$selected_value);
+}
+
 function active_inactive_dp($type="html", $selectedstats = null ){
 	$array = array(
 		"1"=>"Active",

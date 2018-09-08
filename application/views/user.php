@@ -37,7 +37,7 @@
                     </div>
                     <div class="m-portlet__body">
                         <!--begin: Datatable -->
-                            <table class="table-responsive table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary" id="user_list_dt_table" data-source="<?php echo $data_source; ?>">
+                            <table class=" table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary" id="user_list_dt_table" data-source="<?php echo $data_source; ?>">
                                 <thead class="">
                                     <tr>
                                         <th class="no-sort">
@@ -79,7 +79,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="add_update_user_modal" tabindex="-1" role="dialog" aria-labelledby="add_update_user_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
