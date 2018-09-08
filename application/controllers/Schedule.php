@@ -203,5 +203,32 @@ class Schedule extends CI_Controller {
 		echo json_encode(array("status" => "success","message" => '', "data" => $response));
 		die;
 	}
+
+	/* TASK CODE GOES HERE */
+
+	public function add_task(){
+		if($this->input->is_ajax_request())
+		{
+			$data = array(
+							'title' => $this->input->post('title'),
+							'description' => $this->input->post('description'),
+							'created_date' => DATETIME,
+							'status' => '1',
+							'is_deleted' => '0',
+						);
+			$result = $this->common_model->insert('task', $data);
+			echo json_encode(array("status" => "success","message" => 'Task Added Successfully.', "data" => $result));
+
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
 	
+	public function get_task(){
+		$response =  $this->common_model->getdata($selected = false, 'task', $where = array('status' => '1','is_deleted' => '0'), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
+		echo json_encode(array("status" => "success","message" => '', "data" => $response));
+		die;
+	}
 }
