@@ -100,77 +100,103 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-12">
-                        <div class="form-group m-form__group row">
+                        <div class="row">
                             <div class="col-lg-4">
-                                <label>
-                                    Item Name:
-                                </label>
-                                <input type="hidden" id="item_id" name="id" value="0">
-                                <input required type="text" id="item_name" name="name" class="form-control m-input" placeholder="Enter Item name">
-
-                            </div>
-                            <div class="col-lg-4">
-                                <label>
-                                    Item Code:
-                                </label>
-                                <input required type="text" id="item_code" name="code" class="form-control m-input" placeholder="Enter Item Code">
-                            </div>
-                            <div class="col-lg-4">
-                                <label>
-                                    Item Type:
-                                </label>
-                                <select required class="form-control m-input" id="item_type" name="type">
-                                    <option value=""> --Select Type --</option>
-                                    <option value="SERIAL"> SERIAL</option>
-                                    <option value="BATCH"> BATCH</option>
-                                    <option value="NONE"> NONE</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group m-form__group row">
-                            <div class="col-lg-4">
-                                <label>
-                                    Item Group:
-                                </label>
-                                <select id="item_group" name="group" class="form-control m-input">
-                                    <option value="">--Group Type--</option>
-                                    <option value="SERVICE">Service</option>
-                                    <option value="INVENTORY">Inventory</option>
-                                </select>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <label>
-                                    Price List:
-                                </label>
-                                <select id="item_price_list" name="price_list" class="form-control m-input">
-                                    <option value="price1"> Price 1 </option>
-                                    <option value="price2"> Price 2 </option>
-                                    <option value="price3"> Price 3 </option>
-                                    <option value="price4"> Price 4 </option>
-                                    <option value="price5"> Price 5 </option>
-                                </select>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <label>
-                                    Item Price:
-                                </label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon2">
-                                            $
-                                        </span>
+                                <div class="form-group" style="margin-top: 7px;">
+                                    <label class="">Itme Image</label>
+                                    <div class="col-sm-4 col-md-3 col-lg-2">
+                                        <div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
+                                            <img data-folder_name="items" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" class="item_logo_src" style="max-width: 220px;" >
+                                            </div>
+                                            <a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
+                                        </div>
                                     </div>
-                                    <input required type="text" id="itm_price1" name="price1" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price1">
-                                    <input required type="text" id="itm_price2" name="price2" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price2" style="display: none;">
-                                    <input required type="text" id="itm_price3" name="price3" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price3" style="display: none;">
-                                    <input required type="text" id="itm_price4" name="price4" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price4" style="display: none;">
-                                    <input required type="text" id="itm_price5" name="price5" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price5" style="display: none;">
+                                    <div class="col-sm-12">
+                                    <input type="file" id="upload_images_single" data-displayname="Item Logo"  name="..." accept="image/*"   >
+                                    <input type="hidden" name="uploaded_images" value="">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-6">
+                                        <label>
+                                            Item Name:
+                                        </label>
+                                        <input type="hidden" id="item_id" name="id" value="0">
+                                        <input required type="text" id="item_name" name="name" class="form-control m-input" placeholder="Enter Item name">
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>
+                                            Item Code:
+                                        </label>
+                                        <input required type="text" id="item_code" name="code" class="form-control m-input" placeholder="Enter Item Code">
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-6">
+                                        <label>
+                                            Item Type:
+                                        </label>
+                                        <select required class="form-control m-input" id="item_type" name="type">
+                                            <option value=""> --Select Type --</option>
+                                            <option value="SERIAL"> SERIAL</option>
+                                            <option value="BATCH"> BATCH</option>
+                                            <option value="NONE"> NONE</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label>
+                                            Item Group:
+                                        </label>
+                                        <select id="item_group" name="group" class="form-control m-input">
+                                            <option value="">--Group Type--</option>
+                                            <option value="SERVICE">Service</option>
+                                            <option value="INVENTORY">Inventory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-6">
+                                        <label>
+                                            Price List:
+                                        </label>
+                                        <select id="item_price_list" name="price_list" class="form-control m-input">
+                                            <option value="price1"> Price 1 </option>
+                                            <option value="price2"> Price 2 </option>
+                                            <option value="price3"> Price 3 </option>
+                                            <option value="price4"> Price 4 </option>
+                                            <option value="price5"> Price 5 </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label>
+                                            Item Price:
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon2">
+                                                    $
+                                                </span>
+                                            </div>
+                                            <input required type="text" id="itm_price1" name="price1" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price1">
+                                            <input required type="text" id="itm_price2" name="price2" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price2" style="display: none;">
+                                            <input required type="text" id="itm_price3" name="price3" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price3" style="display: none;">
+                                            <input required type="text" id="itm_price4" name="price4" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price4" style="display: none;">
+                                            <input required type="text" id="itm_price5" name="price5" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price5" style="display: none;">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                       
 
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">

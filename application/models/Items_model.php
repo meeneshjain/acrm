@@ -68,7 +68,13 @@ class Items_model extends CI_Model {
         	
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx"><span></span></label>';
-        	$row[] = '<img class="m-widget7__img" src="assets/app/media/img/products/product6.jpg" alt="" style="width:100px">';
+
+            $imgscr = base_url('assets/images/no.jpg');
+            if(!empty($aRow['logo']))
+            {
+            	$imgscr = base_url($aRow['logo']);
+            }
+        	$row[] = '<img class="m-widget7__img" src="'.$imgscr.'" alt="" style="width:100px;height:60px">';
         	$row[] = $aRow['code'];
         	$row[] = $aRow['name'];
         	$row[] = $aRow['type'];

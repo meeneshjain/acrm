@@ -7,6 +7,7 @@ $(document).ready(function () {
 		$("#item_form")[0].reset();
 		$("#item_modal").modal('show');
 		$(".is_gst_rate_apply").show();
+		$(".item_logo_src").attr('src',base_url+'assets/images/no.jpg');
 		$("#item_form").attr('action', base_url + 'items/add_update_item')
 		$(".item_modal_heading").html('ADD NEW ITEM');
 		$("#item_action_btn").html('<i class="fa fa-save"></i> Save');
@@ -51,12 +52,23 @@ $(document).ready(function () {
 					$("#item_action_btn").html('<i class="fa fa-save"></i> Update');
 
 					$("#item_id").val(res.data[0].id);
+
+					if(res.data[0].logo != '')
+					{
+						$(".item_logo_src").attr('src',res.data[0].logo);
+					}
+					else
+					{
+						$(".item_logo_src").attr('src',base_url+'assets/images/no.jpg');
+					}
+
 					$("#item_name").val(res.data[0].name);
 					$("#item_code").val(res.data[0].code);
 					$("#item_type").val(res.data[0].type);
 					$("#item_group").val(res.data[0].group_type);
 					$("#item_unit").val(res.data[0].unit);
 					$("#item_description").val(res.data[0].description);
+
 					if(res.data[0].is_gst == '1')
 					{
 						$('#item_gst').prop('checked', true);

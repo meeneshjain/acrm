@@ -43,6 +43,7 @@ class Items extends CI_Controller {
 
             $data = array(
                             'company_id' => $companyId,
+                            'logo' => $this->input->post('uploaded_images'),
                             'name' => $this->input->post('name'),
                             'code' => $this->input->post('code'),
                             'type' => $this->input->post('type'),
@@ -110,6 +111,7 @@ class Items extends CI_Controller {
 
                 $itemData = json_decode(json_encode($data),true);
 
+                $itemData[0]['price1'] = $pricedata[0]->price1;
                 $itemData[0]['price2'] = $pricedata[0]->price2;
                 $itemData[0]['price3'] = $pricedata[0]->price3;
                 $itemData[0]['price4'] = $pricedata[0]->price4;
