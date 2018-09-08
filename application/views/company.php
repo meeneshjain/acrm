@@ -89,7 +89,7 @@
         									<thead>
         										<tr>
         											<th class="no-sort">
-        												<input type="checkbox" class="compckbxAll" onclick="checkAll('compckbxAll','compckbx')" name="">
+        												<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" class="compckbxAll" onclick="checkAll('compckbxAll','compckbx')" name=""><span></span></label>
         											</th>
         											<th>
         												Company Name

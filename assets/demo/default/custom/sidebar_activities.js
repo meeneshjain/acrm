@@ -362,3 +362,112 @@ $(document).ready(function () {
 		});
 	});
 });
+
+
+/* TASK MODULE CODE GOES HERE */
+
+$(document).ready(function(){
+	$(".task_modal_open_btn").on("click", function () {
+		$("#task_form")[0].reset();
+		$("#task_modal").modal('show');
+		$("#task_form").attr('action', base_url + 'schedule/add_task')
+		$(".task_modal_heading").html('ADD NEW TASK');
+		$("#task_action_btn").html('<i class="fa fa-save"></i> Save');
+	});
+
+	/*
+	 ******** SAVE / UPDATE TASK ********
+	*/
+	$("#task_action_btn").click(function () {
+		var obj = $(this);
+		if ($("#task_form").parsley().validate()) {
+			var btn_text = $("#task_action_btn").html();
+			show_loading("#task_action_btn", 'Loading..!');
+			form_submit('task_form', function (res) {
+				if (res.status == 'success') {
+					notify_alert('success', res.message, "Success");
+					hide_loading("#task_action_btn", btn_text);
+					$("#task_form").parsley().reset();
+					$("#task_form")[0].reset();
+					$("#task_modal").modal('hide');
+					$(".get_task_list_on_tab").trigger("click");
+				}
+			}, function () {
+				hide_loading("#task_action_btn", btn_text);
+			});
+		}
+	});
+
+		/*
+	 ******* GET LIST OF TASK ********
+	*/
+	$(".get_task_list_on_tab").click(function () {
+		call_service(base_url + 'schedule/get_task', function (res) {
+			if (res.status == 'success') {
+				var html = '';
+				var i = 0;
+				var color = ['primary', 'warning', 'brand', 'success', 'danger', 'info'];
+				$(res.data).each(function (index, value) {
+					html += '<div class="m-widget2__item m-widget2__item--'+color[i]+'">\
+							<div class="m-widget2__checkbox">\
+							<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--'+color[i]+'">\
+							<input type="checkbox">\
+							<span></span>\
+							</label>\
+							</div>\
+							<div class="m-widget2__desc">\
+							<span class="m-widget2__text">'+res.data[index].title+'</span>\
+							<br>\
+							<span class="m-widget2__user-name">\
+							<a href="#" class="m-widget2__link">'+res.data[index].description+'<h6 class="m--font-brand"><span><i>Created On : '+res.data[index].created_date+'</i></span></h6></a>\
+							</span>\
+							</div>\
+							<div class="m-widget2__actions">\
+							<div class="m-widget2__actions-nav">\
+							<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">\
+							<a href="#" class="m-dropdown__toggle">\
+							<i class="la la-ellipsis-h"></i>\
+							</a>\
+							<div class="m-dropdown__wrapper">\
+							<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>\
+							<div class="m-dropdown__inner">\
+							<div class="m-dropdown__body">\
+							<div class="m-dropdown__content">\
+							<ul class="m-nav">\
+							<li class="m-nav__item">\
+							<a href="" class="m-nav__link">\
+							<i class="m-nav__link-icon fa fa-edit"></i>\
+							<span class="m-nav__link-text">\
+							Edit\
+							</span>\
+							</a>\
+							</li>\
+							<li class="m-nav__item">\
+							<a href="" class="m-nav__link">\
+							<i class="m-nav__link-icon fa fa-trash"></i>\
+							<span class="m-nav__link-text">\
+							Delete\
+							</span>\
+							</a>\
+							</li>\
+							</ul>\
+							</div>\
+							</div>\
+							</div>\
+							</div>\
+							</div>\
+							</div>\
+							</div>\
+							</div>';
+						i++;
+						if(i == 5){ i = 0; }
+						console.log(i);
+				});
+				$('.custom_task_portlet_container').html(html);
+			}
+		}, function (res) {
+			notify_alert('error', res.message, "Error");
+		});
+	});
+	
+});

@@ -67,7 +67,7 @@ class Company_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx">';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx"><span></span></label>';
         	$row[] = $aRow['company_name'];
         	$row[] = $aRow['email_1'];
         	$row[] = $aRow['contact_1'];
