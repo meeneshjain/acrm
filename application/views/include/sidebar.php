@@ -292,16 +292,16 @@
 
 								<div class="form-group row">
 									<div class="col-lg-6">
-										<label for="meeting_start_date" class="form-control-label">
+										<label for="meeting_start_date" class="form-control-label ">
 											Start Date:
 										</label>
-										<input required readonly type="text" name="start_date" id="meeting_start_date" class="form-control" placeholder="" >
+										<input required readonly type="text" name="start_date" id="meeting_start_date" class="form-control crm_datetimepicker" placeholder="" >
 									</div>
 									<div class="col-lg-6">
 										<label for="meeting_end_date" class="form-control-label">
 											End Date:
 										</label>
-										<input required readonly type="text" name="end_date" id="meeting_end_date" class="form-control" placeholder="" >
+										<input required readonly type="text" name="end_date" id="meeting_end_date" class="form-control crm_datetimepicker" placeholder="" >
 									</div>
 								</div>
 
@@ -320,9 +320,9 @@
 									</div>
 									<div class="col-lg-6">
 										<label for="meeting_alert_datetime" class="form-control-label">
-											Start Date:
+											Alert Date Time:
 										</label>
-										<input required readonly type="text" name="alert_datetime" id="meeting_alert_datetime" class="form-control" placeholder="" >
+										<input required readonly type="text" name="alert_datetime" id="meeting_alert_datetime" class="form-control crm_datetimepicker" placeholder="" >
 									</div>
 								</div>
 
@@ -331,7 +331,7 @@
 										<label for="meeting_invitees" class="form-control-label">
 											Select Invitees:
 										</label>
-										<select required style="width: 100%" class="form-control m-select2" id="meeting_invitees" name="meeting_invitees[]" multiple="multiple">
+										<select required style="width: 100%" class="form-control m-select2 select2_selectbox" id="meeting_invitees" name="meeting_invitees[]" multiple="multiple">
 											<option value="1">User1</option>
 											<option value="2">User2</option>
 											<option value="3">User3</option>
