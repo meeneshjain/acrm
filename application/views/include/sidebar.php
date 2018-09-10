@@ -81,7 +81,9 @@
 				<div class="clearfix"></div>
 				<div class="tab-pane" id="m_widget2_tab1_content">
 					<div class="m-widget2" >
-						<div class="custom_task_portlet_container"></div>
+						<div class="m-scrollable" data-scrollable="true" data-max-height="450" data-scrollbar-shown="true">
+							<div class="custom_task_portlet_container"></div>
+						</div>
 					</div>
 				</div>
 			</div>

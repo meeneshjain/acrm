@@ -218,3 +218,8 @@ a.btn.btn-black {
     padding-left: 5px !important;
     padding-right: 5px !important;
 }
+
+/* TASK COMPLETED */
+.task_completed{
+	text-decoration: line-through;
+}

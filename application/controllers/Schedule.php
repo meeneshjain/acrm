@@ -231,4 +231,50 @@ class Schedule extends CI_Controller {
 		echo json_encode(array("status" => "success","message" => '', "data" => $response));
 		die;
 	}
+
+	public function mark_task_complete(){
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->uri->segment(3);
+			$status = $this->uri->segment(4);
+			if(is_numeric($id) && !empty($id))
+			{
+				$data = array(
+						'complete' => $status,
+						'updated_date' => DATETIME
+					);
+				$where = array('id' => $id);
+				$this->common_model->update_data('task',$data,$where);
+				echo json_encode(array("status" => "success","message" => 'Task updated Successfully!!', "data" => ""));
+			}
+			else
+			{
+				echo json_encode(array("status" => "error","message" => 'Meeting Id doesn\'t exist.', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+	}
+
+	public function delete_task(){
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->uri->segment(3);
+			if(is_numeric($id) && !empty($id))
+			{
+				$data = $this->common_model->delete_data('task',array('id' => $id));
+				echo json_encode(array("status" => "success","message" => 'Task Deleted Successfully!!', "data" => ''));
+			}
+			else
+			{
+				echo json_encode(array("status" => "error","message" => 'Task Id doesn\'t exist.', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
 }

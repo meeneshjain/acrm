@@ -280,7 +280,7 @@ $(document).ready(function () {
 	});
 
 	/*
-	******* DELETE meeting ********
+	******* DELETE MEETING ********
 	*/
 	$(".custom_meeting_portlet_container").on("click", ".meeting_delete", function (e) {
 		var id = $(this).attr('data-meeting-id');
@@ -406,20 +406,28 @@ $(document).ready(function(){
 			if (res.status == 'success') {
 				var html = '';
 				var i = 0;
+
 				var color = ['primary', 'warning', 'brand', 'success', 'danger', 'info'];
 				$(res.data).each(function (index, value) {
+					var complete = '';
+					var checked = '';
+					if(res.data[index].complete == 1)
+					{
+						complete = 'task_completed';
+						checked = 'checked';
+					}
 					html += '<div class="m-widget2__item m-widget2__item--'+color[i]+'">\
 							<div class="m-widget2__checkbox">\
 							<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--'+color[i]+'">\
-							<input type="checkbox">\
+							<input type="checkbox" '+checked+' class="mark_task_complete" data-mark-status="'+res.data[index].complete+'" data-task-id='+res.data[index].id+'>\
 							<span></span>\
 							</label>\
 							</div>\
-							<div class="m-widget2__desc">\
+							<div class="m-widget2__desc '+complete+'" id="tsk_cmplt_id'+res.data[index].id+'">\
 							<span class="m-widget2__text">'+res.data[index].title+'</span>\
 							<br>\
 							<span class="m-widget2__user-name">\
-							<a href="#" class="m-widget2__link">'+res.data[index].description+'<h6 class="m--font-brand"><span><i>Created On : '+res.data[index].created_date+'</i></span></h6></a>\
+							<a href="#" class="m-widget2__link">'+res.data[index].description+'<br><span class="m--font-info"><i>Created On : '+res.data[index].created_date+'</i></span></a>\
 							</span>\
 							</div>\
 							<div class="m-widget2__actions">\
@@ -434,16 +442,8 @@ $(document).ready(function(){
 							<div class="m-dropdown__body">\
 							<div class="m-dropdown__content">\
 							<ul class="m-nav">\
-							<li class="m-nav__item">\
-							<a href="" class="m-nav__link">\
-							<i class="m-nav__link-icon fa fa-edit"></i>\
-							<span class="m-nav__link-text">\
-							Edit\
-							</span>\
-							</a>\
-							</li>\
-							<li class="m-nav__item">\
-							<a href="" class="m-nav__link">\
+							<li class="m-nav__item task_delete_btn" data-delete-id="'+res.data[index].id+'">\
+							<a class="m-nav__link">\
 							<i class="m-nav__link-icon fa fa-trash"></i>\
 							<span class="m-nav__link-text">\
 							Delete\
@@ -461,13 +461,75 @@ $(document).ready(function(){
 							</div>';
 						i++;
 						if(i == 5){ i = 0; }
-						console.log(i);
 				});
 				$('.custom_task_portlet_container').html(html);
 			}
 		}, function (res) {
 			notify_alert('error', res.message, "Error");
 		});
+	});
+
+	$('.custom_task_portlet_container').on("click", ".mark_task_complete", function (e) {
+		var obj = $(this);
+		var id = obj.attr('data-task-id');
+		var status;
+		if(obj.attr('data-mark-status') == '0')
+		{
+			var alertmsg = "Mark as complete?";
+			status = 1;
+		}
+		else
+		{
+			var alertmsg = "Mark as Uncomplete?";
+			status = 0;
+		}
+		if (confirm(alertmsg)) {
+			call_service(base_url + "schedule/mark_task_complete/"+ id+"/"+status, function (response) {
+				if (response.status == 'success') {
+					if(status == 1)
+					{
+						$("#tsk_cmplt_id"+id).addClass('task_completed');
+						obj.attr('data-mark-status','1');
+					}
+					else
+					{
+						$("#tsk_cmplt_id"+id).removeClass('task_completed');
+						obj.attr('data-mark-status','0');						
+					}
+					notify_alert('success', response.message, "Success");
+				} else {
+					notify_alert('danger', response.message, "Error");
+				}
+			}, function (response) {
+				notify_alert('danger', response.message, "Error");
+			});
+
+		}
+		else
+		{
+			obj.prop('checked',false);
+		}
+	});
+
+	
+	/*
+	******* DELETE MEETING ********
+	*/
+	$(".custom_task_portlet_container").on("click", ".task_delete_btn", function (e) {
+		var id = $(this).attr('data-delete-id');
+		if (confirm("Are you sure, You want to delete this task?")) {
+			call_service(base_url + "schedule/delete_task/" + id, function (response) {
+				if (response.status == 'success') {
+					notify_alert('success', response.message, "Success");
+					$(".get_task_list_on_tab").trigger("click");
+				} else {
+					notify_alert('danger', response.message, "Error");
+				}
+			}, function () {
+				notify_alert('danger', response.message, "Error");
+			});
+
+		}
 	});
 	
 });
