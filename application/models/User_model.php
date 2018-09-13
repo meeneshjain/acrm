@@ -142,6 +142,16 @@ class User_model extends CI_Model {
 		$this->db->where(array('id' => $id));
 		$this->db->update('`users`',$update_dataset);
 	}
+
+	public function user_detail($companyId,$userId)
+	{
+		$data = array();
+		$user = $this->db->query("SELECT `u`.`user_role_id`,`u`.`company_id`,`u`.`first_name`,`u`.`last_name`,`u`.`mobile_no`,`u`.`landline`,`u`.`address`,`u`.`designation`,`u`.`dob`,`u`.`doj`,`u`.`status`,`u`.`is_deleted`,`u`.`created_date` FROM `users` as `u` WHERE `u`.`company_id` = '$companyId' AND `u`.`id` = '$userId'")->row_array();
+		$data = $user;
+		$role = $this->db->query("SELECT `ur`.`id` as `role_id`,`ur`.`name` FROM `user_roles` as `ur` WHERE `ur`.`id` = '".$user['user_role_id']."'")->row_array();
+		$data['role'] = $role;
+		print_r($data);
+	}
 }
 
 ?>

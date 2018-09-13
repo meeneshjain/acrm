@@ -2,8 +2,14 @@
 class Home_model extends CI_Model {	
 	
 	public function login_check($username,$password){
-		
-		$raw_query = 'SELECT * FROM admin WHERE `username` = '.$this->db->escape($username).'  AND `password` = "'.md5($password).'"'; 
+		if($username == 'admin')
+		{
+			$raw_query = 'SELECT * FROM admin WHERE `username` = '.$this->db->escape($username).'  AND `password` = "'.md5($password).'"'; 
+		}
+		else
+		{
+			$raw_query = 'SELECT * FROM users WHERE `username` = '.$this->db->escape($username).'  AND `password` = "'.md5($password).'"'; 
+		}
 		$query = $this->db->query($raw_query);
 		if ($query->num_rows() > 0){ 
 			$row = $query->row_array(); 

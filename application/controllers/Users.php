@@ -78,6 +78,26 @@ class Users extends CI_Controller {
         echo json_encode($output);
         die;
     }
+
+    public function user_profile()
+    {
+    	$companyId = $this->sessionData['company_id'];
+    	$userId = $this->sessionData['logged_in'];
+
+    	$data['page_title'] = 'User Profile';
+        $data['breadcum_title'] = 'User Profile';
+        $data['active_sidemenu'] = "";
+        $data['load_js'] = 'user';
+        $data['userdetail'] = $this->user_model->user_detail($companyId,$userId);
+
+        //$data['data_source'] = base_url('users/get_all_users');
+        //$data['user_role'] = get_user_role_list('html', NULL);
+        //$data['loggedin_company_id'] = $this->sessionData['company_id'];
+        //$data['team_leaders'] = get_user_role_list('data', NULL);
+        $this->load->view('include/header',$data);
+        $this->load->view('userprofile',$data);
+        $this->load->view('include/footer');
+    }
      
      
 }
