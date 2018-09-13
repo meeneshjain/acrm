@@ -53,7 +53,7 @@ class Home extends CI_Controller {
 				'user_role_id'   => (isset($login_check['row']['user_role_id']) && $login_check['row']['user_role_id']!="") ? $login_check['row']['user_role_id'] : "",
 				'company_id'     => (isset($login_check['row']['company_id']) && $login_check['row']['company_id']!="") ? $login_check['row']['company_id'] : "",
 				'email'          => $login_check['row']['username'],
-				'logged_in'      => '1',
+				'logged_in'      => $login_check['row']['id'],
 			);
 
 			$this->session->set_userdata($session_data);

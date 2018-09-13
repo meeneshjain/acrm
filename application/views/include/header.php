@@ -840,7 +840,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </li>
                                 <li class="m-nav__item">
-                                    <a href="<?php echo base_url('header/profile.html'); ?>" class="m-nav__link">
+                                    <a href="<?php echo base_url('profile'); ?>" class="m-nav__link">
                                         <i class="m-nav__link-icon flaticon-profile-1"></i>
                                         <span class="m-nav__link-title">
                                             <span class="m-nav__link-wrap">
