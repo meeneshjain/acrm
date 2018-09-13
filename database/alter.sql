@@ -140,3 +140,6 @@ CHANGE `unit` `unit` varchar(50) NOT NULL AFTER `type`;
 
 ALTER TABLE `items`
 CHANGE `group_type` `group_type` enum('SERVICE','INVENTORY') NOT NULL AFTER `description`;
+
+ALTER TABLE `task`
+CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
