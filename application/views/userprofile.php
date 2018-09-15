@@ -12,13 +12,24 @@
 												<div class="m-card-profile__pic-wrapper">
 													<img src="<?php echo base_url('assets/app/media/img/users/user4.jpg');?>" alt=""/>
 												</div>
+
 											</div>
 											<div class="m-card-profile__details">
 												<span class="m-card-profile__name">
-													Mark Andre
+													<?php
+													if(isset($userdetail['first_name']) && !empty($userdetail['first_name']))
+													{
+														echo ucfirst($userdetail['first_name'])." ".ucfirst($userdetail['last_name']);
+													}
+													?>
 												</span>
 												<a href="" class="m-card-profile__email m-link">
-													mark.andre@gmail.com
+													<?php
+													if(isset($userdetail['email']) && !empty($userdetail['email']))
+													{
+														echo $userdetail['email'];
+													}
+													?>
 												</a>
 											</div>
 										</div>
@@ -88,59 +99,6 @@
 											</li>
 										</ul>
 										<div class="m-portlet__body-separator"></div>
-										<div class="m-widget1 m-widget1--paddingless">
-											<div class="m-widget1__item">
-												<div class="row m-row--no-padding align-items-center">
-													<div class="col">
-														<h3 class="m-widget1__title">
-															Member Profit
-														</h3>
-														<span class="m-widget1__desc">
-															Awerage Weekly Profit
-														</span>
-													</div>
-													<div class="col m--align-right">
-														<span class="m-widget1__number m--font-brand">
-															+$17,800
-														</span>
-													</div>
-												</div>
-											</div>
-											<div class="m-widget1__item">
-												<div class="row m-row--no-padding align-items-center">
-													<div class="col">
-														<h3 class="m-widget1__title">
-															Orders
-														</h3>
-														<span class="m-widget1__desc">
-															Weekly Customer Orders
-														</span>
-													</div>
-													<div class="col m--align-right">
-														<span class="m-widget1__number m--font-danger">
-															+1,800
-														</span>
-													</div>
-												</div>
-											</div>
-											<div class="m-widget1__item">
-												<div class="row m-row--no-padding align-items-center">
-													<div class="col">
-														<h3 class="m-widget1__title">
-															Issue Reports
-														</h3>
-														<span class="m-widget1__desc">
-															System bugs and issues
-														</span>
-													</div>
-													<div class="col m--align-right">
-														<span class="m-widget1__number m--font-success">
-															-27,49%
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -150,18 +108,18 @@
 										<div class="m-portlet__head-tools">
 											<ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
 												<li class="nav-item m-tabs__item">
-													<a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+													<a class="nav-link m-tabs__link active" data-toggle="tab" href="#user_profile" role="tab">
 														<i class="flaticon-share m--hide"></i>
 														Update Profile
 													</a>
 												</li>
 												<li class="nav-item m-tabs__item">
-													<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
-														Messages
+													<a class="nav-link m-tabs__link" data-toggle="tab" href="#user_activities" role="tab">
+														<i class="fa fa-activity"></i> Activities
 													</a>
 												</li>
 												<li class="nav-item m-tabs__item">
-													<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+													<a class="nav-link m-tabs__link" data-toggle="tab" href="#user_setting" role="tab">
 														Settings
 													</a>
 												</li>
@@ -247,157 +205,200 @@
 										</div>
 									</div>
 									<div class="tab-content">
-										<div class="tab-pane active" id="m_user_profile_tab_1">
-											<form class="m-form m-form--fit m-form--label-align-right">
+										<div class="tab-pane active" id="user_profile">
+											<div class="m-portlet">
+												<form class="m-form m-form--fit m-form--label-align-right" id="user_profile_activity_form" action="<?php echo base_url('users/user_profile_update');?>" data-parsley-validate >
+													<div class="m-portlet__body">
+														<div class="form-group m-form__group row">
+															<div class="col-lg-6">
+																<label>
+																	First Name:
+																</label>
+																<input type="hidden" name="id" value="<?php echo $userdetail['id'];?>">
+																<input type="text" required id="u_first_name" name="first_name" class="form-control m-input" placeholder="Enter first name" value="<?php echo $userdetail['first_name'];?>">
+																
+															</div>
+															<div class="col-lg-6">
+																<label class="">
+																	Last Name:
+																</label>
+																<input type="text" required id="u_last_name" name="last_name" class="form-control m-input" placeholder="Enter last name" value="<?php echo $userdetail['last_name'];?>">
+																
+															</div>
+														</div>
+
+														<div class="form-group m-form__group row">
+															<div class="col-lg-6">
+																<label>
+																	Mobile:
+																</label>
+																<input type="text" required id="u_mobile" name="mobile" class="form-control m-input onlynumber" placeholder="Enter contact number" value="<?php echo $userdetail['mobile_no'];?>">
+															</div>
+															<div class="col-lg-6">
+																<label class="">
+																	Ladline:
+																</label>
+																<input type="text" required id="u_ladline" name="landline" class="form-control m-input onlynumber" placeholder="Enter ladline number" value="<?php echo $userdetail['landline'];?>">
+															</div>
+														</div>
+
+														<div class="form-group m-form__group row">
+															<div class="col-lg-6">
+																<label class="">
+																	Email:
+																</label>
+																<input type="email" required id="u_email" name="email" class="form-control m-input" placeholder="Enter your email" value="<?php echo $userdetail['email'];?>">
+															</div>
+
+															<div class="col-lg-6">
+																<label class="">
+																	Date Of Birth
+																</label>
+																<input type="text" id="u_dob" name="dob" class="form-control m-input crm_datepicker" readonly placeholder="Enter last name" value="<?php echo $userdetail['doj'];?>">
+															</div>
+														</div>
+
+														<div class="form-group m-form__group row">
+															<div class="col-lg-6">
+																<label>
+																	Username:
+																</label>
+																<div class="input-group m-input-group m-input-group--square">
+																	<div class="input-group-prepend">
+																		<span class="input-group-text">
+																			<i class="la la-user"></i>
+																		</span>
+																	</div>
+																	<input type="text" class="form-control m-input" placeholder="<?php echo $userdetail['roledetail']['name'];?>" disabled readonly>
+																</div>
+															</div>
+															<div class="col-lg-6">
+																<label>
+																	Date Of Joining
+																</label>
+																<input type="text" id="u_doj" name="doj" class="form-control m-input" disabled placeholder="Enter first name" value="<?php echo $userdetail['doj'];?>">
+															</div>
+															
+														</div>
+														<div class="form-group m-form__group row">
+															<div class="col-lg-12">
+																<label class="">
+																	Address:
+																</label>
+																<textarea id="u_address" name="address" class="form-control m-input"><?php echo $userdetail['address'];?></textarea>
+															</div>
+														</div>
+													</div>
+													<div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+														<div class="m-form__actions m-form__actions--solid">
+															<div class="row">
+																<div class="col-lg-4"></div>
+																<div class="col-lg-8">
+																	<button type="button" id="update_user_profile_btn" class="btn btn-sm btn-primary">
+																		<i class="fa fa-save"></i> Update Detail
+																	</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+
+										<div class="tab-pane " id="user_activities">
+											<div class="m-portlet__body">
+					                            <table class=" table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary" id="user_activities_list_dt_table" data-source="<?php echo $user_activities_data_source; ?>">
+					                                <thead class="">
+					                                    <tr>
+					                                        <th class="no-sort">
+					                                            <label class="m-checkbox m-checkbox--state-primary">
+					                                                <input type="checkbox" class="usrprflckbxAll" onclick="checkAll('usrprflckbxAll','usrprflckbx')" name="">
+					                                                <span></span>
+					                                            </label>
+					                                        </th>
+					                                        <th>
+					                                            Title
+					                                        </th>
+					                                        <th>
+					                                           Log Message
+					                                        </th>
+					                                        <th>
+					                                            Status
+					                                        </th>
+					                                        <th>
+					                                            Created Date
+					                                        </th>
+					                                    </tr>
+					                                </thead>
+					                            </table>
+					                        </div>
+										</div>
+
+										<div class="tab-pane " id="user_setting">
+											<form class="m-form m-form--fit m-form--label-align-right" id="user_setting_form" action="<?php echo base_url('users/change_password');?>" data-parsley-validate >
 												<div class="m-portlet__body">
-													<div class="form-group m-form__group m--margin-top-10 m--hide">
-														<div class="alert m-alert m-alert--default" role="alert">
-															The example form below demonstrates common HTML form elements that receive updated styles from Bootstrap with additional classes.
-														</div>
+
+													<div id="pswd_alrt_msg">
+														
 													</div>
-													<div class="form-group m-form__group row">
-														<div class="col-10 ml-auto">
-															<h3 class="m-form__section">
-																1. Personal Details
-															</h3>
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Full Name
+													
+													<h5 class="m-form__heading-title">
+														Current Password
+													</h5>
+
+													<div class="form-group m-form__group">
+														<label for="exampleInputEmail1">
+															Current Password
 														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="Mark Andre">
+														<div class="input-group m-input-group m-input-group--pill">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="basic-addon1">
+																	<i class="la la-unlock"></i>
+																</span>
+															</div>
+															<input type="hidden" name="user_id" value="<?php echo $userdetail['id'];?>">
+															<input type="password" required id="u_p_current_password" name="password" class="form-control m-input" data-parsley-required-message="" placeholder="Enter you current password">
 														</div>
 													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Occupation
+													<h5 class="m-form__heading-title">
+														Reset New Password
+													</h5>
+													<div class="form-group m-form__group">
+														<label for="exampleInputEmail1">
+															New password
 														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="CTO">
+														<div class="input-group m-input-group m-input-group--pill">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="basic-addon1">
+																	<i class="la la-lock"></i>
+																</span>
+															</div>
+															<input type="password" required id="u_p_new_password" name="new_password" class="form-control m-input" data-parsley-required-message="" placeholder="New Passowrd" aria-describedby="basic-addon1">
 														</div>
 													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Company Name
+													<div class="form-group m-form__group">
+														<label for="exampleInputEmail1">
+															Confirm Password
 														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="Keenthemes">
-															<span class="m-form__help">
-																If you want your invoices addressed to a company. Leave blank to use your full name.
-															</span>
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Phone No.
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="+456669067890">
-														</div>
-													</div>
-													<div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-													<div class="form-group m-form__group row">
-														<div class="col-10 ml-auto">
-															<h3 class="m-form__section">
-																2. Address
-															</h3>
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Address
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="L-12-20 Vertex, Cybersquare">
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															City
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="San Francisco">
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															State
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="California">
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Postcode
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="45000">
-														</div>
-													</div>
-													<div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
-													<div class="form-group m-form__group row">
-														<div class="col-10 ml-auto">
-															<h3 class="m-form__section">
-																3. Social Links
-															</h3>
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Linkedin
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="www.linkedin.com/Mark.Andre">
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Facebook
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="www.facebook.com/Mark.Andre">
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Twitter
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="www.twitter.com/Mark.Andre">
-														</div>
-													</div>
-													<div class="form-group m-form__group row">
-														<label for="example-text-input" class="col-2 col-form-label">
-															Instagram
-														</label>
-														<div class="col-7">
-															<input class="form-control m-input" type="text" value="www.instagram.com/Mark.Andre">
+														<div class="input-group m-input-group m-input-group--pill">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="basic-addon1">
+																	<i class="la la-lock"></i>
+																</span>
+															</div>
+															<input type="password" required id="u_p_confirm_password" name="confirm_password" class="form-control m-input" data-parsley-required-message="" placeholder="Confirm Password" aria-describedby="basic-addon1">
 														</div>
 													</div>
 												</div>
 												<div class="m-portlet__foot m-portlet__foot--fit">
 													<div class="m-form__actions">
-														<div class="row">
-															<div class="col-2"></div>
-															<div class="col-7">
-																<button type="reset" class="btn btn-accent m-btn m-btn--air m-btn--custom">
-																	Save changes
-																</button>
-																&nbsp;&nbsp;
-																<button type="reset" class="btn btn-secondary m-btn m-btn--air m-btn--custom">
-																	Cancel
-																</button>
-															</div>
-														</div>
+														<button type="button" class="btn btn-primary" id="user_setting_btn">
+															<i class="fa fa-save"></i> Update Detail
+														</button>
 													</div>
 												</div>
 											</form>
 										</div>
-										<div class="tab-pane " id="m_user_profile_tab_2"></div>
-										<div class="tab-pane " id="m_user_profile_tab_3"></div>
 									</div>
 								</div>
 							</div>
