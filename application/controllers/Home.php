@@ -14,36 +14,55 @@ class Home extends CI_Controller {
     public function index() {
 		$this->dashboard();
 	 }
-    
-    public function login() {
-		if($this->session->userdata('logged_in')=='1'){
-			redirect("home/");
-		}
-		$data['page_title']="Login";
-		$data['form_url'] = base_url("home/login_check");
-		
+	 
+	 public function page_not_found(){
+		 $data['page_title']="Page Not Found";	
+		$this->output->set_status_header('404'); 
 		$this->load->view('include/front_header',$data);
-		$this->load->view('login',$data);
+		$this->load->view('page_not_found');
 		$this->load->view('include/front_footer');
-		echo '';
+	 }
+    
+    public function login($user_type = NULL) {
+		if($user_type == ""){
+			$this->page_not_found();
+		} else {
+			if($this->session->userdata('logged_in')=='1'){
+				redirect($user_type."/");
+				
+			}
+			$data['user_type'] = $user_type;
+			if($user_type == "admin"){
+				$data['page_title']="Administrator Login";
+			} else if($user_type == "user"){
+				$data['page_title']="User Login";
+			}
+			$data['form_url'] = base_url("home/login_check/$user_type");
+			
+			$this->load->view('include/front_header',$data);
+			$this->load->view('login',$data);
+			$this->load->view('include/front_footer');
+		}
     }
     
-     public function dashboard() {
-         check_session();
-         $data['page_title'] = 'Dashboard';
-         $data['breadcum_title'] = 'home';
-         $data['active_sidemenu'] = "home";
-		 $data['load_js'] = 'dashboard';
-         $this->load->view('include/header',$data);
-         $this->load->view('home',$data);
-         $this->load->view('include/footer');	
+     public function dashboard($user_type = NULL) {
+		 
+			check_session($user_type);
+			$data['page_title'] = 'Dashboard';
+			$data['breadcum_title'] = 'home';
+			$data['active_sidemenu'] = "home";
+			$data['load_js'] = 'dashboard';
+			$this->load->view('include/header',$data);
+			$this->load->view('home',$data);
+			$this->load->view('include/footer');	
+		
     }
     
     
-    public function login_check(){
+    public function login_check($user_type = NULL){
 		$username = $this->input->post("username");
 		$password = $this->input->post("password");
-		$login_check =  $this->home_model->login_check($username,$password);
+		$login_check =  $this->home_model->login_check($username,$password, $user_type);
 		if($login_check['status'] == 1){
 			
 			$session_data = array(
@@ -68,12 +87,17 @@ class Home extends CI_Controller {
     }
     
     public function logout(){
+		if($this->session->userdata('is_admin') == "1" ){
+			$url = "admin/login";
+		} else {
+			$url = "user/login";
+		}
 		$this->session->unset_userdata('is_admin');
 		$this->session->unset_userdata('user_role');
 		$this->session->unset_userdata('full_name');
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('logged_in');
-		redirect("home/login");
+		redirect($url);
 	} 
     
 	

@@ -22,7 +22,8 @@ sessionStorage.fonts = true;
 </script>
 
 <script type="text/javascript">
-    base_url = '<?php echo base_url();?>';
+    var base_url = '<?php echo base_url();?>';
+    var DEFAULT_IMAGE  = '<?php echo base_url(DEFAULT_IMAGE); ?>';
 </script>
 
 <!--end::Web font -->

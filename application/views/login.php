@@ -7,13 +7,14 @@
 						<div class="m-login__logo">
 							<a href="#">
 								<img src="<?php echo base_url(COMPANY_LOGO); ?>">
-							</a>
+							</a> 
+							
 						</div>
 						<div class="m-login__signin">
 							<div class="m-login__head">
-								<h3 class="m-login__title">
-									
-								</h3>
+								<h2 class="m-login__title">
+								<?php echo $page_title; ?>
+								</h2>
 							</div>
 							<form class="m-login__form m-form" action="<?php echo $form_url; ?>" data-parsley-validate>
 								<div class="form-group m-form__group">
@@ -155,7 +156,9 @@
 				if(isset($get_data['return_url']) && $get_data['return_url']!== "") { ?>
 				base_url = base_url + '<?php echo $get_data['return_url']; ?>';
 			<?php } else { ?>
-				base_url = base_url+ 'home/dashboard';
+				<?php $dashboard = $user_type. '/dashboard'; ?>
+				
+				base_url = base_url + '<?php echo $dashboard; ?>';
 				<?php } ?>
 				window.location.href = base_url;
             }

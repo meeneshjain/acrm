@@ -9,7 +9,9 @@ class Users extends CI_Controller {
 		$this->load->model("user_model");
         $this->sessionData = $this->session->userdata();
         check_session();
-	}
+    }
+    
+  
     
     public function index() {
          $data['page_title'] = 'User';
@@ -19,7 +21,23 @@ class Users extends CI_Controller {
          $data['data_source'] = base_url('users/get_all_users');
          $data['user_role'] = get_user_role_list('html', NULL);
          $data['loggedin_company_id'] = $this->sessionData['company_id'];
-     //    $data['team_leaders'] = get_user_role_list('data', NULL);
+         $data['tl_data'] = $this->user_model->get_user_list_by_role($data['loggedin_company_id'], '3');
+         $data['tl_options'] = "";
+         if($data['tl_data'] != 0){
+             foreach($data['tl_data'] as $team_leads){
+                 $tl_name = $team_leads['first_name'] . '' . $team_leads['last_name'];
+                 $data['tl_options'] .= '<option value="'.$team_leads['id'].'">'.$tl_name.'</option>';
+                }
+         }
+                  
+         $data['rm_data'] = $this->user_model->get_user_list_by_role($data['loggedin_company_id'],  '2');
+         $data['rm_options'] = "";
+         if($data['rm_data'] != 0){
+             foreach($data['rm_data'] as $rm){
+                 $tl_name = $rm['first_name'] . '' . $rm['last_name'];
+                 $data['rm_options'] .= '<option value="'.$rm['id'].'">'.$tl_name.'</option>';
+            }
+        }
          $this->load->view('include/header',$data);
          $this->load->view('user',$data);
          $this->load->view('include/footer');
@@ -48,11 +66,51 @@ class Users extends CI_Controller {
         exit;
      }
      
+     public function get_employee_user_name($company_id){
+          if($this->input->is_ajax_request()) {
+              if(empty($company_id) && $company_id == "" && $company_id == 0){
+                  $output = array("status" => "error","message" => 'Company ID missing ', "data" => "");
+                } else {
+                    $employeeID = $this->user_model->get_employee_user_name($company_id);
+				     $output = array("status" => "success","message" => 'Employee Code Generated', "data" => $employeeID);
+                }
+              } else {
+		    	$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+            }
+        echo json_encode($output);
+        exit;
+         
+     }
+     
      public function get_details($id){
 		if($this->input->is_ajax_request()) {
 			if(is_numeric($id) && !empty($id)) {
-				$data = $this->user_model->get_details($id);
-				$output = array("status" => "success","message" => '', "data" => $data);
+                $data = $this->user_model->get_details($id);
+                $option = "";
+                if( $data['user_role_id'] == "4" ||  $data['user_role_id'] == "3"){
+                    $text = "";
+                    if($data['user_role_id'] == 4){
+                    $text = "Assign Team Lead";
+                        $reports_to_manager_role =  3;
+                    } else if($data['user_role_id'] == 3){
+                    $text = "Assign Regional Manager";
+                        $reports_to_manager_role =  2;
+                    }
+                    
+                    $reports_to_detail['tl_data'] = $this->user_model->get_user_list_by_role($data['company_id'], $reports_to_manager_role);
+                    if($reports_to_detail['tl_data'] != 0){
+                        $option = '<option value="">'. $text.'</option>';
+                        foreach($reports_to_detail['tl_data'] as $re_to){
+                            $rto_name = $re_to['first_name'] . '' . $re_to['last_name'];
+                            $selected = "";
+                            if($re_to['id'] == $data['reports_to_user_id']){
+                                $selected = 'selected';
+                            }
+                            $option .= '<option value="'.$re_to['id'].'" '.$selected.'>'.$rto_name.'</option>';
+                        }
+                    }
+                } 
+				$output = array("status" => "success","message" => '', "data" => $data, 'reports_to_list' => $option);
 			} else {
 				$output = array("status" => "error","message" => 'User Id doesn\'t exist.', "data" => "");
 			}

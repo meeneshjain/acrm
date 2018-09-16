@@ -100,17 +100,24 @@
                         <h5 class="m-section__heading"> Profile </h5>
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
-                                <label>   User Role </label>
+                                <label>User Role </label>
                                 <select required class="form-control m-input" id="user_role" name="user_role">
                                     <option value="">Select User Role</option>
                                     <?php echo $user_role;?>
                                 </select>
                             </div>
-                            <div class="col-lg-4" id="team_lead_dropdown" style="display:none"> <!--  -->
+                            <div class="col-lg-4 user_role_group" id="team_lead_dropdown" style="display:none"> 
                                 <label> Team Lead Name  </label>
                                 <select required class="form-control m-input" id="team_lead_dd" name="team_lead_dd">
                                     <option value="">Assign Team Leader</option>
-                                    <?php echo $team_leader_options;?>
+                                    <?php echo $tl_options;?>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 user_role_group" id="rm_dropdown" style="display:none"> 
+                                <label> Regional Manager Name  </label>
+                                <select required class="form-control m-input" id="rm_dd" name="rm_dd">
+                                    <option value="">Assign Regional Manager</option>
+                                    <?php echo $rm_options;?>
                                 </select>
                             </div>
                         </div>
@@ -175,7 +182,7 @@
                                 User Name
                             </label>
                             
-                            <input required type="text" id="username" name="username" class="form-control m-input" placeholder="Enter  User-Name">
+                            <input  type="text" required readonly id="username" name="username" class="form-control m-input" placeholder="Enter  User-Name">
                         
                         </div>
                         <div class="col-lg-6">
@@ -234,7 +241,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <input type="hidden" name="company_id" value="<?php echo $loggedin_company_id; ?>">
+                <input type="hidden" name="company_id" id="logged_in_company_id" value="<?php echo $loggedin_company_id; ?>">
                     <input type="hidden" id="user_id" name="id" value="0">
                     <button type="button" id="save_update_button_click"  class="btn btn-primary">
                         <i class="fa fa-check"></i> Save

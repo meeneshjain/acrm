@@ -104,10 +104,16 @@ class User_model extends CI_Model {
 			"dob" => $post_data['dob'],
 			"doj" => $post_data['doj'],
 			"status" => (isset($post_data['status']) && $post_data['status']==1) ? 1 : 0,
+			'profile_pic'=> ($post_data['uploaded_images']) ? $post_data['uploaded_images'] : DEFAULT_IMAGE,
 			'updated_date' => DATETIME,
 			'created_date' => DATETIME,
-
 		);
+		
+		if($post_data['user_role'] == '4'){
+			$data['reports_to_user_id'] = $post_data['team_lead_dd'];
+		} else if($post_data['user_role'] == '3'){
+			$data['reports_to_user_id'] = $post_data['rm_dd'];
+		}
 		$res  = $this->db->insert('users',$data);
 	}
 	
@@ -121,16 +127,36 @@ class User_model extends CI_Model {
 			"designation" => $post_data['designation'],
 			"dob" => $post_data['dob'],
 			"doj" => $post_data['doj'],
+			'profile_pic'=> ($post_data['uploaded_images']) ? $post_data['uploaded_images'] : DEFAULT_IMAGE,
 			"status" => (isset($post_data['status']) && $post_data['status']==1) ? 1 : 0,
 			'updated_date' => DATETIME,
-
 		);
+		
+		/* 
+		if($post_data['user_role'] == '4'){
+			$data['reports_to_user_id'] = $post_data['team_lead_dd'];
+		} else if($post_data['user_role'] == '3'){
+			$data['reports_to_user_id'] = $post_data['rm_dd'];
+		} 
+		*/
 		$this->db->where(array('id' => $id));
 		$this->db->update('users',$data);
 	}
 	
 	public function get_details($id) {
 		return $this->db->query("SELECT * FROM `users` WHERE `status` = '1' AND `id` = '$id'")->row_array();
+	}
+	
+	public function get_employee_user_name($company_id){
+		$data = $this->db->query("SELECT company_name, company_prefix, company_code_start 
+		FROM `companies` 
+		WHERE `status` = '1' AND `id` = '$company_id'")->row_array();
+		$prefix = ($data['company_prefix']);
+		$str_length = 4; 
+		$employee_count = $this->db->query("SELECT COUNT(id) as total_employee FROM `users` WHERE `company_id` = '$company_id'")->row()->total_employee;
+		
+		$final_code = $str = substr("0000{$employee_count}", -$str_length);
+		return strtoupper($prefix).''.$final_code;
 	}
 	
 	public function delete_user($id) {
@@ -152,6 +178,23 @@ class User_model extends CI_Model {
 		$data['role'] = $role;
 		print_r($data);
 	}
+	
+	public function get_user_list_by_role($company_id, $user_role){
+		$where = array(
+			"status"=>"1",
+			"is_deleted"=>"0",
+			"user_role_id"=>$user_role,
+			"company_id"=>$company_id,
+		);
+		$this->db->where($where);	
+		$result = $this->db->get("users");
+		if($result->num_rows() > 0){
+			return $result->result_array();
+		} else {
+			return 0;
+		}
+	}
+ 
 }
 
 ?>

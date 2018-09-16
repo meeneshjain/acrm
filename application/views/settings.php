@@ -15,7 +15,7 @@
 
 <!-- END: Subheader -->
 
-<?php echo '<br>';; ?>
+<?php echo '<br>'; ?>
 <div class="m-content">
     <div class="row">
         <div class="col-lg-4">
@@ -96,6 +96,48 @@
                     <ul class="list-group">
                         <?php foreach($subscription_plan as $plans){ ?>
                             <li class="list-group-item"> <b><?php echo $plans;  ?> </b></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="flaticon-statistics"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Unit of Measure
+                            </h3>
+                            <h2 class="m-portlet__head-label m-portlet__head-label--info">
+                                <span>
+                                   UOM 
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon get_uom_list" data-toggle="modal" data-target="#uom_modal">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <ul class="list-group">
+                        <?php 
+                        if(!empty($uom_list)){
+                        foreach($uom_list as $uom){ ?>
+                            <li class="list-group-item"> <b><?php echo $uom;  ?> </b></li>
+                        <?php } 
+                        } else { ?>
+                            <li class="list-group-item"> No UOM Added Yet </b></li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -401,6 +443,76 @@
             </div> -->
             <!--end::Portlet-->
         </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="uom_modal" tabindex="-1" role="dialog" aria-labelledby="uom_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="add_edit_uom"  data-parsley-validate action="<?php echo base_url('settings/save_update_uom'); ?>">
+            <div class="modal-header">
+                <h4 class="modal-title" id="uom_modal_lable">
+                    <b>List of all UOM  </b>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 uom_loader" style="display:none">
+                    <div class="text-center">
+                        <i class="fa fa-superpowersfa-spin rem-3" ></i>
+                    </div>
+                </div>
+                <div class="col-sm-12 uom_data_grid" > 
+                    <div class="form-group m-form__group row uom_data_head">
+                        <div class="col-lg-2">
+                            <b>#</b>
+                        </div>
+                        <div class="col-lg-4">
+                            <b>Code</b>
+                        </div>
+                        <div class="col-lg-4">
+                            <b>Name</b>
+                        </div>
+                        <div class="col-lg-2">
+                            <a href="javascript:;" class="btn btn-info btn-sm add_more_uom"><i class="fa fa-plus"></i></a>
+                        </div>
+                        </div>   
+                  <div class="service_block_data">
+                      <div class="form-group m-form__group row uom_data" data-block="1" data-is_saved="0">
+                        <div class="col-lg-2">
+                            <label>
+                                1
+                            </label>
+                        </div>
+                        <div class="col-lg-4">
+                        <input type="text" id="uom_input_code_1" required value="" name="uom[1][code]" class="form-control m-input" placeholder="code">
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="text" id="uom_input_name_1" required name="uom[1][name]" value="" class="form-control m-input" placeholder="name">
+                    </div>
+                    <div class="col-lg-2">
+                            <a href="javascript:;" class="btn btn-danger btn-sm remove_current_uom"><i class="fa fa-times"></i></a>
+                        </div>
+                        
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="update_uom_btn"  class="btn btn-primary">
+                   <i class="fa fa-check"></i> Update
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-times"></i> Close
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 </div>

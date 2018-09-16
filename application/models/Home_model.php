@@ -1,19 +1,23 @@
 <?php 
 class Home_model extends CI_Model {	
 	
-	public function login_check($username,$password){
-		if($username == 'admin')
-		{
-			$raw_query = 'SELECT * FROM admin WHERE `username` = '.$this->db->escape($username).'  AND `password` = "'.md5($password).'"'; 
+	public function login_check($username,$password, $user_type){
+		$is_super_admin ="";
+		if($user_type == 'admin') {
+			$raw_query = 'SELECT * FROM admin 
+			WHERE `username` = '.$this->db->escape($username).'  AND `password` = "'.md5($password).'"'; 
+			$is_super_admin = 1;
+		} else {
+			$raw_query = 'SELECT * FROM users 
+			WHERE ((`username` = '.$this->db->escape($username).') OR (`email` = '.$this->db->escape($username).'))  
+			AND `password` = "'.$password.'"'; 
+			$is_super_admin = 0; 
 		}
-		else
-		{
-			$raw_query = 'SELECT * FROM users WHERE `username` = '.$this->db->escape($username).'  AND `password` = "'.md5($password).'"'; 
-		}
+		// print_r($raw_query); die;
 		$query = $this->db->query($raw_query);
 		if ($query->num_rows() > 0){ 
 			$row = $query->row_array(); 
-			return array("status" => 1,"row" => $row, 'is_super_admin'=> 1);
+			return array("status" => 1,"row" => $row, 'is_super_admin'=> $is_super_admin);
 		}  else {
 			return array("status"=>0);
 		}

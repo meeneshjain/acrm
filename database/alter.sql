@@ -143,3 +143,30 @@ CHANGE `group_type` `group_type` enum('SERVICE','INVENTORY') NOT NULL AFTER `des
 
 ALTER TABLE `task`
 CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
+
+-- 14-09-2018
+
+ALTER TABLE `users`
+ADD `reports_to_user_id` int(11) NOT NULL COMMENT 'team lead or RM or admin ID ' AFTER `company_id`;
+
+-- 15-09-2018
+
+ALTER TABLE `activity_logs`
+ADD `activity_for_user_id` int(11) NOT NULL AFTER `company_id`,
+ADD `activity_by_user_i` int(11) NOT NULL AFTER `activity_for_user_id`
+
+-- 16-08-2018
+
+ALTER TABLE `companies`
+CHANGE `company_name` `company_name` varchar(100) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `id`,
+ADD `company_prefix` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_name`,
+ADD `company_code_start` int NOT NULL AFTER `company_prefix`;
+
+ALTER TABLE `companies`
+CHANGE `company_code_start` `company_code_start` varchar(10) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_prefix`;
+
+ALTER TABLE `companies`
+ADD `logo` varchar(250) NOT NULL AFTER `id`;
+
+ALTER TABLE `users`
+ADD `profile_pic` varchar(500) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `password`;

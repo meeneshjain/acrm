@@ -121,3 +121,7 @@ define('SECRET_KEY',"Q29tZm9ydENhbV9hbG9lX2FwcF8yMDE3");
 // application path
 define("PLUGIN_PATH", 'application/third_party/plugins/');
 define('UPLOAD_IMAGES','uploads/images/');
+
+// default values 
+
+define("DEFAULT_IMAGE", "assets/images/no.png");

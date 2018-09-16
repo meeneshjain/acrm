@@ -59,7 +59,7 @@ function generate_strong_password($len = 8){
 	return implode('', $temp_array);
 }
 
-function check_session(){
+function check_session($user_type = NULL){
 	$obj =& get_instance();
 	if($obj->session->userdata('logged_in')==''){
 		$returnURL = "";
@@ -69,7 +69,13 @@ function check_session(){
 			$urldata =  implode("/",$urldata);
 			$returnURL = '?return_url='.$urldata;
 		} 
-		redirect("home/login".$returnURL);
+		$url = "";
+		if($user_type == ""){
+			$url = "user/login".$returnURL;
+		} else {
+			$url  = "$user_type/login".$returnURL;
+		}
+		redirect($url);
 	}
 }
 
@@ -159,6 +165,7 @@ function get_sales_stages_list($type, $selected_value = NULL){
 function get_uom_list($type, $selected_value = NULL){
 	return generate_drop_down('code', 'name', 'uom', $type,$selected_value);
 }
+
 
 function active_inactive_dp($type="html", $selectedstats = null ){
 	$array = array(
