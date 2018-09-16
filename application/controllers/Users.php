@@ -66,7 +66,7 @@ class Users extends CI_Controller {
         exit;
      }
      
-     public function get_employee_user_name($company_id){
+     public function get_employee_user_name($company_id = NULL){
           if($this->input->is_ajax_request()) {
               if(empty($company_id) && $company_id == "" && $company_id == 0){
                   $output = array("status" => "error","message" => 'Company ID missing ', "data" => "");

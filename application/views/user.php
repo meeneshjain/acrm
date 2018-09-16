@@ -220,13 +220,13 @@
                             <label>
                                 Date Of Birth
                             </label>
-                            <input type="text" id="dob" name="dob" class="form-control m-input crm_datetimepicker" placeholder="Date of Birth">
+                            <input type="text" id="dob" name="dob" readonly class="form-control m-input crm_datepicker" placeholder="Date of Birth">
                         </div>
                         <div class="col-lg-4">
                             <label>
                                 Date Of Joining
                             </label>
-                            <input type="text" id="doj" name="doj" class="form-control m-input crm_datetimepicker" placeholder="Date of Birth">
+                            <input type="text" id="doj" name="doj" readonly class="form-control m-input crm_datepicker" placeholder="Date of Joining">
                         </div>
                         <div class="col-lg-4">
                         <label > Is Active </label> <br>
