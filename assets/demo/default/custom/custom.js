@@ -123,6 +123,17 @@ $(document).ready(function () {
         });
     }
 
+    $(".crm_datepicker").datepicker({
+        todayHighlight: !0,
+        orientation: "top left",
+        templates: {
+            leftArrow: '<i class="la la-angle-left"></i>',
+            rightArrow: '<i class="la la-angle-right"></i>'
+        },
+        format: "yyyy-mm-dd",
+        autoclose: !0,
+    });
+
     $(".crm_datetimepicker").datetimepicker({
         todayHighlight: !0,
         pickerPosition: "top-left",

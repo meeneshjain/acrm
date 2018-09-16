@@ -70,6 +70,49 @@ $(document).ready(function () {
         }
     });
 
+    /* ------- MANISH CARPENTER ---------*/
+    $(document).on("click", "#update_user_profile_btn", function () {
+        var obj = $(this);
+        btn_text = obj.html();
+        if ($("#user_profile_activity_form").parsley().validate()) {
+            show_loading('#update_user_profile_btn', 'Updating..!')
+            form_submit("user_profile_activity_form",
+                function (res) {
+                    notify_alert(res.status, res.message);
+                    hide_loading('#update_user_profile_btn', btn_text);
+                    $("#user_profile_activity_form").parsley().reset();
+                    $("#user_profile_activity_form")[0].reset();
+                }, function (res) {
+                    hide_loading('#update_user_profile_btn', btn_text);
+                    notify_alert(res.status, res.message, 'Error');
+            });
+        }
+    });
+
+    $(document).on("click", "#user_setting_btn", function () {
+        var obj = $(this);
+        btn_text = obj.html();
+        if ($("#user_setting_form").parsley().validate()) {
+            show_loading('#user_setting_btn', 'Updating..!')
+            form_submit("user_setting_form",
+                function (res) {
+                    hide_loading('#user_setting_btn', btn_text);
+                    if(res.status == 'success')
+                    {
+                        $("#user_setting_form").parsley().reset();
+                        $("#user_setting_form")[0].reset();
+                    }
+                    notify_alert(res.status, res.message);
+                }, function (res) {
+                    hide_loading('#user_setting_btn', btn_text);
+                    notify_alert(res.status, res.message, 'Error');
+            });
+        }
+    });
+
+    
+    /*--------- /MANISH CARPENTER ------------*/
+
 }); // dom end 
 
 function getEmployeeCode() {
@@ -133,3 +176,33 @@ function delete_user(id) {
 
     }
 }
+
+function deleteMultiple() {
+
+    if ($(".usrchkbx:checked").length > 0) {
+        if (confirm("Are you sure, You want to delete selected user?")) {
+            idArr = [];
+            $('.usrchkbx').each(function (index, value) {
+                if (this.checked == true) {
+                    idArr.push(this.value);
+                }
+            });
+
+            call_service(base_url + "users/multiple_delete_users/?ids=" + idArr, function (response) {
+                if (response.status == 'success') {
+                    reloadTable('#user_list_dt_table');
+                    notify_alert('success', response.message, "Success")
+                } else {
+                    notify_alert('danger', response.message, "Error");
+                }
+            }, function () {
+                notify_alert('danger', response.message, "Error");
+            });
+        }
+    }
+    else {
+        notify_alert('error', 'Please select at least one company.', 'Error');
+    }
+
+}
+

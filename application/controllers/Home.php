@@ -68,7 +68,7 @@ class Home extends CI_Controller {
 			$session_data = array(
 				"is_admin"       => $login_check['is_super_admin'],
 				// "user_role"   => $login_check['row']['user_role'],
-				'full_name'      => $login_check['row']['first_name']. ' '. $login_check['row']['first_name'],
+				'full_name'      => $login_check['row']['first_name']. ' '. $login_check['row']['last_name'],
 				'user_role_id'   => (isset($login_check['row']['user_role_id']) && $login_check['row']['user_role_id']!="") ? $login_check['row']['user_role_id'] : "",
 				'company_id'     => (isset($login_check['row']['company_id']) && $login_check['row']['company_id']!="") ? $login_check['row']['company_id'] : "",
 				'email'          => $login_check['row']['username'],

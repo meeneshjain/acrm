@@ -170,3 +170,14 @@ ADD `logo` varchar(250) NOT NULL AFTER `id`;
 
 ALTER TABLE `users`
 ADD `profile_pic` varchar(500) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `password`;
+
+ALTER TABLE `companies`
+CHANGE `company_name` `company_name` varchar(100) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `id`,
+ADD `company_prefix` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_name`,
+ADD `company_code_start` int NOT NULL AFTER `company_prefix`;
+
+ALTER TABLE `companies`
+CHANGE `company_code_start` `company_code_start` varchar(10) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_prefix`;
+
+ALTER TABLE `companies`
+ADD `logo` varchar(250) NOT NULL AFTER `id`;

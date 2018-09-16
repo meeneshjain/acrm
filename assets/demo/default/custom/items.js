@@ -4,10 +4,16 @@ $(document).ready(function () {
 	 ******** ADD ITEM ********
 	*/
 	$(".item_modal_open_btn").on("click", function () {
+		$("#item_form").parsley().reset();
 		$("#item_form")[0].reset();
+		$("#item_id").val(0);
 		$("#item_modal").modal('show');
 		$(".is_gst_rate_apply").show();
+
 		$(".item_logo_src").attr('src',base_url+'assets/images/no.jpg');
+		$(".item_logo_src_value").val('assets/images/no.jpg');
+		$(".deleteImage").hide();
+
 		$("#item_form").attr('action', base_url + 'items/add_update_item')
 		$(".item_modal_heading").html('ADD NEW ITEM');
 		$("#item_action_btn").html('<i class="fa fa-save"></i> Save');
@@ -56,10 +62,21 @@ $(document).ready(function () {
 					if(res.data[0].logo != '')
 					{
 						$(".item_logo_src").attr('src',res.data[0].logo);
+						$(".item_logo_src_value").val(res.data[0].logo);
+						if(res.data[0].logo == 'assets/images/no.jpg')
+						{
+							$(".deleteImage").hide();
+						}
+						else
+						{
+							$(".deleteImage").show();
+						}
 					}
 					else
 					{
 						$(".item_logo_src").attr('src',base_url+'assets/images/no.jpg');
+						$(".item_logo_src_value").val('assets/images/no.jpg');
+						$(".deleteImage").hide();
 					}
 
 					$("#item_name").val(res.data[0].name);

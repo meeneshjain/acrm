@@ -137,10 +137,37 @@ class Users extends CI_Controller {
         die;
     }
 
+    public function multiple_delete_users(){
+        if($this->input->is_ajax_request())
+        {
+            $get_data = $this->input->get('ids', TRUE);
+            
+            if(!empty($get_data))
+            {
+                $ids = explode(',', $get_data);
+                foreach ($ids as $key => $value) 
+                {
+                    $data = $this->user_model->delete_user($value);
+                }
+                echo json_encode(array("status" => "success","message" => 'Users Deleted Successfully!!', "data" => ''));
+            }
+            else
+            {
+                echo json_encode(array("status" => "error","message" => 'Users Id doesn\'t exist.', "data" => ""));
+            }
+        }
+        else
+        {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
+    }
+
     public function user_profile()
     {
     	$companyId = $this->sessionData['company_id'];
     	$userId = $this->sessionData['logged_in'];
+
+    	//print_r($this->sessionData);
 
     	$data['page_title'] = 'User Profile';
         $data['breadcum_title'] = 'User Profile';
@@ -148,7 +175,7 @@ class Users extends CI_Controller {
         $data['load_js'] = 'user';
         $data['userdetail'] = $this->user_model->user_detail($companyId,$userId);
 
-        //$data['data_source'] = base_url('users/get_all_users');
+        $data['user_activities_data_source'] = base_url('users/get_activities');
         //$data['user_role'] = get_user_role_list('html', NULL);
         //$data['loggedin_company_id'] = $this->sessionData['company_id'];
         //$data['team_leaders'] = get_user_role_list('data', NULL);
@@ -156,7 +183,52 @@ class Users extends CI_Controller {
         $this->load->view('userprofile',$data);
         $this->load->view('include/footer');
     }
+
+    public function user_profile_update()
+    {
+    	if($this->input->is_ajax_request()) {
+
+			$id = $this->input->post('id');
+			if(is_numeric($id) && !empty($id)) {
+				$post_data = $this->input->post(NULL, TRUE);
+				$data = $this->user_model->user_profile_update($post_data,$id);
+				$output = array("status" => "success","message" => 'User Updated Successfully!!', "data" => '');
+			} else {
+				$output = array("status" => "error","message" => 'User Id doesn\'t exist.', "data" => "");
+			}
+		} else {
+			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+    }
+
+    public function change_password()
+    {
+    	if($this->input->is_ajax_request()) {
+
+			$id = $this->input->post('user_id');
+			if(is_numeric($id) && !empty($id)) {
+				$post_data = $this->input->post(NULL, TRUE);
+				$output = $this->user_model->change_password($post_data,$id);
+				//$output = array("status" => "success","message" => 'User Updated Successfully!!', "data" => '');
+			} else {
+				$output = array("status" => "error","message" => 'User Id doesn\'t exist.', "data" => "");
+			}
+		} else {
+			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+    }
      
+    public function get_activities()
+   	{
+   		$companyId = $this->sessionData['company_id'];
+    	$userId = $this->sessionData['logged_in'];
+    	$response =  $this->user_model->get_activities($companyId,$userId);
+		echo json_encode($response);
+		die;
+
+   	}
      
 }
 

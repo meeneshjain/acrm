@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                     <input type="file" id="upload_images_single" data-displayname="Item Logo"  name="..." accept="image/*"   >
-                                    <input type="hidden" name="uploaded_images" value="">
+                                    <input type="hidden" class="item_logo_src_value" name="uploaded_images" value="">
                                     
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon2">
-                                                    $
+                                                    INR
                                                 </span>
                                             </div>
                                             <input required type="text" id="itm_price1" name="price1" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price1">
