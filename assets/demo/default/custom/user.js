@@ -153,3 +153,32 @@ function delete_user(id) {
     }
 }
 
+function deleteMultiple() {
+
+    if ($(".usrchkbx:checked").length > 0) {
+        if (confirm("Are you sure, You want to delete selected user?")) {
+            idArr = [];
+            $('.usrchkbx').each(function (index, value) {
+                if (this.checked == true) {
+                    idArr.push(this.value);
+                }
+            });
+
+            call_service(base_url + "users/multiple_delete_users/?ids=" + idArr, function (response) {
+                if (response.status == 'success') {
+                    reloadTable('#user_list_dt_table');
+                    notify_alert('success', response.message, "Success")
+                } else {
+                    notify_alert('danger', response.message, "Error");
+                }
+            }, function () {
+                notify_alert('danger', response.message, "Error");
+            });
+        }
+    }
+    else {
+        notify_alert('error', 'Please select at least one company.', 'Error');
+    }
+
+}
+

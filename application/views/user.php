@@ -42,7 +42,7 @@
                                     <tr>
                                         <th class="no-sort">
                                             <label class="m-checkbox m-checkbox--state-primary">
-                                                <input type="checkbox" class="compckbxAll" onclick="checkAll('compckbxAll','compckbx')" name="">
+                                                <input type="checkbox" class="usrchkbxAll" onclick="checkAll('usrchkbxAll','usrchkbx')" name="">
                                                 <span></span>
                                             </label>
                                         </th>

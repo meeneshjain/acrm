@@ -67,7 +67,7 @@ class User_model extends CI_Model {
         	
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary">
-            <input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx">
+            <input type="checkbox" name="users" id="user_'.$aRow['id'].'" value="'.$aRow['id'].'" class="usrchkbx">
             <span></span></label>';
         
             $row[] = ($aRow['company_name']!="") ? $aRow['company_name'] : "N/A";
@@ -273,7 +273,7 @@ class User_model extends CI_Model {
             $row[] = $aRow['title'];
             $row[] = addslashes($aRow['log_msg']);
         	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
-            $row[] = '<small><i>Created By : <i class="fa fa-user"></i>'.$aRow['userfor'].'</small>';
+            $row[] = '<small><i class="fa fa-user"></i> '.$aRow['userfor'].'</small>';
 			//$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail('.$aRow['id'].')" ><i class="fa fa-edit"></i></button><button onclick="delete_user('.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>';
 
         	$output['data'][] = $row;

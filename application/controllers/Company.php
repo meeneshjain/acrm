@@ -20,10 +20,10 @@ class Company extends CI_Controller {
          $this->load->view('include/header',$data);
          $this->load->view('company',$data);
          $this->load->view('include/footer');
-	 }
+	}
 	 
-	 public function save_update($id = NULL){
-		 if($this->input->is_ajax_request())
+	public function save_update($id = NULL){
+		if($this->input->is_ajax_request())
 		{
 			if(empty($id) && $id == ""){
 				$this->company_model->insert();
@@ -37,7 +37,7 @@ class Company extends CI_Controller {
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
-	 }
+	}
 
     public function edit_detail(){
 		if($this->input->is_ajax_request())
@@ -109,5 +109,27 @@ class Company extends CI_Controller {
 		$response =  $this->company_model->companylist();
 		echo json_encode($response);
 		die;
+	}
+
+	public function check_prefix()
+	{
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->uri->segment(3);
+			$prefix = strtoupper($this->uri->segment(4));
+			$data = $this->company_model->check_prefix($prefix,$id);
+			if($data == 0)
+			{
+				echo json_encode(array("status" => "success","message" => 'Company Prefix Approved Successfully!!', "data" => ''));
+			}
+			else
+			{
+				echo json_encode(array("status" => "error","message" => 'Company Prefix exist, Please choose another', "data" => ""));
+			}
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
 	}
 }

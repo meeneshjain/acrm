@@ -79,6 +79,31 @@ class Users extends CI_Controller {
         die;
     }
 
+    public function multiple_delete_users(){
+        if($this->input->is_ajax_request())
+        {
+            $get_data = $this->input->get('ids', TRUE);
+            
+            if(!empty($get_data))
+            {
+                $ids = explode(',', $get_data);
+                foreach ($ids as $key => $value) 
+                {
+                    $data = $this->user_model->delete_user($value);
+                }
+                echo json_encode(array("status" => "success","message" => 'Users Deleted Successfully!!', "data" => ''));
+            }
+            else
+            {
+                echo json_encode(array("status" => "error","message" => 'Users Id doesn\'t exist.', "data" => ""));
+            }
+        }
+        else
+        {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
+    }
+
     public function user_profile()
     {
     	$companyId = $this->sessionData['company_id'];

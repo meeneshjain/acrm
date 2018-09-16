@@ -322,11 +322,12 @@
 					                                        <th>
 					                                           Log Message
 					                                        </th>
-					                                        <th>
-					                                            Status
-					                                        </th>
+					                                        
 					                                        <th>
 					                                            Created Date
+					                                        </th>
+					                                        <th>
+					                                            Status
 					                                        </th>
 					                                    </tr>
 					                                </thead>
@@ -342,9 +343,7 @@
 														
 													</div>
 													
-													<h5 class="m-form__heading-title">
-														Current Password
-													</h5>
+											
 
 													<div class="form-group m-form__group">
 														<label for="exampleInputEmail1">
@@ -360,9 +359,7 @@
 															<input type="password" required id="u_p_current_password" name="password" class="form-control m-input" data-parsley-required-message="" placeholder="Enter you current password">
 														</div>
 													</div>
-													<h5 class="m-form__heading-title">
-														Reset New Password
-													</h5>
+
 													<div class="form-group m-form__group">
 														<label for="exampleInputEmail1">
 															New password

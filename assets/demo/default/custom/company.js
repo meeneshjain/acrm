@@ -10,11 +10,18 @@ $(document).ready(function () {
             button_title = '<i class="fa fa-save"></i> Save';
             form_action = base_url + "company/save_update";
             $(".manager_section_block").show();
+            $("#comp_prefix").removeAttr('disabled');
+
+            $(".company_logo_src").attr('src',base_url+'assets/images/no.jpg');
+            $(".company_logo_src_value").val('assets/images/no.jpg');
+            $(".deleteImage").hide();
+
         } else if (obj.attr('data-form_type') == "edit") {
             title = "EDIT COMPANY DETAIL";
             button_title = '<i class="fa fa-save"></i> Update';
             form_action = base_url + "company/save_update/" + obj.attr('data-el_id');
             $(".manager_section_block").hide();
+            $("#comp_prefix").attr('disabled','disabled');
         }
         $('#company_form').attr('action', form_action);
         $("#add_update_company_modal_lable").html(title);
@@ -43,10 +50,36 @@ $(document).ready(function () {
                     }, 1000);
                 }, function (res) {
                     hide_loading('#save_update_button_click', '<i class="fa fa-check"></i> Save');
-                    notify_alert(res.status, res.message, 'Error')
+                    notify_alert(res.status, res.message, 'Error');
                 });
         }
     });
+
+    /* -------Check Prefix-------*/
+    $(document).on("blur","#comp_prefix",function(){
+        var company_id = $("#company_id").val();
+        var prefix = $(this).val();
+
+        var url = base_url+"company/check_prefix/"+company_id+"/"+prefix;
+        if(company_id == 0 && prefix != '')
+        {
+            $.getJSON(url,function(res){
+                if(res.status == 'success')
+                {
+                    notify_alert(res.status, res.message, 'Success');
+                    $("#comp_prefix").val(prefix.toUpperCase());
+                    $("#user_name").val(prefix.toUpperCase()+'0001');
+                }
+                else
+                {
+                    notify_alert(res.status, res.message, 'Error');
+                    $("#comp_prefix").val('');
+                    $("#comp_prefix").focus();
+                }
+            });
+        }
+    });
+
 }); // dom end 
 
 function getDetail(obj, id) {
@@ -63,6 +96,28 @@ function getDetail(obj, id) {
             $("#subscription").val(data_res.subscription);
             $("#about_company").val(data_res.about_company);
             $("#address").val(data_res.address);
+            $("#comp_prefix").val(data_res.company_prefix);
+            $("#is_active").prop("checked", ((data_res.status == 1) ? true : false));
+            
+            if(data_res.logo != '')
+            {
+                $(".company_logo_src").attr('src',data_res.logo);
+                $(".company_logo_src_value").val(data_res.logo);
+                if(data_res.logo == 'assets/images/no.jpg')
+                {
+                    $(".deleteImage").hide();
+                }
+                else
+                {
+                    $(".deleteImage").show();
+                }
+            }
+            else
+            {
+                $(".company_logo_src").attr('src',base_url+'assets/images/no.jpg');
+                $(".company_logo_src_value").val('assets/images/no.jpg');
+                $(".deleteImage").hide();
+            }
         }
     }, function (res) {
     });
@@ -83,6 +138,8 @@ function deleteCompany(obj, id) {
 
     }
 }
+
+
 
 function deleteMultiple() {
 

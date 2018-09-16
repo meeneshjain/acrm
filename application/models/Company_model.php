@@ -9,7 +9,7 @@ class Company_model extends CI_Model {
 		$dt_table = "companies as c";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'c.id', 'c.company_name', 'c.email_1', 'c.contact_1', 'c.created_date');
+		$dt_columns = array( 'c.id', 'c.logo', 'c.company_name', 'c.email_1', 'c.contact_1', 'c.created_date','c.status');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -50,7 +50,7 @@ class Company_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('status' => '1', 'is_deleted' => '0'));
+		$this->db->where(array('is_deleted' => '0'));
         // $this->db->join('project_participants as pp', 'p.id=pp.project_id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
 		// last_query(1);
@@ -68,9 +68,18 @@ class Company_model extends CI_Model {
         	
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx"><span></span></label>';
+            $imgscr = base_url('assets/images/no.jpg');
+            if(!empty($aRow['logo']))
+            {
+            	$imgscr = base_url($aRow['logo']);
+            }
+        	$row[] = '<img class="m-widget7__img" src="'.$imgscr.'" alt="" style="width:100px;height:60px">';
         	$row[] = $aRow['company_name'];
         	$row[] = $aRow['email_1'];
         	$row[] = $aRow['contact_1'];
+        	if($aRow['status'] == '0'){ 
+        		$row[] = '<span class="m-badge m-badge--danger m-badge--wide">Inactive</span>'; 
+        	}else{ $row[] = '<span class="m-badge m-badge--success m-badge--wide">Active</span>'; }
         	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
 			$row[] = '
 			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button>
@@ -85,7 +94,6 @@ class Company_model extends CI_Model {
 
     public function insert()
 	{
-
 		$userArray = array(
 			'user_role_id' => '1',
 			'email' => $this->input->post('email_address'),
@@ -104,6 +112,9 @@ class Company_model extends CI_Model {
 
 		$companyArray = array(
 			'company_name' => $this->input->post('company_name'),
+			'logo' => $this->input->post('uploaded_images'),
+			'company_prefix' => $this->input->post('company_prefix'),
+			'company_code_start' => '0001',
 			'email_1' => $this->input->post('email_1'),
 			'email_2' => $this->input->post('email_2'),
 			'contact_1	' => $this->input->post('contact_1'),
@@ -115,7 +126,7 @@ class Company_model extends CI_Model {
 			'updated_date' => DATETIME,
 			'pan_no' => DATE,
 			'gstin_no' => DATE,
-			'status' => '1',
+			'status' => (isset($_POST['status']) && $_POST['status']==1) ? 1 : 0,
 			'is_deleted' => '0'
 		);
 
@@ -128,13 +139,21 @@ class Company_model extends CI_Model {
 
 	public function edit_detail($id)
 	{
-		return $this->db->query("SELECT * FROM `companies` WHERE `status` = '1' AND `id` = '$id'")->result_array();
+		return $this->db->query("SELECT * FROM `companies` WHERE `is_deleted` = '0' AND `id` = '$id'")->result_array();
+	}
+
+	public function check_prefix($prefix,$id)
+	{
+		$query = $this->db->get_where('companies', array('company_prefix' => $prefix));
+        return $query->num_rows();
 	}
 
 	public function update_detail()
 	{
+
 		$data = array(
 			'company_name' => $this->input->post('company_name'),
+			'logo' => $this->input->post('uploaded_images'),
 			'email_1' => $this->input->post('email_1'),
 			'email_2' => $this->input->post('email_2'),
 			'contact_1' => $this->input->post('contact_1'),
@@ -144,6 +163,7 @@ class Company_model extends CI_Model {
 			'address' => $this->input->post('address'),
 			'subscription' => $this->input->post('subscription'),
 			'subscription' => $this->input->post('subscription'),
+			'status' => (isset($_POST['status']) && $_POST['status']==1) ? 1 : 0,
 			'updated_date' => DATETIME,
 
 		);

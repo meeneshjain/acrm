@@ -91,6 +91,9 @@
         											<th class="no-sort">
         												<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" class="compckbxAll" onclick="checkAll('compckbxAll','compckbx')" name=""><span></span></label>
         											</th>
+                                                    <th>
+                                                        Logo
+                                                    </th>
         											<th>
         												Company Name
         											</th>
@@ -100,6 +103,9 @@
         											<th>
         												Contact
         											</th>
+                                                    <th>
+                                                        Status
+                                                    </th>
                                                     <th>
                                                         Create Date
                                                     </th>
@@ -142,14 +148,14 @@
                                             <div class="col-sm-4 col-md-3 col-lg-2">
                                             <div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
-                                                <img data-folder_name="company" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" style="max-width: 220px;" >
+                                                <img data-folder_name="company" class="company_logo_src" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" style="max-width: 220px;" >
                                                 </div>
                                                 <a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
                                             </div>
                                             </div>
                                             <div class="col-sm-12">
                                             <input type="file" id="upload_images_single" data-displayname="Choose Logo"  name="..." accept="image/*"   >
-                                            <input type="hidden" name="uploaded_images" value="">
+                                            <input type="hidden" class="company_logo_src_value" name="uploaded_images" value="">
                                             
                                             </div>
                                         </div>
@@ -211,19 +217,38 @@
                                     
                                     <div class="form-group m-form__group row">
                                         
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <label>
                                                 Another Email:
                                             </label>
                                             <input type="email" id="email_2" name="email_2" data-parsley-required-message="Enter A Valid Email Address" class="form-control m-input" placeholder="Enter your another email">
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <label>
                                                 Another Contact:
                                             </label>
                                             <input type="text" id="contact_2" name="contact_2" class="form-control m-input only_number" placeholder="Enter contact number">
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
+                                            <label > Active/Deactive </label> <br>
+                                            <span class="m-switch m-switch--icon">
+                                                <label>
+                                                    <input type="checkbox" id="is_active" name="status" value="1">
+                                                    <span></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label>
+                                                Prefix <a class="btn btn-warning m-btn m-btn--icon btn-sm m-btn--icon-only  m-btn--pill m-btn--air" style="width: 15px;height: 15px" data-container="body" data-toggle="m-popover" data-placement="left" data-content="Please choose Unique Prefix and use only 3 Letter."><i class="fa flaticon-questions-circular-button" style="font-size: 0.8rem"></i></a>
+                                            </label>
+                                            <input type="text" required id="comp_prefix" name="company_prefix" data-parsley-required-message="" minlength="3" maxlength="3" class="form-control m-input" placeholder="Ex. ABC">
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-lg-12">
                                             <label>
                                                 Address:
                                             </label>
@@ -267,7 +292,7 @@
                                                 <label>
                                                    User Name
                                                 </label>
-                                                <input required type="text" id="user_name" name="user_name" class="form-control m-input" placeholder="Enter User Name">
+                                                <input readonly required type="text" id="user_name" name="user_name" class="form-control m-input" placeholder="Enter User Name">
                                             </div>
                                             <div class="col-lg-4">
                                                 <label>
