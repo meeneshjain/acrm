@@ -10,7 +10,7 @@ class Home_model extends CI_Model {
 		} else {
 			$raw_query = 'SELECT * FROM users 
 			WHERE ((`username` = '.$this->db->escape($username).') OR (`email` = '.$this->db->escape($username).'))  
-			AND `password` = "'.$password.'"'; 
+			AND `password` = "'.md5($password).'"'; 
 			$is_super_admin = 0; 
 		}
 		// print_r($raw_query); die;

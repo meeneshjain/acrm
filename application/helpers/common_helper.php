@@ -219,10 +219,14 @@ function load_required_js($page_name){
 		"company" => array('company.js'),
 		"user" => array('user.js'),
 		"items" => array('items.js'),
+		"account" => array('account.js'),
 		
 	);
 	return $js_list[$page_name];
 }
 
+function convert_db_date_time($date){
+	return date(DISPLAY_FORMAT,strtotime($date));
+}
 
 ?>

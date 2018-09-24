@@ -1004,6 +1004,20 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
+
+
+                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "account")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('account');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Account
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
 							
 							<!-- <li class="m-menu__section ">
 								<h4 class="m-menu__section-text">
