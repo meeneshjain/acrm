@@ -320,7 +320,6 @@ $(document).ready(function () {
 					$(res.data).each(function (index, value) {
 						html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
 							<small class="pull-right">\
-								<i class="fa fa-eye text-success meeting_detail" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
 								<i class="fa fa-edit text-info meeting_edit" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
 								<i class="fa fa-trash text-danger meeting_delete" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;&nbsp;&nbsp;\
 							</small>\
@@ -408,6 +407,7 @@ $(document).ready(function(){
 						checked = 'checked';
 					}
 					html += '<div class="m-widget2__item m-widget2__item--'+color[i]+'">\
+							<span class="pull-right"><i class="fa fa-trash text-danger task_delete_btn" data-delete-id="'+res.data[index].id+'"></i></span>\
 							<div class="m-widget2__checkbox">\
 							<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--'+color[i]+'">\
 							<input type="checkbox" '+checked+' class="mark_task_complete" data-mark-status="'+res.data[index].complete+'" data-task-id='+res.data[index].id+'>\
@@ -420,33 +420,6 @@ $(document).ready(function(){
 							<span class="m-widget2__user-name">\
 							<a href="#" class="m-widget2__link">'+res.data[index].description+'<br><span class="m--font-info"><i>Created On : '+res.data[index].created_date+'</i></span></a>\
 							</span>\
-							</div>\
-							<div class="m-widget2__actions">\
-							<div class="m-widget2__actions-nav">\
-							<div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover">\
-							<a href="#" class="m-dropdown__toggle">\
-							<i class="la la-ellipsis-h"></i>\
-							</a>\
-							<div class="m-dropdown__wrapper">\
-							<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>\
-							<div class="m-dropdown__inner">\
-							<div class="m-dropdown__body">\
-							<div class="m-dropdown__content">\
-							<ul class="m-nav">\
-							<li class="m-nav__item task_delete_btn" data-delete-id="'+res.data[index].id+'">\
-							<a class="m-nav__link">\
-							<i class="m-nav__link-icon fa fa-trash"></i>\
-							<span class="m-nav__link-text">\
-							Delete\
-							</span>\
-							</a>\
-							</li>\
-							</ul>\
-							</div>\
-							</div>\
-							</div>\
-							</div>\
-							</div>\
 							</div>\
 							</div>\
 							</div>';
@@ -479,32 +452,27 @@ $(document).ready(function(){
 			var alertmsg = "Mark as Uncomplete?";
 			status = 0;
 		}
-		if (confirm(alertmsg)) {
-			call_service(base_url + "schedule/mark_task_complete/"+ id+"/"+status, function (response) {
-				if (response.status == 'success') {
-					if(status == 1)
-					{
-						$("#tsk_cmplt_id"+id).addClass('task_completed');
-						obj.attr('data-mark-status','1');
-					}
-					else
-					{
-						$("#tsk_cmplt_id"+id).removeClass('task_completed');
-						obj.attr('data-mark-status','0');						
-					}
-					notify_alert('success', response.message, "Success");
-				} else {
-					notify_alert('danger', response.message, "Error");
+		
+		call_service(base_url + "schedule/mark_task_complete/"+ id+"/"+status, function (response) {
+			if (response.status == 'success') {
+				if(status == 1)
+				{
+					$("#tsk_cmplt_id"+id).addClass('task_completed');
+					obj.attr('data-mark-status','1');
 				}
-			}, function (response) {
+				else
+				{
+					$("#tsk_cmplt_id"+id).removeClass('task_completed');
+					obj.attr('data-mark-status','0');						
+				}
+				notify_alert('success', response.message, "Success");
+			} else {
 				notify_alert('danger', response.message, "Error");
-			});
+			}
+		}, function (response) {
+			notify_alert('danger', response.message, "Error");
+		});
 
-		}
-		else
-		{
-			obj.prop('checked',false);
-		}
 	});
 
 	

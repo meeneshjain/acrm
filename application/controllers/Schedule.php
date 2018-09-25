@@ -213,7 +213,8 @@ class Schedule extends CI_Controller {
 			foreach ($response as $key => $value) 
 			{
 				$response[$key]->showtime = date('h:i',strtotime($value->start_datetime));
-				$response[$key]->showdate = date('h:i A N, F d, Y',strtotime($value->start_datetime));
+				$response[$key]->showdate = date('l, F d, Y',strtotime($value->start_datetime));
+				$response[$key]->description = truncated_string($value->description,100);
 			}
 			echo json_encode(array("status" => "success","message" => '', "data" => $response));
 		}

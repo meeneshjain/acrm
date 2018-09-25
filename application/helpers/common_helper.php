@@ -234,4 +234,13 @@ function convert_db_date_time($date){
 	return date(DISPLAY_FORMAT,strtotime($date));
 }
 
+function truncated_string($string,$len) {
+ if(strlen($string)>$len) {
+  $new = substr($string, 0,$len);
+  $new .= ". . ."; 
+ } else {
+  $new = $string; 
+ }
+ return $new;
+}
 ?>
