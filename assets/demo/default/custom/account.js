@@ -120,18 +120,16 @@ $(document).ready(function () {
 		}
 	});
 
-	/*
-	 ****** CHECK ACCOUNT WITH SAME EMAIL AND NUMBER *******
-	*/
 
-	$("#acnt_email,#acnt_contact").blur(function(){
+
+	/*$("#acnt_email,#acnt_contact").blur(function(){
 
 		var id = $("#acnt_id").val();
 		var email = $("#acnt_email").val();
 		var number = $("#acnt_contact").val();
 
 
-		var data = {"id":id,"email":email,"contact":number};
+		var data = {"id":id,"column":searchWith,"contact":number};
 		if(email != '' && number != '')
 		{
 			$(".checkduplicateaccount").html(' <i class="fa fa-spinner fa-spin"></i> Please wait checking account..');
@@ -155,6 +153,40 @@ $(document).ready(function () {
 	    			}
 			}, 'JSON');
 		}
-	});
+	});*/
 
 });
+
+	/*
+	 ****** CHECK ACCOUNT WITH SAME EMAIL AND NUMBER *******
+	*/
+
+	function checkDuplicate(obj,column)
+	{
+		var id = $("#acnt_id").val();
+		var searchValue = $(obj).val();
+		var data = {"id":id,"column":column,"value":searchValue};
+
+		if(searchValue != '')
+		{
+			$(".checkduplicateaccount").html(' <i class="fa fa-spinner fa-spin"></i> Please wait checking account..');
+			$.post(
+					base_url+"account/checkDuplicate",
+					data,
+					function(response) {
+	    			if(response.status == 'success'){
+	    				$(".checkduplicateaccount").html('<i class="fa fa-check"></i> Account Verified!!');
+	    				$(".checkduplicateaccount").removeClass('text-danger');
+	    				$(".checkduplicateaccount").addClass('text-success');
+	    				$(".checkduplicateaccount").show().fadeOut(10000);
+	    			}
+	    			if(response.status == 'error'){
+	    				$(".checkduplicateaccount").html('<i class="fa fa-warning"></i>'+response.message);
+	    				$(".checkduplicateaccount").removeClass('text-success');
+	    				$(".checkduplicateaccount").addClass('text-danger');
+	    				$(".checkduplicateaccount").show().fadeOut(10000);
+	    				$(obj).val('').focus();
+	    			}
+			}, 'JSON');
+		}
+	}

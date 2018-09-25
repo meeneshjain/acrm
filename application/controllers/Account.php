@@ -160,14 +160,16 @@ class Account extends CI_Controller {
             //print_r($_POST);die;
             $companyId = $this->sessionData['company_id'];
             $id = $this->input->post('id');
-            $email = $this->input->post('email');
-            $contact = $this->input->post('contact');
+            $column = $this->input->post('column');
+            $value = $this->input->post('value');
+            $msg = explode("_", $column);
+
             if(!empty($id))
             {
-                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `id` != '$id' AND `email_1` = '$email' AND `contact_no_1` = '$contact'");
+                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `id` != '$id' AND `$column` = '$value'");
                 if(!empty($data))
                 {
-                    echo json_encode(array("status" => "error","message" => $email.' & '.$contact.' Already Exist please choose another', "data" => ""));
+                    echo json_encode(array("status" => "error","message" => 'Account already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
 
                 }
                 else
@@ -177,10 +179,10 @@ class Account extends CI_Controller {
             }
             else
             {
-                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `email_1` = '$email' AND `contact_no_1` = '$contact'");
+                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `$column` = '$value'");
                 if(!empty($data))
                 {
-                    echo json_encode(array("status" => "error","message" => $email.' & '.$contact.' Already Exist please choose another', "data" => ""));
+                    echo json_encode(array("status" => "error","message" => 'Account already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
                 }
                 else
                 {

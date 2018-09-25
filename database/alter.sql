@@ -185,3 +185,6 @@ ADD `logo` varchar(250) NOT NULL AFTER `id`;
 ALTER TABLE `account`
 ADD `email_1` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `address`,
 ADD `email_2` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_1`;
+
+ALTER TABLE `account`
+CHANGE `code` `account_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_id`;

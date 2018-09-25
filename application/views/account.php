@@ -131,13 +131,13 @@
                                 <label>
                                     Contact
                                 </label>
-                                <input type="text" required id="acnt_contact" name="contact_no_1" class="form-control m-input onlynumber" data-parsley-type="digits" placeholder="Enter Contact number">
+                                <input type="text" required id="acnt_contact"  name="contact_no_1" class="form-control m-input onlynumber" onblur="checkDuplicate(this,'contact_no_1')" data-parsley-type="digits" placeholder="Enter Contact number">
                             </div>
                             <div class="col-lg-6">
                                 <label>
                                     Eamil Address
                                 </label>
-                                <input type="text" required id="acnt_email" name="email_1" class="form-control m-input" placeholder="Enter email address">
+                                <input type="text" required id="acnt_email"  name="email_1" class="form-control m-input" onblur="checkDuplicate(this,'email_1')" placeholder="Enter email address">
                             </div>
                         </div>
 

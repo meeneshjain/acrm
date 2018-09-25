@@ -98,8 +98,15 @@ class Schedule extends CI_Controller {
     }
 
 	public function get_notes(){
-		$response =  $this->common_model->getdata($selected = false, 'notes', $where = false, $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
-		echo json_encode(array("status" => "success","message" => '', "data" => $response));
+		$response =  $this->common_model->getdata($selected = false, 'notes', $where = array('is_deleted' => 0), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
+		if(!empty($response))
+		{		
+			echo json_encode(array("status" => "success","message" => '', "data" => $response));
+		}
+		else
+		{
+			echo json_encode(array("status" => "success","message" => '', "data" => ''));
+		}
 		die;
 	}
 
@@ -199,9 +206,21 @@ class Schedule extends CI_Controller {
     }
 
 	public function get_meeting(){
-		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = false, $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
-		echo json_encode(array("status" => "success","message" => '', "data" => $response));
-		die;
+		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		
+		if(!empty($response))
+		{		
+			foreach ($response as $key => $value) 
+			{
+				$response[$key]->showtime = date('h:i',strtotime($value->start_datetime));
+				$response[$key]->showdate = date('h:i A N, F d, Y',strtotime($value->start_datetime));
+			}
+			echo json_encode(array("status" => "success","message" => '', "data" => $response));
+		}
+		else
+		{
+			echo json_encode(array("status" => "success","message" => '', "data" => ''));
+		}
 	}
 
 	/* TASK CODE GOES HERE */
@@ -228,7 +247,15 @@ class Schedule extends CI_Controller {
 	
 	public function get_task(){
 		$response =  $this->common_model->getdata($selected = false, 'task', $where = array('status' => '1','is_deleted' => '0'), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
-		echo json_encode(array("status" => "success","message" => '', "data" => $response));
+
+		if(!empty($response))
+		{		
+			echo json_encode(array("status" => "success","message" => '', "data" => $response));
+		}
+		else
+		{
+			echo json_encode(array("status" => "success","message" => '', "data" => ''));
+		}
 		die;
 	}
 

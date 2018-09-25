@@ -123,54 +123,61 @@ $(document).ready(function () {
 		call_service(base_url + 'schedule/get_notes', function (res) {
 			if (res.status == 'success') {
 				var html = '';
-				$(res.data).each(function (index, value) {
-					html += '<div class="cust_notes m-portlet m-portlet--skin-dark m-portlet--bordered-semi ' + res.data[index].color + ' custom_portlet"  data-status="0">\
-							<div class="m-portlet__head">\
-								<div class="m-portlet__head-caption">\
-									<div class="m-portlet__head-title">\
-										<span class="m-portlet__head-icon">\
-											<i class="flaticon-statistics"></i>\
-										</span>\
-										<h3 class="m-portlet__head-text">'+ res.data[index].subject + '</h3>\
-									</div>\
-								</div>\
-								<div class="m-portlet__head-tools">\
-									<ul class="m-portlet__nav">\
-										<li class="m-portlet__nav-item">\
-											<a data-notes-id="'+ res.data[index].id + '" class="notes_delete m-portlet__nav-link m-portlet__nav-link--icon">\
-												<i class="fa fa-trash"></i>\
-											</a>\
-										</li>\
-										<li class="m-portlet__nav-item">\
-											<a data-notes-id="'+ res.data[index].id + '" class="notes_edit m-portlet__nav-link m-portlet__nav-link--icon">\
-												<i class="fa fa-edit"></i>\
-											</a>\
-										</li>\
-										<li class="m-portlet__nav-item">\
-										<a  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_note_portlet_toggle">\
-											<i class="la la-angle-down"></i>\
-										</a>\
-									</li>\
-									</ul>\
-								</div>\
-							</div>\
-							<div class="m-portlet__body" style="display:none">'+ res.data[index].message + '</div>\
-							<div class="m-portlet__foot cust_notes_foot text-white" style="display:none">\
-								<div class="row">\
-									<div class="col-sm-6 ">\
-										<div class="pull-left text-sm">\
-											<em>Edited By : Meenesh</em>\
+				if(res.data != '')
+				{
+					$(res.data).each(function (index, value) {
+						html += '<div class="cust_notes m-portlet m-portlet--skin-dark m-portlet--bordered-semi ' + res.data[index].color + ' custom_portlet"  data-status="0">\
+								<div class="m-portlet__head">\
+									<div class="m-portlet__head-caption">\
+										<div class="m-portlet__head-title">\
+											<span class="m-portlet__head-icon">\
+												<i class="flaticon-statistics"></i>\
+											</span>\
+											<h3 class="m-portlet__head-text">'+ res.data[index].subject + '</h3>\
 										</div>\
 									</div>\
-									<div class="col-sm-6">\
-										<div class="pull-right text-sm">\
-											<em>Created On : '+ res.data[index].created_date + '</em>\
+									<div class="m-portlet__head-tools">\
+										<ul class="m-portlet__nav">\
+											<li class="m-portlet__nav-item">\
+												<a data-notes-id="'+ res.data[index].id + '" class="notes_delete m-portlet__nav-link m-portlet__nav-link--icon">\
+													<i class="fa fa-trash"></i>\
+												</a>\
+											</li>\
+											<li class="m-portlet__nav-item">\
+												<a data-notes-id="'+ res.data[index].id + '" class="notes_edit m-portlet__nav-link m-portlet__nav-link--icon">\
+													<i class="fa fa-edit"></i>\
+												</a>\
+											</li>\
+											<li class="m-portlet__nav-item">\
+											<a  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_note_portlet_toggle">\
+												<i class="la la-angle-down"></i>\
+											</a>\
+										</li>\
+										</ul>\
+									</div>\
+								</div>\
+								<div class="m-portlet__body" style="display:none">'+ res.data[index].message + '</div>\
+								<div class="m-portlet__foot cust_notes_foot text-white" style="display:none">\
+									<div class="row">\
+										<div class="col-sm-6 ">\
+											<div class="pull-left text-sm">\
+												<em>Edited By : Meenesh</em>\
+											</div>\
+										</div>\
+										<div class="col-sm-6">\
+											<div class="pull-right text-sm">\
+												<em>Created On : '+ res.data[index].created_date + '</em>\
+											</div>\
 										</div>\
 									</div>\
 								</div>\
-							</div>\
-						</div>';
-				});
+							</div>';
+					});
+				}	
+				else
+				{
+					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No notes added yet!!</div>';
+				}
 				$('.custom_notes_portlet_container').html(html);
 			}
 		}, function (res) {
@@ -218,6 +225,7 @@ $(document).ready(function () {
 	$(".meeting_modal_open_btn").on("click", function () {
 		$("#meeting_form")[0].reset();
 		$("#meeting_modal").modal('show');
+		$("#meeting_invitees").val('').trigger('change');
 		$("#meeting_form").attr('action', base_url + 'schedule/add_meeting')
 		$(".meeting_modal_heading").html('ADD NEW MEETING');
 		$("#meeting_action_btn").html('<i class="fa fa-save"></i> Save');
@@ -307,54 +315,35 @@ $(document).ready(function () {
 		call_service(base_url + 'schedule/get_meeting', function (res) {
 			if (res.status == 'success') {
 				var html = '';
-				$(res.data).each(function (index, value) {
-					html += '<div class="cust_meeting m-portlet m-portlet--skin-dark m-portlet--bordered-semi ' + res.data[index].color + ' custom_portlet"  data-status="0">\
-							<div class="m-portlet__head">\
-								<div class="m-portlet__head-caption">\
-									<div class="m-portlet__head-title">\
-										<span class="m-portlet__head-icon">\
-											<i class="flaticon-statistics"></i>\
-										</span>\
-										<h3 class="m-portlet__head-text">'+ res.data[index].subject + '</h3>\
-									</div>\
-								</div>\
-								<div class="m-portlet__head-tools">\
-									<ul class="m-portlet__nav">\
-										<li class="m-portlet__nav-item">\
-											<a data-meeting-id="'+ res.data[index].id + '" class="meeting_delete m-portlet__nav-link m-portlet__nav-link--icon">\
-												<i class="fa fa-trash"></i>\
-											</a>\
-										</li>\
-										<li class="m-portlet__nav-item">\
-											<a data-meeting-id="'+ res.data[index].id + '" class="meeting_edit m-portlet__nav-link m-portlet__nav-link--icon">\
-												<i class="fa fa-edit"></i>\
-											</a>\
-										</li>\
-										<li class="m-portlet__nav-item">\
-										<a  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon custom_meeting_portlet_toggle">\
-											<i class="la la-angle-down"></i>\
-										</a>\
-									</li>\
-									</ul>\
-								</div>\
-							</div>\
-							<div class="m-portlet__body" style="display:none">'+ res.data[index].description + '</div>\
-							<div class="m-portlet__foot cust_meeting_foot text-white" style="display:none">\
-								<div class="row">\
-									<div class="col-sm-6 ">\
-										<div class="pull-left text-sm">\
-											<em>Edited By : Meenesh</em>\
-										</div>\
-									</div>\
-									<div class="col-sm-6">\
-										<div class="pull-right text-sm">\
-											<em>Created On : '+ res.data[index].created_date + '</em>\
-										</div>\
-									</div>\
+				if(res.data != '')
+				{
+					$(res.data).each(function (index, value) {
+						html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
+							<small class="pull-right">\
+								<i class="fa fa-eye text-success meeting_detail" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
+								<i class="fa fa-edit text-info meeting_edit" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
+								<i class="fa fa-trash text-danger meeting_delete" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;&nbsp;&nbsp;\
+							</small>\
+							<span class="m-timeline-3__item-time">\
+								<small>'+ res.data[index].showtime + '</small>\
+							</span>\
+							<div class="m-timeline-3__item-desc">\
+								<span class="m-timeline-3__item-text">'+ res.data[index].subject + '</span>	\
+								<br>\
+								<span class="m-timeline-3__item-user-name">\
+									<a class="m-link m-link--metal m-timeline-3__item-link">'+ res.data[index].description + '</a>\
+								</span>\
+								<div>\
+									<small class="text-info"><i class="fa fa-clock-o"></i> '+ res.data[index].showdate + '</small>\
 								</div>\
 							</div>\
 						</div>';
-				});
+					});
+				}
+				else
+				{
+					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No meetings added yet!!</div>';
+				}
 				$('.custom_meeting_portlet_container').html(html);
 			}
 		}, function (res) {
@@ -408,6 +397,8 @@ $(document).ready(function(){
 				var i = 0;
 
 				var color = ['primary', 'warning', 'brand', 'success', 'danger', 'info'];
+				if(res.data != "")
+				{
 				$(res.data).each(function (index, value) {
 					var complete = '';
 					var checked = '';
@@ -462,7 +453,12 @@ $(document).ready(function(){
 						i++;
 						if(i == 5){ i = 0; }
 				});
-				$('.custom_task_portlet_container').html(html);
+				}
+				else
+				{
+					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No task added yet!!</div>';
+				}
+				$('.custom_task_portlet_container').html(html+'<br><br>');
 			}
 		}, function (res) {
 			notify_alert('error', res.message, "Error");
