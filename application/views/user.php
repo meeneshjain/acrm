@@ -144,7 +144,7 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="form-group m-form__group row">
-                            <div class="col-lg-6">
+                                <div class="col-lg-6">
                                     <label>
                                         Designation
                                     </label>

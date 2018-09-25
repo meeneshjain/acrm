@@ -54,7 +54,7 @@ $(document).ready(function () {
 				if (res.status == 'success') {
 					$("#item_modal").modal('show');
 					$("#item_form").attr('action', base_url + 'items/add_update_item')
-					$(".item_modal_heading").html('EDIT NEW ITEM');
+					$(".item_modal_heading").html('EDIT ITEM DETAILS');
 					$("#item_action_btn").html('<i class="fa fa-save"></i> Update');
 
 					$("#item_id").val(res.data[0].id);
