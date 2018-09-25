@@ -66,8 +66,8 @@ $(document).ready(function () {
         block_count++;
         var output = `<tr class="item_list_data" data-is_saved="0">
             <td><div class="form-control m-input" >`+ block_count + `</div></td>
-            <td> <input type="text" id="item_code+`+ block_count + `" name="item_detail[` + block_count + `][item_code]" class="form-control m-input" placeholder="Item Code"> </td>
-            <td><input type="text" id="item_name+`+ block_count + `" name="item_detail[` + block_count + `][item_name]" class="form-control m-input" placeholder="Item Name"></td>
+            <td> <input type="text" required id="item_code+`+ block_count + `" name="item_detail[` + block_count + `][item_code]" class="form-control m-input" placeholder="Item Code"> </td>
+            <td><input type="text" required id="item_name+`+ block_count + `" name="item_detail[` + block_count + `][item_name]" class="form-control m-input" placeholder="Item Name"></td>
             <td><input type="text" id="quantity+`+ block_count + `" name="item_detail[` + block_count + `][quantity]" class="form-control m-input" placeholder="Quantity">
             </td>
             <td><input type="text" id="price+`+ block_count + `" name="item_detail[` + block_count + `][price]" class="form-control m-input" placeholder="Price">

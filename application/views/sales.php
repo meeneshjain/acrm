@@ -110,7 +110,7 @@
                             <div class="col-lg-2"></div>
                             <label class="text-left col-lg-2 col-form-label">   Document Number  </label>
                             <div class="col-lg-3 pull-right">
-                                    <input type="text" id="doc_number" readonly name="doc_number" class="form-control m-input" placeholder="Enter Document Number">
+                                    <input type="text" id="doc_number" required readonly name="doc_number" class="form-control m-input" placeholder="Enter Document Number">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                     <hr>  
-                    <div class="">
+                    <div class="table table-responsive">
                         <table class="table m-table m-table--head-bg-success table-sm">
                         <thead>
                             <tr>
@@ -238,10 +238,10 @@
                                 <div class="form-control m-input" >1</div>
                             </td>
                             <td>
-                                <input type="text" id="item_code" name="item_detail[1][item_code]" class="form-control m-input" placeholder="Item Code">
+                                <input type="text" id="item_code" name="item_detail[1][item_code]" required class="form-control m-input" placeholder="Item Code">
                             </td>
                             <td>
-                                <input type="text" id="item_name" name="item_detail[1][item_name]" class="form-control m-input" placeholder="Item Name">
+                                <input type="text" id="item_name" name="item_detail[1][item_name]" required class="form-control m-input" placeholder="Item Name">
                             </td>
                             <td>
                                 <input type="text" id="quantity" name="item_detail[1][quantity]" class="form-control m-input" placeholder="Quantity">
