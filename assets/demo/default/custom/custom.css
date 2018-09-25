@@ -9,6 +9,11 @@
     width:95%
 }
 
+.modal-mlg{
+    max-width: 100%;
+    width:80%
+}
+
 .m-quick-sidebar {
     padding: 3px 15px 7px 10px !important;
 }

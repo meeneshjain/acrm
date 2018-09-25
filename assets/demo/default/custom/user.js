@@ -85,7 +85,7 @@ $(document).ready(function () {
                 }, function (res) {
                     hide_loading('#update_user_profile_btn', btn_text);
                     notify_alert(res.status, res.message, 'Error');
-            });
+                });
         }
     });
 
@@ -97,8 +97,7 @@ $(document).ready(function () {
             form_submit("user_setting_form",
                 function (res) {
                     hide_loading('#user_setting_btn', btn_text);
-                    if(res.status == 'success')
-                    {
+                    if (res.status == 'success') {
                         $("#user_setting_form").parsley().reset();
                         $("#user_setting_form")[0].reset();
                     }
@@ -106,11 +105,11 @@ $(document).ready(function () {
                 }, function (res) {
                     hide_loading('#user_setting_btn', btn_text);
                     notify_alert(res.status, res.message, 'Error');
-            });
+                });
         }
     });
 
-    
+
     /*--------- /MANISH CARPENTER ------------*/
 
 }); // dom end 
@@ -122,7 +121,6 @@ function getEmployeeCode() {
             $("#username").val(employee_code);
         }
     }, function (res) {
-
     });
 }
 

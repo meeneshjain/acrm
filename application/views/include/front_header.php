@@ -28,7 +28,7 @@
 		
 		<link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
 		<!--end::Base Styles -->
-		<link rel="shortcut icon" href="<?php echo base_url('assets/demo/default/media/img/logo/favicon.ico'); ?>" />
+		<link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png'); ?>" />
 		<script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js'); ?>"></script>
 		<script>
 			var base_url = '<?php echo base_url(); ?>';

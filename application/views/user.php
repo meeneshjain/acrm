@@ -121,9 +121,7 @@
                                 </select>
                             </div>
                         </div>
-                       
                     </div>
-                        
                     <h5 class="m-section__heading">User Details </h5>
                     <div class="row">
                     <div class="col-lg-4">

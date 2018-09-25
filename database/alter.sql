@@ -181,3 +181,131 @@ CHANGE `company_code_start` `company_code_start` varchar(10) COLLATE 'latin1_swe
 
 ALTER TABLE `companies`
 ADD `logo` varchar(250) NOT NULL AFTER `id`;
+
+-- 22 - 09 - 2018
+
+CREATE TABLE `sales_order_quote` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `sales_quotation_id` int NOT NULL,
+  `revision_id` varchar(150) NOT NULL,
+  `account_id` int NOT NULL,
+  `account_name` varchar(200) NOT NULL,
+  `doc_no` varchar(100) NOT NULL,
+  `doc_date` datetime NOT NULL,
+  `delivery_date` datetime NOT NULL,
+  `valid_till` datetime NOT NULL,
+  `remarks` text NOT NULL,
+  `pan_card_no` varchar(50) NOT NULL,
+  `pay_terms` text NOT NULL,
+  `delivery_address` text NOT NULL,
+  `gst_no.` varchar(50) NOT NULL,
+  `total_amount` varchar(50) NOT NULL,
+  `discount` varchar(50) NOT NULL,
+  `actual_total` varchar(50) NOT NULL,
+  `stages` varchar(50) NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_by` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+--
+ALTER TABLE `sales_order_quote`
+RENAME TO `sales_order`;
+
+
+
+CREATE TABLE `sales_quotation` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `revision_id` varchar(150) NOT NULL,
+  `account_id` int NOT NULL,
+  `account_name` varchar(200) NOT NULL,
+  `doc_no` varchar(100) NOT NULL,
+  `doc_date` datetime NOT NULL,
+  `delivery_date` datetime NOT NULL,
+  `valid_till` datetime NOT NULL,
+  `remarks` text NOT NULL,
+  `pan_card_no` varchar(50) NOT NULL,
+  `pay_terms` text NOT NULL,
+  `delivery_address` text NOT NULL,
+  `gst_no.` varchar(50) NOT NULL,
+  `total_amount` varchar(50) NOT NULL,
+  `discount` varchar(50) NOT NULL,
+  `actual_total` varchar(50) NOT NULL,
+  `stages` varchar(50) NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_by` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+CREATE TABLE `sales_quotation_revisions` (
+  `id` int NOT NULL,
+  `sales_quotation_id` int(11) NOT NULL,
+  `revision_no` int NOT NULL,
+  `revision_amount` int NOT NULL,
+  `status` int NOT NULL,
+  `is_deleted` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  FOREIGN KEY (`sales_quotation_id`) REFERENCES `sales_quotation` (`id`)
+);
+
+CREATE TABLE `sales_quotation_details` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `sales_quotation_id` int NOT NULL,
+  `item_id` int NOT NULL,
+  `item_code` varchar(100) NOT NULL,
+  `item_name` varchar(200) NOT NULL,
+  `quantity` int NOT NULL,
+  `price` double NOT NULL,
+  `discount` varchar(20) NOT NULL,
+  `after_discount` varchar(20) NOT NULL,
+  `tax_code` varchar(50) NOT NULL,
+  `tax_amount` varchar(20) NOT NULL,
+  `total` varchar(50) NOT NULL,
+  `delivery_date` datetime NOT NULL,
+  `remark` text NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `updated_by` int NOT NULL
+);
+
+CREATE TABLE `sales_order_details` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `sales_order_id` int NOT NULL,
+  `item_id` int NOT NULL,
+  `item_code` varchar(100) NOT NULL,
+  `item_name` varchar(200) NOT NULL,
+  `quantity` int NOT NULL,
+  `price` double NOT NULL,
+  `discount` varchar(20) NOT NULL,
+  `after_discount` varchar(20) NOT NULL,
+  `tax_code` varchar(50) NOT NULL,
+  `tax_amount` varchar(20) NOT NULL,
+  `total` varchar(50) NOT NULL,
+  `delivery_date` datetime NOT NULL,
+  `remark` text NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `updated_by` int NOT NULL
+);
+
+ALTER TABLE `account`
+CHANGE `code` `account_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_id`;

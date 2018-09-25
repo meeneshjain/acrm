@@ -35,7 +35,7 @@ sessionStorage.fonts = true;
 <link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
 <!--end::Base Styles -->
-<link rel="shortcut icon" href="<?php echo base_url('assets/demo/default/media/img/logo/favicon.ico'); ?>" />
+<link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png'); ?>" />
 </head>
 <!-- end::Head -->
 <!-- end::Body -->
@@ -1004,6 +1004,31 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
+                             <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_quotation")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('sales/quotation');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Sales Quotation 
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                             <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_order")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('sales/order');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Sales Order 
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                           
 							
 							<!-- <li class="m-menu__section ">
 								<h4 class="m-menu__section-text">

@@ -166,6 +166,10 @@ function get_uom_list($type, $selected_value = NULL){
 	return generate_drop_down('code', 'name', 'uom', $type,$selected_value);
 }
 
+function get_account_number($type, $selected_value = NULL){
+	return generate_drop_down('id', 'code', 'uom', $type,$selected_value);
+}
+
 
 function active_inactive_dp($type="html", $selectedstats = null ){
 	$array = array(
@@ -219,6 +223,7 @@ function load_required_js($page_name){
 		"company" => array('company.js'),
 		"user" => array('user.js'),
 		"items" => array('items.js'),
+		"sales" => array('sales_module.js'),
 		
 	);
 	return $js_list[$page_name];
