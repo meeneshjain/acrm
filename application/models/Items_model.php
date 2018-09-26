@@ -1,7 +1,7 @@
 <?php 
 class Items_model extends CI_Model {	
 
-	public function itemlist()
+	public function itemlist($companyId)
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
@@ -50,7 +50,7 @@ class Items_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('status' => '1', 'is_deleted' => '0'));
+		$this->db->where(array('status' => '1', 'is_deleted' => '0','company_id' => $companyId));
         // $this->db->join('project_participants as pp', 'p.id=pp.project_id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
 		// last_query(1);
@@ -83,7 +83,7 @@ class Items_model extends CI_Model {
         		$row[] = '<span class="m-badge m-badge--danger m-badge--wide">No</span>'; 
         	}else{ $row[] = '<span class="m-badge m-badge--success m-badge--wide">Yes</span>'; }
         	 
-        	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
+        	$row[] = convert_db_date_time($aRow['created_date']);
 			$row[] = '
 			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
 			
@@ -94,85 +94,6 @@ class Items_model extends CI_Model {
         }
         return $output;
     }
-
-    public function insert()
-	{
-
-		$userArray = array(
-			'user_role_id' => '1',
-			'email' => $this->input->post('email_address'),
-			'username' => $this->input->post('user_name'),
-			'password' => md5($this->input->post('password')),
-			'first_name	' => $this->input->post('first_name'),
-			'last_name' => $this->input->post('last_name'),
-			'mobile_no' => $this->input->post('user_contact_no'),
-			'created_date' => DATETIME,
-			'dob' => DATE,
-			'doj' => DATE,
-			'status' => '1',
-			'is_deleted' => '0',
-			'created_by' => '1'
-		);
-
-		$companyArray = array(
-			'company_name' => $this->input->post('company_name'),
-			'email_1' => $this->input->post('email_1'),
-			'email_2' => $this->input->post('email_2'),
-			'contact_1	' => $this->input->post('contact_1'),
-			'contact_2	' => $this->input->post('contact_2'),
-			'subscription	' => $this->input->post('subscription'),
-			'about_company	' => $this->input->post('about_company'),
-			'address	' => $this->input->post('address'),
-			'created_date' => DATETIME,
-			'updated_date' => DATETIME,
-			'pan_no' => DATE,
-			'gstin_no' => DATE,
-			'status' => '1',
-			'is_deleted' => '0'
-		);
-
-		$this->db->insert('`companies`', $companyArray);
-		$company_id = $this->db->insert_id();
-		$userArray['company_id'] = $company_id;
-		$this->db->insert('`users`', $userArray);
-
-	}
-
-	public function edit_detail($id)
-	{
-		return $this->db->query("SELECT * FROM `companies` WHERE `status` = '1' AND `id` = '$id'")->result_array();
-	}
-
-	public function update_detail()
-	{
-		$data = array(
-			'company_name' => $this->input->post('company_name'),
-			'email_1' => $this->input->post('email_1'),
-			'email_2' => $this->input->post('email_2'),
-			'contact_1' => $this->input->post('contact_1'),
-			'contact_2' => $this->input->post('contact_2'),
-			'subscription' => $this->input->post('subscription'),
-			'about_company' => $this->input->post('about_company'),
-			'address' => $this->input->post('address'),
-			'subscription' => $this->input->post('subscription'),
-			'subscription' => $this->input->post('subscription'),
-			'updated_date' => DATETIME,
-
-		);
-		$where = array('id' => $this->input->post('id'));
-		$this->db->where($where);
-		$this->db->update('companies',$data);
-	}
-
-	public function delete_detail($id)
-	{
-		$data['status'] = '0';
-		$data['is_deleted'] = '1';
-		$data['updated_date'] = DATETIME;
-		$where = array('id' => $id);
-		$this->db->where($where);
-		$this->db->update('`companies`',$data);
-	}
 }
 
 ?>

@@ -43,8 +43,9 @@ class Users extends CI_Controller {
          $this->load->view('include/footer');
      }
      
-     public function get_all_users(){
-       $response =  $this->user_model->get_all_users();
+    public function get_all_users(){
+        $companyId = $this->sessionData['company_id'];
+        $response =  $this->user_model->get_all_users($companyId);
 		echo json_encode($response);
 		die;
 	}

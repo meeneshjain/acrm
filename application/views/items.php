@@ -30,7 +30,7 @@
                                     </a>
                                 </li>
                                 <li class="m-portlet__nav-item">
-                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
+                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill multiple_items_delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </li>

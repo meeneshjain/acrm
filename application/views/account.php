@@ -30,7 +30,7 @@
                                     </a>
                                 </li>
                                 <li class="m-portlet__nav-item">
-                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
+                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill multiple_account_delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </li>
@@ -107,7 +107,7 @@
                                 <label>
                                     Account Number
                                 </label>
-                                <input type="text" disabled required id="acnt_number" name="account_number" class="form-control m-input onlynumber" placeholder="Enter Account number">
+                                <input type="text" disabled id="acnt_number" name="account_number" class="form-control m-input onlynumber" placeholder="Enter Account number">
                             </div>
                         </div>
                         <div class="form-group m-form__group row">

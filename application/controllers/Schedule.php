@@ -17,7 +17,11 @@ class Schedule extends CI_Controller {
     public function add_notes(){
 		if($this->input->is_ajax_request())
 		{
+			$userId = $this->sessionData['logged_in'];
+			$companyId = $this->sessionData['company_id'];
 			$data = array(
+							'user_id' => $userId,
+							'company_id' => $companyId,
 							'subject' => $this->input->post('subject'),
 							'message' => $this->input->post('message'),
 							'color' => $this->input->post('color'),
@@ -98,7 +102,8 @@ class Schedule extends CI_Controller {
     }
 
 	public function get_notes(){
-		$response =  $this->common_model->getdata($selected = false, 'notes', $where = array('is_deleted' => 0), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
+		$userId = $this->sessionData['logged_in'];
+		$response =  $this->common_model->getdata($selected = false, 'notes', $where = array('is_deleted' => 0,'user_id' => $userId), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
 		if(!empty($response))
 		{		
 			echo json_encode(array("status" => "success","message" => '', "data" => $response));
@@ -116,7 +121,10 @@ class Schedule extends CI_Controller {
 	public function add_meeting(){
 		if($this->input->is_ajax_request())
 		{
+			$userId = $this->sessionData['logged_in'];
+			$companyId = $this->sessionData['company_id'];
 			$data = array(
+							'company_id' => $companyId,
 							'subject' => $this->input->post('subject'),
 							'description' => $this->input->post('description'),
 							'user_ids' => implode(',', $this->input->post('meeting_invitees')),
@@ -125,7 +133,7 @@ class Schedule extends CI_Controller {
 							'status_type' => $this->input->post('status_type'),
 							'alert_before_datetime' => $this->input->post('alert_datetime'),
 							'created_date' => DATETIME,
-							'created_by' => '1',
+							'created_by' => $userId,
 							'updated_date' => DATETIME,
 							'status' => '1',
 							'is_deleted' => '0'
@@ -206,7 +214,8 @@ class Schedule extends CI_Controller {
     }
 
 	public function get_meeting(){
-		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		$userId = $this->sessionData['logged_in'];
+		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
 		
 		if(!empty($response))
 		{		
@@ -227,13 +236,17 @@ class Schedule extends CI_Controller {
 	/* TASK CODE GOES HERE */
 
 	public function add_task(){
+		$userId = $this->sessionData['logged_in'];
+		$companyId = $this->sessionData['company_id'];
 		if($this->input->is_ajax_request())
 		{
 			$data = array(
+							'company_id' => $companyId,
 							'title' => $this->input->post('title'),
 							'description' => $this->input->post('description'),
 							'created_date' => DATETIME,
 							'status' => '1',
+							'created_by' => $userId,
 							'is_deleted' => '0',
 						);
 			$result = $this->common_model->insert('task', $data);
@@ -247,7 +260,8 @@ class Schedule extends CI_Controller {
     }
 	
 	public function get_task(){
-		$response =  $this->common_model->getdata($selected = false, 'task', $where = array('status' => '1','is_deleted' => '0'), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
+		$userId = $this->sessionData['logged_in'];
+		$response =  $this->common_model->getdata($selected = false, 'task', $where = array('status' => '1','is_deleted' => '0','created_by' => $userId), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
 
 		if(!empty($response))
 		{		

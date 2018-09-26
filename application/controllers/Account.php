@@ -27,7 +27,8 @@ class Account extends CI_Controller {
 
     public function accountlist()
     {
-        $response =  $this->common_model->get_datatable_json("account as a",array( 'a.id', 'a.account_number', 'a.name', 'a.description', 'a.contact_no_1', 'a.email_1', 'a.created_date', 'a.status'),array('is_deleted' => '0'),"'id', 'DESC'");
+        $companyId = $this->sessionData['company_id'];
+        $response =  $this->common_model->get_datatable_json("account as a",array( 'a.id', 'a.account_number', 'a.name', 'a.description', 'a.contact_no_1', 'a.email_1', 'a.created_date', 'a.status'),array('is_deleted' => '0','company_id' => $companyId),"'id', 'DESC'");
 
         //echo '<PRE>';print_r($response['data']);die;
 
@@ -96,7 +97,7 @@ class Account extends CI_Controller {
 
                 $code = "ACNT".str_pad($account_id, 6, '0', STR_PAD_LEFT);
                 $where = array('id' => $account_id);
-                $this->common_model->update_data('account',array('code'=>$code),$where);
+                $this->common_model->update_data('account',array('account_number'=>$code),$where);
                 echo json_encode(array("status" => "success","message" => 'Account Added Successfully.', "data" => $result));
             }
             die;
@@ -153,11 +154,36 @@ class Account extends CI_Controller {
         }
     }
 
+    public function multiple_delete_account(){
+        if($this->input->is_ajax_request())
+        {
+            $get_data = $this->input->get('ids', TRUE);
+            
+            if(!empty($get_data))
+            {
+                $ids = explode(',', $get_data);
+                foreach ($ids as $key => $value) 
+                {
+                    $data = array('is_deleted' => '1','updated_date' => DATETIME);
+                    $res_data = $this->common_model->update_data('account',$data,array('id' => $value));
+                }
+                echo json_encode(array("status" => "success","message" => 'Account Deleted Successfully!!', "data" => ''));
+            }
+            else
+            {
+                echo json_encode(array("status" => "error","message" => 'Account Id doesn\'t exist.', "data" => ""));
+            }
+        }
+        else
+        {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
+    }
+
     public function checkDuplicate()
     {
         if($this->input->is_ajax_request())
         {
-            //print_r($_POST);die;
             $companyId = $this->sessionData['company_id'];
             $id = $this->input->post('id');
             $column = $this->input->post('column');
@@ -166,7 +192,7 @@ class Account extends CI_Controller {
 
             if(!empty($id))
             {
-                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `id` != '$id' AND `$column` = '$value'");
+                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `id` != '$id' AND `$column` = '$value' AND `company_id` = '$companyId'");
                 if(!empty($data))
                 {
                     echo json_encode(array("status" => "error","message" => 'Account already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
@@ -179,7 +205,7 @@ class Account extends CI_Controller {
             }
             else
             {
-                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `$column` = '$value'");
+                $data = $this->common_model->customQueryCount("SELECT `id` FROM `account` WHERE `$column` = '$value' AND `company_id` = '$companyId'");
                 if(!empty($data))
                 {
                     echo json_encode(array("status" => "error","message" => 'Account already exist with same '.$value.' choose another '.$msg[0], "data" => ""));

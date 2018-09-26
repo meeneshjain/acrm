@@ -94,6 +94,35 @@ $(document).ready(function () {
 		}
 	});
 
+	$(".multiple_account_delete").on("click",function(){
+		if ($(".acntchkbx:checked").length > 0) {
+	        if (confirm("Are you sure, You want to delete selected accounts?")) {
+	            idArr = [];
+	            $('.acntchkbx').each(function (index, value) {
+	                if (this.checked == true) {
+	                    idArr.push(this.value);
+	                }
+	            });
+
+	            call_service(base_url + "account/multiple_delete_account/?ids=" + idArr, function (response) {
+	                if (response.status == 'success') {
+	                    reloadTable("#acnt_list_dt_table");
+	                    notify_alert('success', response.message, "Success")
+	                } else {
+	                    notify_alert('danger', response.message, "Error");
+	                }
+	            }, function () {
+	                notify_alert('danger', response.message, "Error");
+	            });
+	        }
+	    }
+	    else {
+	        notify_alert('error', 'Please select at least one account.', 'Error');
+	    }
+	});
+
+	
+
 	$("#acnt_list_dt_table").on("click", ".changestats", function (e) {
 		$obj = $(this);
 		var id = $obj.attr('data-id');
@@ -121,39 +150,6 @@ $(document).ready(function () {
 	});
 
 
-
-	/*$("#acnt_email,#acnt_contact").blur(function(){
-
-		var id = $("#acnt_id").val();
-		var email = $("#acnt_email").val();
-		var number = $("#acnt_contact").val();
-
-
-		var data = {"id":id,"column":searchWith,"contact":number};
-		if(email != '' && number != '')
-		{
-			$(".checkduplicateaccount").html(' <i class="fa fa-spinner fa-spin"></i> Please wait checking account..');
-			$.post(
-					base_url+"account/checkDuplicate",
-					data,
-					function(response) {
-	    			if(response.status == 'success'){
-	    				notify_alert('success', response.message, "Success");
-	    				$(".checkduplicateaccount").html('<i class="fa fa-check"></i> Account Verified!!');
-	    				$(".checkduplicateaccount").removeClass('text-danger');
-	    				$(".checkduplicateaccount").addClass('text-success');
-	    				$(".checkduplicateaccount").show().fadeOut(5000);
-	    			}
-	    			if(response.status == 'error'){
-	    				notify_alert('danger', response.message, "Error");
-	    				$(".checkduplicateaccount").html('<i class="fa fa-warning"></i> Account already exist with same contact and email.!!');
-	    				$(".checkduplicateaccount").removeClass('text-success');
-	    				$(".checkduplicateaccount").addClass('text-danger');
-	    				$(".checkduplicateaccount").show().fadeOut(5000);
-	    			}
-			}, 'JSON');
-		}
-	});*/
 
 });
 
