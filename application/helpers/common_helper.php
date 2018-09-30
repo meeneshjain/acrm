@@ -225,6 +225,7 @@ function load_required_js($page_name){
 		"items" => array('items.js'),
 		"sales" => array('sales_module.js'),
 		"account" => array('account.js'),
+		"contact" => array('contact.js'),
 		
 	);
 	return $js_list[$page_name];

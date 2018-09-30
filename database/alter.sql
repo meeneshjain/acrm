@@ -316,3 +316,50 @@ ADD `email_2` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_1`;
 
 ALTER TABLE `account`
 CHANGE `code` `account_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_id`;
+
+
+/*  NEW TABLE FOR CONTACT/LEAD */
+CREATE TABLE `contact_lead` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `account_id` int NOT NULL,
+  `owner_id` int NOT NULL COMMENT 'Employee id who handle this lead/contact/opp',
+  `is_type` tinyint NOT NULL COMMENT '0-Contact | 1-Lead | 2-Opportunity',
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `mobile` varchar(12) NOT NULL,
+  `office_contact` varchar(15) NOT NULL,
+  `email_address` varchar(50) NOT NULL COMMENT 'multiple concat with ***',
+  `fax` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `website_url` varchar(50) NOT NULL,
+  `account_name` varchar(100) NOT NULL,
+  `primary_address` text NOT NULL,
+  `primary_city` varchar(50) NOT NULL,
+  `primary_state` varchar(50) NOT NULL,
+  `primary_pincode` varchar(10) NOT NULL,
+  `primary_country` varchar(50) NOT NULL,
+  `secondary_address` text NOT NULL,
+  `secondary_city` varchar(50) NOT NULL,
+  `secondary_state` varchar(50) NOT NULL,
+  `secondary_pincode` varchar(10) NOT NULL,
+  `secondary_country` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `assign_date` datetime NOT NULL COMMENT 'When assign to user',
+  `convert_oppr_date` datetime NOT NULL COMMENT 'convert from lead to opportunity date',
+  `convert_lead_date` datetime NOT NULL COMMENT 'convert from contact to lead date',
+  `created_date` datetime NOT NULL,
+  `created_by` int NOT NULL,
+  `status` int NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  `is_deleted` int NOT NULL
+);
+
+
+ALTER TABLE `contact_lead`
+CHANGE `office_contact` `other_contact` varchar(15) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `mobile`,
+CHANGE `email_address` `email_1` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `other_contact`,
+ADD `email_2` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_1`,
+ADD `other_email` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_2`;
