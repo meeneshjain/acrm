@@ -86,7 +86,7 @@
 <div class="modal fade" id="add_update_user_modal" tabindex="-1" role="dialog" aria-labelledby="add_update_user_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-mlg" role="document">
         <div class="modal-content">
-            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="user_form" action=""  data-parsley-validate>
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="sales_action_form" action=""  data-parsley-validate>
                 <div class="modal-header">
                     <h4 class="modal-title" id="add_update_user_modal_label">
                     <?php echo $popup_title; ?>
@@ -116,14 +116,14 @@
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">Account Name </label>
                             <div class="col-lg-3">
-                                  <input type="text" id="account_name" name="account_name" readonly class="form-control m-input" placeholder="Enter Account Name ">
+                                  <input type="text" id="account_name" name="account_name" required readonly class="form-control m-input" placeholder="Enter Account Name ">
                                 </div>
                              <div class="col-lg-2"></div>
                                     <label class="text-left col-lg-2 col-form-label">
                                         Document Date
                                     </label>
                             <div class="col-lg-3 pull-right">
-                                    <input type="text" id="doc_name" readonly name="doc_name" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="">
+                                    <input type="text" id="doc_date" readonly name="doc_date" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
@@ -142,14 +142,14 @@
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">GST No. </label>
                             <div class="col-lg-3">
-                                  <input type="text" id="delivery_address" name="delivery_address" class="form-control m-input" placeholder="Enter GST. No">
+                                  <input type="text" id="gst_number" name="gst_number" class="form-control m-input" placeholder="Enter GST. No">
                                 </div>
                               <div class="col-lg-2"></div>
                                     <label class="text-left col-lg-2 col-form-label">
                                         Valid Till
                                     </label>
                             <div class="col-lg-3 pull-right">
-                                    <input type="text" id="doc_name" readonly name="doc_name" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="Enter Document Date">
+                                    <input type="text" id="valid_till" readonly name="valid_till" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="Enter Document Date">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
@@ -184,13 +184,14 @@
                                 <label class="text-left col-lg-2 col-form-label">Contact Number </label>
                             <div class="col-lg-3">
                                   <input type="text" id="contact_no" required readonly name="contact_no" class="form-control m-input" placeholder="Enter Contact Number">
+                                  <input type="hidden" id="contact_person_name" required readonly name="contact_name" class="form-control m-input" placeholder="">
                                 </div>
-                              <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label">
+                                 <div class="col-lg-2"></div>
+                                    <label class="text-left col-lg-2 col-form-label ref_quote_no_block">
                                         Reference Quotation Number
                                     </label>
-                            <div class="col-lg-3 pull-right">
-                                    <input type="text" id="ref_quote_no" readonly name="ref_quote_no" class="form-control m-input" placeholder="Reference Quotation Number">
+                                    <div class="col-lg-3 pull-right ">
+                                    <input type="text" id="ref_quote_no" name="ref_quote_no" class="form-control m-input ref_quote_no_block" placeholder="Reference Quotation Number">
                                 </div>
                         </div>
                     </div>
@@ -208,22 +209,22 @@
                                 <th class="pl-3">
                                     Item Name
                                 </th>
-                                <th class="pl-3">
+                                <th class="pl-3" width="8%">
                                     Quantity
                                 </th>
                                 <th class="pl-3">
                                     Price
                                 </th>
-                                <th class="pl-3">
-                                    Discount
+                                <th class="pl-3" width="8%">
+                                    Discount %
                                 </th>
-                                <th class="pl-3">
-                                    Tax
+                                <th class="pl-3" width="8%">
+                                    Tax %
                                 </th>
-                                <th class="pl-3">
+                                <th class="pl-3" width="10%">
                                     Total
                                 </th>
-                                <th class="pl-3">
+                                <th class="pl-3" width="15%">
                                     Remark
                                 </th>
                                 <th class="pl-3">
@@ -232,41 +233,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="item_detail_section">
-                            <tr class="item_list_data" data-is_saved="0">
-                            <td>
-                                <div class="form-control m-input" >1</div>
-                            </td>
-                            <td>
-                                <input type="text" id="item_code" name="item_detail[1][item_code]" required class="form-control m-input" placeholder="Item Code">
-                            </td>
-                            <td>
-                                <input type="text" id="item_name" name="item_detail[1][item_name]" required class="form-control m-input" placeholder="Item Name">
-                            </td>
-                            <td>
-                                <input type="text" id="quantity" name="item_detail[1][quantity]" class="form-control m-input" placeholder="Quantity">
-                            </td>
-                            <td>
-                                <input type="text" id="price" name="item_detail[1][price]" class="form-control m-input" placeholder="Price">
-                            </td>
-                            <td>
-                                <input type="text" id="discount" name="item_detail[1][discount]" class="form-control m-input" placeholder="Discount">
-                            </td> 
-                                <td>
-                                    <input type="text" id="tax_amount" name="item_detail[1][tax_amount]" class="form-control m-input" placeholder="Enter Tax Amount">
-                                </td>
-                                <td>
-                                    <input type="text" id="total" name="item_detail[1][total]" class="form-control m-input" placeholder="Total">
-                                </td>
-                                <td>
-                                    <input type="text" id="remark" name="item_detail[1][remark]" class="form-control m-input" placeholder="Remark"> 
-                                </td>
-                                <td>
-                                    <a href="javascript:;" class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill remove_crrent_row btn-sm ml-2">
-                                        <i class="fa fa-minus"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody class="item_detail_section"></tbody>
                     </table>
                     <hr>  
                     </div>
@@ -286,30 +253,46 @@
                     <div class="col-md-4 row">
                     <label class="text-left col-lg-5 col-form-label"> Total Amount </label>
                     <div class="col-lg-7 pull-right">
-                            <input type="text" id="total_amount"  name="total_amount" class="form-control m-input" placeholder="Total Amount">
+                            <input type="text" id="total_amount" readonly  name="total_amount" class="form-control m-input" placeholder="Total Amount">
                         </div>
                          <label class="text-left col-lg-5 col-form-label"> Other Charges </label>
                     <div class="col-lg-7 pull-right">
-                            <input type="text" id="other_charges"  name="other_charges" class="form-control m-input" placeholder="Other Charges">
+                            <input type="text" id="other_charges"  name="other_charges" class="form-control m-input actual_calculator" placeholder="Other Charges">
                         </div>
+                        <div class="input-group m-form__group">
                          <label class="text-left col-lg-5 col-form-label"> Total Tax </label>
-                    <div class="col-lg-7 pull-right">
-                            <input type="text" id="total_tax"  name="total_tax" class="form-control m-input" placeholder="Total Tax">
+                            <div class="col-lg-6 pull-right">
+                            <input type="text" id="total_tax"  name="total_tax" class="form-control m-input actual_calculator pull-left" placeholder="Total Tax">
+                            <div class="input-group-append" style="margin-top: -3px;">
+                                <span class="input-group-text" id="basic-addon2">
+                                  %
+                                </span>
+                            </div>
                         </div>
+                        </div>
+                        <div class="input-group m-form__group">
                          <label class="text-left col-lg-5 col-form-label"> Discount </label>
-                    <div class="col-lg-7 pull-right">
-                            <input type="text" id="discount"  name="discount" class="form-control m-input" placeholder="Discount">
+                    <div class="col-lg-6 pull-right">
+                            <input type="text" id="final_discount"  name="final_discount" class="form-control m-input actual_calculator pull-left" placeholder="Discount">
+                            <div class="input-group-append" style="margin-top: -3px;">
+                                <span class="input-group-text" id="basic-addon2">
+                                  %
+                                </span>
+                            </div>
+                        </div>
                         </div>
                          <label class="text-left col-lg-5 col-form-label"> Actual Total </label>
                     <div class="col-lg-7 pull-right">
-                            <input type="text" id="actual_total"  name="actual_total" class="form-control m-input" placeholder="Actual Total">
+                            <input type="text" id="actual_total"  readonly name="actual_total" class="form-control m-input" placeholder="Actual Total">
                         </div>
                     </div>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" name="form_name" id="form_name"  value="<?php echo $page_type; ?>">
+                    <input type="hidden" name="sales_form_title" id="sales_form_title" value="<?php echo $page_title; ?>">
                 <input type="hidden" name="company_id" id="logged_in_company_id" value="<?php echo $loggedin_company_id; ?>">
-                    <input type="hidden" id="user_id" name="id" value="0">
+                    <input type="hidden" id="sales_order_quotation_id" name="sales_id" value="0">
                     <button type="button" id="save_update_button_click"  class="btn btn-primary">
                         <i class="fa fa-check"></i> Save
                     </button>
@@ -322,4 +305,29 @@
         </div>
 </div>
                 
-                
+<!-- <div class="modal fade extra_z_index" id="item_selection_modal" tabindex="-1" role="dialog" aria-labelledby="item_selection_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="user_form" action=""  data-parsley-validate>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="item_selection_modal_label">
+                    <?php echo 'Select Item' ?>
+                    </h4>
+                    <button type="button" class="close close_item_selection_modal remove_modal_over_modal_backdrop" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 Modal Laucnhed
+                </div>
+                <div class="modal-footer">
+                   
+                    <button type="button" class="btn btn-danger close_item_selection_modal remove_modal_over_modal_backdrop" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+</div> -->

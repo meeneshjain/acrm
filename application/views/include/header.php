@@ -916,109 +916,115 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 											<span class="m-menu__link-text">
 												Dashboard
 											</span>
-											<!-- <span class="m-menu__link-badge">
-												<span class="m-badge m-badge--danger">
-													2
-												</span>
-											</span> -->
+								
 										</span>
 									</span>
 								</a>
 							</li>
 
-							<!-- <li class="m-menu__section ">
-								<h4 class="m-menu__section-text">
-									Components
-								</h4>
-								<i class="m-menu__section-icon flaticon-more-v3"></i>
-							</li> -->
-
-							<!-- <li class="m-menu__item  m-menu__item--submenu m-menu__item--open m-menu__item--expanded" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+		
+							<li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "company" || $active_sidemenu == "user"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
 									<i class="m-menu__link-icon flaticon-layers"></i>
 									<span class="m-menu__link-text">
-										Base
+										Employees
 									</span>
 									<i class="m-menu__ver-arrow la la-angle-right"></i>
 								</a>
 								<div class="m-menu__submenu ">
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
-										<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
-											<span class="m-menu__link">
-												<span class="m-menu__link-text">
-													Direct Option
-												</span>
-											</span>
-										</li>
-										<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" >
-											<a  href="components/base/state.html" class="m-menu__link ">
-												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-													<span></span>
-												</i>
-												<span class="m-menu__link-text">
-													First Option
-												</span>
-											</a>
-										</li>
-									
+										<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "company")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('company');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Company
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+								     	<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "user")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                        <a  href="<?php echo base_url('users');?>" class="m-menu__link ">
+                                            <i class="m-menu__link-icon fa fa-building"></i>
+                                            <span class="m-menu__link-title">
+                                                <span class="m-menu__link-wrap">
+                                                    <span class="m-menu__link-text">
+                                                        Users
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
 									</ul>
 								</div>
-							</li> -->
+							</li> 
 
-                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "company")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('company');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Company
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
+                             <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "account" || $active_sidemenu == "contact" || $active_sidemenu == "lead"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon flaticon-layers"></i>
+									<span class="m-menu__link-text">
+										Contacts
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+								<div class="m-menu__submenu ">
+									<span class="m-menu__arrow"></span>
+									<ul class="m-menu__subnav">
+									  <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "account")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('account');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Account
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                          <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "contact")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('contact');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Contact
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "lead")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('lead');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Leads
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+									</ul>
+								</div>
+							</li> 
                             
-                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "user")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('users');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Users
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('items');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Items
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-
-
-                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "account")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('account');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Account
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                             <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_quotation")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                            <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "sales_quotation" || $active_sidemenu == "sales_order"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon flaticon-layers"></i>
+									<span class="m-menu__link-text">
+										Sales 
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+								<div class="m-menu__submenu ">
+									<span class="m-menu__arrow"></span>
+									<ul class="m-menu__subnav">
+										<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_quotation")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                 <a  href="<?php echo base_url('sales/quotation');?>" class="m-menu__link ">
                                     <i class="m-menu__link-icon fa fa-building"></i>
                                     <span class="m-menu__link-title">
@@ -1042,61 +1048,25 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
-                           
-							
-							<!-- <li class="m-menu__section ">
-								<h4 class="m-menu__section-text">
-									CRUD
-								</h4>
-								<i class="m-menu__section-icon flaticon-more-v3"></i>
-							</li> -->
-							<!-- <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  m-menu-submenu-toggle="hover">
-								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
-									<i class="m-menu__link-icon flaticon-interface-7"></i>
-									<span class="m-menu__link-text">
-										Menu in Menu
-									</span>
-									<i class="m-menu__ver-arrow la la-angle-right"></i>
-								</a>
-								<div class="m-menu__submenu ">
-									<span class="m-menu__arrow"></span>
-									<ul class="m-menu__subnav">
-										<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
-											<span class="m-menu__link">
-												<span class="m-menu__link-text">
-													first level
-												</span>
-											</span>
-										</li>
-										<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  m-menu-submenu-toggle="hover">
-											<a  href="javascript:;" class="m-menu__link m-menu__toggle">
-												<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-													<span></span>
-												</i>
-												<span class="m-menu__link-text">
-													second level
-												</span>
-												<i class="m-menu__ver-arrow la la-angle-right"></i>
-											</a>
-											<div class="m-menu__submenu ">
-												<span class="m-menu__arrow"></span>
-												<ul class="m-menu__subnav">
-													<li class="m-menu__item " aria-haspopup="true" >
-														<a  href="crud/forms/controls/base.html" class="m-menu__link ">
-															<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-																<span></span>
-															</i>
-															<span class="m-menu__link-text">
-																final option
-															</span>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</li>
 									</ul>
 								</div>
-							</li> -->
+							</li> 
+                             
+                             <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('items');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Items
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+
+                           
+						
 						</ul>
 					</div>
 					<!-- END: Aside Menu -->

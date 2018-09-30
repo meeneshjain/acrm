@@ -234,6 +234,10 @@ function convert_db_date_time($date){
 	return date(DISPLAY_FORMAT,strtotime($date));
 }
 
+function get_only_date($date){
+	return date(DEFAULT_DATE_FORMAT,strtotime($date));
+}
+
 function truncated_string($string,$len) {
  if(strlen($string)>$len) {
   $new = substr($string, 0,$len);

@@ -223,4 +223,24 @@ $(document).ready(function () {
         });
     }
 
+    //modal over modal functionality - start
+
+
+    $(document).on("click", ".open_modal_over_modal", function () {
+        var obj = $(this);
+        var modal_id = obj.data("modal-id");
+        $("div.modal-backdrop:first").addClass("modal_over_modal_backdrop");
+        $("#" + modal_id).modal('show');
+    });
+
+    $(document).on("click", ".remove_modal_over_modal_backdrop", function () {
+        $("div.modal-backdrop").removeClass('modal_over_modal_backdrop');
+        setTimeout(function () {
+            $("body").addClass("modal-open");
+        }, 700);
+    });
+
+    //modal over modal functionality - end
+
+
 }); // jquery end 

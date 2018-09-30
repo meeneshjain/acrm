@@ -316,3 +316,19 @@ ADD `email_2` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_1`;
 
 ALTER TABLE `account`
 CHANGE `code` `account_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `company_id`;
+
+ALTER TABLE `sales_order`
+ADD `contact_person_id` varchar(200) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `account_name`,
+ADD `contact_person_number` varchar(200) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `contact_person_id`,
+ADD `sales_employee` varchar(200) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `contact_person_number`;
+
+ALTER TABLE `sales_order`
+CHANGE `gst_no.` `gst_no` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `delivery_address`;
+
+ALTER TABLE `sales_order`
+ADD `contact_person_name` varchar(200) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `contact_person_id`;
+
+
+ALTER TABLE `sales_order`
+ADD `other_charges` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `total_amount`;
+ADD `total_tax` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `other_charges`;

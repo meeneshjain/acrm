@@ -13,14 +13,14 @@ class Sales extends CI_Controller {
     
     public function quotation() {
          $data['page_title'] = 'Sales Quotation';
-         $data['breadcum_title'] = 'users';
+         $data['breadcum_title'] = 'sales';
          $data['active_sidemenu'] = "sales_quotation";
          $data['main_title'] = $data['page_title'];
          $data['popup_title'] = "Add ". $data['page_title'];
          $data['load_js'] = 'sales';
          $data['page_type'] = "sales_quote";
          $data['sales_employee_name'] = $this->sessionData['full_name'];
-         $data['data_source'] = base_url('users/get_all_quotation');
+         $data['data_source'] = base_url('sales/get_all_sales/'.$data['page_type']);
          $data['account_numbers'] = get_account_number('html', NULL);
          $data['loggedin_company_id'] = $this->sessionData['company_id'];
          $this->load->view('include/header',$data);
@@ -30,13 +30,13 @@ class Sales extends CI_Controller {
      
       public function order() {
          $data['page_title'] = 'Sales Order';
-         $data['breadcum_title'] = 'users';
+         $data['breadcum_title'] = 'sales';
          $data['active_sidemenu'] = "sales_order";
          $data['main_title'] = $data['page_title'];
          $data['popup_title'] = "Add ". $data['page_title'];
          $data['load_js'] = 'sales';
          $data['page_type'] = "sales_order";
-         $data['data_source'] = base_url('users/get_all_order');
+         $data['data_source'] = base_url('sales/get_all_sales/'.$data['page_type']);
          $data['loggedin_company_id'] = $this->sessionData['company_id'];
          $data['sales_employee_name'] = $this->sessionData['full_name'];
          $this->load->view('include/header',$data);
@@ -44,32 +44,59 @@ class Sales extends CI_Controller {
          $this->load->view('include/footer');
      }
      
-     public function get_all_quotation(){
-       $response =  $this->sales_model->get_all_quotation();
+     public function get_all_sales($type){
+       $response =  $this->sales_model->get_all_sales($type);
 		echo json_encode($response);
 		die;
     }
     
-    public function get_all_order(){
-       $response =  $this->sales_model->get_all_order();
-		echo json_encode($response);
-		die;
-    }
-    
-     public function get_sales_data($company_id = NULL){
+    public function save_update($type,$id = NULL){
+		 if($this->input->is_ajax_request()) {
+            $post_data = $this->input->post(NULL, TRUE);
+            if(empty($id) && $id == "" && $id == 0){
+				$this->sales_model->insert_sales($type,$post_data);
+				$output = array("status" => "success","message" => $post_data['sales_form_title'].' Inserted', "data" => "");
+			} else {
+				$this->sales_model->update_sales($type,$post_data, $id);
+				$output = array("status" => "success","message" => $post_data['sales_form_title'].' Updated', "data" => "");
+			}
+		} else {
+			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+        exit;
+     }
+     
+    public function get_sales_data($company_id = NULL){
           if($this->input->is_ajax_request()) {
               if(empty($company_id) && $company_id == "" && $company_id == 0){
                   $output = array("status" => "error","message" => 'Company ID missing ', "data" => "");
                 } else {
                     $docNumber = $this->sales_model->get_sales_data($company_id);
                     $account_list = $this->sales_model->get_account_list($company_id);
-				     $output = array("status" => "success","message" => 'Document Number Generated', "doc_number" => $docNumber, 'account_list'=>$account_list, 'sale_employees'=> $this->sessionData['full_name']);
+                    $item_list = $this->sales_model->get_item_list($company_id);
+				    $output = array("status" => "success","message" => 'Document Number Generated', "doc_number" => $docNumber, 'account_list'=>$account_list, 'sale_employees'=> $this->sessionData['full_name'], "item_list"=> $item_list);
                 }
               } else {
 		    	$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
             }
         echo json_encode($output);
         exit;
+     }
+     
+     public function get_sales_details($id){
+        if($this->input->is_ajax_request()) {
+			if(is_numeric($id) && !empty($id)) {
+                $data = $this->sales_model->get_sales_details($id);
+                $output = array("status" => "success","message" => '', "header" => $data['header'], 'details' => $data['detail'], 'account_list'=>$data['account_list'], "item_list"=> $data['item_list']);
+            } else {
+				$output = array("status" => "error","message" => 'Sales ID doesnt exist.', "data" => "");
+			}
+		} else {
+			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+        die;
      }
      
      function get_account_contacts($account_id){
@@ -86,4 +113,38 @@ class Sales extends CI_Controller {
         echo json_encode($output);
         exit;
      }
+     
+     function delete_so_detail_item($so_detail_id){
+        $output= '';
+		if($this->input->is_ajax_request()) {
+			if(is_numeric($so_detail_id) && !empty($so_detail_id)) {
+				$data = $this->sales_model->delete_so_detail_item($so_detail_id);
+				$output = array("status" => "success","message" => 'Deleted Successfully!!', "data" => '');
+			} else {
+				$output = array("status" => "error","message" => 'Id doesn\'t exist.', "data" => "");
+			}
+		} else {
+			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+        die;
+     }
+     
+     function delete_sales($so_id){
+        $output= '';
+		if($this->input->is_ajax_request()) {
+			if(is_numeric($so_id) && !empty($so_id)) {
+				$data = $this->sales_model->delete_sales($so_id);
+				$output = array("status" => "success","message" => 'Deleted Successfully!!', "data" => '');
+			} else {
+				$output = array("status" => "error","message" => 'Id doesn\'t exist.', "data" => "");
+			}
+		} else {
+			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+        die;
+     }
+     
+     
 }

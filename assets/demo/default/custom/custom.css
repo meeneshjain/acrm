@@ -228,3 +228,20 @@ a.btn.btn-black {
 .task_completed{
 	text-decoration: line-through;
 }
+
+.extra_z_index{
+	z-index: 1060 !important;
+	top: 10%;
+}
+
+.modal_over_modal_backdrop{
+	z-index: 1052 !important;
+}
+
+.m-form.m-form--group-seperator-dashed .m-form__group {
+    border-bottom: none !important;
+}
+
+.dataTables_info {
+    display: none;
+}
