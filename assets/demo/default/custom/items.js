@@ -137,6 +137,33 @@ $(document).ready(function () {
 		}
 	});
 
+	$(".multiple_items_delete").on("click",function(){
+		if ($(".itmckbx:checked").length > 0) {
+	        if (confirm("Are you sure, You want to delete selected items?")) {
+	            idArr = [];
+	            $('.itmckbx').each(function (index, value) {
+	                if (this.checked == true) {
+	                    idArr.push(this.value);
+	                }
+	            });
+
+	            call_service(base_url + "items/multiple_delete_items/?ids=" + idArr, function (response) {
+	                if (response.status == 'success') {
+	                    reloadTable("#item_list_dt_table");
+	                    notify_alert('success', response.message, "Success")
+	                } else {
+	                    notify_alert('danger', response.message, "Error");
+	                }
+	            }, function () {
+	                notify_alert('danger', response.message, "Error");
+	            });
+	        }
+	    }
+	    else {
+	        notify_alert('error', 'Please select at least one item.', 'Error');
+	    }
+	});
+
 
 	/*
 	************************

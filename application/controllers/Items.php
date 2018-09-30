@@ -24,8 +24,9 @@ class Items extends CI_Controller {
      }
 
      public function itemlist(){
+        $companyId = $this->sessionData['company_id'];
         $this->load->model("items_model");
-        $response =  $this->items_model->itemlist();
+        $response =  $this->items_model->itemlist($companyId);
         echo json_encode($response);
         die;
     }
@@ -142,6 +143,32 @@ class Items extends CI_Controller {
             else
             {
                 echo json_encode(array("status" => "error","message" => 'Item Id doesn\'t exist.', "data" => ""));
+            }
+        }
+        else
+        {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
+    }
+
+    public function multiple_delete_items(){
+        if($this->input->is_ajax_request())
+        {
+            $get_data = $this->input->get('ids', TRUE);
+            
+            if(!empty($get_data))
+            {
+                $ids = explode(',', $get_data);
+                foreach ($ids as $key => $value) 
+                {
+                    $data = array('is_deleted' => '1','updated_date' => DATETIME);
+                    $res_data = $this->common_model->update_data('items',$data,array('id' => $value));
+                }
+                echo json_encode(array("status" => "success","message" => 'Items Deleted Successfully!!', "data" => ''));
+            }
+            else
+            {
+                echo json_encode(array("status" => "error","message" => 'Items Id doesn\'t exist.', "data" => ""));
             }
         }
         else

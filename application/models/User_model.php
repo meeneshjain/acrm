@@ -1,6 +1,6 @@
 <?php 
 class User_model extends CI_Model {	
-    public function get_all_users() {
+    public function get_all_users($companyId) {
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		$get_data = $this->input->get(NULL, TRUE);
@@ -46,7 +46,7 @@ class User_model extends CI_Model {
 			$this->db->group_end();       
 		}
 
-		$this->db->where(array('us.status' => '1', 'us.is_deleted' => '0'));
+		$this->db->where(array('us.status' => '1', 'us.is_deleted' => '0','company_id' => $companyId));
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
         $this->db->join('companies as c', 'c.id=us.company_id', 'left');

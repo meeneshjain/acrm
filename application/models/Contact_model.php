@@ -1,15 +1,15 @@
 <?php 
-class Items_model extends CI_Model {	
+class Contact_model extends CI_Model {	
 
-	public function itemlist($companyId)
+	public function contactlist()
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		$get_data = $this->input->get(NULL, TRUE);
-		$dt_table = "items as i";
+		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'i.id', 'i.logo', 'i.code', 'i.name', 'i.type', 'i.unit', 'i.is_gst', 'i.created_date');
+		$dt_columns = array( 'cl.id', 'a.name', 'a.account_number', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -50,8 +50,8 @@ class Items_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('status' => '1', 'is_deleted' => '0','company_id' => $companyId));
-        // $this->db->join('project_participants as pp', 'p.id=pp.project_id', 'left');
+		$this->db->where(array('cl.status' => '1', 'cl.is_deleted' => '0'));
+        $this->db->join('account as a', 'cl.account_id=a.id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
 		// last_query(1);
         $dt_filtered_total = $this->db->query('SELECT FOUND_ROWS() as count;')->row()->count; //Calculate total number of filtered rows
@@ -67,27 +67,16 @@ class Items_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx"><span></span></label>';
-
-            $imgscr = base_url('assets/images/no.jpg');
-            if(!empty($aRow['logo']))
-            {
-            	$imgscr = base_url($aRow['logo']);
-            }
-        	$row[] = '<img class="m-widget7__img" src="'.$imgscr.'" alt="" style="width:100px;height:60px">';
-        	$row[] = $aRow['code'];
-        	$row[] = $aRow['name'];
-        	$row[] = $aRow['type'];
-        	$row[] = $aRow['unit'];
-        	if($aRow['is_gst'] == '0'){ 
-        		$row[] = '<span class="m-badge m-badge--danger m-badge--wide">No</span>'; 
-        	}else{ $row[] = '<span class="m-badge m-badge--success m-badge--wide">Yes</span>'; }
-        	 
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="contacts" id="cont_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="contchkbx"><span></span></label>';
+        	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
+        	$row[] = $aRow['first_name']." ".$aRow['last_name'];
+        	$row[] = $aRow['mobile'];
+        	$row[] = $aRow['email_1'];
         	$row[] = convert_db_date_time($aRow['created_date']);
 			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
+			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-cont-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
 			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
+			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_cont" data-cont-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
 			';
 
         	$output['data'][] = $row;
