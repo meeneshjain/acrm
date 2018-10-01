@@ -27,11 +27,11 @@
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </li>
-                                <li class="m-portlet__nav-item">
+                                <!-- <li class="m-portlet__nav-item">
                                     <a onclick="deleteMultiple()" href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
                                         <i class="fa fa-trash"></i>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                         <div class="input-group m-form__group">
                          <label class="text-left col-lg-5 col-form-label"> Discount </label>
                     <div class="col-lg-6 pull-right">
-                            <input type="text" id="final_discount"  name="final_discount" class="form-control m-input actual_calculator pull-left" placeholder="Discount">
+                            <input type="text" id="final_discount"  name="final_discount" class="actual_calculator form-control m-input pull-left" placeholder="Discount">
                             <div class="input-group-append" style="margin-top: -3px;">
                                 <span class="input-group-text" id="basic-addon2">
                                   %

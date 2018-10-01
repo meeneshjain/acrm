@@ -1,5 +1,6 @@
 -- MANISH 29-08-2018
 
+SET foreign_key_checks = 0;
 
 DROP TABLE IF EXISTS `companies`;
 CREATE TABLE `companies` (
@@ -379,3 +380,39 @@ CHANGE `office_contact` `other_contact` varchar(15) COLLATE 'latin1_swedish_ci' 
 CHANGE `email_address` `email_1` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `other_contact`,
 ADD `email_2` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_1`,
 ADD `other_email` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_2`;
+
+
+truncate table companies;
+truncate table account;
+truncate table contact;
+truncate table items;
+truncate table items_price_list;
+truncate table meeting;
+truncate table `notes`;
+truncate table sales_order;
+truncate table sales_order_details;
+truncate table task;
+truncate table users;
+
+ALTER TABLE `sales_quotation_revisions`
+RENAME TO `sales_order_revisions`;
+
+ALTER TABLE `sales_order_revisions`
+CHANGE `sales_quotation_id` `sales_order_id` int NOT NULL AFTER `id`;
+
+DROP TABLE IF EXISTS `sales_order_revisions`;
+CREATE TABLE `sales_order_revisions` (
+  `id` int(11) NOT NULL,
+  `sales_order_id` int(11) NOT NULL,
+  `revision_no` int(11) NOT NULL,
+  `revision_amount` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `is_deleted` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `sales_order_revisions`
+CHANGE `id` `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;

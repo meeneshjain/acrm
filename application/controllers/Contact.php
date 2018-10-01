@@ -31,7 +31,7 @@ class Contact extends CI_Controller {
     {
         $this->load->model('contact_model');
         $companyId = $this->sessionData['company_id'];
-        $response =  $this->contact_model->contactlist();
+        $response =  $this->contact_model->contactlist($companyId);
         echo json_encode($response);
         die;
     }
@@ -64,7 +64,6 @@ class Contact extends CI_Controller {
             //echo '<pre>';print_r($this->input->post());die;
 
             $data = array(
-                            'account_id' => $this->input->post('account_name'),
                             'first_name' => $this->input->post('first_name'),
                             'last_name' => $this->input->post('last_name'),
                             'mobile' => $this->input->post('mobile'),
@@ -105,6 +104,8 @@ class Contact extends CI_Controller {
                 $data['owner_id'] = $userId;
                 $data['created_by'] = $userId;
                 $data['created_date'] = DATETIME;
+                $data['account_id'] = $this->input->post('account_name');
+
                 $result = $this->common_model->insert('contact_lead', $data);
 
                 echo json_encode(array("status" => "success","message" => 'Contact Added Successfully.', "data" => $result));

@@ -256,7 +256,6 @@ function final_total() {
     var total = 0;
     $(".item_detail_section tr").each(function () {
         $(this).find("input[data-mapped_price_total]").val();
-        console.log($(this).find("input[data-mapped_price_total]").val());
         if ($(this).find("input[data-mapped_price_total]").val() != "" && $(this).find("input[data-mapped_price_total]").val() != undefined) {
             total += parseFloat(($(this).find("input[data-mapped_price_total]").val()));
         }
@@ -274,14 +273,14 @@ function actual_total() {
     var total = ($("#total_amount").val() != "") ? parseFloat($("#total_amount").val()) : 0;
     var other_charges = ($("#other_charges").val() != "") ? parseFloat($("#other_charges").val()) : 0;
     var total_tax = ($("#total_tax").val() != "") ? parseFloat($("#total_tax").val()) : 0;
-    var discount = ($("#discount").val() != "") ? parseFloat($("#discount").val()) : 0;
+    var discount = ($("#final_discount").val() != "") ? parseFloat($("#final_discount").val()) : 0;
     var full_total = (total + other_charges);
     if (total_tax != 0) {
-        full_total = full_total + parseFloat(total_tax + (total_tax / 100));
+        full_total = parseFloat(full_total + (full_total * (total_tax / 100)));
     }
     var actual_total = full_total;
     if (discount != 0) {
-        parseFloat(full_total - (discount / 100));
+        actual_total = parseFloat(actual_total - (actual_total * parseFloat(discount / 100)));
     }
     $("#actual_total").val(actual_total.toFixed(2));
 }
@@ -450,7 +449,7 @@ function get_sales_details(id) {
 }
 
 function delete_sale(id) {
-    if (confirm("Are you sure, You want to delete this user?")) {
+    if (confirm("Are you sure, You want to delete?")) {
         call_service(base_url + "sales/delete_sales/" + id, function (response) {
             if (response.status == 'success') {
                 reloadTable('#user_list_dt_table');

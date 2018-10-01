@@ -1,7 +1,7 @@
 <?php 
 class Contact_model extends CI_Model {	
 
-	public function contactlist()
+	public function contactlist($companyId)
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
@@ -9,7 +9,7 @@ class Contact_model extends CI_Model {
 		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'cl.id', 'a.name', 'a.account_number', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date');
+		$dt_columns = array( 'cl.id', 'a.name', 'a.account_number', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -50,7 +50,7 @@ class Contact_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('cl.status' => '1', 'cl.is_deleted' => '0'));
+		$this->db->where(array('cl.status' => '1', 'cl.is_deleted' => '0', 'cl.company_id'=> $companyId));
         $this->db->join('account as a', 'cl.account_id=a.id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
 		// last_query(1);

@@ -95,7 +95,7 @@ class Sales_model extends CI_Model {
 	
 	
 	function get_sales_data($company_id){
-		$sales_count = $this->db->query("SELECT COUNT(id) as total_quote FROM `sales_quotation` WHERE `company_id` = '$company_id'")->row()->total_quote;
+		$sales_count = $this->db->query("SELECT COUNT(id) as total_quote FROM `sales_order` WHERE `company_id` = '$company_id'")->row()->total_quote;
 		$str_length = 4;
 		$sales_count = $sales_count+1;
 		$final_code = substr("0000{$sales_count}", -    $str_length);
