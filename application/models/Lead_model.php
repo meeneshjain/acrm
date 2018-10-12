@@ -1,15 +1,34 @@
 <?php 
-class Contact_model extends CI_Model {	
+class Lead_model extends CI_Model {	
 
-	public function contactlist($companyId)
+	public function leadlist($userId,$user_role_id,$companyId)
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
+
+		$lead_owner = '';
+		if($user_role_id == 4)
+		{
+			$lead_owner = $userId;
+		}
+		else
+		{
+			$owner_ids = array();
+			$result = $this->db->query("SELECT id FROM users WHERE reports_to_user_id = '$userId'")->result_array();
+			foreach ($result as $key => $value) 
+			{
+				$owner_ids['id'][] = $value['id'];
+			}
+			$owner_ids['id'][] = $userId;
+			$ids = implode(',', $owner_ids['id']);
+			$lead_owner = $ids;
+		}
+
 		$get_data = $this->input->get(NULL, TRUE);
 		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'cl.id', 'a.name', 'a.account_number', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id');
+		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -50,10 +69,12 @@ class Contact_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('cl.is_type' => '0', 'cl.status' => '1', 'cl.is_deleted' => '0', 'cl.company_id'=> $companyId));
+		$this->db->where(array('cl.is_type' => '1', 'cl.status' => '1', 'cl.is_deleted' => '0', 'cl.company_id'=> $companyId));
+		$this->db->where("cl.owner_id IN (".$lead_owner.")",NULL, false);
         $this->db->join('account as a', 'cl.account_id=a.id', 'left');
+        $this->db->join('users as u', 'cl.owner_id=u.id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
-		// last_query(1);
+		//echo last_query(1);
         $dt_filtered_total = $this->db->query('SELECT FOUND_ROWS() as count;')->row()->count; //Calculate total number of filtered rows
         $dt_total = $this->db->count_all($dt_table);//Calculate total number of rows
 
@@ -70,13 +91,16 @@ class Contact_model extends CI_Model {
             $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="contacts" id="cont_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="contchkbx"><span></span></label>';
         	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
         	$row[] = $aRow['first_name']." ".$aRow['last_name'];
+        	$row[] = $aRow['own_fname']." ".$aRow['own_lname'];
         	$row[] = $aRow['mobile'];
         	$row[] = $aRow['email_1'];
         	$row[] = convert_db_date_time($aRow['created_date']);
 			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-cont-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
+			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air convert_to_opportunity_btn custom-popover" data-lead-id="'.$aRow['id'].'" data-opportunity-name="'.$aRow['first_name'].' '.$aRow['last_name'].'" data-account-name="'.$aRow['name'] .'('.$aRow['account_number'].')'.'"  data-toggle="m-popover" data-placement="left" title="Make Opportunity" data-content="Convert to Opportunity"><i class="fa fa-dollar"></i></button>
+
+			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-lead-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
 			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_cont" data-cont-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
+			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_lead" data-lead-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
 			';
 
         	$output['data'][] = $row;

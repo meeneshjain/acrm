@@ -3,86 +3,87 @@ $(document).ready(function () {
 	/*
 	 ******** ADD CONTACT ********
 	*/
-	$(".cont_modal_open_btn").on("click", function () {
-		$("#cont_form").parsley().reset();
-		$("#cont_form")[0].reset();
-		$("#cont_id").val(0);
-		$("#cont_modal").modal('show');
+	$(".lead_modal_open_btn").on("click", function () {
+		$("#lead_form").parsley().reset();
+		$("#lead_form")[0].reset();
+		$("#lead_id").val(0);
+		$("#lead_modal").modal('show');
 
-		$("#cont_account").removeAttr('disabled');
+		$("#lead_account").removeAttr('disabled');
 
-		$("#cont_form").attr('action', base_url + 'contact/add_update_account')
-		$(".cont_modal_heading").html('ADD NEW CONTACT');
-		$("#cont_action_btn").html('<i class="fa fa-save"></i> Save');
+		$("#lead_form").attr('action', base_url + 'contact/add_update_account')
+		$(".lead_modal_heading").html('ADD NEW LEAD');
+		$("#lead_action_btn").html('<i class="fa fa-save"></i> Save');
 	});
 
 	/*
 	 ******** SAVE / UPDATE CONTACT ********
 	*/
-	$("#cont_action_btn").click(function () {
+	$("#lead_action_btn").click(function () {
 		var obj = $(this);
-		if ($("#cont_form").parsley().validate()) {
-			var btn_text = $("#cont_action_btn").html();
-			show_loading("#cont_action_btn", 'Loading..!');
-			form_submit('cont_form', function (res) {
+		if ($("#lead_form").parsley().validate()) {
+			var btn_text = $("#lead_action_btn").html();
+			show_loading("#lead_action_btn", 'Loading..!');
+			form_submit('lead_form', function (res) {
 				if (res.status == 'success') {
 					notify_alert('success', res.message, "Success");
-					hide_loading("#cont_action_btn", btn_text);
-					$("#cont_form").parsley().reset();
-					$("#cont_form")[0].reset();
-					$("#cont_modal").modal('hide');					
-					reloadTable("#cont_list_dt_table");
+					hide_loading("#lead_action_btn", btn_text);
+					$("#lead_form").parsley().reset();
+					$("#lead_form")[0].reset();
+					$("#lead_modal").modal('hide');					
+					reloadTable("#lead_list_dt_table");
 				}
 			}, function (res) {
 				notify_alert('danger', res.message, "Error");
-				hide_loading("#cont_action_btn", btn_text);
+				hide_loading("#lead_action_btn", btn_text);
 			});
 		}
 	});
 
 	/*
-	 ******** EDIT CONTACT ********
+	 ******** EDIT LEAD ********
 	*/
-	$("#cont_list_dt_table").on("click", ".edit_cont", function (e) {
-		var id = $(this).attr('data-cont-id');
-		$("#cont_form").parsley().reset();
-		call_service(base_url + 'contact/edit_contact/' + id,
+	$("#lead_list_dt_table").on("click", ".edit_cont", function (e) {
+		var id = $(this).attr('data-lead-id');
+		$("#lead_form").parsley().reset();
+		call_service(base_url + 'lead/edit_lead/' + id,
 			function (res) {
 				if (res.status == 'success') {
-					$("#cont_modal").modal('show');
-					$("#cont_form").attr('action', base_url + 'contact/add_update_account')
-					$(".cont_modal_heading").html('EDIT CONTACT DETAIL');
-					$("#cont_action_btn").html('<i class="fa fa-save"></i> Update');
+					$("#lead_modal").modal('show');
+					$("#lead_form").attr('action', base_url + 'lead/add_update_account')
+					$(".lead_modal_heading").html('EDIT LEAD DETAIL');
+					$("#lead_action_btn").html('<i class="fa fa-save"></i> Update');
 
-					$("#cont_account").attr('disabled','disabled');
+					$("#lead_account").attr('disabled','disabled');
 
-					$("#cont_id").val(res.data[0].id);
+					$("#lead_id").val(res.data[0].id);
 
-					$("#cont_account").val(res.data[0].account_id);
-					$("#cont_fname").val(res.data[0].first_name);
-					$("#cont_lname").val(res.data[0].last_name);
-					$("#cont_mobile_no").val(res.data[0].mobile);
-					$("#cont_email_1").val(res.data[0].email_1);
-					$("#cont_other_contact").val(res.data[0].other_contact);
-					$("#cont_other_email").val(res.data[0].other_email);
-					$("#cont_title").val(res.data[0].title);
-					$("#cont_fax").val(res.data[0].fax);
-					$("#cont_department").val(res.data[0].department);
-					$("#cont_website").val(res.data[0].website_url);
+					$("#lead_account").val(res.data[0].account_id);
+					$("#lead_owner_id").val(res.data[0].owner_id);
+					$("#lead_fname").val(res.data[0].first_name);
+					$("#lead_lname").val(res.data[0].last_name);
+					$("#lead_mobile_no").val(res.data[0].mobile);
+					$("#lead_email_1").val(res.data[0].email_1);
+					$("#lead_other_contact").val(res.data[0].other_contact);
+					$("#lead_other_email").val(res.data[0].other_email);
+					$("#lead_title").val(res.data[0].title);
+					$("#lead_fax").val(res.data[0].fax);
+					$("#lead_department").val(res.data[0].department);
+					$("#lead_website").val(res.data[0].website_url);
 
-					$("#cont_paddress").val(res.data[0].primary_address);
-					$("#cont_pcity").val(res.data[0].primary_city);
-					$("#cont_pstate").val(res.data[0].primary_state);
-					$("#cont_pcode").val(res.data[0].primary_pincode);
-					$("#cont_pcountry").val(res.data[0].primary_country);
+					$("#lead_paddress").val(res.data[0].primary_address);
+					$("#lead_pcity").val(res.data[0].primary_city);
+					$("#lead_pstate").val(res.data[0].primary_state);
+					$("#lead_pcode").val(res.data[0].primary_pincode);
+					$("#lead_pcountry").val(res.data[0].primary_country);
 
-					$("#cont_saddress").val(res.data[0].secondary_address);
-					$("#cont_scity").val(res.data[0].secondary_city);
-					$("#cont_sstate").val(res.data[0].secondary_state);
-					$("#cont_scode").val(res.data[0].secondary_pincode);
-					$("#cont_scountry").val(res.data[0].secondary_country);
+					$("#lead_saddress").val(res.data[0].secondary_address);
+					$("#lead_scity").val(res.data[0].secondary_city);
+					$("#lead_sstate").val(res.data[0].secondary_state);
+					$("#lead_scode").val(res.data[0].secondary_pincode);
+					$("#lead_scountry").val(res.data[0].secondary_country);
 
-					$("#cont_description").val(res.data[0].description);
+					$("#lead_description").val(res.data[0].description);
 				
 				}
 				if (res.status == 'error') {
@@ -96,15 +97,15 @@ $(document).ready(function () {
 	});
 
 	/*
-	******* DELETE CONTACT ********
+	******* DELETE LEAD ********
 	*/
-	$("#cont_list_dt_table").on("click", ".delete_cont", function (e) {
-		var id = $(this).attr('data-cont-id');
+	$("#lead_list_dt_table").on("click", ".delete_lead", function (e) {
+		var id = $(this).attr('data-lead-id');
 		if (confirm("Are you sure, You want to delete this Contact.?")) {
 			call_service(base_url + "contact/delete_contact/" + id, function (response) {
 				if (response.status == 'success') {
 					notify_alert('success', response.message, "Success");
-					reloadTable("#cont_list_dt_table");
+					reloadTable("#lead_list_dt_table");
 				} else {
 					notify_alert('danger', response.message, "Error");
 				}
@@ -115,7 +116,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".multiple_contact_delete").on("click",function(){
+	$(".multiple_lead_delete").on("click",function(){
 		if ($(".contchkbx:checked").length > 0) {
 	        if (confirm("Are you sure, You want to delete selected Contact?")) {
 	            idArr = [];
@@ -127,7 +128,7 @@ $(document).ready(function () {
 
 	            call_service(base_url + "contact/multiple_delete_contact/?ids=" + idArr, function (response) {
 	                if (response.status == 'success') {
-	                    reloadTable("#cont_list_dt_table");
+	                    reloadTable("#lead_list_dt_table");
 	                    notify_alert('success', response.message, "Success")
 	                } else {
 	                    notify_alert('danger', response.message, "Error");
@@ -142,53 +143,27 @@ $(document).ready(function () {
 	    }
 	});
 
-	$("#cont_list_dt_table").on("click", ".changestats", function (e) {
-		$obj = $(this);
-		var id = $obj.attr('data-id');
-		var status = $obj.attr('data-status');
-		var msg;
-		if(status == 1){ msg = 'Inactive'; }else{msg = 'Active'; }
-		if (confirm("Are you sure, you want make "+msg+"?")) {
-			$obj.html('<i class="fa fa-spinner fa-spin"></i> changing..');
-			$.getJSON("contact/changestats/"+id+"/"+status,function(res){
-				if(res.status == 'success')
-				{
-					if(status == 1){ 
-						$obj.html('Inactive').removeClass('m-badge--success').addClass('m-badge--danger').attr('data-status','0');
-					}else{
-						$obj.html('Active').removeClass('m-badge--danger').addClass('m-badge--success').attr('data-status','1');
-					}
-					notify_alert('success', res.message, "Success");
-				}
-				if(res.status == 'error')
-				{
-					notify_alert('danger', res.message, "Error");
-				}
-			});
-		}
-	});
-
 	$("#clone_primary_address").on("change",function(){
 		if($(this).prop("checked") == true)
 		{
-    		$("#cont_saddress").val($("#cont_paddress").val());
-			$("#cont_scity").val($("#cont_pcity").val());
-			$("#cont_sstate").val($("#cont_pstate").val());
-			$("#cont_scode").val($("#cont_pcode").val());
-			$("#cont_scountry").val($("#cont_pcountry").val());
+    		$("#lead_saddress").val($("#lead_paddress").val());
+			$("#lead_scity").val($("#lead_pcity").val());
+			$("#lead_sstate").val($("#lead_pstate").val());
+			$("#lead_scode").val($("#lead_pcode").val());
+			$("#lead_scountry").val($("#lead_pcountry").val());
         }
         else if($(this).prop("checked") == false)
         {
-			$("#cont_saddress").val('');
-			$("#cont_scity").val('');
-			$("#cont_sstate").val('');
-			$("#cont_scode").val('');
-			$("#cont_scountry").val('');
+			$("#lead_saddress").val('');
+			$("#lead_scity").val('');
+			$("#lead_sstate").val('');
+			$("#lead_scode").val('');
+			$("#lead_scountry").val('');
         }
 	});
 
 
-	/*$('#cont_account_list').select2({
+	/*$('#lead_account_list').select2({
 	  	placeholder: "Search for git repositories",
         allowClear: !0,
         ajax: {
@@ -217,7 +192,7 @@ $(document).ready(function () {
 
 	});*/
 
-	/*$("#cont_account_list").select2({
+	/*$("#lead_account_list").select2({
 	 	disabled:false,
 	  	ajax: { 
        	url: base_url+"contact/account_list",
@@ -238,7 +213,7 @@ $(document).ready(function () {
 	  }
 	});*/
 
-	/*$("#cont_account_list").select2({
+	/*$("#lead_account_list").select2({
             placeholder: "Search for git repositories",
             allowClear: !0,
             ajax: {
@@ -269,17 +244,19 @@ $(document).ready(function () {
     /*
 	## ASSIGN CONTACT TO USER
     */
-    $(".contact_to_lead_btn").on("click", function () {
+    $("#lead_list_dt_table").on("click", ".convert_to_opportunity_btn", function () {    	
+    	$("#convert_to_opportunity_form").parsley().reset();
+		$("#convert_to_opportunity_form")[0].reset();
+		$("#convert_to_opportunity_modal").modal('show');
 
-    	if ($(".contchkbx:checked").length > 0) 
-    	{
-	        	$("#contat_to_lead_form").parsley().reset();
-				$("#contat_to_lead_form")[0].reset();
-				$("#contact_to_lead_modal").modal('show');
-	    }
-	    else {
-	        notify_alert('error', 'Please select at least one contact.', 'Error');
-	    }
+    	$("#oppr_id").val($(this).attr('data-lead-id'));
+    	$("#oppr_name").val($(this).attr('data-opportunity-name'));
+    	$("#oppr_account_name").val($(this).attr('data-account-name'));
+	});
+
+	$("#oppr_stage").on("change",function(){
+		var option = $('option:selected', this).attr('data-probability');
+		$('#oppr_probability').val(option)
 	});
 
 });
@@ -287,7 +264,7 @@ $(document).ready(function () {
 
 function convert_contact_to_lead()
 {
-	if ($("#contat_to_lead_form").parsley().validate()) 
+	if ($("#contact_to_lead_form").parsley().validate()) 
 	{
 		idArr = [];
 	    $('.contchkbx').each(function (index, value) {
@@ -300,7 +277,7 @@ function convert_contact_to_lead()
 
 	    call_service(base_url + "contact/convert_contact_to_lead/?assign_to="+assign_to+"&ids=" + idArr, function (response) {
 	        if (response.status == 'success') {
-	            reloadTable("#cont_list_dt_table");
+	            reloadTable("#lead_list_dt_table");
 	            notify_alert('success', response.message, "Success")
 	        } else {
 	            notify_alert('danger', response.message, "Error");
@@ -318,8 +295,8 @@ function convert_contact_to_lead()
 function checkDuplicate(obj,column)
 {
 
-	var id = $("#cont_id").val();
-	var account_id = $("#cont_account").val();
+	var id = $("#lead_id").val();
+	var account_id = $("#lead_account").val();
 	var searchValue = $(obj).val();
 
 	var data = {"id":id,"column":column,"value":searchValue,"account_id":account_id};

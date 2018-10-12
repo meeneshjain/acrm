@@ -120,12 +120,16 @@ $(document).ready(function () {
                 "columnDefs": [{ "bSortable": false, "aTargets": 'no-sort' }],
             });
             i++;
+        }).on("mouseover",function() {
+            $('.custom-popover').popover({ trigger: "hover",html: true });
         });
     }
 
+
+
     $(".crm_datepicker").datepicker({
         todayHighlight: !0,
-        orientation: "top left",
+        orientation: "bottom left",
         templates: {
             leftArrow: '<i class="la la-angle-left"></i>',
             rightArrow: '<i class="la la-angle-right"></i>'
@@ -144,6 +148,7 @@ $(document).ready(function () {
     $(".select2_selectbox").select2({
         placeholder: ""
     });
+
 
     $(".live_select_picker").selectpicker();
 

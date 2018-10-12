@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contact extends CI_Controller {
+class Lead extends CI_Controller {
     
     public $sessionData;
 	public function __construct()
@@ -14,15 +14,22 @@ class Contact extends CI_Controller {
     
     public function index() 
     {
-        $this->load->model('contact_model');
+        $this->load->model('lead_model');
         $companyId = $this->sessionData['company_id'];
         $user_role_id = $this->sessionData['user_role_id'];
         $userId = $this->sessionData['logged_in'];
-        $data['page_title'] = 'Contact';
-        $data['breadcum_title'] = 'Contact';
-        $data['active_sidemenu'] = "contact";
-        $data['load_js'] = 'contact';
-        $data['data_source'] = base_url('contact/contactlist');
+        $data['page_title'] = 'Lead';
+        $data['breadcum_title'] = 'Lead';
+        $data['active_sidemenu'] = "lead";
+        $data['load_js'] = 'lead';
+
+        $sales_stages = get_sales_stages_list_with_prob('special', '');
+        $output = '';
+        foreach($sales_stages as $value){
+            $output.='<option value="'.$value['id'].'" data-probability="'.$value['probability'].'">'.ucfirst($value['name']).'</option>';
+        }
+        $data['sales_stages'] = $output;
+        $data['data_source'] = base_url('lead/leadlist');
         $data['account_list'] = $this->common_model->getdata($selected = 'id,account_number,name','account', $where = array('is_deleted' => '0','status' => '1','company_id' => $companyId), $limit = false, $offset = false, $orderby=false);
         
         /* 
@@ -36,15 +43,17 @@ class Contact extends CI_Controller {
         $data['user_list'] = user_list_role_wise($userId,$companyId,$user_role_id,'');
 
         $this->load->view('include/header',$data);
-        $this->load->view('contact',$data);
+        $this->load->view('lead',$data);
         $this->load->view('include/footer');
     }
 
-    public function contactlist()
+    public function leadlist()
     {
-        $this->load->model('contact_model');
+        $this->load->model('lead_model');
+        $user_role_id = $this->sessionData['user_role_id'];
+        $userId = $this->sessionData['logged_in'];
         $companyId = $this->sessionData['company_id'];
-        $response =  $this->contact_model->contactlist($companyId);
+        $response =  $this->lead_model->leadlist($userId,$user_role_id,$companyId);
         echo json_encode($response);
         die;
     }
@@ -134,7 +143,7 @@ class Contact extends CI_Controller {
         }
     }
 
-    public function edit_contact()
+    public function edit_lead()
     {
         if($this->input->is_ajax_request())
         {

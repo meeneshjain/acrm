@@ -131,7 +131,11 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 					$selected = 'selected';
 				}
 				$output.='<option value="'.$table_data[$value].'" '.$selected.'>'.ucfirst($table_data[$text]).'</option>';
-			} else {
+			} 
+			else if($type == 'special'){
+				$output[$table_data[$value]] = $table_data;
+			}
+			else {
 				$output[$table_data[$value]] = ucfirst($table_data[$text]);
 			}
 			
@@ -141,6 +145,102 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 		return 0;
 	}
 }
+
+function user_list_role_wise($userId,$companyId,$user_role_id,$selected_value=null)
+{
+	$obj =& get_instance();
+	$obj->load->database();
+
+	$data = array();
+    if($user_role_id == 1)
+    {
+        $obj->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
+		$obj->db->from('users as u');
+		$obj->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id !=' => $userId, 'u.company_id'=> $companyId));
+        $obj->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
+        $obj->db->order_by("ur.id", "asc");
+		$result = $obj->db->get() or die( 'MySQL Error: ' . $obj->db->_error_number()); 
+        $data = $result->result_array();
+    
+    }
+    else
+    {
+        $obj->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
+		$obj->db->from('users as u');
+		$obj->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id !=' => $userId, 'u.reports_to_user_id' => $userId, 'u.company_id'=> $companyId));
+        $obj->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
+        $obj->db->order_by("ur.id", "asc");
+		$result = $obj->db->get() or die( 'MySQL Error: ' . $obj->db->_error_number()); 
+        $data = $result->result_array();
+    }
+
+    if(empty($data))
+    {
+    	$obj->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
+		$obj->db->from('users as u');
+		$obj->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id' => $userId, 'u.company_id'=> $companyId));
+        $obj->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
+        $obj->db->order_by("ur.id", "asc");
+		$result = $obj->db->get() or die( 'MySQL Error: ' . $obj->db->_error_number()); 
+        $data = $result->result_array();
+    }
+
+    $user_role_wise = array();
+
+    if(isset($data) && !empty($data))
+    {
+        foreach ($data as $key => $value) 
+        {
+            $user_role_wise[$value['role_id']][] = $value;
+        }
+    }
+
+	$html = '';
+    if(isset($user_role_wise['2']) && !empty($user_role_wise['2']))
+    {
+        $html .='<optgroup label="Resional Managers">';
+        foreach ($user_role_wise['2'] as $rmkey => $rmvalue) 
+        {
+        	$selected="";
+			if($selected_value == $rmvalue['id']){
+				$selected = 'selected';
+			}
+            $html .='<option value="'.$rmvalue['id'].'" '.$selected.'>'.$rmvalue['empname'].' ('.$rmvalue['role'].')</option>';
+        }
+        $html .='</optgroup>';
+    }
+
+    if(isset($user_role_wise['3']) && !empty($user_role_wise['3']))
+    {
+        $html .='<optgroup label="Team Leaders">';
+        foreach ($user_role_wise['3'] as $tlkey => $tlvalue) 
+        {
+        	$selected="";
+			if($selected_value == $tlvalue['id']){
+				$selected = 'selected';
+			}
+            $html .='<option value="'.$tlvalue['id'].'" '.$selected.'>'.$tlvalue['empname'].' ('.$tlvalue['role'].')</option>';
+        }
+        $html .='</optgroup>';
+    }
+
+    if(isset($user_role_wise['4']) && !empty($user_role_wise['4']))
+    {
+        $html .='<optgroup label="Other Users">';
+        foreach ($user_role_wise['4'] as $ukey => $uvalue) 
+        {
+        	$selected="";
+			if($selected_value == $uvalue['id']){
+				$selected = 'selected';
+			}
+            $html .='<option value="'.$uvalue['id'].'" '.$selected.'>'.$uvalue['empname'].' ('.$uvalue['role'].')</option>';
+        }
+        $html .='</optgroup>';
+    }
+    return $html;
+}
+
+
 
 function get_company_list($type, $selected_value = NULL){
 	return generate_drop_down('id', 'company_name', 'companies', $type,$selected_value);
@@ -160,6 +260,10 @@ function get_subscription_plan_list($type, $selected_value = NULL){
 
 function get_sales_stages_list($type, $selected_value = NULL){
 	return generate_drop_down('id', 'name', 'sales_stages', $type,$selected_value);
+}
+
+function get_sales_stages_list_with_prob($type, $selected_value = NULL){
+	return generate_drop_down('id', 'name,probability', 'sales_stages', $type,$selected_value);
 }
 
 function get_uom_list($type, $selected_value = NULL){
@@ -226,6 +330,7 @@ function load_required_js($page_name){
 		"sales" => array('sales_module.js'),
 		"account" => array('account.js'),
 		"contact" => array('contact.js'),
+		"lead" => array('lead.js'),
 		
 	);
 	return $js_list[$page_name];
