@@ -1,6 +1,6 @@
 
 <div class="m-grid__item m-grid__item--fluid m-wrapper">
-   <div class="m-subheader ">
+    <div class="m-subheader">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
@@ -24,6 +24,19 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
+                                <?php
+                                $user = 1;
+                                if($user == 1)
+                                {
+                                ?>
+                                <li class="m-portlet__nav-item">
+                                    <a href="javascript:;" class="contact_to_lead_btn m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
+                                        <i class="fa fa-user"></i>
+                                    </a>
+                                </li>
+                                <?php 
+                                }
+                                ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill cont_modal_open_btn" data-form_type="add">
                                         <i class="fa fa-plus"></i>
@@ -75,12 +88,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="account_list_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="contact_to_lead_modal" tabindex="-1" role="dialog" aria-labelledby="contact_to_lead_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    New message
+                <h5 class="modal-title" id="contact_to_lead_label">
+                    Assign Contact
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
@@ -89,32 +102,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form class="" id="contat_to_lead_form"  data-parsley-validate>
                     <div class="form-group">
                         <label for="recipient-name" class="form-control-label">
-                            Recipient:
+                            Assign to User:
                         </label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="form-control-label">
-                            Message:
-                        </label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <select class="form-control m-input" required id="assign_to_user_list" name="user_ids[]">
+                            <option value="">- Select User-</option>
+                            <?php 
+                            echo $user_list;
+                            ?>
+                        </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
+                <button type="button" onclick="convert_contact_to_lead()" class="btn btn-primary">
+                    Assign
                 </button>
-                <button type="button" class="btn btn-primary">
-                    Send message
+                <button type="button" class="btn btn-danger"  data-dismiss="modal">
+                    Close
                 </button>
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 <div class="modal fade" id="cont_modal" tabindex="-1" role="dialog" aria-labelledby="cont_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
@@ -132,14 +144,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-12">
+                        <div class="checkduplicatecontact"></div>
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
                                 <label>
                                     Account Name
                                 </label>
-                                <!-- <select class="form-control m-select2" id="cont_account" name="param">
-                                    <option></option>
-                                </select> -->
                                 <select required id="cont_account" name="account_name" class="form-control m-input">
                                     <option value=""> Select Account</option>
                                     <?php
@@ -154,8 +164,8 @@
                                 </select>
                             </div> 
                         </div>
-                        <div class="form-group m-form__group row">
 
+                        <div class="form-group m-form__group row">
                             <div class="col-lg-6">
                                 <label>
                                     First Name
@@ -177,15 +187,14 @@
                                 <label>
                                     Mobile
                                 </label>
-                                <input type="text" required id="cont_mobile_no" name="mobile" class="form-control m-input" placeholder="Enter mobile number">
+                                <input type="text" required id="cont_mobile_no" onblur="checkDuplicate(this,'mobile')" name="mobile" class="form-control m-input" placeholder="Enter mobile number">
                             </div>
                             <div class="col-lg-6">
                                 <label>
                                     Email
                                 </label>
-                                <input type="text" required id="cont_email_1" name="email_1" class="form-control m-input" placeholder="Enter email address">
+                                <input type="text" required id="cont_email_1" onblur="checkDuplicate(this,'email_1')" name="email_1" class="form-control m-input" placeholder="Enter email address">
                             </div> 
-                                                  
                         </div>
 
                         <div class="form-group m-form__group row">
@@ -229,7 +238,6 @@
                                 <input type="text" id="cont_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
                             </div>
                         </div>
-
 
                         <div class="form-group m-form__group row">
                             <div class="col-lg-6">
@@ -318,13 +326,13 @@
                 </div>
 
                 <div class="modal-footer">
-                        <button type="button" id="cont_action_btn"  class="btn btn-primary">
-                         <i class="fa fa-check"></i> Update
-                     </button>
+                    <button type="button" id="cont_action_btn"  class="btn btn-primary">
+                        <i class="fa fa-check"></i> Update
+                    </button>
 
-                     <button type="button" class="btn btn-danger close_modal_common" data-dismiss="modal">
-                         <i class="fa fa-times"></i> Close
-                     </button>
+                    <button type="button" class="btn btn-danger close_modal_common" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
                 </div>
             </form>
         </div>
