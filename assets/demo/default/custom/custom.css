@@ -22,6 +22,10 @@
     margin: 0 0 10px 0 !important;
 }
 
+.fa-2x{
+	font-size: 2rem;
+}
+
 .rem-3{
     font-size:3rem;
 }

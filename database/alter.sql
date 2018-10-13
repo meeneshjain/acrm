@@ -416,3 +416,8 @@ CREATE TABLE `sales_order_revisions` (
 
 ALTER TABLE `sales_order_revisions`
 CHANGE `id` `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+
+ALTER TABLE `sales_order`
+ADD `cancel_reason` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `stages`,
+ADD `revision_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `cancel_reason`;

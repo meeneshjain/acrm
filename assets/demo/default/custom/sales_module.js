@@ -1,5 +1,12 @@
 var form_obj = $('#sales_action_form');
 var item_options = "";
+var sale_stages = '<option value="">Select Sale Current Status</option>\
+                    <option value="draft">Draft</option>\
+                   <option value="negotiation">In Negotiation</option>\
+                   <option value="approved">Approved</option>\
+                   <option value="close">Close</option>\
+                   <option value="cancel">Cancel</option>\ ';
+var is_new_revision = 0;
 $(document).ready(function () {
     $(document).on("click", ".add_update_click", function () {
         var obj = $(this);
@@ -7,11 +14,13 @@ $(document).ready(function () {
         var button_title = "";
         var form_action = '';
         var form_name = $("#form_name").val();
+        $("#sale_stages").html(sale_stages);
         if (form_name == "sales_quote") {
             $(".ref_quote_no_block").hide();
             $("#ref_quote_no").val("");
         } else if (form_name == "sales_order") {
             $(".ref_quote_no_block").show();
+            $("#ref_quote_no").attr('disabled', false);
         }
 
         if (obj.attr('data-form_type') == "add") {
@@ -20,6 +29,8 @@ $(document).ready(function () {
             button_title = '<i class="fa fa-save"></i> Save';
             form_action = base_url + "sales/save_update/" + form_name;
             get_new_sales_data();
+            $(".ref_sales_order_input").show();
+            $(".ref_quote_no_label").hide()
             $("#profile_section_box").show();
             $("#email").attr('disabled', false);
             $("#username").attr('disabled', false);
@@ -27,16 +38,26 @@ $(document).ready(function () {
             $(".deleteImage").hide();
             $("#password").attr('disabled', false).parents('div').show();;
             $("#is_active").prop("checked", true);
+            $("#sale_stages").val('draft');
             $("#sales_order_quotation_id").val('0');
+            $("#is_new_sales_order").val(1);
         } else if (obj.attr('data-form_type') == "edit") {
             title = "Edit " + ($("#sales_form_title").val());
             button_title = '<i class="fa fa-save"></i> Update';
+            $("#sale_stages").val("");
+
+            if (form_name == "sales_order") {
+                $("#ref_quote_no").attr('disabled', true);
+                $(".ref_sales_order_input").hide();
+                $(".ref_quote_no_label").show()
+            }
             form_action = base_url + "sales/save_update/" + form_name + '/' + obj.attr('data-el_id');
             // $("#profile_section_box").hide();
             $("#email").attr('disabled', true);
             $("#username").attr('disabled', true);
             $("#password").attr('disabled', true).parent('div').hide();;
             $("#is_active").prop("checked", false);
+            $("#is_new_sales_order").val(0);
         }
 
         form_obj.attr('action', form_action);
@@ -46,9 +67,9 @@ $(document).ready(function () {
     });
 
     $(document).on("click", ".close_modal_common", function () {
-        form_obj.parsley().reset();
-        form_obj[0].reset();
+        reset_form();
         $("#user_id").val(0);
+        $("#sales_order_quotation_id").val(0);
     });
 
     $(document).on("click", "#save_update_button_click", function () {
@@ -88,7 +109,7 @@ $(document).ready(function () {
             <input type="text" id="item_name_`+ block_count + `" name="item_detail[` + block_count + `][item_name]" required class="form-control m-input" data-maped_item_code_id="item_code_` + block_count + `" placeholder="Item Name" readonly>
             </td>
             <td>
-            <input type="text" id="quantity_`+ block_count + `" data-item_price_quantity="price_` + block_count + `" name="item_detail[` + block_count + `][quantity]" required class="form-control m-input item_price_quantity" placeholder="Quantity">
+            <input type="text" id="quantity_`+ block_count + `" data-item_price_quantity="price_` + block_count + `" name="item_detail[` + block_count + `][quantity]" value="1" required class="form-control m-input item_price_quantity" placeholder="Quantity">
             </td>
             <td>
             <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" class="form-control m-input price_list_select" placeholder="Price">
@@ -248,9 +269,48 @@ $(document).ready(function () {
     $(document).on("change, keyup", ".actual_calculator", function () {
         actual_total();
     });
+
+
+    $(document).on("change", "#sale_stages", function () {
+        var obj = $(this);
+        $(".sale_stages_sections").hide();
+        if ($(obj).val() != "") {
+            if ($(obj).val() == "negotiation") {
+                $(".revision_box_show").show();
+            } else if ($(obj).val() == "cancel") {
+                $(".cancel_reason_box").show();
+            }
+        }
+    });
+
+    $(document).on("change", "#ref_quote_no", function () {
+        var obj = $(this);
+        if ($(obj).val() != "0") {
+            var sales_order_id = $(obj).val();
+            reset_form();
+            $("#is_new_sales_order").val(1);
+            $(".loader_block").show();
+            $("#is_new_sales_order").val(1);
+            get_sales_details(sales_order_id);
+            $("#ref_quote_no").val(sales_order_id);
+        } else if ($(obj).val() == "0") {
+            reset_form();
+            $("#is_new_sales_order").val(1);
+            $("#account_code").val("");
+        }
+    });
+
+
+
 }); // document end 
 
 // custom functions goes here - start
+
+function reset_form() {
+    form_obj.parsley().reset();
+    form_obj[0].reset();
+    $(".item_detail_section").html("");
+}
 
 function final_total() {
     var total = 0;
@@ -303,7 +363,7 @@ function calculate_row_amount(price, discount, quantity, tax) {
 }
 
 function get_new_sales_data() {
-    call_service(base_url + "sales/get_sales_data/" + $("#logged_in_company_id").val(), function (res) {
+    call_service(base_url + "sales/get_sales_data/" + $("#logged_in_company_id").val() + "/" + $("#form_name").val(), function (res) {
         if (res['status'] == 'success') {
             var employee_code = res['data'];
             $("#doc_number").val(res['doc_number']);
@@ -312,6 +372,16 @@ function get_new_sales_data() {
             item_options = generate_item_list(res['item_list']);
             if ($(".item_code_list").length > 0) {
                 $(".item_code_list").html(item_options);
+            }
+
+            if ($("#form_name").val() == "sales_order") {
+                if (res['sales_quotes'].length > 0 && res['sales_quotes'] != "") {
+                    var sales_quote_orders = '<option value="0">Select Sales Quotation Number</option>';
+                    for (let index = 0; index < res['sales_quotes'].length; index++) {
+                        sales_quote_orders += '<option value="' + res['sales_quotes'][index]['id'] + '">' + res['sales_quotes'][index]['doc_no'] + '</option>';
+                    }
+                    $("#ref_quote_no").html(sales_quote_orders);
+                }
             }
 
         }
@@ -349,7 +419,7 @@ function generate_account_list(account_list_array, selected_account) {
     $("#account_code").html(out);
 }
 
-function get_sales_details(id) {
+function get_sales_details(id, called_from) {
     $("#add_update_user_modal").modal('show');
     call_service(base_url + "sales/get_sales_details/" + id, function (res) {
         if (res['status'] == 'success') {
@@ -357,6 +427,15 @@ function get_sales_details(id) {
             generate_account_list(res['account_list'], header_data['account_id']);
             setTimeout(function () {
                 $("#account_code").trigger('change');
+                setTimeout(function () {
+                    $("#contact_person").val(header_data.contact_person_id);
+                    $("#contact_person").trigger('change');
+                    setTimeout(function () {
+                        if ($(".loader_block").is(":visible")) {
+                            $(".loader_block").hide();
+                        }
+                    }, 500);
+                }, 1000);
             }, 500);
             // $("#account_code").val(header_data.account_name);
             $("#doc_number").val(header_data.doc_no);
@@ -367,14 +446,14 @@ function get_sales_details(id) {
             $("#gst_number").val(header_data.gst_no);
             $("#valid_till").val(header_data.valid_till);
             $("#pan_no").val(header_data.pan_card_no);
-            $("#status").val(header_data.stages);
-            setTimeout(function () {
-                $("#contact_person").val(header_data.contact_person_id);
-                $("#contact_person").trigger('change');
-            }, 1000);
             $("#sales_employee").val(header_data.sales_employee);
             $("#contact_person_name").val(header_data.contact_person_name);
-            $("#ref_quote_no").val(header_data.sales_quote_ref_id);
+            if ($("#form_name").val() != "sales_order") {
+                $("#ref_quote_no").val(header_data.sales_quote_ref_id);
+            }
+            
+            $(".ref_quote_no_label label").html(header_data.sales_quote_ref_id);
+
             $("#pay_terms").val(header_data.pay_terms);
             $("#remark").val(header_data.remarks);
             $("#total_amount").val(header_data.total_amount);
@@ -383,6 +462,17 @@ function get_sales_details(id) {
             $("#final_discount").val(header_data.discount);
             $("#actual_total").val(header_data.actual_total);
             $("#sales_order_quotation_id").val(header_data.id);
+            $("#sale_stages").val(header_data.stages);
+            is_new_revision = 0;
+            if (header_data.stages == "negotiation") {
+                $(".revision_box_show").show();
+                $("#revision_number").val(header_data.revision_number);
+                is_new_revision = header_data.revision_number;
+            } else if (header_data.stages == "cancel") {
+                $(".cancel_reason_box").show();
+                $("#cancel_reason").val(header_data.cancel_reason);
+            }
+
             if (res['details'].length > 0 && res['details'] !== undefined) {
                 var block_count = 0;
                 var output = "";
@@ -445,6 +535,15 @@ function get_sales_details(id) {
 
         }
     }, function (res) {
+    });
+
+    $(document).on("change", "#is_new_revision", function () {
+        var obj = $(this);
+        if (obj.is(":checked")) {
+            $("#revision_number").val(parseFloat(is_new_revision) + 1);
+        } else {
+            $("#revision_number").val(parseFloat(is_new_revision));
+        }
     });
 }
 

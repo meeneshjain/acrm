@@ -57,8 +57,13 @@ class Sales extends CI_Controller {
 				$this->sales_model->insert_sales($type,$post_data);
 				$output = array("status" => "success","message" => $post_data['sales_form_title'].' Inserted', "data" => "");
 			} else {
-				$this->sales_model->update_sales($type,$post_data, $id);
-				$output = array("status" => "success","message" => $post_data['sales_form_title'].' Updated', "data" => "");
+                if(isset($post_data['is_new_sales_order']) && $post_data['is_new_sales_order']=="1"){
+                    $this->sales_model->insert_sales($type,$post_data);
+				    $output = array("status" => "success","message" => $post_data['sales_form_title'].' Inserted', "data" => "");
+                } else {
+                    $this->sales_model->update_sales($type,$post_data, $id);
+				    $output = array("status" => "success","message" => $post_data['sales_form_title'].' Updated', "data" => "");    
+                }
 			}
 		} else {
 			$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
@@ -67,7 +72,7 @@ class Sales extends CI_Controller {
         exit;
      }
      
-    public function get_sales_data($company_id = NULL){
+    public function get_sales_data($company_id = NULL, $form_name = NULL){
           if($this->input->is_ajax_request()) {
               if(empty($company_id) && $company_id == "" && $company_id == 0){
                   $output = array("status" => "error","message" => 'Company ID missing ', "data" => "");
@@ -75,7 +80,11 @@ class Sales extends CI_Controller {
                     $docNumber = $this->sales_model->get_sales_data($company_id);
                     $account_list = $this->sales_model->get_account_list($company_id);
                     $item_list = $this->sales_model->get_item_list($company_id);
-				    $output = array("status" => "success","message" => 'Document Number Generated', "doc_number" => $docNumber, 'account_list'=>$account_list, 'sale_employees'=> $this->sessionData['full_name'], "item_list"=> $item_list);
+                    $sales_quotes = "";
+                    if($form_name == "sales_order"){
+                        $sales_quotes = $this->sales_model->get_sales_quote_list($company_id);
+                    }
+				    $output = array("status" => "success","message" => 'Document Number Generated', "doc_number" => $docNumber, 'account_list'=>$account_list, 'sale_employees'=> $this->sessionData['full_name'], "item_list"=> $item_list, "sales_quotes"=>$sales_quotes);
                 }
               } else {
 		    	$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");

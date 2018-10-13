@@ -154,8 +154,8 @@ class User_model extends CI_Model {
 		$prefix = ($data['company_prefix']);
 		$str_length = 4; 
 		$employee_count = $this->db->query("SELECT COUNT(id) as total_employee FROM `users` WHERE `company_id` = '$company_id'")->row()->total_employee;
-		
-		$final_code = $str = substr("0000{$employee_count}", -$str_length);
+		$employee_count++;
+		$final_code = substr("0000{$employee_count}", -$str_length);
 		return strtoupper($prefix).''.$final_code;
 	}
 	

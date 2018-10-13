@@ -99,7 +99,7 @@ class Sales_model extends CI_Model {
 		$str_length = 4;
 		$sales_count = $sales_count+1;
 		$final_code = substr("0000{$sales_count}", -    $str_length);
-		return strtoupper('DOC').'00'.date('Y').''.$final_code;
+		return strtoupper('DOC').$company_id.'00'.date('Y').''.$final_code;
 	}
 	
 	function get_account_list($company_id){
@@ -119,9 +119,16 @@ class Sales_model extends CI_Model {
 		return $data;
 	}
 	
+	function get_sales_quote_list($company_id){
+		$data = $this->db->query("SELECT *
+		FROM `sales_order` as so 
+		WHERE so.`type` = 'QUOTATION'")->result_array(); //  AND `company_id` = '$company_id'
+		return $data;
+	}
+	
 	function get_account_contacts($account_id){
-		$data = $this->db->query("SELECT id, CONCAT(first_name, ' ', last_name) as full_name, contact_no1 as contact_number
-		FROM `contact` 
+		$data = $this->db->query("SELECT id, CONCAT(first_name, ' ', last_name) as full_name, mobile as contact_number
+		FROM `contact_lead` 
 		WHERE `status` = '1' AND `account_id` = '$account_id'")->result_array(); //  AND `company_id` = '$company_id'
 		return $data;
 	}
@@ -135,7 +142,7 @@ class Sales_model extends CI_Model {
 		
 		$insert_data_hdr = array(
 			"type"=> $sale_type,
-			"sales_quote_ref_id"=>$post_data['ref_quote_no'],
+			"sales_quote_ref_id"=>(isset($post_data['ref_quote_no']) && $post_data['ref_quote_no']!="") ? $post_data['ref_quote_no'] : 0,
 			"company_id"=> $post_data['company_id'],
 			"account_id"=> $post_data['account_code'],
 			"account_name"=> $post_data['account_name'],
@@ -154,6 +161,8 @@ class Sales_model extends CI_Model {
 			"other_charges"=>$post_data['other_charges'],
 			"total_tax"=> $post_data['total_tax'],
 			"stages"=> $post_data['status'],
+			"cancel_reason"=>$post_data['cancel_reason'],
+			"revision_number"=>$post_data['revision_number'],
 			"contact_person_id"=> $post_data['contact_person'],
 			"contact_person_name"=> $post_data['contact_name'],
 			"contact_person_number"=> $post_data['contact_no'],
@@ -166,6 +175,20 @@ class Sales_model extends CI_Model {
 		$res  = $this->db->insert('sales_order',$insert_data_hdr);
 		if($res){
 			$sales_order_id = $this->db->insert_id();
+			if($post_data['status'] == "negotiation"){
+				if(isset($post_data['is_new_revision']) && $post_data['is_new_revision']!=""){
+					$insert_data_revision = array(
+						"sales_order_id" => $sales_order_id,
+						"revision_no" => $post_data['revision_number'] ,
+						"revision_amount" => $post_data['actual_total'],
+						"status" => "1",
+						"is_deleted" => "0",
+						"created_date" => DATETIME,
+					); 
+					$res  = $this->db->insert('sales_order_revisions',$insert_data_revision);
+				}
+				
+			}
 			if(count($post_data['item_detail']) > 0){
 				foreach($post_data['item_detail'] as $items ){
 					$insert_data_detail = array(
@@ -194,7 +217,7 @@ class Sales_model extends CI_Model {
 	
 	function update_sales($type, $post_data, $id){
 		$update_hrd_data = array(
-			"sales_quote_ref_id"=>$post_data['ref_quote_no'],
+			// "sales_quote_ref_id"=>(isset($post_data['ref_quote_no']) && $post_data['ref_quote_no']!="") ? $post_data['ref_quote_no'] : "",
 			"company_id"=> $post_data['company_id'],
 			"account_id"=> $post_data['account_code'],
 			"account_name"=> $post_data['account_name'],
@@ -212,6 +235,8 @@ class Sales_model extends CI_Model {
 			"other_charges"=>$post_data['other_charges'],
 			"total_tax"=> $post_data['total_tax'],
 			"stages"=> $post_data['status'],
+			"cancel_reason"=>$post_data['cancel_reason'],
+			"revision_number"=>$post_data['revision_number'],
 			"contact_person_id"=> $post_data['contact_person'],
 			"contact_person_name"=> $post_data['contact_name'],
 			"contact_person_number"=> $post_data['contact_no'],
@@ -224,6 +249,19 @@ class Sales_model extends CI_Model {
 		$res  = $this->db->update('sales_order',$update_hrd_data);
 		if($res){
 			$sales_order_id = $post_data['sales_id'];
+			if($post_data['status'] == "negotiation"){
+				if(isset($post_data['is_new_revision']) && $post_data['is_new_revision']!=""){
+					$insert_data_revision = array(
+						"sales_order_id" => $sales_order_id,
+						"revision_no" => $post_data['revision_number'] ,
+						"revision_amount" => $post_data['actual_total'],
+						"status" => "1",
+						"is_deleted" => "0",
+						"created_date" => DATETIME,
+					); 
+					$res  = $this->db->insert('sales_order_revisions',$insert_data_revision);
+				}
+			}
 			if(count($post_data['item_detail']) > 0){
 				foreach($post_data['item_detail'] as $items ){
 					$insert_update_detail = array(

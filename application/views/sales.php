@@ -100,6 +100,26 @@
                 <div class="modal-body">
                     <div class="col-md-12">
                         <div class="form-group m-form__group row">
+                             <label class="text-left col-lg-2 col-form-label ref_quote_no_block">
+                                Reference Quotation Number
+                            </label>
+                            <div class="col-lg-3 pull-right  ">
+                           <!--  <input type="text" id="ref_quote_no" name="ref_quote_no" class="form-control m-input ref_quote_no_block" placeholder="Reference Quotation Number"> -->
+                           <div class="ref_sales_order_input">
+                               <select class="form-control m-input" id="ref_quote_no" name="ref_quote_no">
+                                   <option value="">Select Sales Quotation Number</option>
+                                </select>
+                            </div>
+                            <div class="ref_quote_no_label" style="display:none;">
+                             <label class="text-left col-lg-2 col-form-label "></label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-2 loader_block" style="display:none;">
+                            <span><i class="fa fa-spinner fa-spin fa-2x mt-2"></i></span>
+                        </div>
+                        </div>
+                        <div class="form-group m-form__group row">
                             <label class="text-left col-lg-2 col-form-label">Account Code </label>
                             <div class="col-lg-3">
                                 <select required class="form-control m-input" id="account_code" name="account_code">
@@ -158,12 +178,10 @@
                                   <input type="text" id="pan_no" name="pan_no" class="form-control m-input" placeholder="Enter PAN No. Address">
                                 </div>
                               <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label">
-                                        Status
-                                    </label>
+                              <label class="text-left col-lg-2 col-form-label"> Sales Employee </label>
                             <div class="col-lg-3 pull-right">
-                                    <input type="text" id="status"  name="status" class="form-control m-input"   placeholder="Enter Current Status">
-                                </div>
+                                <input type="text" id="sales_employee" required name="sales_employee" class="form-control m-input" placeholder="Enter Sales Employee" value="<?php echo  $sales_employee_name; ?>">
+                            </div>     
                         </div>
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">Contact Person </label>
@@ -173,26 +191,46 @@
                                 </select>
                                 </div>
                               <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label">
-                                        Sales Employee
-                                    </label>
-                            <div class="col-lg-3 pull-right">
-                                    <input type="text" id="sales_employee" required name="sales_employee" class="form-control m-input" placeholder="Enter Sales Employee" value="<?php echo  $sales_employee_name; ?>">
-                                </div>
-                        </div>
-                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">Contact Number </label>
+                             <label class="text-left col-lg-2 col-form-label">Contact Number </label>
                             <div class="col-lg-3">
                                   <input type="text" id="contact_no" required readonly name="contact_no" class="form-control m-input" placeholder="Enter Contact Number">
                                   <input type="hidden" id="contact_person_name" required readonly name="contact_name" class="form-control m-input" placeholder="">
                                 </div>
-                                 <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label ref_quote_no_block">
-                                        Reference Quotation Number
+                        </div>
+                         <div class="form-group m-form__group row">
+                                <label class="text-left col-lg-2 col-form-label">
+                                        Stages
                                     </label>
-                                    <div class="col-lg-3 pull-right ">
-                                    <input type="text" id="ref_quote_no" name="ref_quote_no" class="form-control m-input ref_quote_no_block" placeholder="Reference Quotation Number">
+                            <div class="col-lg-3 pull-right">
+                                <select required class="form-control m-input" id="sale_stages" required name="status">
+                                </select>
                                 </div>
+                                 <div class="col-lg-2"></div>
+                                <!-- reference  -->
+                                <div class="text-left col-lg-2">
+                                <label class="col-form-label revision_box_show sale_stages_sections"  style="display:none;">
+                                     Is New Revision ?  
+                                </label>
+                                </div>
+                                <div class="col-lg-3 pull-right revision_box_show  sale_stages_sections" style="display:none;">
+                                <span class="m-switch m-switch--icon pull-left">
+                                        <label>
+                                            <input type="checkbox" id="is_new_revision" name="is_new_revision" value="1">
+                                            <span></span>
+                                        </label>
+                                    </span>
+                                <input type="text" id="revision_number" name="revision_number" class="form-control m-input col-sm-5" placeholder="Revision #">
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <div class="text-left col-lg-2">
+                                <label class="col-form-label cancel_reason_box sale_stages_sections" style="display:none;"> Cancel Reason </label>    
+                            </div>
+                            <div class="col-lg-3">
+                                  <textarea rows="3" id="cancel_reason" name="cancel_reason" required class="form-control m-input cancel_reason_box sale_stages_sections" style="display:none;" placeholder="Cancel Reason"></textarea>
+                            </div>
+                                <div class="col-lg-2"></div>
+                                
                         </div>
                     </div>
                     <hr>  
@@ -293,6 +331,7 @@
                     <input type="hidden" name="sales_form_title" id="sales_form_title" value="<?php echo $page_title; ?>">
                 <input type="hidden" name="company_id" id="logged_in_company_id" value="<?php echo $loggedin_company_id; ?>">
                     <input type="hidden" id="sales_order_quotation_id" name="sales_id" value="0">
+                    <input type="hidden" id="is_new_sales_order" name="is_new_sales_order" value="0">
                     <button type="button" id="save_update_button_click"  class="btn btn-primary">
                         <i class="fa fa-check"></i> Save
                     </button>
