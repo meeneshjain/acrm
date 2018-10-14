@@ -33,6 +33,11 @@ body{
     .m-footer--push.m-aside-left--enabled:not(.m-footer--fixed) .m-footer{
         margin-left: 200px; 
     }
+    
+    .logo_css {
+        width: 70%;
+        padding: 0%;
+    }
 }
 
 .h4, h4 {
@@ -133,7 +138,7 @@ body{
 }
 
 .m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__heading .m-menu__link-text, .m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__link .m-menu__link-text{
-    font-size: 0.9rem;
+    font-size: 0.99rem;
 }
 
 .m-header-menu .m-menu__nav>.m-menu__item>.m-menu__link .m-menu__link-text{
@@ -188,10 +193,7 @@ body{
     margin: 0 !important;
 }
 
-.logo_css {
-     width: 90%;
-    padding: 0%;
-}
+
 
 
 .m-form .form-control-label, .m-form label{
@@ -199,7 +201,7 @@ body{
 }
 
 .m-aside-menu .m-menu__nav>.m-menu__item .m-menu__submenu .m-menu__item>.m-menu__heading .m-menu__link-text, .m-aside-menu .m-menu__nav>.m-menu__item .m-menu__submenu .m-menu__item>.m-menu__link .m-menu__link-text{
-        font-size: 0.9rem;
+        font-size: 0.95rem;
 }
 
 .m-btn--icon.m-btn--custom.m-btn--icon-only {

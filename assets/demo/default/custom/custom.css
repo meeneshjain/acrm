@@ -211,3 +211,12 @@ a.btn.btn-black {
 .dataTables_info {
     display: none;
 }
+
+
+.m-stack.m-stack--ver.m-stack--desktop{
+	z-index: 99999;
+}
+
+.m-stack.m-stack--general.m-stack--ver>.m-stack__item{
+	z-index: 0000;
+}

@@ -120,8 +120,8 @@ $(document).ready(function () {
                 "columnDefs": [{ "bSortable": false, "aTargets": 'no-sort' }],
             });
             i++;
-        }).on("mouseover",function() {
-            $('.custom-popover').popover({ trigger: "hover",html: true });
+        }).on("mouseover", function () {
+            $('.custom-popover').popover({ trigger: "hover", html: true });
         });
     }
 
@@ -248,6 +248,27 @@ $(document).ready(function () {
     });
 
     //modal over modal functionality - end
+
+    // menu resposive issue fix
+
+    if ($(window).width() > 900) {
+        $("#m_header_topbar").show();
+    } else {
+        $("#m_header_topbar").hide()
+    }
+
+
+    $(window).resize(function () {
+        if ($(this).width() > 900) {
+            $("#m_header_topbar").show();
+        } else {
+            $("#m_header_topbar").hide()
+        }
+    });
+
+    $("#m_aside_header_topbar_mobile_toggle").on("click", function () {
+        $("#m_header_topbar").toggle();
+    })
 
 
 }); // jquery end 
