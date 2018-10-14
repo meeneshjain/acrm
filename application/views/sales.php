@@ -99,8 +99,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
-                        <div class="form-group m-form__group row">
-                             <label class="text-left col-lg-2 col-form-label ref_quote_no_block">
+                        <div class="form-group m-form__group row ref_quote_no_block">
+                             <label class="text-left col-lg-2 col-form-label ">
                                 Reference Quotation Number
                             </label>
                             <div class="col-lg-3 pull-right  ">
@@ -219,7 +219,7 @@
                                             <span></span>
                                         </label>
                                     </span>
-                                <input type="text" id="revision_number" name="revision_number" class="form-control m-input col-sm-5" placeholder="Revision #">
+                                <input type="text" id="revision_number" name="revision_number" class="form-control m-input col-sm-5 " placeholder="Revision #">
                             </div>
                         </div>
                         <div class="form-group m-form__group row">
