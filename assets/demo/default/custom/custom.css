@@ -178,7 +178,7 @@ a.btn.btn-black {
 
 .thum_img_outer a { display: none;}
 .thum_img_outer:hover a { display: block;}
-#uploadifive-upload_images_single ,#uploadifive-upload_pdf { width: auto !important; height: inherit !important; cursor: pointer;}
+#uploadifive-upload_images_single ,#uploadifive-upload_pdf { width: auto !important; height: inherit !important; cursor: pointer; }
 
 
 .fileinput, .page-container .main-content{
