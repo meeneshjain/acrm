@@ -260,8 +260,8 @@ body, html{
 }
 
 .m-btn--icon.m-btn--icon-only>i{
-    top: 48%;
-    left: 48%;
+    top: 50%;
+    left: 50%;
 }
 
  .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-text{
@@ -281,4 +281,16 @@ table.table-bordered.dataTable tbody td, table.table-bordered.dataTable tbody th
     border-bottom-width: 0;
     padding: 5px !important;
     font-size: 12px;
+}
+.m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__heading .m-menu__link-icon, .m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__link .m-menu__link-icon{
+    font-size: 1.1rem;
+}
+
+.m-aside-menu .m-menu__nav>.m-menu__item .m-menu__submenu .m-menu__item>.m-menu__heading .m-menu__link-icon, .m-aside-menu .m-menu__nav>.m-menu__item .m-menu__submenu .m-menu__item>.m-menu__link .m-menu__link-icon{
+    width: 20px;
+    font-size: 1.0rem;
+}
+
+.m-btn--icon.m-btn--icon-only [class*=" fa-"], .m-btn--icon.m-btn--icon-only [class^=fa-] {
+    font-size: 1.0rem;
 }
