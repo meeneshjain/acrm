@@ -37,7 +37,7 @@
                     </div>
                     <div class="m-portlet__body">
                         <!--begin: Datatable -->
-                            <table class=" table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary" id="user_list_dt_table" data-source="<?php echo $data_source; ?>">
+                            <table class=" table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary table-responsive" id="user_list_dt_table" data-source="<?php echo $data_source; ?>">
                                 <thead class="">
                                     <tr>
                                         <th class="no-sort">

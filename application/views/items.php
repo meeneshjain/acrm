@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="m-portlet__body">
-                        <table class="table table-striped- table-bordered table-hover table-checkable dt_table m-table--head-separator-primary" id="item_list_dt_table" data-source="<?php echo base_url('items/itemlist'); ?>">
+                        <table class="table table-striped- table-bordered table-hover table-checkable dt_table m-table--head-separator-primary table-responsive" id="item_list_dt_table" data-source="<?php echo base_url('items/itemlist'); ?>">
                             <thead>
                                 <tr>
                                     <th class="no-sort">

@@ -58,18 +58,17 @@ sessionStorage.fonts = true;
 </div>
 <div class="m-stack__item m-stack__item--middle m-brand__tools">
     <!-- BEGIN: Left Aside Minimize Toggle -->
-    <a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block 
-">
+    <a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block">
         <span></span>
     </a>
     <!-- END -->
 <!-- BEGIN: Responsive Aside Left Menu Toggler -->
-    <a href="javascript:;" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
+    <a href="javascript:;" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block" >
         <span></span>
     </a>
     <!-- END -->
 <!-- BEGIN: Responsive Header Menu Toggler -->
-    <a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+    <a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block" >
         <span></span>
     </a>
     <!-- END -->
@@ -506,7 +505,7 @@ sessionStorage.fonts = true;
 </ul>
 </div>
 <!-- END: Horizontal Menu -->								<!-- BEGIN: Topbar -->
-<div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid">
+<div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid ">
 <div class="m-stack__item m-topbar__nav-wrapper">
     <ul class="m-topbar__nav m-nav m-nav--inline">
         <li class="
