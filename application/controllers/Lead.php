@@ -41,11 +41,15 @@ class Lead extends CI_Controller {
             @param4 : get selected user 
         */
         $data['user_list'] = user_list_role_wise($userId,$companyId,$user_role_id,'');
+        $data['lead_source'] = get_lead_source('select');
+        $data['opp_type'] = get_opportunity_type('select');
 
         $this->load->view('include/header',$data);
         $this->load->view('lead',$data);
         $this->load->view('include/footer');
     }
+
+
 
     public function leadlist()
     {
@@ -308,6 +312,46 @@ class Lead extends CI_Controller {
             else
             {
                 echo json_encode(array("status" => "error","message" => 'Account Id doesn\'t exist.', "data" => ""));
+            }
+        }
+        else
+        {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
+    }
+
+    public function convert_to_opportunity()
+    {
+        if($this->input->is_ajax_request())
+        {
+            $companyId = $this->sessionData['company_id'];
+            $userId = $this->sessionData['logged_in'];
+            //echo '<PRE>';print_r($_POST);
+            $data = array(
+                            'opp_currency' => $this->input->post('oppr_currency'),
+                            'opp_close_date' => $this->input->post('oppr_close_date'),
+                            'opp_amount' => $this->input->post('oppr_amount'),
+                            'opp_type' => $this->input->post('oppr_type'),
+                            'opp_sales_stage' => $this->input->post('oppr_stage'),
+                            'opp_probability' => $this->input->post('oppr_probability'),
+                            'opp_lead_source' => $this->input->post('oppr_source'),
+                            'opp_next_step' => $this->input->post('oppr_next_step'),
+                            'opp_description' => $this->input->post('oppr_description')
+                        );
+            if(isset($_POST['id']) && !empty($_POST['id']))
+            {
+                $data['is_type'] = '2';
+                $data['updated_by'] = $userId;
+                $data['updated_date'] = DATETIME;
+                $data['convert_oppr_date'] = DATETIME;
+
+                $where = array('id' => $this->input->post('id'));
+                $this->common_model->update_data('contact_lead',$data,$where);
+                echo json_encode(array("status" => "success","message" => 'Lead Converted to Opportunity Successfully', "data" => ""));
+            }
+            else
+            {
+                echo json_encode(array("status" => "error","message" => 'Something went wrong please check.', "data" => ""));
             }
         }
         else
