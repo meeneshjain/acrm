@@ -14,6 +14,7 @@ $(document).ready(function () {
         var button_title = "";
         var form_action = '';
         var form_name = $("#form_name").val();
+        $("#revision_number").val(is_new_revision);
         $("#sale_stages").html(sale_stages);
         if (form_name == "sales_quote") {
             $(".ref_quote_no_block").hide();
@@ -451,7 +452,7 @@ function get_sales_details(id, called_from) {
             if ($("#form_name").val() != "sales_order") {
                 $("#ref_quote_no").val(header_data.sales_quote_ref_id);
             }
-            
+
             $(".ref_quote_no_label label").html(header_data.sales_quote_ref_id);
 
             $("#pay_terms").val(header_data.pay_terms);
@@ -467,7 +468,7 @@ function get_sales_details(id, called_from) {
             if (header_data.stages == "negotiation") {
                 $(".revision_box_show").show();
                 $("#revision_number").val(header_data.revision_number);
-                is_new_revision = header_data.revision_number;
+                is_new_revision = (header_data.revision_number != "" && header_data.revision_number != 0) ? header_data.revision_number : 0;
             } else if (header_data.stages == "cancel") {
                 $(".cancel_reason_box").show();
                 $("#cancel_reason").val(header_data.cancel_reason);

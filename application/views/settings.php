@@ -228,6 +228,47 @@
                     </ul>
                 </div>
             </div>
+            
+            <div class="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="flaticon-statistics"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                Email Templates
+                            </h3>
+                            <h2 class="m-portlet__head-label m-portlet__head-label--info">
+                                <span>
+                                    Modify Email templates to change global system templates
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="javascript:;" id="fetch_email_temples" class="m-portlet__nav-link m-portlet__nav-link--icon" data-toggle="modal" data-target="#email_temples_modal">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </li>
+                            <li class="m-portlet__nav-item">
+                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                                    <i class="fa fa-upload"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <ul class="list-group">
+                        <?php foreach($email_templates as $temple){ ?>
+                            <li class="list-group-item"> <b><?php echo $temple;  ?> </b></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
         
             <!-- <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
                 <div class="m-portlet__head">

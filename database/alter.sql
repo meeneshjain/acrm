@@ -421,3 +421,42 @@ CHANGE `id` `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 ALTER TABLE `sales_order`
 ADD `cancel_reason` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `stages`,
 ADD `revision_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `cancel_reason`;
+
+
+--after deployment 14-10-2018
+
+ALTER TABLE `sales_order`
+CHANGE `doc_date` `doc_date` date NOT NULL AFTER `doc_no`,
+CHANGE `delivery_date` `delivery_date` date NOT NULL AFTER `doc_date`,
+CHANGE `valid_till` `valid_till` date NOT NULL AFTER `delivery_date`;
+
+CREATE TABLE `email_template` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `template_key` int NOT NULL,
+  `subject` text NOT NULL,
+  `body` longtext NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+ALTER TABLE `email_template`
+ADD `is_global` tinyint NOT NULL DEFAULT '0' AFTER `body`;
+
+CREATE TABLE `company_email_templates` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `subject` text NOT NULL,
+  `body` text NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_by` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+
+ALTER TABLE `email_template`
+CHANGE `template_key` `template_key` varchar(200) NOT NULL AFTER `id`;

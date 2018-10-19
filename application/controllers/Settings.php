@@ -23,6 +23,8 @@ class Settings extends CI_Controller {
         $data['subscription_plan'] = get_subscription_plan_list('data', NULL);
         $data['sales_stages']      = get_sales_stages_list('data', NULL);
         $data['uom_list']          = get_uom_list('data', NULL);
+        $data['email_temple']          = get_all_email_templates('data', NULL);
+        $data['email_template']          = get_company_email_templates('data', NULL);
          
         $data['all_stages'] = $this->settings_model->get_sales_stages();
         

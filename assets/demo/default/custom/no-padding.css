@@ -296,3 +296,19 @@ table.table-bordered.dataTable tbody td, table.table-bordered.dataTable tbody th
 .m-btn--icon.m-btn--icon-only [class*=" fa-"], .m-btn--icon.m-btn--icon-only [class^=fa-] {
     font-size: 1.0rem;
 }
+
+
+.m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label{
+        height: 2rem;
+        top: -2.5rem;
+        padding: 0 1.4rem;
+        font-size: 1.1rem;
+}
+
+.m-portlet.m-portlet--creative{
+        padding-top: 1.5rem;
+}
+
+.m-portlet.m-portlet--creative.m-portlet--first {
+    margin-top: 1.375rem;
+}

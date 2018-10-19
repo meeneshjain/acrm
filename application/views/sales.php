@@ -219,7 +219,7 @@
                                             <span></span>
                                         </label>
                                     </span>
-                                <input type="text" id="revision_number" name="revision_number" class="form-control m-input col-sm-5 " placeholder="Revision #">
+                                <input type="text" id="revision_number" name="revision_number" class="form-control m-input col-sm-5 " placeholder="Revision #" readonly>
                             </div>
                         </div>
                         <div class="form-group m-form__group row">
