@@ -94,7 +94,7 @@ class User_model extends CI_Model {
 			"company_id" => $post_data['company_id'],
 			"email" => $post_data['email'],
 			"username" => $post_data['username'],
-			"password" => $post_data['password'],
+			"password" => md5($post_data['password']),
 			"first_name" => $post_data['first_name'],
 			"last_name" => $post_data['last_name'],
 			"mobile_no" => $post_data['mobile'],
