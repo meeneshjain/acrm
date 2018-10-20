@@ -77,8 +77,12 @@
 <script src="<?php echo base_url('assets/demo/default/custom/sidebar_activities.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
 
-
-
+<?php if(isset($view_needed_js) && $view_needed_js!=""){ ?>
+	<?php if($view_needed_js == "setting"){ ?>
+	<script src="<?php echo base_url('assets/demo/default/custom/crud/forms/widgets/summernote.js'); ?>" type="text/javascript"></script>
+	<?php } ?>
+	
+<?php } ?>
 
 <?php  if(isset($load_js) && $load_js!=""){
 	foreach(load_required_js($load_js) as $js_files){ ?>

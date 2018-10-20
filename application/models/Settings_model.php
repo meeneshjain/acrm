@@ -64,4 +64,37 @@ class Settings_model extends CI_Model {
             return 0;
         }
     }
+    
+    public function get_email_template_content($template_key){
+        $sessionData = $this->session->userdata();
+        if($sessionData['is_admin'] == "1"){
+            $select_template_query = "SELECT id, template_key, `subject`, `body`  FROM email_templates WHERE status = '1' AND is_deleted = '0' AND template_key = '$template_key' ";
+        } else if($sessionData['is_admin'] == 0){
+            $select_template_query = "SELECT id, template_key, `subject`, `body`  FROM company_email_templates WHERE status = '1' AND is_deleted = '0' AND template_key = '$template_key' AND company_id='$sessionData[company_id]' ";
+        }
+        return $this->db->query($select_template_query)->row_array();
+    }
+    
+    function update_email_template($post_data){
+        $sessionData = $this->session->userdata();
+        $update_data = array(
+            "subject" => $post_data['subject'],
+            "body" => $post_data['body'],
+            "updated_date"=> DATETIME
+        );
+        if($sessionData['is_admin'] == "1"){
+            $table = "email_templates";
+            
+        } else if($sessionData['is_admin'] == 0){
+          $this->db->where(array("template_key"=> $post_data['template_key'], "company_id" => $sessionData['company_id']));
+           $table = "company_email_templates";
+        }
+        $response = $this->db->update($table, $update_data);    
+        // echo $this->db->last_query(); die;
+         if($response > 0){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

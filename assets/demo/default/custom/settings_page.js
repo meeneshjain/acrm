@@ -128,7 +128,94 @@ $(document).ready(function (event) {
         }
     });
 
+    $(document).on("click", ".close_template_button", function () {
+        template_loader();
+    });
+
+
+    $(document).on("click", ".fetch_email_temples", function () {
+        template_loader();
+        call_service(base_url + "settings/get_email_template_list/", function (res) {
+            if (res['status'] == 'success') {
+                var out = '<option value=""> Select a template</option>\n';
+                out = out + res['data'];
+                setTimeout(function () {
+                    $("#email_template_chooser").html(out);
+                    $(".template_loader").hide();
+                    $(".loadded_data_section").show();
+                }, 350);
+            }
+        }, function (res) {
+        });
+    });
+
+    $(document).on("change", "#email_template_chooser", function () {
+        var obj = $(this);
+        $('.email_template_block').hide();
+        if (obj.val() != "") {
+            call_service(base_url + "settings/get_email_template_content/" + obj.val(), function (res) {
+                if (res['status'] == 'success') {
+                    $('.email_template_block').show();
+                    $("#template_subject").val(res['data']['subject']);
+                    console.log(res['data']['body']);
+                    $(".email_editor").summernote('code', res['data']['body']);
+                }
+            }, function (res) {
+            });
+        }
+    });
+
+
+    $(document).on("submit", "#email_template_update_form", function (event) {
+        event.preventDefault();
+        var form_obj = $(this);
+        var btn_id = '#update_email_template_button';
+        var obj = $(btn_id);
+        btn_text = obj.html();
+        if (form_obj.parsley().validate()) {
+            show_loading(btn_id, 'Updating..!');
+            $.ajax({
+                url: form_obj.attr("action"),
+                data: {
+                    "template_key": $("#email_template_chooser").val(),
+                    "subject": $("#template_subject").val(),
+                    // "body": $(".email_editor").val(),
+                    "body": $('.email_editor').summernote('code')
+                },
+                type: 'POST',
+                dataType: "JSON",
+                success: function (res) {
+                    notify_alert(res.status, res.message);
+                    setTimeout(function () {
+                        hide_loading(btn_id, btn_text);
+                        form_obj.parsley().reset();
+                        form_obj[0].reset();
+                        $('#email_template_modal').modal('hide');
+                    }, 1000);
+                },
+                error: function (response) {
+                    hide_loading(btn_id, btn_text);
+
+                    notify_alert('danger', 'There was some error, Please try again.', "Error");
+                }
+            });
+        }
+    });
+
+    $(document).on("click", ".email_constants_toggle", function (event) {
+        $(".email_contstans").slideToggle();
+    });
 
 
 
 }); // dom end 
+
+function template_loader() {
+    $(".email_template_block").hide();
+    $(".template_loader").show();
+    $(".loadded_data_section").hide();
+    $("#template_subject").val("");
+    $('.email_editor').summernote();
+    $(".email_contstans").hide();
+
+}

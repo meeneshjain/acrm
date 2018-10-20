@@ -460,3 +460,6 @@ CREATE TABLE `company_email_templates` (
 
 ALTER TABLE `email_template`
 CHANGE `template_key` `template_key` varchar(200) NOT NULL AFTER `id`;
+
+ALTER TABLE `company_email_templates`
+ADD `template_key` varchar(200) NOT NULL AFTER `company_id`;

@@ -134,6 +134,8 @@ class Company_model extends CI_Model {
 		$company_id = $this->db->insert_id();
 		$userArray['company_id'] = $company_id;
 		$this->db->insert('`users`', $userArray);
+		
+		generate_new_company_templates($company_id); 
 
 	}
 

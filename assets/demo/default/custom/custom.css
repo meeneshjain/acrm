@@ -9,6 +9,11 @@
     width:95%
 }
 
+.modal-slg {
+    max-width: 100%;
+    width: 65%;
+}
+
 .modal-mlg{
     max-width: 100%;
     width:80%
@@ -219,4 +224,14 @@ a.btn.btn-black {
 
 .m-stack.m-stack--general.m-stack--ver>.m-stack__item{
 	z-index: 0000;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable{
+	margin-top: 25px;
+    border: 1px solid #ccc;
+}
+
+.height_150_scroll{
+	max-height: 150px;
+	overflow-y: scroll;
 }

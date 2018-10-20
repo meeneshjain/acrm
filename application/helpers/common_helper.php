@@ -353,4 +353,84 @@ function truncated_string($string,$len) {
  }
  return $new;
 }
+
+function get_all_email_templates($type, $selected_value = NULL ){
+	return generate_drop_down('template_key', 'subject', 'email_template', $type,$selected_value);
+}
+
+function get_company_email_templates($type, $selected_value = NULL ){
+	$obj =& get_instance();
+	$obj->load->database();
+	$obj->sessionData = $obj->session->userdata();
+	$logged_in_company = $obj->sessionData['company_id'];
+	$value = "template_key";
+	$text = "subject";
+	$query = $obj->db->query("SELECT $value, $text FROM company_email_templates WHERE company_id = '$logged_in_company'" );
+	if($query->num_rows() > 0)	{
+		$output = "";
+		foreach($query->result_array() as $table_data){
+			if($type == 'html'){
+				
+				$selected="";
+				if($selected_value == $table_data[$value]){
+					$selected = 'selected';
+				}
+				$output.='<option value="'.$table_data[$value].'" '.$selected.'>'.ucfirst($table_data[$text]).'</option>';
+			} 
+			else if($type == 'special'){
+				$output[$table_data[$value]] = $table_data;
+			}
+			else if($type == 'data'){
+				$output[$table_data[$value]] = ucfirst($table_data[$text]);
+			}
+			
+		}
+		return $output;
+	} else {
+		return 0;
+	}
+
+}
+
+function generate_new_company_templates($company_id){
+	$obj =& get_instance();
+	$obj->load->database();
+	$raw_query = "SELECT * FROM email_template WHERE is_global= 0 AND status = 1 AND is_deleted = 0";
+	$res = $obj->db->query($raw_query);
+	if($res->num_rows() > 0){
+		$output = "";
+		foreach($res->result_array() as $table_data){
+			$output = $table_data;
+			unset($output['id']);
+			unset($output['is_global']);
+			$output['company_id'] = $company_id;
+			$data = $obj->db->insert("company_email_templates", $output);
+		}
+	} else {
+		return 0;
+	}
+	
+}
+
+
+function get_all_email_template_constants(){
+	$constants =  array(
+		"{{base_url}}"=>"Application Path",
+		"{{app_name_full}}"=> "Application Full Name",
+		"{app_name_short}} "=>"Application Short Name ",
+		"{{company_name}}"=>"Company Name",
+		"{{user_full_name}}"=>"User Full Name",
+		"{{user_first_name}}"=>"User First Name",
+		"{{user_last_name}}"=>"User Last Name",
+		"{{user_id}}"=> "User Login ID",
+		"{{user_email}}"=> "User Email ID",
+		"{{password}}"=>"Current Non Encrypted Password ",
+		"{{employee_name}}"=>"Employee Name",
+		"{{employee_email}}"=>"Employee Email",
+		"{{new_random_password}}"=>"New Generated Password",
+	);
+	
+	return $constants;
+}
+
 ?>

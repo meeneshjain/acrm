@@ -43,11 +43,11 @@
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
-                            <li class="m-portlet__nav-item">
+                            <!-- <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
                                     <i class="fa fa-upload"></i>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -78,18 +78,7 @@
                         </div>
                     </div>
                     <div class="m-portlet__head-tools">
-                        <!-- <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul> -->
+                      
                     </div>
                 </div>
                 <div class="m-portlet__body">
@@ -143,49 +132,7 @@
                 </div>
             </div>
             
-            <!-- <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon">
-                                <i class="flaticon-statistics"></i>
-                            </span>
-                            <h3 class="m-portlet__head-text">
-                                Portlet sub title goes here
-                            </h3>
-                            <h2 class="m-portlet__head-label m-portlet__head-label--accent">
-                                <span>
-                                    Projects
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <ul class="list-group">
-                        <li class="list-group-item"> <b>Cras justo odio </b></li>
-                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
-                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
-                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
-                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
-                    </ul>
-                </div>
-            </div> -->
-            <!--end::Portlet-->
+         
         </div>
         <div class="col-lg-4">
             <div class="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
@@ -212,11 +159,11 @@
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </li>
-                            <li class="m-portlet__nav-item">
+                            <!-- <li class="m-portlet__nav-item">
                                 <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
                                     <i class="fa fa-upload"></i>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -237,11 +184,11 @@
                                 <i class="flaticon-statistics"></i>
                             </span>
                             <h3 class="m-portlet__head-text">
-                                Email Templates
+                                Modify Email templates to change overall templates
                             </h3>
                             <h2 class="m-portlet__head-label m-portlet__head-label--info">
                                 <span>
-                                    Modify Email templates to change global system templates
+                                    Email Templates
                                 </span>
                             </h2>
                         </div>
@@ -249,13 +196,8 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="javascript:;" id="fetch_email_temples" class="m-portlet__nav-link m-portlet__nav-link--icon" data-toggle="modal" data-target="#email_temples_modal">
+                                <a href="javascript:;" id="fetch_email_temples" class="m-portlet__nav-link m-portlet__nav-link--icon fetch_email_temples" data-toggle="modal" data-target="#email_template_modal">
                                     <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
                                 </a>
                             </li>
                         </ul>
@@ -270,91 +212,6 @@
                 </div>
             </div>
         
-            <!-- <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon m--hide">
-                                <i class="flaticon-statistics"></i>
-                            </span>
-                            <h3 class="m-portlet__head-text">
-                                Portlet sub title goes here
-                            </h3>
-                            <h2 class="m-portlet__head-label m-portlet__head-label--success">
-                                <span>
-                                    Recent Customers
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <ul class="list-group">
-                        <li class="list-group-item"> <b>Cras justo odio </b></li>
-                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
-                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
-                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
-                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon">
-                                <i class="flaticon-statistics"></i>
-                            </span>
-                            <h3 class="m-portlet__head-text">
-                                Portlet sub title goes here
-                            </h3>
-                            <h2 class="m-portlet__head-label m-portlet__head-label--primary">
-                                <span>
-                                    Projects
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <ul class="list-group">
-                        <li class="list-group-item"> <b>Cras justo odio </b></li>
-                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
-                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
-                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
-                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
-                    </ul>
-                </div>
-            </div> -->
-            <!--end::Portlet-->
         </div>
         <div class="col-lg-4">
             <div class="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
@@ -375,18 +232,7 @@
                         </div>
                     </div>
                     <div class="m-portlet__head-tools">
-                      <!--   <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul> -->
+              
                     </div>
                 </div>
                 <div class="m-portlet__body">
@@ -398,91 +244,7 @@
                 </div>
             </div>
         
-            <!-- <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon m--hide">
-                                <i class="flaticon-statistics"></i>
-                            </span>
-                            <h3 class="m-portlet__head-text">
-                                Portlet sub title goes here
-                            </h3>
-                            <h2 class="m-portlet__head-label m-portlet__head-label--accent">
-                                <span>
-                                    Recent Customers
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <ul class="list-group">
-                        <li class="list-group-item"> <b>Cras justo odio </b></li>
-                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
-                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
-                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
-                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- <div class="m-portlet m-portlet--creative m-portlet--bordered-semi">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon">
-                                <i class="flaticon-statistics"></i>
-                            </span>
-                            <h3 class="m-portlet__head-text">
-                                Portlet sub title goes here
-                            </h3>
-                            <h2 class="m-portlet__head-label m-portlet__head-label--success">
-                                <span>
-                                    Projects
-                                </span>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="m-portlet__head-tools">
-                        <ul class="m-portlet__nav">
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            </li>
-                            <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <ul class="list-group">
-                        <li class="list-group-item"> <b>Cras justo odio </b></li>
-                        <li class="list-group-item"> <b>Dapibus ac facilisis in </b></li>
-                        <li class="list-group-item"> <b>Morbi leo risus </b></li>
-                        <li class="list-group-item"> <b>Porta ac consectetur ac </b></li>
-                        <li class="list-group-item"> <b>Vestibulum at eros </b></li>
-                    </ul>
-                </div>
-            </div> -->
-            <!--end::Portlet-->
+         
         </div>
     </div>
 </div>
@@ -505,7 +267,7 @@
             <div class="modal-body">
                 <div class="col-md-12 uom_loader" style="display:none">
                     <div class="text-center">
-                        <i class="fa fa-superpowersfa-spin rem-3" ></i>
+                        <i class="fa 	fa-spinner fa-spin rem-3" ></i>
                     </div>
                 </div>
                 <div class="col-sm-12 uom_data_grid" > 
@@ -575,7 +337,7 @@
             <div class="modal-body">
                 <div class="col-md-12 sale_stages_loader" style="display:none">
                     <div class="text-center">
-                        <i class="fa fa-superpowersfa-spin rem-3" ></i>
+                        <i class="fa 	fa-spinner fa-spin rem-3" ></i>
                     </div>
                 </div>
                 <div class="col-sm-12">
@@ -644,6 +406,88 @@
                 </button>
                 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-times"></i> Close
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="email_template_modal" tabindex="-1" role="dialog" aria-labelledby="email_template_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-slg" role="document">
+    <div class="modal-content">
+        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="email_template_update_form"  data-parsley-validate action="<?php echo base_url('settings/update_email_template'); ?>">
+            <div class="modal-header">
+                <h4 class="modal-title" id="email_template_modal_label">
+                    <b>Email Template</b>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="col-md-12 template_loader" style="display:none">
+                    <div class="text-center">
+                        <i class="fa 	fa-spinner fa-spin rem-3" ></i>
+                    </div>
+                </div>
+                <div class="loadded_data_section" style="display:none;">
+                        
+                <div class="form-group m-form__group row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label for="email_template_chooser">
+                        Select Template
+                    </label>
+                    <select required class="form-control m-input" id="email_template_chooser" name="email_template_chooser"></select>
+                </div>
+            </div>    
+                
+            <div class="email_template_block" style="display:none;">
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label for="template_subject">
+                            Template Subject
+                        </label>
+                        <input required type="text" id="template_subject" name="template_subject" class="form-control m-input" placeholder="Enter a subject">
+                    </div>
+                </div>
+                <div class="form-group m-form__group row m--margin-top-10">
+                    <label class="ml-4">
+                        Template Body
+                    </label>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="email_editor"></div>
+                    </div>
+                </div>
+                
+                <div class="predefined_email_constants_box">
+                    <a href="javascript:;" class="btn btn-outline-accent btn-sm m-btn m-btn--icon m-btn--pill email_constants_toggle col-md-3 mb-3 ml-5">Toggle Email Constants</a>
+                    <br>
+                    <div class="email_contstans height_150_scroll col-md-12" style="display:none;">
+                        <?php if($email_constants!=""){ ?>
+                            <ul class="list-group">
+                            <?php foreach($email_constants as $key =>  $constants){  ?>
+                                <li class="list-group-item"> <b> <?php echo $key;  ?> </b> - <?php echo $constants; ?></li>
+                            <?php } ?>
+                    <?php } ?>
+                    </div>
+                </div>
+            </div>
+        
+                    </div>    
+                </div>
+            <div class="modal-footer">
+                <button type="submit" id="update_email_template_button"  class="btn btn-primary">
+                   <i class="fa fa-check"></i> Update
+                </button>
+                
+                <button type="button" class="btn btn-danger close_template_button" data-dismiss="modal">
                     <i class="fa fa-times"></i> Close
                 </button>
             </div>
