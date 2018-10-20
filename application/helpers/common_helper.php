@@ -374,7 +374,8 @@ function load_required_js($page_name){
 		"account" => array('account.js'),
 		"contact" => array('contact.js'),
 		"lead" => array('lead.js'),
-		"opportunity" => array('opportunity.js')
+		"opportunity" => array('opportunity.js'),
+		"target" => array('target.js')
 	);
 	return $js_list[$page_name];
 }

@@ -421,3 +421,9 @@ CHANGE `id` `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 ALTER TABLE `sales_order`
 ADD `cancel_reason` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `stages`,
 ADD `revision_number` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `cancel_reason`;
+
+ALTER TABLE `targets`
+ADD `company_id` int(11) NOT NULL AFTER `id`;
+
+ALTER TABLE `targets`
+ADD `target_type` enum('amount','product') NOT NULL AFTER `target_duration_id`;
