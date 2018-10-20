@@ -105,7 +105,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="" method="post" id="convert_to_opportunity_form"  data-parsley-validate>
+                <form class="" method="post" id="convert_to_opportunity_form" action="lead/convert_to_opportunity"  data-parsley-validate>
                     <input type="hidden" name="id" id="oppr_id">
                     <div class="col-lg-12">
                         <div class="form-group m-form__group row">
@@ -129,7 +129,7 @@
                                 <label>
                                     Currency
                                 </label>
-                                <select id="oppr_currency" name="oppr_currency" class="form-control m-input">
+                                <select required id="oppr_currency" name="oppr_currency" class="form-control m-input">
                                     <option value="">--Currency--</option>
                                     <option value="INR"><i class="fa fa-inr"></i> INR</option>
                                     <option value="DOLLAR"><i class="fa fa-dollar"></i> Dollar</option>
@@ -155,10 +155,9 @@
                                 <label>
                                     Type
                                 </label>
-                                <select id="oppr_type" name="oppr_type" class="form-control m-input">
-                                    <option value="">--Currency--</option>
-                                    <option value="INR"><i class="fa fa-inr"></i> INR</option>
-                                    <option value="DOLLAR"><i class="fa fa-dollar"></i> Dollar</option>
+                                <select required id="oppr_type" name="oppr_type" class="form-control m-input">
+                                    <option value="">--Select Type--</option>
+                                    <?php echo $opp_type;?>
                                 </select>
                             </div> 
                         </div>
@@ -168,6 +167,7 @@
                                     Sales Stage
                                 </label>
                                 <select required id="oppr_stage" name="oppr_stage" class="form-control m-input" >
+                                    <option value="">--Select Sales Stage--</option>
                                     <?php 
                                     echo ($sales_stages);
                                     ?>
@@ -177,7 +177,7 @@
                                 <label>
                                     Probability(%)
                                 </label>
-                                <input type="text" required readonly id="oppr_probability" name="oppr_probability" class="form-control m-input" placeholder="">
+                                <input type="text" readonly id="oppr_probability" name="oppr_probability" class="form-control m-input" placeholder="">
                             </div> 
                         </div>
                         <div class="form-group m-form__group row">
@@ -186,9 +186,8 @@
                                     Lead Source
                                 </label>
                                 <select required id="oppr_source" name="oppr_source" class="form-control m-input">
-                                    <option value="">--Sales Stage--</option>
-                                    <option value="INR"><i class="fa fa-inr"></i> INR</option>
-                                    <option value="DOLLAR"><i class="fa fa-dollar"></i> Dollar</option>
+                                    <option value="">--Lead Source--</option>
+                                    <?php echo $lead_source;?>
                                 </select>
                             </div> 
                             <div class="col-lg-6">
@@ -210,11 +209,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
+                <button type="button" id="convert_oppr_action_btn" class="btn btn-primary">
+                    Convert
                 </button>
-                <button type="button" class="btn btn-primary">
-                    Send message
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Close
                 </button>
             </div>
         </div>

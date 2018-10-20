@@ -301,7 +301,8 @@ function convert_contact_to_lead()
 	    call_service(base_url + "contact/convert_contact_to_lead/?assign_to="+assign_to+"&ids=" + idArr, function (response) {
 	        if (response.status == 'success') {
 	            reloadTable("#cont_list_dt_table");
-	            notify_alert('success', response.message, "Success")
+	            notify_alert('success', response.message, "Success");
+	            $("#contact_to_lead_modal").modal('hide');
 	        } else {
 	            notify_alert('danger', response.message, "Error");
 	        }

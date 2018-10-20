@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 	/*
-	 ******** ADD CONTACT ********
+	 ******** ADD LEAD ********
 	*/
 	$(".lead_modal_open_btn").on("click", function () {
 		$("#lead_form").parsley().reset();
@@ -17,7 +17,7 @@ $(document).ready(function () {
 	});
 
 	/*
-	 ******** SAVE / UPDATE CONTACT ********
+	 ******** SAVE / UPDATE LEAD ********
 	*/
 	$("#lead_action_btn").click(function () {
 		var obj = $(this);
@@ -36,6 +36,30 @@ $(document).ready(function () {
 			}, function (res) {
 				notify_alert('danger', res.message, "Error");
 				hide_loading("#lead_action_btn", btn_text);
+			});
+		}
+	});
+
+	/*
+	 ******** CONVERT TO OPPORTUNITY ********
+	*/
+	$("#convert_oppr_action_btn").click(function () {
+		var obj = $(this);
+		if ($("#convert_to_opportunity_form").parsley().validate()) {
+			var btn_text = $("#convert_oppr_action_btn").html();
+			show_loading("#convert_oppr_action_btn", 'Loading..!');
+			form_submit('convert_to_opportunity_form', function (res) {
+				if (res.status == 'success') {
+					notify_alert('success', res.message, "Success");
+					hide_loading("#convert_oppr_action_btn", btn_text);
+					$("#convert_to_opportunity_form").parsley().reset();
+					$("#convert_to_opportunity_form")[0].reset();
+					$("#convert_to_opportunity_modal").modal('hide');					
+					reloadTable("#lead_list_dt_table");
+				}
+			}, function (res) {
+				notify_alert('danger', res.message, "Error");
+				hide_loading("#convert_oppr_action_btn", btn_text);
 			});
 		}
 	});
@@ -117,10 +141,10 @@ $(document).ready(function () {
 	});
 
 	$(".multiple_lead_delete").on("click",function(){
-		if ($(".contchkbx:checked").length > 0) {
+		if ($(".leadchkbx:checked").length > 0) {
 	        if (confirm("Are you sure, You want to delete selected Contact?")) {
 	            idArr = [];
-	            $('.contchkbx').each(function (index, value) {
+	            $('.leadchkbx').each(function (index, value) {
 	                if (this.checked == true) {
 	                    idArr.push(this.value);
 	                }
@@ -162,87 +186,8 @@ $(document).ready(function () {
         }
 	});
 
-
-	/*$('#lead_account_list').select2({
-	  	placeholder: "Search for git repositories",
-        allowClear: !0,
-        ajax: {
-            url: base_url+"contact/account_list",
-            dataType: "json",
-            delay: 250,
-            data: function(e) {
-                console.log(e);
-                return {
-                    q: e.result
-                   // page: e.page
-                }
-            },
-            processResults: function (data) {
-            	console.log(data);
-			    return {
-			        results: data.result,
-			    };
-			},
-            cache: !0
-        },
-        escapeMarkup: function(e) {
-        	console.log(e);
-            return e
-        },
-
-	});*/
-
-	/*$("#lead_account_list").select2({
-	 	disabled:false,
-	  	ajax: { 
-       	url: base_url+"contact/account_list",
-	   	type: "post",
-	   	dataType: 'json',
-	   	delay: 250,
-	   	data: function (params) {
-	    return {
-	      searchTerm: params.term // search term
-	    };
-	   },
-	   processResults: function (response) {
-	     return {
-	        results: response
-	     };
-	   },
-	   cache: true
-	  }
-	});*/
-
-	/*$("#lead_account_list").select2({
-            placeholder: "Search for git repositories",
-            allowClear: !0,
-            ajax: {
-                url: base_url+"contact/account_list",
-                dataType: "json",
-                delay: 250,
-                data: function(e) {
-                    console.log(e);
-                    return {
-                        q: e.result
-                       // page: e.page
-                    }
-                },
-                processResults: function (data) {
-                	console.log(data);
-				    return {
-				        results: data.result,
-				    };
-				},
-                cache: !0
-            },
-            escapeMarkup: function(e) {
-            	console.log(e);
-                return e
-            },
-    });*/
-
     /*
-	## ASSIGN CONTACT TO USER
+	## CONVERT TO OPPORTUNITY
     */
     $("#lead_list_dt_table").on("click", ".convert_to_opportunity_btn", function () {    	
     	$("#convert_to_opportunity_form").parsley().reset();
@@ -267,7 +212,7 @@ function convert_contact_to_lead()
 	if ($("#contact_to_lead_form").parsley().validate()) 
 	{
 		idArr = [];
-	    $('.contchkbx').each(function (index, value) {
+	    $('.leadchkbx').each(function (index, value) {
 	        if (this.checked == true) {
 	            idArr.push(this.value);
 	        }

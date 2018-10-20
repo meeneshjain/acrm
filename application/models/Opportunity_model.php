@@ -1,7 +1,7 @@
 <?php 
-class Lead_model extends CI_Model {	
+class Opportunity_model extends CI_Model {	
 
-	public function leadlist($userId,$user_role_id,$companyId)
+	public function opportunitylist($userId,$user_role_id,$companyId)
 	{
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
@@ -28,7 +28,7 @@ class Lead_model extends CI_Model {
 		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
+		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id','cl.opp_close_date','cl.opp_amount','cl.opp_type','cl.opp_sales_stage','cl.opp_probability','cl.opp_lead_source','cl.convert_oppr_date', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -44,7 +44,8 @@ class Lead_model extends CI_Model {
 				} else {
 					$this->db->order_by($sort_column, ($get_data['order'][0]['dir'] === 'asc' ? 'asc' : 'desc'));
 				}
-		} else {
+		} else 
+		{
 			$this->db->order_by('id', 'DESC');
 		}
 		
@@ -69,7 +70,7 @@ class Lead_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('cl.is_type' => '1', 'cl.status' => '1', 'cl.is_deleted' => '0', 'cl.company_id'=> $companyId));
+		$this->db->where(array('cl.is_type' => '2', 'cl.status' => '1', 'cl.is_deleted' => '0', 'cl.company_id'=> $companyId));
 		$this->db->where("cl.owner_id IN (".$lead_owner.")",NULL, false);
         $this->db->join('account as a', 'cl.account_id=a.id', 'left');
         $this->db->join('users as u', 'cl.owner_id=u.id', 'left');
@@ -88,51 +89,22 @@ class Lead_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="contacts" id="cont_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="leadchkbx"><span></span></label>';
-        	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="opportunities" id="opprt_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="opprchkbx"><span></span></label>';
         	$row[] = $aRow['first_name']." ".$aRow['last_name'];
+        	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
         	$row[] = $aRow['own_fname']." ".$aRow['own_lname'];
-        	$row[] = $aRow['mobile'];
-        	$row[] = $aRow['email_1'];
+        	$row[] = $aRow['opp_close_date'];
+        	$row[] = $aRow['opp_amount'];
+        	$row[] = get_opportunity_type($aRow['opp_type']);
+        	$row[] = $this->db->query("SELECT CONCAT(`name`,' (',`probability`,')') as stage FROM sales_stages WHERE `id` = '".$aRow['opp_sales_stage']."'")->row('stage');
+        	$row[] = get_lead_source($aRow['opp_lead_source']);
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air convert_to_opportunity_btn custom-popover" data-lead-id="'.$aRow['id'].'" data-opportunity-name="'.$aRow['first_name'].' '.$aRow['last_name'].'" data-account-name="'.$aRow['name'] .'('.$aRow['account_number'].')'.'"  data-toggle="m-popover" data-placement="left" title="Make Opportunity" data-content="Convert to Opportunity"><i class="fa fa-dollar"></i></button>
-
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-lead-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
-			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_lead" data-lead-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
-			';
+        	$row[] = '';
+			//$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_opprt" data-opprt-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button><button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_opprt" data-opprt-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
 
         	$output['data'][] = $row;
         }
         return $output;
-    }
-
-    public function user_downline_list($userId,$companyId,$user_role_id)
-    {
-    	$data = array();
-	    if($user_role_id == 1)
-	    {
-	        $this->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
-			$this->db->from('users as u');
-			$this->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id !=' => $userId, 'u.company_id'=> $companyId));
-	        $this->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
-	        $this->db->order_by("ur.id", "asc");
-			$result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number()); 
-	        $data = $result->result_array();
-	    
-	    }
-	    else
-	    {
-	        $this->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
-			$this->db->from('users as u');
-			$this->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id !=' => $userId, 'u.reports_to_user_id' => $userId, 'u.company_id'=> $companyId));
-	        $this->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
-	        $this->db->order_by("ur.id", "asc");
-			$result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number()); 
-	        $data = $result->result_array();
-	    }
-		return $data;
     }
 }
 

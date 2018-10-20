@@ -463,3 +463,9 @@ CHANGE `template_key` `template_key` varchar(200) NOT NULL AFTER `id`;
 
 ALTER TABLE `company_email_templates`
 ADD `template_key` varchar(200) NOT NULL AFTER `company_id`;
+
+ALTER TABLE `targets`
+ADD `company_id` int(11) NOT NULL AFTER `id`;
+
+ALTER TABLE `targets`
+ADD `target_type` enum('amount','product') NOT NULL AFTER `target_duration_id`;

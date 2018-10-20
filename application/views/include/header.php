@@ -962,7 +962,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 								</div>
 							</li> 
 
-                             <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "account" || $active_sidemenu == "contact" || $active_sidemenu == "lead"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+                             <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "account" || $active_sidemenu == "contact" || $active_sidemenu == "lead" || $active_sidemenu == "opportunity"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
 									<i class="m-menu__link-icon flaticon-layers"></i>
 									<span class="m-menu__link-text">
@@ -1004,6 +1004,18 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                     <span class="m-menu__link-wrap">
                                                         <span class="m-menu__link-text">
                                                             Leads
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "opportunity")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('opportunity');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Opportunity
                                                         </span>
                                                     </span>
                                                 </span>
@@ -1052,7 +1064,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 								</div>
 							</li> 
                              
-                             <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                 <a  href="<?php echo base_url('items');?>" class="m-menu__link ">
                                     <i class="m-menu__link-icon fa fa-building"></i>
                                     <span class="m-menu__link-title">
@@ -1064,9 +1076,6 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
-
-                           
-						
 						</ul>
 					</div>
 					<!-- END: Aside Menu -->

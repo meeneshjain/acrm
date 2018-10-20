@@ -240,6 +240,49 @@ function user_list_role_wise($userId,$companyId,$user_role_id,$selected_value=nu
     return $html;
 }
 
+function get_lead_source($result_type=null)
+{
+	$lead_source = array('1'=> 'Cold Call','2'=> 'Existing Customer','3'=> 'Self Generated','4'=> 'Employee','5'=> 'Partner','6'=> 'Public Relation','7'=> 'Direct Mail','8'=> 'Conference','9'=> 'Trade Show','10'=> 'Web Site','11'=> 'Worth Of Mouth');
+	$output = '';
+	if($result_type == 'select')
+	{
+		foreach ($lead_source as $key => $value) 
+		{
+			$output .= '<option value="'.$key.'">'.$value.'</option>';
+		}
+	}
+	else
+	{
+		if(count($lead_source[$result_type])>0)
+		{
+			$output .= $lead_source[$result_type];
+		}
+	}
+
+	return $output;
+}
+
+function get_opportunity_type($result_type=null)
+{
+	$oppr_type = array('1'=> 'New Business','2'=> 'Existing Business');
+
+	$output = '';
+	if($result_type == 'select')
+	{
+		foreach ($oppr_type as $key => $value) 
+		{
+			$output .= '<option value="'.$key.'">'.$value.'</option>';
+		}
+	}
+	else
+	{
+		if(count($oppr_type[$result_type])>0)
+		{
+			$output .= $oppr_type[$result_type];
+		}
+	}
+	return $output;
+}
 
 
 function get_company_list($type, $selected_value = NULL){
@@ -331,7 +374,8 @@ function load_required_js($page_name){
 		"account" => array('account.js'),
 		"contact" => array('contact.js'),
 		"lead" => array('lead.js'),
-		
+		"opportunity" => array('opportunity.js'),
+		"target" => array('target.js')
 	);
 	return $js_list[$page_name];
 }
