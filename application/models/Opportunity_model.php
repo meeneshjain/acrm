@@ -93,7 +93,7 @@ class Opportunity_model extends CI_Model {
         	$row[] = $aRow['first_name']." ".$aRow['last_name'];
         	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
         	$row[] = $aRow['own_fname']." ".$aRow['own_lname'];
-        	$row[] = $aRow['opp_close_date'];
+        	$row[] = get_only_date($aRow['opp_close_date']);
         	$row[] = $aRow['opp_amount'];
         	$row[] = get_opportunity_type($aRow['opp_type']);
         	$row[] = $this->db->query("SELECT CONCAT(`name`,' (',`probability`,')') as stage FROM sales_stages WHERE `id` = '".$aRow['opp_sales_stage']."'")->row('stage');

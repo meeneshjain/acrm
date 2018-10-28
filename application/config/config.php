@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-  // $config['base_url'] = 'http://localhost/akcrm/acrm/';
- $config['base_url'] = 'http://localhost/akshay_crm/acrm/';
+  $config['base_url'] = 'http://localhost/akcrm/acrm/';
+  //$config['base_url'] = 'http://localhost/akshay_crm/acrm/';
   // $config['base_url'] = 'http://meeneshjain.com/akshay_crm/';
 
 

@@ -174,16 +174,15 @@ function user_list_role_wise($userId,$companyId,$user_role_id,$selected_value=nu
         $data = $result->result_array();
     }
 
-    if(empty($data))
-    {
-    	$obj->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
-		$obj->db->from('users as u');
-		$obj->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id' => $userId, 'u.company_id'=> $companyId));
-        $obj->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
-        $obj->db->order_by("ur.id", "asc");
-		$result = $obj->db->get() or die( 'MySQL Error: ' . $obj->db->_error_number()); 
-        $data = $result->result_array();
-    }
+	$obj->db->select("u.id, CONCAT(`u`.`first_name`,' ',`u`.`last_name`) as `empname`,`ur`.`name` as `role`,`ur`.`id` as `role_id`");
+	$obj->db->from('users as u');
+	$obj->db->where(array('u.status' => '1', 'u.is_deleted' => '0', 'u.id' => $userId, 'u.company_id'=> $companyId));
+    $obj->db->join('user_roles as ur', 'ur.id=u.user_role_id', 'left');
+    $obj->db->order_by("ur.id", "asc");
+	$result = $obj->db->get() or die( 'MySQL Error: ' . $obj->db->_error_number()); 
+    $owndetail = $result->result_array();
+
+    $data = array_merge($data,$owndetail);
 
     $user_role_wise = array();
 
@@ -385,7 +384,7 @@ function convert_db_date_time($date){
 }
 
 function get_only_date($date){
-	return date(DEFAULT_DATE_FORMAT,strtotime($date));
+	return date(DISPLAY_DATE_FORMAT,strtotime($date));
 }
 
 function truncated_string($string,$len) {

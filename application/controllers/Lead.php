@@ -84,10 +84,11 @@ class Lead extends CI_Controller {
         
     }
 
-    public function add_update_account()
+    public function add_update_lead()
     {
         if($this->input->is_ajax_request())
         {
+
             $companyId = $this->sessionData['company_id'];
             $userId = $this->sessionData['logged_in'];
             //echo '<pre>';print_r($this->input->post());die;
@@ -114,13 +115,12 @@ class Lead extends CI_Controller {
                             'secondary_pincode' => $this->input->post('secondary_pincode'),
                             'secondary_country' => $this->input->post('secondary_country'),
                             'description' => $this->input->post('description'),
-                            'status' => '1',
-                            'is_deleted' => '0',
                         );
             //print_r($this->input->post());die;
             if(isset($_POST['id']) && !empty($_POST['id']))
             {
                 $data['updated_by'] = $userId;
+                $data['owner_id'] = $this->input->post('owner_id');
                 $data['updated_date'] = DATETIME;
 
                 $where = array('id' => $this->input->post('id'));
@@ -131,6 +131,9 @@ class Lead extends CI_Controller {
             {
                 $data['company_id'] = $companyId;
                 $data['owner_id'] = $userId;
+                $data['is_type'] = '1';
+                $data['status'] = '1';
+                $data['is_deleted'] = '0';
                 $data['created_by'] = $userId;
                 $data['created_date'] = DATETIME;
                 $data['account_id'] = $this->input->post('account_name');
@@ -156,6 +159,7 @@ class Lead extends CI_Controller {
             if(is_numeric($id) && !empty($id))
             {
                 $userId = $this->sessionData['logged_in'];
+                
                 $data = $this->common_model->getdata($selected = '*','contact_lead', $where = array('id' => $id,'company_id' => $companyId), $limit = false, $offset = false, $orderby=false);
                 echo json_encode(array("status" => "success","message" => '', "data" => $data));
             }
@@ -295,30 +299,6 @@ class Lead extends CI_Controller {
         }
     }
 
-    public function changestats()
-    {
-        if($this->input->is_ajax_request())
-        {
-            $id = $this->uri->segment(3);
-            $status = $this->uri->segment(4);
-
-            if(is_numeric($id) && !empty($id))
-            {
-                if($status == 0){$dbstatus = 1;}else{$dbstatus = 0;}
-                $data = array('status' => $dbstatus,'updated_date' => DATETIME);
-                $res_data = $this->common_model->update_data('account',$data,array('id' => $id));
-                echo json_encode(array("status" => "success","message" => 'Account Status Change Successfully!!', "data" => ''));
-            }
-            else
-            {
-                echo json_encode(array("status" => "error","message" => 'Account Id doesn\'t exist.', "data" => ""));
-            }
-        }
-        else
-        {
-            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
-        }
-    }
 
     public function convert_to_opportunity()
     {
