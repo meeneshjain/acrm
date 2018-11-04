@@ -923,7 +923,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 							</li>
 
 		
-							<li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "company" || $active_sidemenu == "user"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+							<li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "company" || $active_sidemenu == "user" || $active_sidemenu == "target"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
 									<i class="m-menu__link-icon flaticon-layers"></i>
 									<span class="m-menu__link-text">
@@ -953,6 +953,18 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                 <span class="m-menu__link-wrap">
                                                     <span class="m-menu__link-text">
                                                         Users
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "target")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                        <a  href="<?php echo base_url('target');?>" class="m-menu__link ">
+                                            <i class="m-menu__link-icon fa fa-building"></i>
+                                            <span class="m-menu__link-title">
+                                                <span class="m-menu__link-wrap">
+                                                    <span class="m-menu__link-text">
+                                                        Targets
                                                     </span>
                                                 </span>
                                             </span>
