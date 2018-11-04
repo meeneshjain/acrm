@@ -10,10 +10,14 @@ $(document).ready(function () {
 		$("#item_modal").modal('show');
 		$(".is_gst_rate_apply").show();
 
-		$(".item_logo_src").attr('src',base_url+'assets/images/no.jpg');
+		$(".item_logo_src").attr('src', base_url + 'assets/images/no.jpg');
 		$(".item_logo_src_value").val('assets/images/no.jpg');
 		$(".deleteImage").hide();
-
+		if ($("#item_type_id").val() == "service") {
+			$("#item_group").val('SERVICE');
+		} else {
+			$("#item_group").val('INVENTORY');
+		}
 		$("#item_form").attr('action', base_url + 'items/add_update_item')
 		$(".item_modal_heading").html('ADD NEW ITEM');
 		$("#item_action_btn").html('<i class="fa fa-save"></i> Save');
@@ -33,7 +37,7 @@ $(document).ready(function () {
 					hide_loading("#item_action_btn", btn_text);
 					$("#item_form").parsley().reset();
 					$("#item_form")[0].reset();
-					$("#item_modal").modal('hide');					
+					$("#item_modal").modal('hide');
 					reloadTable("#item_list_dt_table");
 				}
 			}, function (res) {
@@ -59,22 +63,18 @@ $(document).ready(function () {
 
 					$("#item_id").val(res.data[0].id);
 
-					if(res.data[0].logo != '')
-					{
-						$(".item_logo_src").attr('src',res.data[0].logo);
+					if (res.data[0].logo != '') {
+						$(".item_logo_src").attr('src', res.data[0].logo);
 						$(".item_logo_src_value").val(res.data[0].logo);
-						if(res.data[0].logo == 'assets/images/no.jpg')
-						{
+						if (res.data[0].logo == 'assets/images/no.jpg') {
 							$(".deleteImage").hide();
 						}
-						else
-						{
+						else {
 							$(".deleteImage").show();
 						}
 					}
-					else
-					{
-						$(".item_logo_src").attr('src',base_url+'assets/images/no.jpg');
+					else {
+						$(".item_logo_src").attr('src', base_url + 'assets/images/no.jpg');
 						$(".item_logo_src_value").val('assets/images/no.jpg');
 						$(".deleteImage").hide();
 					}
@@ -86,17 +86,15 @@ $(document).ready(function () {
 					$("#item_unit").val(res.data[0].unit);
 					$("#item_description").val(res.data[0].description);
 
-					if(res.data[0].is_gst == '1')
-					{
+					if (res.data[0].is_gst == '1') {
 						$('#item_gst').prop('checked', true);
 						$("#item_gst_rate").val(res.data[0].gst_tax_rate);
 						$(".is_gst_rate_apply").show();
 					}
-					else
-					{
+					else {
 						$('#item_gst').prop('checked', false);
 						$("#item_gst_rate").val('');
-            			$(".is_gst_rate_apply").hide();
+						$(".is_gst_rate_apply").hide();
 					}
 					$("#itm_price1").val(res.data[0].price1);
 					$("#itm_price2").val(res.data[0].price2);
@@ -137,31 +135,31 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".multiple_items_delete").on("click",function(){
+	$(".multiple_items_delete").on("click", function () {
 		if ($(".itmckbx:checked").length > 0) {
-	        if (confirm("Are you sure, You want to delete selected items?")) {
-	            idArr = [];
-	            $('.itmckbx').each(function (index, value) {
-	                if (this.checked == true) {
-	                    idArr.push(this.value);
-	                }
-	            });
+			if (confirm("Are you sure, You want to delete selected items?")) {
+				idArr = [];
+				$('.itmckbx').each(function (index, value) {
+					if (this.checked == true) {
+						idArr.push(this.value);
+					}
+				});
 
-	            call_service(base_url + "items/multiple_delete_items/?ids=" + idArr, function (response) {
-	                if (response.status == 'success') {
-	                    reloadTable("#item_list_dt_table");
-	                    notify_alert('success', response.message, "Success")
-	                } else {
-	                    notify_alert('danger', response.message, "Error");
-	                }
-	            }, function () {
-	                notify_alert('danger', response.message, "Error");
-	            });
-	        }
-	    }
-	    else {
-	        notify_alert('error', 'Please select at least one item.', 'Error');
-	    }
+				call_service(base_url + "items/multiple_delete_items/?ids=" + idArr, function (response) {
+					if (response.status == 'success') {
+						reloadTable("#item_list_dt_table");
+						notify_alert('success', response.message, "Success")
+					} else {
+						notify_alert('danger', response.message, "Error");
+					}
+				}, function () {
+					notify_alert('danger', response.message, "Error");
+				});
+			}
+		}
+		else {
+			notify_alert('error', 'Please select at least one item.', 'Error');
+		}
 	});
 
 
@@ -169,21 +167,21 @@ $(document).ready(function () {
 	************************
 	*/
 
-	$("#item_price_list").on("change",function(){
-        id = $(this).val();
-        $('.itm_prc_input').hide();
-        $("#itm_"+id).show();
+	$("#item_price_list").on("change", function () {
+		id = $(this).val();
+		$('.itm_prc_input').hide();
+		$("#itm_" + id).show();
 
-    });
+	});
 
-    $("#item_gst").on('change',function(){
-    	if($(this).prop("checked") == true){
-    		$(".is_gst_rate_apply").show();
+	$("#item_gst").on('change', function () {
+		if ($(this).prop("checked") == true) {
+			$(".is_gst_rate_apply").show();
 
-        }
-        else if($(this).prop("checked") == false){
-        	$("#item_gst_rate").val('');
-            $(".is_gst_rate_apply").hide();
-        }
-    });
+		}
+		else if ($(this).prop("checked") == false) {
+			$("#item_gst_rate").val('');
+			$(".is_gst_rate_apply").hide();
+		}
+	});
 });

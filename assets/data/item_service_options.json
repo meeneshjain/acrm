@@ -1,0 +1,116 @@
+{
+    "service_stage": [
+        {
+            "id": "draft",
+            "value": "Draft"
+        },
+        {
+            "id": "approved",
+            "value": "Approved"
+        },
+        {
+            "id": "closed",
+            "value": "Closed"
+        },
+        {
+            "id": "cancelled",
+            "value": "Cancelled"
+        }
+    ],
+    "priority": [
+        {
+            "id": "low",
+            "value": "Low"
+        },
+        {
+            "id": "medium",
+            "value": "Medium"
+        },
+        {
+            "id": "high",
+            "value": "High"
+        }
+    ],
+    "call_status": [
+        {
+            "id": "planned",
+            "value": "Planned"
+        },
+        {
+            "id": "tentative",
+            "value": "Tentative"
+        },
+        {
+            "id": "approved",
+            "value": "Approved"
+        },
+        {
+            "id": "rejected",
+            "value": "Rejected"
+        }
+    ],
+    "problem_origin": [
+        {
+            "id": "software",
+            "value": "Software"
+        },
+        {
+            "id": "hardware",
+            "value": "Hardware"
+        }
+    ],
+    "problem_type": [
+        {
+            "id": "1",
+            "value": "Problem Type 1"
+        },
+        {
+            "id": "2",
+            "value": "Problem Type 2"
+        },
+        {
+            "id": "3",
+            "value": "Problem Type 3"
+        },
+        {
+            "id": "4",
+            "value": "Problem Type 4"
+        }
+    ],
+    "problem_subtype": [
+        {
+            "id": "1",
+            "value": "Problem Subtype 1"
+        },
+        {
+            "id": "2",
+            "value": "Problem Subtype 2"
+        },
+        {
+            "id": "3",
+            "value": "Problem Subtype 3"
+        },
+        {
+            "id": "4",
+            "value": "Problem Subtype 4"
+        }
+    ],
+    "call_type": [
+        {
+            "id": "1",
+            "value": "Call Type 1"
+        },
+        {
+            "id": "2",
+            "value": "Call Type 2"
+        },
+        {
+            "id": "3",
+            "value": "Call Type 3"
+        },
+        {
+            "id": "4",
+            "value": "Call Type 4"
+        }
+    ]
+}

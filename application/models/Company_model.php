@@ -73,7 +73,7 @@ class Company_model extends CI_Model {
             {
             	$imgscr = base_url($aRow['logo']);
             }
-        	$row[] = '<img class="m-widget7__img" src="'.$imgscr.'" alt="" style="width:100px;height:60px">';
+        	$row[] = '<img class="m-widget7__img img-thumbnail" src="'.$imgscr.'" alt="" style="width:80px">';
         	$row[] = $aRow['company_name'];
         	$row[] = $aRow['email_1'];
         	$row[] = $aRow['contact_1'];

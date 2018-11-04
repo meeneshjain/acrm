@@ -4,6 +4,10 @@
     padding-top: 11px;
 }
 
+.display_none{
+	display: none;
+}
+
 .modal-xlg{
     max-width: 100%;
     width:95%

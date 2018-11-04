@@ -370,6 +370,7 @@ function load_required_js($page_name){
 		"company" => array('company.js'),
 		"user" => array('user.js'),
 		"items" => array('items.js'),
+		"item_service" => array('item_service_module.js'),
 		"sales" => array('sales_module.js'),
 		"account" => array('account.js'),
 		"contact" => array('contact.js'),
@@ -475,6 +476,38 @@ function get_all_email_template_constants(){
 	);
 	
 	return $constants;
+}
+
+function get_current_user_id(){
+	$obj =& get_instance();
+	$sessionData = $obj->session->userdata();
+	return (isset($sessionData['logged_in']) && $sessionData['logged_in']!="") ? $sessionData['logged_in'] : 0;
+}
+
+function get_current_company(){
+	$obj =& get_instance();
+	$sessionData = $obj->session->userdata();
+	return (isset($sessionData['company_id']) && $sessionData['company_id']!="") ? $sessionData['company_id'] : 0;
+}
+
+function get_service_items($array_name = NULL , $all_data = 0, $type = 'array'){
+	$json_data = file_get_contents('assets/data/item_service_options.json');
+	$json_obj = json_decode($json_data, true);
+	
+	if($all_data == 1 || $array_name== ""){
+		return $json_obj;	
+	} else {
+		$data = $json_obj[$array_name] ;
+		if($type == 'array'){
+			return $data;
+		} else if($type == 'html_options'){
+			$html_options = '';
+			foreach( $data as $key => $inner_array ){
+				$html_options .= '<option value="'.$inner_array['id'].'">'.$inner_array['value'].'</option>';
+			}
+			return $html_options;
+		}
+	}
 }
 
 ?>

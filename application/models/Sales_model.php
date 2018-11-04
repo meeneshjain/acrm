@@ -166,10 +166,12 @@ class Sales_model extends CI_Model {
 			"contact_person_id"=> $post_data['contact_person'],
 			"contact_person_name"=> $post_data['contact_name'],
 			"contact_person_number"=> $post_data['contact_no'],
+			"sales_employee_id"=> $post_data['sales_employee_id'],
 			"sales_employee"=> $post_data['sales_employee'],
 			"status "=> "1",
 			"is_deleted"=> "0",
 			"created_date"=> DATETIME,
+			"created_by" => get_current_user_id(),
 		);
 		
 		$res  = $this->db->insert('sales_order',$insert_data_hdr);
@@ -184,6 +186,7 @@ class Sales_model extends CI_Model {
 						"status" => "1",
 						"is_deleted" => "0",
 						"created_date" => DATETIME,
+						"created_by" => get_current_user_id(),
 					); 
 					$res  = $this->db->insert('sales_order_revisions',$insert_data_revision);
 				}
@@ -206,6 +209,7 @@ class Sales_model extends CI_Model {
 						"status "=> "1",
 						"is_deleted"=> "0",
 						"created_date"=> DATETIME,
+						"created_by" => get_current_user_id(),
 					);
 				$res2  = $this->db->insert('sales_order_details',$insert_data_detail);
 				}
@@ -240,10 +244,10 @@ class Sales_model extends CI_Model {
 			"contact_person_id"=> $post_data['contact_person'],
 			"contact_person_name"=> $post_data['contact_name'],
 			"contact_person_number"=> $post_data['contact_no'],
-			"sales_employee"=> $post_data['sales_employee'],
 			"status "=> "1",
 			"is_deleted"=> "0",
-			"updated_date"=> DATETIME
+			"updated_date"=> DATETIME,
+			"updated_by"=>get_current_user_id()
 		);
 		$this->db->where("id", $post_data['sales_id']);
 		$res  = $this->db->update('sales_order',$update_hrd_data);
@@ -258,6 +262,7 @@ class Sales_model extends CI_Model {
 						"status" => "1",
 						"is_deleted" => "0",
 						"created_date" => DATETIME,
+						"created_by" => get_current_user_id(),
 					); 
 					$res  = $this->db->insert('sales_order_revisions',$insert_data_revision);
 				}
@@ -277,6 +282,8 @@ class Sales_model extends CI_Model {
 						"remark"=> $items['remark'],
 						"status "=> "1",
 						"is_deleted"=> "0",
+						"updated_by"=>get_current_user_id(),
+						"updated_date"=> DATETIME,
 					);
 					if(isset($items['item_detail_id']) && $items['item_detail_id']!="" && $items['item_detail_id'] != "0"){
 						$insert_update_detail["updated_date"] = DATETIME;

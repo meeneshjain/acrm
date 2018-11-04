@@ -4,7 +4,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                   Item List
+                   <?php echo $page_title; ?>
                 </h3>
            </div>
         </div>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="m-portlet__body">
-                        <table class="table table-striped- table-bordered table-hover table-checkable dt_table m-table--head-separator-primary table-responsive" id="item_list_dt_table" data-source="<?php echo base_url('items/itemlist'); ?>">
+                        <table class="table table-striped- table-bordered table-hover table-checkable dt_table m-table--head-separator-primary" id="item_list_dt_table" data-source="<?php echo $data_source; ?>">
                             <thead>
                                 <tr>
                                     <th class="no-sort">
@@ -152,8 +152,7 @@
                                         <label>
                                             Item Group:
                                         </label>
-                                        <select id="item_group" name="group" class="form-control m-input">
-                                            <option value="">--Group Type--</option>
+                                        <select id="item_group" disabled  name="group" class="form-control m-input">
                                             <option value="SERVICE">Service</option>
                                             <option value="INVENTORY">Inventory</option>
                                         </select>
@@ -247,6 +246,7 @@
                 </div>
 
                 <div class="modal-footer">
+                    <input type="hidden" name="item_type" id="item_type_id" value="<?php echo $item_type ?>">
                         <button type="button" id="item_action_btn"  class="btn btn-primary">
                          <i class="fa fa-check"></i> Update
                      </button>

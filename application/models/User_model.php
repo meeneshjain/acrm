@@ -89,6 +89,7 @@ class User_model extends CI_Model {
 	}
 	
 	public function insert_user($post_data) {
+		
 		$data = array(
 			"user_role_id" => $post_data['user_role'],
 			"company_id" => $post_data['company_id'],
@@ -107,6 +108,7 @@ class User_model extends CI_Model {
 			'profile_pic'=> ($post_data['uploaded_images']) ? $post_data['uploaded_images'] : DEFAULT_IMAGE,
 			'updated_date' => DATETIME,
 			'created_date' => DATETIME,
+			"created_by" => get_current_user_id(),
 		);
 		
 		if($post_data['user_role'] == '4'){
@@ -130,6 +132,7 @@ class User_model extends CI_Model {
 			'profile_pic'=> ($post_data['uploaded_images']) ? $post_data['uploaded_images'] : DEFAULT_IMAGE,
 			"status" => (isset($post_data['status']) && $post_data['status']==1) ? 1 : 0,
 			'updated_date' => DATETIME,
+			"updated_by" => get_current_user_id(),
 		);
 		
 		/* 

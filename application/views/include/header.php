@@ -1023,9 +1023,8 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                         </li>
 									</ul>
 								</div>
-							</li> 
-                            
-                            <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "sales_quotation" || $active_sidemenu == "sales_order"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+                            </li> 
+                             <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "sales_quotation" || $active_sidemenu == "sales_order"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
 								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
 									<i class="m-menu__link-icon flaticon-layers"></i>
 									<span class="m-menu__link-text">
@@ -1060,12 +1059,11 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
-									</ul>
-								</div>
-							</li> 
-                             
-                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('items');?>" class="m-menu__link ">
+</ul>
+</div>
+</li>
+                            <!--  <li class="m-menu__item <?php // if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php // echo base_url('items');?>" class="m-menu__link ">
                                     <i class="m-menu__link-icon fa fa-building"></i>
                                     <span class="m-menu__link-title">
                                         <span class="m-menu__link-wrap">
@@ -1075,9 +1073,71 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                         </span>
                                     </span>
                                 </a>
+                            </li> -->
+                            <li class="m-menu__item  m-menu__item--submenu <?php if(isset($active_sidemenu) && ($active_sidemenu == "item" || $active_sidemenu == "item"))  { echo 'm-menu__item--open m-menu__item--expanded';  }  ?>" aria-haspopup="true"  m-menu-submenu-toggle="hover">
+								<a  href="javascript:;" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon flaticon-layers"></i>
+									<span class="m-menu__link-text">
+										Items 
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+								<div class="m-menu__submenu ">
+									<span class="m-menu__arrow"></span>
+									<ul class="m-menu__subnav">
+										<li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "inventory_item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('items/inventory');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Inventory Item
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
                             </li>
-						</ul>
-					</div>
-					<!-- END: Aside Menu -->
-				</div>
-				<!-- END: Left Aside -->
+                             <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('items/service');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Service Item
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_contract")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('items/service_contract');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Service Contract
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_call")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('items/service_call');?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon fa fa-building"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Service Call
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- END: Aside Menu -->
+    </div>
+<!-- END: Left Aside -->

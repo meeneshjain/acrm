@@ -31,7 +31,7 @@
 										<div class="m-widget24">
 											<div class="m-widget24__item">
 												<h4 class="m-widget24__title">
-													Total Frofit
+													Total Profit
 												</h4>
 												<br>
 												<span class="m-widget24__desc">

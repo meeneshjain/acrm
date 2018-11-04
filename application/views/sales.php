@@ -37,45 +37,47 @@
                     </div>
                     <div class="m-portlet__body">
                         <!--begin: Datatable -->
-                            <table class=" table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary table-responsive" id="user_list_dt_table" data-source="<?php echo $data_source; ?>">
-                                <thead class="">
-                                    <tr>
-                                        <th class="no-sort">
-                                            <label class="m-checkbox m-checkbox--state-primary">
-                                                <input type="checkbox" class="usrchkbxAll" onclick="checkAll('usrchkbxAll','usrchkbx')" name="">
-                                                <span></span>
-                                            </label>
-                                        </th>
-                                        <th>
-                                            Document No
-                                        </th>
-                                        <th>
-                                          Doc. Date
-                                        </th>
-                                           <th>
-                                          Account Name
-                                        </th>
-                                        <th>
-                                         Contact Person
-                                        </th>
-                                        <th>
-                                          Contact No
-                                        </th>
-                                        <th>
-                                            Sales Employee
-                                        </th>
-                                        <th>
-                                            Status
-                                        </th>
-                                        <th>
-                                            Order Date
-                                        </th>
-                                        <th class="no-sort">
-                                            Action
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
+                            <div class="">
+                                <table class="table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary" id="user_list_dt_table" data-source="<?php echo $data_source; ?>">
+                                    <thead class="">
+                                        <tr>
+                                            <th class="no-sort">
+                                                <label class="m-checkbox m-checkbox--state-primary">
+                                                    <input type="checkbox" class="usrchkbxAll" onclick="checkAll('usrchkbxAll','usrchkbx')" name="">
+                                                    <span></span>
+                                                </label>
+                                            </th>
+                                            <th>
+                                                Document No
+                                            </th>
+                                            <th>
+                                              Doc. Date
+                                            </th>
+                                               <th>
+                                              Account Name
+                                            </th>
+                                            <th>
+                                             Contact Person
+                                            </th>
+                                            <th>
+                                              Contact No
+                                            </th>
+                                            <th>
+                                                Sales Employee
+                                            </th>
+                                            <th>
+                                                Status
+                                            </th>
+                                            <th>
+                                                Order Date
+                                            </th>
+                                            <th class="no-sort">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +236,7 @@
                         </div>
                     </div>
                     <hr>  
-                    <div class="table table-responsive">
+                    <div class="table ">
                         <table class="table m-table m-table--head-bg-success table-sm">
                         <thead>
                             <tr>
@@ -327,6 +329,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="sales_employee_id" name="sales_employee_id" value="<?php echo  $sales_employee_id; ?>">
                     <input type="hidden" name="form_name" id="form_name"  value="<?php echo $page_type; ?>">
                     <input type="hidden" name="sales_form_title" id="sales_form_title" value="<?php echo $page_title; ?>">
                 <input type="hidden" name="company_id" id="logged_in_company_id" value="<?php echo $loggedin_company_id; ?>">

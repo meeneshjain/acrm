@@ -70,7 +70,8 @@ class Settings_model extends CI_Model {
         if($sessionData['is_admin'] == "1"){
             $select_template_query = "SELECT id, template_key, `subject`, `body`  FROM email_templates WHERE status = '1' AND is_deleted = '0' AND template_key = '$template_key' ";
         } else if($sessionData['is_admin'] == 0){
-            $select_template_query = "SELECT id, template_key, `subject`, `body`  FROM company_email_templates WHERE status = '1' AND is_deleted = '0' AND template_key = '$template_key' AND company_id='$sessionData[company_id]' ";
+            $company_id = get_current_company();
+            $select_template_query = "SELECT id, template_key, `subject`, `body`  FROM company_email_templates WHERE status = '1' AND is_deleted = '0' AND template_key = '$template_key' AND company_id='$company_id' ";
         }
         return $this->db->query($select_template_query)->row_array();
     }
@@ -86,7 +87,8 @@ class Settings_model extends CI_Model {
             $table = "email_templates";
             
         } else if($sessionData['is_admin'] == 0){
-          $this->db->where(array("template_key"=> $post_data['template_key'], "company_id" => $sessionData['company_id']));
+        $company_id = get_current_company();
+          $this->db->where(array("template_key"=> $post_data['template_key'], "company_id" => $company_id));
            $table = "company_email_templates";
         }
         $response = $this->db->update($table, $update_data);    

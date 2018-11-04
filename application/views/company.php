@@ -85,7 +85,7 @@
                     				</div>
         							<div class="m-portlet__body">
         								<!--begin: Datatable -->
-        								<table class="table table-striped- table-bordered table-hover table-checkable dt_table table-responsive" id="company_list_dt_table" data-source="<?php echo base_url('company/companylist'); ?>">
+        								<table class="table table-striped- table-bordered table-hover table-checkable dt_table " id="company_list_dt_table" data-source="<?php echo base_url('company/companylist'); ?>">
         									<thead>
         										<tr>
         											<th class="no-sort">

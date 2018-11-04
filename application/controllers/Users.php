@@ -20,12 +20,12 @@ class Users extends CI_Controller {
          $data['load_js'] = 'user';
          $data['data_source'] = base_url('users/get_all_users');
          $data['user_role'] = get_user_role_list('html', NULL);
-         $data['loggedin_company_id'] = $this->sessionData['company_id'];
+         $data['loggedin_company_id'] = get_current_company();
          $data['tl_data'] = $this->user_model->get_user_list_by_role($data['loggedin_company_id'], '3');
          $data['tl_options'] = "";
          if($data['tl_data'] != 0){
              foreach($data['tl_data'] as $team_leads){
-                 $tl_name = $team_leads['first_name'] . '' . $team_leads['last_name'];
+                 $tl_name = $team_leads['first_name'] . ' ' . $team_leads['last_name'];
                  $data['tl_options'] .= '<option value="'.$team_leads['id'].'">'.$tl_name.'</option>';
                 }
          }
@@ -34,7 +34,7 @@ class Users extends CI_Controller {
          $data['rm_options'] = "";
          if($data['rm_data'] != 0){
              foreach($data['rm_data'] as $rm){
-                 $tl_name = $rm['first_name'] . '' . $rm['last_name'];
+                 $tl_name = $rm['first_name'] . ' ' . $rm['last_name'];
                  $data['rm_options'] .= '<option value="'.$rm['id'].'">'.$tl_name.'</option>';
             }
         }
@@ -44,7 +44,7 @@ class Users extends CI_Controller {
      }
      
     public function get_all_users(){
-        $companyId = $this->sessionData['company_id'];
+        $companyId = get_current_company();
         $response =  $this->user_model->get_all_users($companyId);
 		echo json_encode($response);
 		die;
@@ -164,7 +164,7 @@ class Users extends CI_Controller {
 
     public function user_profile()
     {
-    	$companyId = $this->sessionData['company_id'];
+    	$companyId = get_current_company();
     	$userId = $this->sessionData['logged_in'];
 
     	//print_r($this->sessionData);
@@ -177,7 +177,7 @@ class Users extends CI_Controller {
 
         $data['user_activities_data_source'] = base_url('users/get_activities');
         //$data['user_role'] = get_user_role_list('html', NULL);
-        //$data['loggedin_company_id'] = $this->sessionData['company_id'];
+        //$data['loggedin_company_id'] = get_current_company();
         //$data['team_leaders'] = get_user_role_list('data', NULL);
         $this->load->view('include/header',$data);
         $this->load->view('userprofile',$data);
@@ -222,7 +222,7 @@ class Users extends CI_Controller {
      
     public function get_activities()
    	{
-   		$companyId = $this->sessionData['company_id'];
+   		$companyId = get_current_company();
     	$userId = $this->sessionData['logged_in'];
     	$response =  $this->user_model->get_activities($companyId,$userId);
 		echo json_encode($response);

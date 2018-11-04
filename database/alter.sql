@@ -469,3 +469,125 @@ ADD `company_id` int(11) NOT NULL AFTER `id`;
 
 ALTER TABLE `targets`
 ADD `target_type` enum('amount','product') NOT NULL AFTER `target_duration_id`;
+
+ALTER TABLE `sales_order`
+ADD `sales_employee_id` varchar(200) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `contact_person_number`;
+
+ALTER TABLE `sales_order`
+CHANGE `contact_person_id` `contact_person_id` int NOT NULL AFTER `account_name`,
+CHANGE `sales_employee_id` `sales_employee_id` int NOT NULL AFTER `contact_person_number`;
+
+
+CREATE TABLE `item_service_contract` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `account_id` int NOT NULL,
+  `account_name` varchar(200) NOT NULL,
+  `contact_person_id` int NOT NULL,
+  `contact_person_name` varchar(200) NOT NULL,
+  `contact_person_number` varchar(200) NOT NULL,
+  `sales_employee_id` int NOT NULL,
+  `sales_employee` varchar(200) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `response_duration_type` enum('days','hours') NOT NULL,
+  `response_time` varchar(50) NOT NULL,
+  `resolution_duration_type` enum('days','hours') NOT NULL,
+  `resolution_time` varchar(50) NOT NULL,
+  `stage` varchar(50) NOT NULL COMMENT 'similar as quotation ',
+  `serial_number` varchar(250) NOT NULL COMMENT 'auto generate and unique',
+  `item_id` int NOT NULL,
+  `item_code` varchar(250) NOT NULL,
+  `item_name` varchar(250) NOT NULL,
+  `remark` text NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL,
+  `created_by` int NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_by` int NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+
+
+DROP TABLE IF EXISTS `item_service_call`;
+CREATE TABLE `item_service_call` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `item_service_contract_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `account_name` varchar(250) NOT NULL,
+  `contact_person_id` int(11) NOT NULL,
+  `contact_person_name` varchar(250) NOT NULL,
+  `contact_person_number` varchar(100) NOT NULL,
+  `sales_employee_id` int(11) NOT NULL,
+  `sales_employee` varchar(250) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_code` varchar(200) NOT NULL,
+  `item_name` varchar(200) NOT NULL,
+  `item_group` varchar(200) NOT NULL,
+  `call_status` varchar(200) NOT NULL,
+  `priority` enum('low','medium','high') NOT NULL,
+  `call_open_date` datetime NOT NULL,
+  `call_closing_date` datetime NOT NULL,
+  `call_working_date` datetime NOT NULL,
+  `call_progress_date` datetime NOT NULL,
+  `subject` text NOT NULL,
+  `description` text NOT NULL,
+  `problem_origin` varchar(200) NOT NULL,
+  `problem_type` varchar(200) NOT NULL,
+  `problem_subtype` varchar(200) NOT NULL,
+  `call_type` varchar(200) NOT NULL,
+  `technical` varchar(100) NOT NULL,
+  `technical_type` varchar(250) NOT NULL,
+  `given_by_id` int(11) NOT NULL,
+  `given_to_id` int(11) NOT NULL,
+  `job_description` text NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `is_deleted` tinyint(4) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `item_service_contract`
+ADD `free_services` tinyint NOT NULL AFTER `remark`
+
+ALTER TABLE `item_service_call`
+ADD `item_service_contract_serial_number` int NOT NULL AFTER `item_service_contract_id`;
+
+ALTER TABLE `item_service_call`
+ADD `remark` tinyint NOT NULL AFTER `end_date`
+
+ALTER TABLE `item_service_call`
+CHANGE `call_open_date` `planned_call_date` datetime NOT NULL AFTER `priority`,
+CHANGE `call_closing_date` `tentative_call_date` datetime NOT NULL AFTER `planned_call_date`,
+CHANGE `call_working_date` `approved_call_date` datetime NOT NULL AFTER `tentative_call_date`,
+CHANGE `call_progress_date` `rejected_call_date` datetime NOT NULL AFTER `approved_call_date`;
+
+ALTER TABLE `item_service_call`
+ADD `technician` varchar(250) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `technical_type`;
+
+ALTER TABLE `item_service_call`
+CHANGE `given_by_id` `given_by` int(11) NOT NULL AFTER `technician`,
+CHANGE `given_to_id` `given_to` int(11) NOT NULL AFTER `given_by`;
+
+ALTER TABLE `item_service_call`
+CHANGE `given_by` `given_by` varchar(250) NOT NULL AFTER `technician`,
+CHANGE `given_to` `given_to` varchar(250) NOT NULL AFTER `given_by`;
+
+ALTER TABLE `item_service_call`
+CHANGE `remark` `remark` varchar(200) NOT NULL AFTER `end_date`;
+
+ALTER TABLE `item_service_call`
+CHANGE `planned_call_date` `planned_call_date` date NOT NULL AFTER `priority`,
+CHANGE `tentative_call_date` `tentative_call_date` date NOT NULL AFTER `planned_call_date`,
+CHANGE `approved_call_date` `approved_call_date` date NOT NULL AFTER `tentative_call_date`,
+CHANGE `rejected_call_date` `rejected_call_date` date NOT NULL AFTER `approved_call_date`;
+
+ALTER TABLE `item_service_call`
+CHANGE `item_service_contract_serial_number` `item_service_contract_serial_number` varchar(200) NOT NULL AFTER `item_service_contract_id`;

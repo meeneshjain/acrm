@@ -312,3 +312,16 @@ table.table-bordered.dataTable tbody td, table.table-bordered.dataTable tbody th
 .m-portlet.m-portlet--creative.m-portlet--first {
     margin-top: 1.375rem;
 }
+
+select.form-control:not([size]):not([multiple]){
+    line-height: 1.05;
+    height: 1.9rem;
+}
+
+.get_closer_right {
+    padding-right: 0px !important;
+}
+
+.get_closer_left {
+    padding-left: 2px;
+}

@@ -19,10 +19,11 @@ class Sales extends CI_Controller {
          $data['popup_title'] = "Add ". $data['page_title'];
          $data['load_js'] = 'sales';
          $data['page_type'] = "sales_quote";
+         $data['sales_employee_id'] = get_current_user_id();
          $data['sales_employee_name'] = $this->sessionData['full_name'];
          $data['data_source'] = base_url('sales/get_all_sales/'.$data['page_type']);
          $data['account_numbers'] = get_account_number('html', NULL);
-         $data['loggedin_company_id'] = $this->sessionData['company_id'];
+         $data['loggedin_company_id'] = get_current_company();
          $this->load->view('include/header',$data);
          $this->load->view('sales',$data);
          $this->load->view('include/footer');
@@ -37,7 +38,8 @@ class Sales extends CI_Controller {
          $data['load_js'] = 'sales';
          $data['page_type'] = "sales_order";
          $data['data_source'] = base_url('sales/get_all_sales/'.$data['page_type']);
-         $data['loggedin_company_id'] = $this->sessionData['company_id'];
+         $data['loggedin_company_id'] = get_current_company();
+         $data['sales_employee_id'] = get_current_user_id();
          $data['sales_employee_name'] = $this->sessionData['full_name'];
          $this->load->view('include/header',$data);
          $this->load->view('sales',$data);

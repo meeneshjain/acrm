@@ -257,12 +257,24 @@ $(document).ready(function () {
         $("#m_header_topbar").hide()
     }
 
+    if ($(this).width() > 800) {
+        $("table").removeClass("table-responsive");
+    } else if ($(this).width() < 800) {
+        $("table").addClass("table-responsive");
+    }
+
 
     $(window).resize(function () {
         if ($(this).width() > 900) {
             $("#m_header_topbar").show();
         } else {
             $("#m_header_topbar").hide()
+        }
+
+        if ($(this).width() > 800) {
+            $("table").removeClass("table-responsive");
+        } else if ($(this).width() < 800) {
+            $("table").addClass("table-responsive");
         }
     });
 

@@ -204,7 +204,7 @@ $(document).ready(function () {
         $("input[data-maped_item_code_id='" + mapped_id + "']").val("");
         $("input[data-maped_item_code='" + mapped_id + "']").val("");
         $("select[data-item_pricelist='" + mapped_id + "']").val("");
-        $("select[data-item_pricelist='" + mapped_id + "']").html('<option value="">Select Price </option>');
+        $("select[data-item_pricelist='" + mapped_id + "']").html('<option value="">Select Price</option>');
         $("input[data-mapped_price='" + mapped_id + "']").val("");
         $("input[data-item_price_quantity='" + mapped_id + "']").val("");
         $("select[data-item_pricelist='" + mapped_id + "']").trigger('change');
@@ -402,7 +402,6 @@ function generate_item_list(item_list, selected_item) {
         item_options += '<option value="' + item_list[ici]['id'] + '" data-item_name="' + item_list[ici]['name'] + '" data-pice_list="' + item_list[ici]['price_list'] + '" data-tax="' + item_list[ici]['tax'] + '" data-item_code="' + item_list[ici]['code'] + '" ' + selected + '>' + item_list[ici]['code'] + '</option>\n';
     }
     return item_options;
-
 }
 
 
@@ -421,9 +420,9 @@ function generate_account_list(account_list_array, selected_account) {
 }
 
 function get_sales_details(id, called_from) {
-    $("#add_update_user_modal").modal('show');
     call_service(base_url + "sales/get_sales_details/" + id, function (res) {
         if (res['status'] == 'success') {
+            $("#add_update_user_modal").modal('show');
             var header_data = res['header'];
             generate_account_list(res['account_list'], header_data['account_id']);
             setTimeout(function () {

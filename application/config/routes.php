@@ -71,3 +71,6 @@ $route['user/dashboard'] = 'home/dashboard/user';
 
 $route['admin'] = 'home/dashboard/admin';
 $route['user'] = 'home/dashboard/user';
+
+$route['items/inventory'] = 'items/index/inventory';
+$route['items/service'] = 'items/index/service';
