@@ -91,7 +91,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 date_default_timezone_set('Asia/Kolkata');
 define('TIME',date('H:i:s'));
 define('DEFAULT_DATE_FORMAT', 'Y-m-d');
-define('DISPLAY_FORMAT', 'M d, Y h:i A');
+define('DISPLAY_DATE_FORMAT', 'M d, Y');
+define('DISPLAY_FORMAT', DISPLAY_DATE_FORMAT. ' H:i A');
 define('DATE',date(DEFAULT_DATE_FORMAT));
 define('DATETIME',date(DEFAULT_DATE_FORMAT . ' H:i:s'));
 define('TIMESTAMP', DATETIME);

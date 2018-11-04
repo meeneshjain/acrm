@@ -84,6 +84,29 @@ class Target_model extends CI_Model {
         }
         return $output;
     }
+
+    public function myTarget($userId,$user_role_id)
+    {
+    	$roleArray = array('1' => 'ADMIN','2' => 'REGIONAL MANAGER','3'=>'TEAM LEADER','4' => 'USER');
+    	$data['role'] = $roleArray[$user_role_id];
+    	$data['target'] = $this->db->query("SELECT t.id,t.target_title,t.target_type,t.target,t.target_left,t.target_duration_id,td.name,td.in_days FROM targets as t,target_duration as td WHERE t.target_duration_id = td.id AND assign_to_user_id = '".$userId."'")->result_array();
+    	return $data;
+    }
+
+    public function getDownlineUser($userId,$user_role_id)
+    {
+    	$data = array();
+    	$uom_res = "SELECT u.id,u.first_name,u.last_name,u.reports_to_user_id,u.username,u.user_role_id,ur.name as role_name FROM users as u,user_roles as ur WHERE u.status = '1' AND u.is_deleted = '0' AND u.user_role_id = ur.id AND u.reports_to_user_id = '$userId'";
+        $data = $this->db->query($uom_res)->result_array();
+        foreach ($data as $key => $value) 
+        {
+        	$data[$key]['reported_users'] = $this->db->query("SELECT COUNT(`id`) as count FROM `users` WHERE `reports_to_user_id` = '".$value['id']."'")->row()->count;
+        	$data[$key]['target'] = $this->db->query("SELECT t.id,t.target_title,t.target_type,t.target,t.amount,t.product,td.name,td.in_days FROM targets as t,target_duration as td WHERE t.target_duration_id = td.id AND assign_to_user_id = '".$value['id']."'")->result_array();
+        }
+        //echo '<PRE>';print_r($data);die;
+        return $data;
+    }
+
 }
 
 ?>

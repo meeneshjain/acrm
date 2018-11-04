@@ -1,3 +1,30 @@
+-- MANISH 21-10-2018
+
+DROP TABLE IF EXISTS `targets`;
+CREATE TABLE `targets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `assign_to_user_id` int(11) NOT NULL,
+  `report_to_user_id` int(11) NOT NULL,
+  `target_title` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `target_duration_id` int(11) NOT NULL,
+  `target_type` enum('amount','product') NOT NULL,
+  `amount` int(11) NOT NULL COMMENT 'will delete ',
+  `product` int(11) NOT NULL COMMENT 'will delete',
+  `target` int(11) NOT NULL,
+  `target_left` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `created_date` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `target_duration_id` (`target_duration_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 -- MANISH 29-08-2018
 
 SET foreign_key_checks = 0;

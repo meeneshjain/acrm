@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 		$("#lead_account").removeAttr('disabled');
 
-		$("#lead_form").attr('action', base_url + 'contact/add_update_account')
+		$("#lead_form").attr('action', base_url + 'lead/add_update_lead')
 		$(".lead_modal_heading").html('ADD NEW LEAD');
 		$("#lead_action_btn").html('<i class="fa fa-save"></i> Save');
 	});
@@ -74,7 +74,7 @@ $(document).ready(function () {
 			function (res) {
 				if (res.status == 'success') {
 					$("#lead_modal").modal('show');
-					$("#lead_form").attr('action', base_url + 'lead/add_update_account')
+					$("#lead_form").attr('action', base_url + 'lead/add_update_lead')
 					$(".lead_modal_heading").html('EDIT LEAD DETAIL');
 					$("#lead_action_btn").html('<i class="fa fa-save"></i> Update');
 

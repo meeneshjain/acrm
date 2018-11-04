@@ -24,19 +24,6 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
-                                <?php
-                                $user = 1;
-                                if($user == 1)
-                                {
-                                ?>
-                                <li class="m-portlet__nav-item" data-trigger1="focus"  data-skin="dark" data-toggle="m-popover" data-placement="top" title="Dark skin" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
-                                        <i class="fa fa-user"></i>
-                                    </a>
-                                </li>
-                                <?php 
-                                }
-                                ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill lead_modal_open_btn" data-form_type="add">
                                         <i class="fa fa-plus"></i>
