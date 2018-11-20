@@ -134,29 +134,7 @@ $(document).ready(function () {
             if (res['status'] == 'success') {
                 var header_data = res.item_service_data;
                 fill_up_drop_down_data(res);
-                $("#account_code").val(header_data.account_id);
-                setTimeout(function () {
-                    $("#account_code").trigger('change');
-                    setTimeout(function () {
-                        $("#contact_person").val(header_data.contact_person_id);
-                        $("#contact_person").trigger('change');
-                    }, 1000);
-                }, 500);
-                // contract details  - start
-                $("#item_code").val(header_data.item_id);
-                $("#item_code").trigger('change');
-                $("#resolution_time_type").val(header_data.resolution_duration_type);
-                $("#resolution_time").val(header_data.resolution_time);
-                $("#response_time_type").val(header_data.response_duration_type);
-                $("#reponse_time").val(header_data.response_time);
-                $("#serial_number").val(header_data.serial_number);
-                $("#serviec_status").val(header_data.stage);
-                $("#free_services").val(header_data.free_services);
-                $("#start_date").val(header_data.start_date);
-                $("#end_date").val(header_data.end_date);
-                $("#remark").val(header_data.remark);
-                $("#sales_employee_name").val(header_data.sales_employee);
-                $("#sales_employee_id").val(header_data.sales_employee_id);
+                fill_header_data(header_data);
                 // contract details  - end
 
                 // call details  - start
@@ -223,20 +201,53 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", "#service_contract_id", function () {
+    $(document).on("change", "#service_contract_id", function () {
         var obj = $(this);
         if (obj.val() != "") {
             $("#serial_number").val(obj.find("option:selected").html());
+            $(".service_contract_serial_loader").removeClass('display_none');
+            call_service(base_url + "items/get_contract_serial_detail/" + obj.val(), function (res) {
+                if (res['status'] == 'success') {
+                    header_data = res['data'];
+                    fill_header_data(header_data);
+                    setTimeout(function () {
+                        $(".service_contract_serial_loader").addClass('display_none');
+                    }, 1500);
+                }
+            }, function (res) { // error callback if required
+            });
         } else {
             $("#serial_number").val("");
         }
     });
 
-
-
-
-
 }); // document end 
+
+function fill_header_data(header_data) {
+    // contract details  - start
+    $("#account_code").val(header_data.account_id);
+    setTimeout(function () {
+        $("#account_code").trigger('change');
+        setTimeout(function () {
+            $("#contact_person").val(header_data.contact_person_id);
+            $("#contact_person").trigger('change');
+        }, 1000);
+    }, 500);
+    $("#item_code").val(header_data.item_id);
+    $("#item_code").trigger('change');
+    $("#resolution_time_type").val(header_data.resolution_duration_type);
+    $("#resolution_time").val(header_data.resolution_time);
+    $("#response_time_type").val(header_data.response_duration_type);
+    $("#reponse_time").val(header_data.response_time);
+    $("#serial_number").val(header_data.serial_number);
+    $("#serviec_status").val(header_data.stage);
+    $("#free_services").val(header_data.free_services);
+    $("#start_date").val(header_data.start_date);
+    $("#end_date").val(header_data.end_date);
+    $("#remark").val(header_data.remark);
+    $("#sales_employee_name").val(header_data.sales_employee);
+    $("#sales_employee_id").val(header_data.sales_employee_id);
+}
 
 
 function get_new_contract_call_details(company_id, form_type) {

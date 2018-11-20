@@ -509,4 +509,26 @@ function get_service_items($array_name = NULL , $all_data = 0, $type = 'array'){
 	}
 }
 
+
+function get_global_settings($specfic_setting = null){
+	$obj =& get_instance();
+	$obj->load->database();
+	$specific_setting_where = "";
+	if($specfic_setting != ""){
+		$specific_setting_where = " AND name='$specfic_setting'";
+	}
+	
+	$raw_query = "SELECT name, sys_value FROM system_settings WHERE status = 1 and is_deleted = 0  $specific_setting_where";
+	$res = $obj->db->query($raw_query);
+	if($res->num_rows() > 0){
+		$output = [];
+		foreach($res->result_array() as $settings){
+			$output[$settings['name']] = $settings['sys_value'];
+		}
+		return $output;
+	} else {
+		return 0;
+	}
+}
+
 ?>

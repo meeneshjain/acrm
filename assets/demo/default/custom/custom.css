@@ -35,6 +35,10 @@
 	font-size: 2rem;
 }
 
+.fa-1_5x{
+	font-size: 1.5rem;
+}
+
 .rem-3{
     font-size:3rem;
 }
@@ -238,4 +242,14 @@ a.btn.btn-black {
 .height_150_scroll{
 	max-height: 150px;
 	overflow-y: scroll;
+}
+
+.purple_red_bg{
+    background: #282733 !important;  
+}
+
+.btn.m-btn--hover-primary.active, .btn.m-btn--hover-primary:active, .btn.m-btn--hover-primary:focus, .btn.m-btn--hover-primary:hover, .show>.btn.m-btn--hover-primary.dropdown-toggle {
+    border-color: #5867dd !important;
+    color: #fff !important;
+    background-color: #5867dd !important;
 }

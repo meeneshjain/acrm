@@ -108,8 +108,8 @@ body{
 }
 
 .btn-group-sm>.m-btn--icon.m-btn--icon-only.btn, .m-btn--icon.m-btn--icon-only.btn-sm {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
 }
 
 .m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__link {
@@ -163,7 +163,7 @@ body{
 }
 
 .m-portlet .m-portlet__body {
-    padding: 1.8rem 1.8rem !important;
+    padding: 1.2rem 1.2rem !important;
 }
 
 .m-checkbox>span, .m-radio>span{
@@ -294,7 +294,7 @@ table.table-bordered.dataTable tbody td, table.table-bordered.dataTable tbody th
 }
 
 .m-btn--icon.m-btn--icon-only [class*=" fa-"], .m-btn--icon.m-btn--icon-only [class^=fa-] {
-    font-size: 1.0rem;
+    font-size: 0.88rem;
 }
 
 
@@ -324,4 +324,17 @@ select.form-control:not([size]):not([multiple]){
 
 .get_closer_left {
     padding-left: 2px;
+}
+
+.dataTables_wrapper .dataTables_paginate .pagination .page-item>.page-link {
+    height: 1.7rem !important;
+    min-width: 1.7rem !important;
+    padding: .3rem !important;
+    font-size: 0.8rem !important;
+    line-height: 0.8rem !important;
+}
+
+.btn-group-lg>.m-btn--icon.m-btn--icon-only.btn, .m-btn--icon.m-btn--icon-only.btn-lg {
+    width: 30px;
+    height: 30px;
 }

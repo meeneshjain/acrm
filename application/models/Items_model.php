@@ -375,7 +375,7 @@ class Items_model extends CI_Model {
 		$dt_table = "item_service_call as i";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'i.id', 'i.item_service_contract_serial_number', 'i.subject', 'i.contact_person_name', 'i.sales_employee', 'i.item_name', 'i.start_date', 'i.end_date', 'i.priority', 'i.problem_origin', 'i.problem_type', 'i.created_date',  'i.updated_date');
+		$dt_columns = array( 'i.id', 'i.item_service_contract_serial_number as serial_number', 'i.subject', 'i.contact_person_name', 'i.sales_employee', 'i.item_name', 'i.start_date', 'i.end_date', 'i.priority', 'i.problem_origin', 'i.problem_type', 'i.created_date',  'i.updated_date');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -437,10 +437,9 @@ class Items_model extends CI_Model {
         	
         	$row = array();
 			/* $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx"><span></span></label>'; */
-			
-
 			$row[] =  '<span class="ml-3 bold"><strong>'. $aRow['id'] .'</strong></span>';
-			$row[] = ($aRow['item_service_contract_serial_number']!="" && $aRow['item_service_contract_serial_number']!=0) ? $aRow['item_service_contract_serial_number'] : "N/A";
+			
+			$row[] = ($aRow['serial_number']!="" && $aRow['serial_number']!='0') ? $aRow['serial_number'] : 'N/A';
 			$row[] =  $aRow['subject'];
 			$row[] =  $aRow['contact_person_name'];
 			$row[] =  $aRow['sales_employee'];
@@ -455,7 +454,7 @@ class Items_model extends CI_Model {
 			} else if($priority == "high"){
 				$priority_class = "text-danger";
 			}
-			$row[] =  '<span class="'.$priority_class.'"><strong>'. $aRow['priority']. '</strong></span>';
+			$row[] =  '<span class="'.$priority_class.'"><strong>'. ucfirst($aRow['priority']). '</strong></span>';
 			$row[] =  $aRow['problem_origin'];
 			$row[] =  $aRow['problem_type'];
         	 
@@ -467,8 +466,16 @@ class Items_model extends CI_Model {
 			';
 
         	$output['data'][] = $row;
-        }
+		}
+		
         return $output;
+	}
+	
+	public function get_contract_serial_detail($serial_number){
+		$data = $this->db->query("SELECT * FROM `item_service_contract` as sic 
+		WHERE `id` = '$serial_number'")->row_array();
+		return $data;
+		
 	}
  
 }

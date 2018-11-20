@@ -74,6 +74,13 @@
                                     <option value="">Select Service Contract</option>
                                 </select>
                             </div>
+                            <div class="col-lg-1 service_contract_serial_loader display_none">
+                                <div class="text-left mt-1">
+                                    <strong>
+                                        <i class="fa fa-spinner fa-spin fa-1_5x"></i>
+                                    </strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
                       <div class="form-group m-form__group row">

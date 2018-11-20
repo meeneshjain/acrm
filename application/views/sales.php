@@ -268,7 +268,7 @@
                                     Remark
                                 </th>
                                 <th class="pl-3">
-                                    <a href="javascript:;" class="btn btn-brand m-btn m-btn--icon btn-lg m-btn--icon-only m-btn--pill add_more_rows btn-sm">
+                                    <a href="javascript:;" class="btn btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--pill add_more_rows btn-sm">
                                         <i class="fa fa-plus"></i></a>
                                 </th>
                             </tr>
