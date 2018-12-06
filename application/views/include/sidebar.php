@@ -19,9 +19,14 @@
 					Tasks
 				</a>
 			</li>
-			<li class="nav-item m-tabs__item">
-				<a class="nav-link m-tabs__link" data-toggle="tab" href="#calls" role="tab">
+			<li class="nav-item m-tabs__item get_calls_sb_list_on_tab">
+				<a class="nav-link m-tabs__link" data-toggle="tab" href="#calls_tab" role="tab">
 					Calls
+				</a>
+			</li>
+			<li class="nav-item m-tabs__item" style="display:none">
+				<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger" role="tab">
+					Chat
 				</a>
 			</li>
 		</ul>
@@ -44,8 +49,8 @@
 			
 				<div class="custom_notes_portlet_container"></div>
 			</div>
-			
 			<!-- tab 1 end -->
+
 			<!-- tab 2 start -->
 			<div class="tab-pane  m-scrollable" id="meeting_tab" role="tabpanel">
 				<div class="button_section col-md-12">
@@ -62,10 +67,6 @@
 				<hr>
 				<div class="clearfix"></div>
 			
-				<!-- <div class="custom_meeting_portlet_container">
-					
-
-				</div> -->
 				<div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="380" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
 					<div class="m-timeline-3">
 						<div class="m-timeline-3__items custom_meeting_portlet_container">
@@ -75,6 +76,7 @@
 				</div>
 			</div>
 			<!-- tab 2 end  -->
+
 			<!-- tab 3 start -->
 			<div class="tab-pane m-scrollable" id="task_tab" role="tabpanel">
 				<div class="button_section col-md-12 ">
@@ -97,86 +99,241 @@
 					</div>
 				</div>
 			</div>
-
 			<!-- tab 3 end -->
+
 			<!-- tab 4 start -->
-			<div class="tab-pane  m-scrollable" id="calls" role="tabpanel">
-				<div class="m-list-timeline">
-					<div class="m-list-timeline__group">
-						
-						<div class="m-list-timeline__items">
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 1
-									
-								</a>
-								<span class="m-list-timeline__time">
-									Just now
-								</span>
-							</div>
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 2
-								</a>
-								<span class="m-list-timeline__time">
-									11 mins
-								</span>
-							</div>
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-danger"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 3
-								</a>
-								<span class="m-list-timeline__time">
-									20 mins
-								</span>
-							</div>
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-warning"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 4
-									
-								</a>
-								<span class="m-list-timeline__time">
-									1 hr
-								</span>
-							</div>
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 5
-								</a>
-								<span class="m-list-timeline__time">
-									2 hrs
-								</span>
-							</div>
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-info"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 6
-									
-								</a>
-								<span class="m-list-timeline__time">
-									3 hrs
-								</span>
-							</div>
-							<div class="m-list-timeline__item">
-								<span class="m-list-timeline__badge m-list-timeline__badge--state-success"></span>
-								<a href="" class="m-list-timeline__text">
-									Caller Name 7
-								</a>
-								<span class="m-list-timeline__time">
-									5 hrs
-								</span>
-							</div>
+			<div class="tab-pane  m-scrollable" id="calls_tab" role="tabpanel">
+				<div class="button_section col-md-12 ">
+
+				</div>
+				<div class="clearfix"></div>
+				<hr> 
+				<div class="clearfix"></div>
+			
+				<div class="m-scrollable mCustomScrollbar _mCS_5 mCS-autoHide" data-scrollbar-shown="true" data-scrollable="true" data-max-height="380" style="overflow: visible; height: 380px; max-height: 380px; position: relative;">
+					<div class="m-timeline-3">
+						<div class="m-timeline-3__items custom_calls_portlet_container">
+							
 						</div>
 					</div>
 				</div>
 			</div>
-
+			<!-- tab 4 end -->
+			
+			<!-- tab 5 start -->
+			<div class="tab-pane m-scrollable" id="m_quick_sidebar_tabs_messenger" role="tabpanel">
+				<div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
+					<div id="chat_with_user" style="display:none">
+						<button class="back-to-chat">back</button>
+						<div class="m-messenger__messages">
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--in">
+									<div class="m-messenger__message-pic">
+										<img src="assets/app/media/img//users/user3.jpg" alt=""/>
+									</div>
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-username">
+												Megan wrote
+											</div>
+											<div class="m-messenger__message-text">
+												Hi Bob. What time will be the meeting ?
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--out">
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-text">
+												Hi Megan. It's at 2.30PM
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--in">
+									<div class="m-messenger__message-pic">
+										<img src="assets/app/media/img//users/user3.jpg" alt=""/>
+									</div>
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-username">
+												Megan wrote
+											</div>
+											<div class="m-messenger__message-text">
+												Will the development team be joining ?
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--out">
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-text">
+												Yes sure. I invited them as well
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__datetime">
+								2:30PM
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--in">
+									<div class="m-messenger__message-pic">
+										<img src="assets/app/media/img//users/user3.jpg"  alt=""/>
+									</div>
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-username">
+												Megan wrote
+											</div>
+											<div class="m-messenger__message-text">
+												Noted. For the Coca-Cola Mobile App project as well ?
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--out">
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-text">
+												Yes, sure.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--out">
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-text">
+												Please also prepare the quotation for the Loop CRM project as well.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__datetime">
+								3:15PM
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--in">
+									<div class="m-messenger__message-no-pic m--bg-fill-danger">
+										<span>
+											M
+										</span>
+									</div>
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-username">
+												Megan wrote
+											</div>
+											<div class="m-messenger__message-text">
+												Noted. I will prepare it.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--out">
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-text">
+												Thanks Megan. I will see you later.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="m-messenger__wrapper">
+								<div class="m-messenger__message m-messenger__message--in">
+									<div class="m-messenger__message-pic">
+										<img src="assets/app/media/img//users/user3.jpg"  alt=""/>
+									</div>
+									<div class="m-messenger__message-body">
+										<div class="m-messenger__message-arrow"></div>
+										<div class="m-messenger__message-content">
+											<div class="m-messenger__message-username">
+												Megan wrote
+											</div>
+											<div class="m-messenger__message-text">
+												Sure. See you in the meeting soon.
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="m-messenger__seperator"></div>
+						<div class="m-messenger__form">
+							<div class="m-messenger__form-controls">
+								<input type="text" name="" placeholder="Type here..." class="m-messenger__form-input">
+							</div>
+							<div class="m-messenger__form-tools">
+								<a href="" class="m-messenger__form-attachment">
+									<i class="la la-paperclip"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div id="chat_userlist">
+						<div class="m-messenger__form" style="width:100%">
+							<div class="m-messenger__form-controls">
+								<input type="text" id="chat_searchfield" placeholder="Search User..." class="m-messenger__form-input">
+							</div>
+						</div>
+						<div class="m-messenger__messages m-widget4" id="chat_users">
+							<?php
+							for($i=1;$i<=10;$i++)
+							{
+							?>
+							<div class="m-widget4__item chat_user">
+								<div class="m-widget4__img m-widget4__img--pic">
+									<img src="<?php echo base_url();?>assets/app/media/img/users/100_4.jpg" alt="">
+								</div>
+								<div class="m-widget4__info">
+									<span class="m-widget4__title">
+										User <?php echo $i;?>
+									</span>
+									<br>
+									<span class="m-widget4__sub">
+										Regional manager
+									</span>
+								</div>
+								<div class="m-widget4__ext">
+									<span class="m-list-timeline__badge m-list-timeline__badge--success"></span>
+								</div>
+							</div>
+							<?php
+							}
+							?>
+						</div>
+					</div>
+				</div>
 			</div>
+			<!-- tab 5 end -->
+
 		</div>
 	</div>
 </div>
@@ -184,6 +341,8 @@
 
 		<!-- MODAL FOR NOTES, MEETINGS, TASK, CALLS -->
 		
+
+		<!-- NOTES MODAL -->
 		<div class="modal fade" id="notes_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -264,7 +423,7 @@
             </div>
         </div>
         
-        <!-- meeting modal -->
+        <!-- MEETING MODAL -->
         <div class="modal fade" id="meeting_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     		<div class="modal-dialog" role="document">
 		        <div class="modal-content">
@@ -411,7 +570,7 @@
 		    </div>
 		</div>
 
-		<!-- task modal -->
+		<!-- TASK MODAL -->
 		<div class="modal fade" id="task_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -453,3 +612,197 @@
                 </div>
             </div>
         </div>
+
+        <!-- CALLS MODAL -->
+        <div class="modal fade" id="calls_sb_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    		<div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="calls_sb_form" action="<?php echo base_url('schedule/add_calls');?>"  data-parsley-validate >
+		                <div class="modal-header">
+		                    <h4 class="modal-title calls_sb_modal_heading">
+		                        ADD NEW CALLS
+		                    </h4>
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                        <span aria-hidden="true">
+		                            &times;
+		                        </span>
+		                    </button>
+		                </div>
+		                <div class="modal-body">
+		                	<div class="col-lg-12">
+								<div class="form-group row">
+									<div class="col-lg-6">
+										<label for="calls_sb_title" class="form-control-label">
+											Name:
+										</label>
+										<input type="hidden" name="calls_sb_id" id="calls_sb_id" value="0">
+										<input type="hidden" name="calls_sb_lead_id" id="calls_sb_lead_id" value="0">
+										<input type="hidden" name="calls_sb_lead_type" id="calls_sb_lead_type" value="0">
+										<input type="hidden" name="calls_sb_account_id" id="calls_sb_account_id" value="0">
+										<input type="text" disabled id="calls_sb_name" class="form-control">
+									</div>
+									<div class="col-lg-6">
+										<label for="calls_sb_title" class="form-control-label">
+											Type:
+										</label>
+										<input type="text" disabled id="calls_sb_type" class="form-control">
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-lg-6">
+										<label for="calls_sb_account" class="form-control-label">
+											Account Name:
+										</label>
+										<input type="text" disabled id="calls_sb_account" class="form-control">
+									</div>
+									<div class="col-lg-6">
+										<label for="calls_sb_contact" class="form-control-label">
+											Contact:
+										</label>
+										<input type="text" disabled id="calls_sb_contact" class="form-control">
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<div class="col-lg-12">
+										<label for="calls_sb_reason" class="form-control-label">
+											Reason:
+										</label>
+										<textarea name="reason" required id="calls_sb_reason" class="form-control" placeholder="Enter you reason" rows="5"></textarea>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-lg-6">
+										<label for="calls_sb_callback" class="form-control-label ">
+											Call Back Time:
+										</label>
+										<input required readonly type="text" name="start_date" id="calls_sb_callback" class="form-control crm_datetimepicker" placeholder="" >
+									</div>
+									<div class="col-lg-6">
+										<label for="calls_sb_alert_datetime" class="form-control-label">
+											Alert Before Minute:
+										</label>
+										<select required readonly type="text" name="alert_datetime" id="calls_sb_alert_datetime" class="form-control">
+											<option value="">--Select Time--</option>
+											<option value="1">Before 1 Minute</option>
+											<option value="2">Before 2 Minute</option>
+											<option value="3">Before 3 Minute</option>
+											<option value="4">Before 4 Minute</option>
+											<option value="5">Before 5 Minute</option>
+											<option value="6">Before 6 Minute</option>
+											<option value="7">Before 7 Minute</option>
+											<option value="8">Before 8 Minute</option>
+											<option value="9">Before 9 Minute</option>
+											<option value="10">Before 10 Minute</option>
+											<option value="11">Before 11 Minute</option>
+											<option value="12">Before 12 Minute</option>
+											<option value="13">Before 13 Minute</option>
+											<option value="14">Before 14 Minute</option>
+											<option value="15">Before 15 Minute</option>
+											<option value="16">Before 16 Minute</option>
+											<option value="17">Before 17 Minute</option>
+											<option value="18">Before 18 Minute</option>
+											<option value="19">Before 19 Minute</option>
+											<option value="20">Before 20 Minute</option>
+											<option value="21">Before 21 Minute</option>
+											<option value="22">Before 22 Minute</option>
+											<option value="23">Before 23 Minute</option>
+											<option value="24">Before 24 Minute</option>
+											<option value="25">Before 25 Minute</option>
+											<option value="26">Before 26 Minute</option>
+											<option value="27">Before 27 Minute</option>
+											<option value="28">Before 28 Minute</option>
+											<option value="29">Before 29 Minute</option>
+											<option value="30">Before 30 Minute</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-lg-6">
+										<label for="calls_sb_status_type" class="form-control-label">
+											Status Type:
+										</label>
+										<select required id="calls_sb_status_type" name="status_type" class="form-control">
+											<option value="">--Status Type--</option>
+											<option value="PLANED">PLANED</option>
+											<option value="TENTATIVE">TENTATIVE</option>
+											<option value="APPROVED">APPROVED</option>
+											<option value="REJECT">REJECT</option>
+										</select>
+									</div>
+									<div class="col-lg-6">
+										<label for="calls_sb_invitees" class="form-control-label">
+											Select Invitees:
+										</label>
+										<select style="width: 100%" class="form-control m-select2 select2_selectbox" id="calls_sb_invitees" name="calls_sb_invitees[]" multiple="multiple">
+											<option value="1">User1</option>
+											<option value="2">User2</option>
+											<option value="3">User3</option>
+											<option value="4">User4</option>
+											<option value="5">User5</option>
+											<option value="6">User6</option>
+											<option value="7">User7</option>
+											<option value="8">User8</option>
+											<option value="9">User9</option>
+											<option value="10">User10</option>
+											<option value="11">User11</option>
+											<option value="12">User12</option>
+											<option value="13">User13</option>
+											<option value="14">User14</option>
+											<option value="15">User15</option>
+											<option value="16">User16</option>
+											<option value="17">User17</option>
+											<option value="18">User18</option>
+											<option value="19">User19</option>
+											<option value="20">User20</option>
+											<option value="21">User21</option>
+											<option value="22">User22</option>
+											<option value="23">User23</option>
+											<option value="24">User24</option>
+											<option value="25">User25</option>
+											<option value="26">User26</option>
+											<option value="27">User27</option>
+											<option value="28">User28</option>
+											<option value="29">User29</option>
+											<option value="30">User30</option>
+											<option value="31">User31</option>
+											<option value="32">User32</option>
+											<option value="33">User33</option>
+											<option value="34">User34</option>
+											<option value="35">User35</option>
+											<option value="36">User36</option>
+											<option value="37">User37</option>
+											<option value="38">User38</option>
+											<option value="39">User39</option>
+											<option value="40">User40</option>
+											<option value="41">User41</option>
+											<option value="42">User42</option>
+											<option value="43">User43</option>
+											<option value="44">User44</option>
+											<option value="45">User45</option>
+											<option value="46">User46</option>
+											<option value="47">User47</option>
+											<option value="48">User48</option>
+											<option value="49">User49</option>
+											<option value="50">User50</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+		                <div class="modal-footer">
+		                    <button type="button"  id="calls_sb_action_btn" class="btn btn-primary">
+		                        Save
+		                    </button>
+		                    
+		                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+		                        Close
+		                    </button>
+		                </div>
+		            </form>
+		        </div>
+		    </div>
+		</div>

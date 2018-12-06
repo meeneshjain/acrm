@@ -52,6 +52,7 @@ class Opportunity extends CI_Controller {
 
     public function opportunitylist()
     {
+        //Recommit on git
         $this->load->model('opportunity_model');
         $user_role_id = $this->sessionData['user_role_id'];
         $userId = $this->sessionData['logged_in'];

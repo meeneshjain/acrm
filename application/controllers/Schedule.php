@@ -251,7 +251,6 @@ class Schedule extends CI_Controller {
 						);
 			$result = $this->common_model->insert('task', $data);
 			echo json_encode(array("status" => "success","message" => 'Task Added Successfully.', "data" => $result));
-
 		}
 		else
 		{
@@ -319,4 +318,69 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
+
+    /* CALLS CODE GOES HERE */
+
+	public function add_calls(){
+		if($this->input->is_ajax_request())
+		{
+			$userId = $this->sessionData['logged_in'];
+			$companyId = $this->sessionData['company_id'];
+
+			$alert_before_time = $this->input->post('start_date');
+			$alert_before_time = strtotime($alert_before_time);
+			$alert_before_time = strtotime("+".$this->input->post('alert_datetime')." minute", $alert_before_time);
+			$alert_before_time = date('Y-m-d H:i:s',$alert_before_time);
+			$data = array(
+							'company_id' => $companyId,
+							'lead_id' => $this->input->post('calls_sb_lead_id'),
+							'lead_type' => $this->input->post('calls_sb_lead_type'),
+							'account_id' => $this->input->post('calls_sb_account_id'),
+							'reason' => $this->input->post('reason'),
+							'callback_time' => $this->input->post('start_date'),
+							'status_type' => $this->input->post('status_type'),
+							'alert_before_datetime' => $alert_before_time,
+							'users_ids' => implode(',', $this->input->post('calls_sb_invitees')),
+							'created_date' => DATETIME,
+							'created_by' => $userId,
+							'updated_date' => DATETIME,
+							'status' => '1',
+							'is_deleted' => '0'
+						);
+			$result = $this->common_model->insert('calls', $data);
+			echo json_encode(array("status" => "success","message" => 'Calls Added Successfully.', "data" => $result));
+
+		}
+		else
+		{
+			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+		}
+    }
+
+    public function get_calls(){
+		$userId = $this->sessionData['logged_in'];
+		$companyId = $this->sessionData['company_id'];
+
+		$response =  $this->schedule_model->getCalls($userId,$companyId);
+
+
+		//$response =  $this->common_model->getdata($selected = false, 'calls', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		
+		if(!empty($response))
+		{	
+			foreach ($response as $key => $value) 
+			{
+				$response[$key]->showtime = date('h:i',strtotime($value->callback_time));
+				$response[$key]->showdate = date('l, F d, Y',strtotime($value->callback_time));
+				$response[$key]->description = truncated_string($value->reason,100);
+			}
+			echo json_encode(array("status" => "success","message" => '', "data" => $response));
+		}
+		else
+		{
+			echo json_encode(array("status" => "success","message" => '', "data" => ''));
+		}
+	}
 }
+

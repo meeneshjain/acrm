@@ -15,13 +15,13 @@ class Home extends CI_Controller {
 		$this->dashboard();
 	 }
 	 
-	 public function page_not_found(){
+	public function page_not_found(){
 		 $data['page_title']="Page Not Found";	
 		$this->output->set_status_header('404'); 
 		$this->load->view('include/front_header',$data);
 		$this->load->view('page_not_found');
 		$this->load->view('include/front_footer');
-	 }
+	}
     
     public function login($user_type = NULL) {
 		if($user_type == ""){
