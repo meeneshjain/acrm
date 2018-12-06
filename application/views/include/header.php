@@ -27,20 +27,13 @@ sessionStorage.fonts = true;
 </script>
 
 <!--end::Web font -->
-<!--begin::Base Styles -->
-<link href="<?php echo base_url('assets/vendors/custom/datatables/datatables.bundle.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/vendors/base/vendors.bundle.css'); ?>" rel="stylesheet" type="text/css" />
+
 <link href="<?php echo base_url('assets/demo/default/base/style.bundle.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/demo/default/custom/no-padding.css'); ?>" rel="stylesheet" type="text/css" />
 <?php 
 $settings = get_global_settings('default_theme');
 if(isset($settings['default_theme'])  && $settings['default_theme'] != ""){ ?>
     <link href="<?php echo base_url('assets/demo/default/custom/themes/css/'.$settings['default_theme'].'.css'); ?>" rel="stylesheet" type="text/css" />
 <?php } ?>
-<!--end::Base Styles -->
 <link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png'); ?>" />
 </head>
 <!-- end::Head -->

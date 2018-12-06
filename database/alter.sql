@@ -148,7 +148,6 @@ VALUES ('system_email', 'info@akshaycrm.com', 'email', '', '', '', '');
 ALTER TABLE `contact` ADD `company_id` int(11) NOT NULL AFTER `id`;
 
 ALTER TABLE `items` ADD `company_id` int(11) NOT NULL AFTER `id`;
-ALTER TABLE `categories` ADD `company_id` int(11) NOT NULL AFTER `id`;
 ALTER TABLE `meeting` ADD `company_id` int(11) NOT NULL AFTER `id`;
 ALTER TABLE `notes` ADD `company_id` int(11) NOT NULL AFTER `id`;
 ALTER TABLE `subscription` ADD `company_id` int(11) NOT NULL AFTER `id`;
@@ -409,18 +408,6 @@ ADD `email_2` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_1`,
 ADD `other_email` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email_2`;
 
 
-truncate table companies;
-truncate table account;
-truncate table contact;
-truncate table items;
-truncate table items_price_list;
-truncate table meeting;
-truncate table `notes`;
-truncate table sales_order;
-truncate table sales_order_details;
-truncate table task;
-truncate table users;
-
 ALTER TABLE `sales_quotation_revisions`
 RENAME TO `sales_order_revisions`;
 
@@ -628,3 +615,35 @@ CHANGE `updated_date` `updated_date` datetime NOT NULL AFTER `created_date`;
 INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`)
 VALUES ('available_theme', '[{\"name\":\"purple_red\",\"title\":\"Purple Red\"},{\"name\":\"pitch_black\",\"title\":\"Pitch Black\"},{\"name\":\"just_white\",\"title\":\"Just White\"},{\"name\":\"soft_metal\",\"title\":\"Soft Metal\"},{\"name\":\"grape_fruit\",\"title\":\"Grape Fruit\"},{\"name\":\"blue_jeans\",\"title\":\"Blue Jeans\"},{\"name\":\"grass\",\"title\":\"Grass\"},{\"name\":\"pink_rose\",\"title\":\"Pink Rose\"}]', 'look_feel', '1', '0', now(), now());
 
+
+-- truncate table for deployment 
+truncate table account;
+truncate table activity_logs;
+truncate table contact_lead;
+truncate table companies;
+truncate table company_email_templates;
+truncate table items;
+truncate table items_price_list;
+truncate table item_service_call;
+truncate table item_service_contract;
+truncate table company_email_templates;
+truncate table meeting;
+truncate table `notes`;
+truncate table sales_order;
+truncate table sales_order_details;
+truncate table sales_order_revisions;
+truncate table task;
+truncate table  targets;
+truncate table users;
+
+-- queries after 2nd release
+
+
+-- manish region start 
+
+-- manish region end
+
+
+-- meenesh region start 
+
+-- meenesh region end
