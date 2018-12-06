@@ -495,5 +495,178 @@ $(document).ready(function(){
 
 		}
 	});
-	
 });
+
+/* CALLS MODULE CODE GOES HERE */
+
+$(document).ready(function(){
+	$(".table").on("click",".calls_modal", function () {
+		$("#calls_sb_form").parsley().reset();
+		$("#calls_sb_form")[0].reset();
+
+		var lead_id = $(this).attr('data-lead-id');
+		var acnt_id = $(this).attr('data-acnt-id');
+		var name = $(this).attr('data-name');
+		var type = $(this).attr('data-type');
+		var account = $(this).attr('data-account');
+		var contact = $(this).attr('data-contact');
+
+		$("#calls_sb_lead_id").val(lead_id);
+		$("#calls_sb_account_id").val(acnt_id);
+
+		$("#calls_sb_name").val(name);
+		$("#calls_sb_type").val(type);
+		$("#calls_sb_account").val(account);
+		$("#calls_sb_contact").val(contact);
+
+		$("#calls_sb_lead_type").val(type);
+
+		$("#calls_sb_modal").modal('show');
+		$("#calls_sb_form").attr('action', base_url + 'schedule/add_calls')
+		$(".calls_sb_modal_heading").html('ADD NEW CALLS');
+		$("#calls_sb_action_btn").html('<i class="fa fa-save"></i> Save');
+	});
+
+	/*
+	 ******** SAVE / UPDATE CALLS ********
+	*/
+	$("#calls_sb_action_btn").click(function () {
+		var obj = $(this);
+		if ($("#calls_sb_form").parsley().validate()) {
+			var btn_text = $("#calls_sb_action_btn").html();
+			show_loading("#calls_sb_action_btn", 'Loading..!');
+			form_submit('calls_sb_form', function (res) {
+				if (res.status == 'success') {
+					notify_alert('success', res.message, "Success");
+					hide_loading("#calls_sb_action_btn", btn_text);
+					$("#calls_sb_form").parsley().reset();
+					$("#calls_sb_form")[0].reset();
+					$("#calls_sb_modal").modal('hide');
+					$(".get_calls_sb_list_on_tab").trigger("click");
+				}
+			}, function () {
+				hide_loading("#calls_sb_action_btn", btn_text);
+			});
+		}
+	});
+
+	/*
+	 ******* GET LIST OF CALLS ********
+	*/
+	$(".get_calls_sb_list_on_tab").click(function () {
+		call_service(base_url + 'schedule/get_calls', function (res) {
+			console.log('Manish');
+			if (res.status == 'success') {
+				var html = '';
+				if(res.data != '')
+				{
+					$(res.data).each(function (index, value) {
+						html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
+							<span class="m-timeline-3__item-time">\
+								<small>'+ res.data[index].showtime + '</small>\
+							</span>\
+							<div class="m-timeline-3__item-desc">\
+								<span class="m-timeline-3__item-text">'+ res.data[index].lead_type + '</span>	\
+								<br>\
+								<span class="m-timeline-3__item-user-name">\
+									<a class="m-link m-link--metal m-timeline-3__item-link"><b>Reason:</b> '+ res.data[index].reason + '</a>\
+								</span>\
+								<div>\
+									<br><small class="text-info"><i class="fa fa-clock-o"></i> '+ res.data[index].showdate + '</small>\
+								</div>\
+							</div>\
+						</div>';
+					});
+				}
+				else
+				{
+					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No meetings added yet!!</div>';
+				}
+				$('.custom_calls_portlet_container').html(html);
+			}
+		}, function (res) {
+			notify_alert('error', res.message, "Error");
+		});
+	});
+
+	$('.custom_calls_sb_portlet_container').on("click", ".mark_calls_sb_complete", function (e) {
+		var obj = $(this);
+		var id = obj.attr('data-task-id');
+		var status;
+		if(obj.attr('data-mark-status') == '0')
+		{
+			var alertmsg = "Mark as complete?";
+			status = 1;
+		}
+		else
+		{
+			var alertmsg = "Mark as Uncomplete?";
+			status = 0;
+		}
+		
+		call_service(base_url + "schedule/mark_calls_sb_complete/"+ id+"/"+status, function (response) {
+			if (response.status == 'success') {
+				if(status == 1)
+				{
+					$("#tsk_cmplt_id"+id).addClass('calls_sb_completed');
+					obj.attr('data-mark-status','1');
+				}
+				else
+				{
+					$("#tsk_cmplt_id"+id).removeClass('calls_sb_completed');
+					obj.attr('data-mark-status','0');						
+				}
+				notify_alert('success', response.message, "Success");
+			} else {
+				notify_alert('danger', response.message, "Error");
+			}
+		}, function (response) {
+			notify_alert('danger', response.message, "Error");
+		});
+
+	});
+
+	
+	/*
+	******* DELETE MEETING ********
+	*/
+	$(".custom_calls_sb_portlet_container").on("click", ".calls_sb_delete_btn", function (e) {
+		var id = $(this).attr('data-delete-id');
+		if (confirm("Are you sure, You want to delete this task?")) {
+			call_service(base_url + "schedule/delete_task/" + id, function (response) {
+				if (response.status == 'success') {
+					notify_alert('success', response.message, "Success");
+					$(".get_calls_sb_list_on_tab").trigger("click");
+				} else {
+					notify_alert('danger', response.message, "Error");
+				}
+			}, function () {
+				notify_alert('danger', response.message, "Error");
+			});
+
+		}
+	});
+});
+
+/* CHAT CODE GOES HERE */
+$(document).ready(function(){
+  	$("#chat_searchfield").on("keyup", function() {
+    	var value = $(this).val().toLowerCase();
+    	$("#chat_users .chat_user").filter(function() {
+      		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    	});
+  	});
+
+  	$(".chat_user").on("click",function(){
+  		$("#chat_with_user").fadeIn(100);
+  		$("#chat_userlist").fadeOut(100);
+  	});
+
+  	$(".back-to-chat").on("click",function(){
+  		$("#chat_userlist").fadeIn(100);
+  		$("#chat_with_user").fadeOut(100);
+  	});
+});
+
+
+

@@ -9,7 +9,7 @@ class Contact_model extends CI_Model {
 		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'cl.id', 'a.name', 'a.account_number', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id');
+		$dt_columns = array( 'cl.id', 'a.id as acnt_id', 'a.name', 'a.account_number', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -75,8 +75,8 @@ class Contact_model extends CI_Model {
         	$row[] = convert_db_date_time($aRow['created_date']);
 			$row[] = '
 			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-cont-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
-			
 			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_cont" data-cont-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
+			<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="CONTACT"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>
 			';
 
         	$output['data'][] = $row;

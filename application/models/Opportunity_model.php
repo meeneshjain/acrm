@@ -28,7 +28,7 @@ class Opportunity_model extends CI_Model {
 		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id','cl.opp_close_date','cl.opp_amount','cl.opp_type','cl.opp_sales_stage','cl.opp_probability','cl.opp_lead_source','cl.convert_oppr_date', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
+		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id','cl.opp_close_date','cl.opp_amount','cl.opp_type','cl.opp_sales_stage','cl.opp_probability','cl.opp_lead_source','cl.convert_oppr_date', 'a.id as acnt_id', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -99,8 +99,7 @@ class Opportunity_model extends CI_Model {
         	$row[] = $this->db->query("SELECT CONCAT(`name`,' (',`probability`,')') as stage FROM sales_stages WHERE `id` = '".$aRow['opp_sales_stage']."'")->row('stage');
         	$row[] = get_lead_source($aRow['opp_lead_source']);
         	$row[] = convert_db_date_time($aRow['created_date']);
-        	$row[] = '';
-			//$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_opprt" data-opprt-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button><button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_opprt" data-opprt-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+			$row[] = '<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="OPPORTUNITY"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>';
 
         	$output['data'][] = $row;
         }

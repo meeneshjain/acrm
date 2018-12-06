@@ -1,5 +1,13 @@
 -- MANISH 21-10-2018
 
+ALTER TABLE `calls`
+ADD `lead_type` enum('CONTACT','LEAD','OPPORTUNITY') NOT NULL AFTER `lead_id`,
+DROP `contact_id`;
+
+ALTER TABLE `calls`
+CHANGE `alert_before_minute` `alert_before_datetime` datetime NOT NULL AFTER `updated_by`;
+
+
 DROP TABLE IF EXISTS `targets`;
 CREATE TABLE `targets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

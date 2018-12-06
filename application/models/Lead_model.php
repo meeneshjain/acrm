@@ -28,7 +28,7 @@ class Lead_model extends CI_Model {
 		$dt_table = "contact_lead as cl";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
+		$dt_columns = array( 'cl.id', 'cl.first_name', 'cl.last_name', 'cl.mobile', 'cl.email_1', 'cl.created_date', 'cl.company_id', 'a.id as acnt_id', 'a.name', 'a.account_number', 'u.first_name as own_fname','u.last_name as own_lname');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -99,8 +99,8 @@ class Lead_model extends CI_Model {
 			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air convert_to_opportunity_btn custom-popover" data-lead-id="'.$aRow['id'].'" data-opportunity-name="'.$aRow['first_name'].' '.$aRow['last_name'].'" data-account-name="'.$aRow['name'] .'('.$aRow['account_number'].')'.'"  data-toggle="m-popover" data-placement="left" title="Make Opportunity" data-content="Convert to Opportunity"><i class="fa fa-dollar"></i></button>
 
 			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-lead-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
-			
 			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_lead" data-lead-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
+			<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="LEAD"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>
 			';
 
         	$output['data'][] = $row;
