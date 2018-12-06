@@ -86,6 +86,7 @@ class Lead extends CI_Controller {
 
     public function add_update_lead()
     {
+        //Recommit on git
         if($this->input->is_ajax_request())
         {
 

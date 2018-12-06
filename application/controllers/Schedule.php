@@ -383,3 +383,4 @@ class Schedule extends CI_Controller {
 		}
 	}
 }
+

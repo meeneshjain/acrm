@@ -3,6 +3,7 @@ class Contact_model extends CI_Model {
 
 	public function contactlist($companyId)
 	{
+		//Recommit on git
 		error_reporting(E_ALL);
 		ini_set('display_errors', 1);
 		$get_data = $this->input->get(NULL, TRUE);
