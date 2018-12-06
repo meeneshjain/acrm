@@ -427,7 +427,15 @@ class Items extends CI_Controller {
         } else {
             echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
         }
-         
+    }
+    
+    public function get_contract_serial_detail($serial_number){
+        if($this->input->is_ajax_request()) {
+            $serial_data  = $this->items_model->get_contract_serial_detail($serial_number);
+            echo json_encode(array("status" => "success","message" => 'Serial Number Contract Detail Found.', "data" => $serial_data));
+        } else {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
     }
 }
 

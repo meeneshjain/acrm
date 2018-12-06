@@ -626,3 +626,13 @@ CHANGE `rejected_call_date` `rejected_call_date` date NOT NULL AFTER `approved_c
 
 ALTER TABLE `item_service_call`
 CHANGE `item_service_contract_serial_number` `item_service_contract_serial_number` varchar(200) NOT NULL AFTER `item_service_contract_id`;
+
+INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`)
+VALUES ('default_theme', 'purple_red', 'look_feel', '1', '0', now(), '');
+
+ALTER TABLE `system_settings`
+CHANGE `updated_date` `updated_date` datetime NOT NULL AFTER `created_date`;
+
+INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`)
+VALUES ('available_theme', '[{\"name\":\"purple_red\",\"title\":\"Purple Red\"},{\"name\":\"pitch_black\",\"title\":\"Pitch Black\"},{\"name\":\"just_white\",\"title\":\"Just White\"},{\"name\":\"soft_metal\",\"title\":\"Soft Metal\"},{\"name\":\"grape_fruit\",\"title\":\"Grape Fruit\"},{\"name\":\"blue_jeans\",\"title\":\"Blue Jeans\"},{\"name\":\"grass\",\"title\":\"Grass\"},{\"name\":\"pink_rose\",\"title\":\"Pink Rose\"}]', 'look_feel', '1', '0', now(), now());
+

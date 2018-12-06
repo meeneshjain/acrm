@@ -99,4 +99,29 @@ class Settings_model extends CI_Model {
             return 0;
         }
     }
+    
+    public function get_general_setting_details(){
+        $data = $this->db->query("SELECT `name`, sys_value as `value`, sys_group FROM system_settings WHERE status = 1 and is_deleted = 0")->result_array();
+        $output_data = []; 
+        foreach($data as $settings ){
+            $output_data[$settings['name']] = $settings['value'];
+        }
+		return $output_data;
+    }
+    
+    public function update_global_settings($post_data){
+        $count_success = 0;
+        foreach($post_data as $key => $value){
+          $update_settings = "UPDATE system_settings SET `sys_value` = '$value' WHERE `name`= '$key' ";
+          $update_settings_res = $this->db->query($update_settings);
+            if($update_settings_res){
+                $count_success++;
+            }
+        }
+        if($count_success > 0){
+            return 1; 
+        } else {
+            return 0;
+        }
+    }
 }

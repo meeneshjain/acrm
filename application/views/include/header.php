@@ -35,6 +35,11 @@ sessionStorage.fonts = true;
 <link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/no-padding.css'); ?>" rel="stylesheet" type="text/css" />
+<?php 
+$settings = get_global_settings('default_theme');
+if(isset($settings['default_theme'])  && $settings['default_theme'] != ""){ ?>
+    <link href="<?php echo base_url('assets/demo/default/custom/themes/css/'.$settings['default_theme'].'.css'); ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
 <!--end::Base Styles -->
 <link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png'); ?>" />
 </head>
@@ -549,7 +554,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
             <div class="m-dropdown__wrapper">
                 <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                 <div class="m-dropdown__inner">
-                    <div class="m-dropdown__header m--align-center" style="background: #282733;">
+                    <div class="m-dropdown__header m--align-center purple_red_bg">
                         <span class="m-dropdown__header-title">
                             9 New
                         </span>
@@ -758,7 +763,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
             <div class="m-dropdown__wrapper">
                 <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                 <div class="m-dropdown__inner">
-                    <div class="m-dropdown__header m--align-center" style="background: #282733;">
+                    <div class="m-dropdown__header m--align-center purple_red_bg">
                         <span class="m-dropdown__header-title">
                             Quick Actions
                         </span>
@@ -817,7 +822,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
             <div class="m-dropdown__wrapper">
                 <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                 <div class="m-dropdown__inner">
-                    <div class="m-dropdown__header m--align-center" style="background: #282733;">
+                    <div class="m-dropdown__header m--align-center purple_red_bg">
                         <div class="m-card-user m-card-user--skin-dark">
                             <div class="m-card-user__pic">
                                 <img src="<?php echo base_url('assets/images/avatar-grey.png'); ?>" class="m--img-rounded m--marginless" alt=""/>
@@ -1071,9 +1076,9 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </span>
                                 </a>
                             </li>
-</ul>
-</div>
-</li>
+                            </ul>
+                            </div>
+                            </li>
                             <!--  <li class="m-menu__item <?php // if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                 <a  href="<?php // echo base_url('items');?>" class="m-menu__link ">
                                     <i class="m-menu__link-icon fa fa-building"></i>

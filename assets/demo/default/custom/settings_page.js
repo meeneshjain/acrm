@@ -206,6 +206,65 @@ $(document).ready(function (event) {
         $(".email_contstans").slideToggle();
     });
 
+    $(document).on("click", ".get_general_settings", function () {
+        var obj = $(this);
+        $(".general_setting_block").addClass('display_none');
+        $(".general_setting_loader").removeClass('display_none');
+        call_service(base_url + "settings/get_general_setting_details/", function (res) {
+            if (res['status'] == 'success') {
+                var general_data = res.data;
+
+                $("#default_currency").val(general_data.default_currency);
+                $("#account_name").val(general_data.system_email);
+
+                var theme_array = JSON.parse(general_data.available_theme);
+                var theme_block_html = '';
+                for (var index = 0; index < theme_array.length; index++) {
+                    var current_theme = theme_array[index];
+                    theme_block_html += '<div class="col-lg-3">\
+                        <img src="'+ base_url + '/assets/demo/default/custom/themes/preview/' + current_theme['name'] + '.PNG"  alt = "' + current_theme['title'] + '" class="img img-thumbnail " >\
+                            <p class="text-center">\
+                                <input type="radio" id="theme_'+ current_theme['name'] + '" value="' + current_theme['name'] + '" name="default_theme" class="m-input" placeholder="' + current_theme['title'] + ' ">\
+                                    <label class="col-form-label" for="theme_'+ current_theme['name'] + '">' + current_theme['title'] + ' </label>\
+                                </p> \
+                            </div>';
+                }
+                $(".all_theme_block").html(theme_block_html);
+                setTimeout(function () {
+                    $('[value="' + general_data.default_theme + '"]').prop('checked', true);
+                }, 500);
+                $(".general_setting_block").removeClass('display_none');
+                $(".general_setting_loader").addClass('display_none');
+            }
+        }, function (res) {
+        });
+    });
+
+
+    $(document).on("submit", "#general_setting_form", function (event) {
+        event.preventDefault();
+        var form_obj = $(this);
+        var btn_id = '#update_user_btn';
+        var obj = $(btn_id);
+        btn_text = obj.html();
+        if (form_obj.parsley().validate()) {
+            show_loading(btn_id, 'Updating..!')
+            form_submit(form_obj.attr("id"), function (res) {
+                notify_alert(res.status, res.message);
+                setTimeout(function () {
+                    hide_loading(btn_id, btn_text);
+                    form_obj.parsley().reset();
+                    form_obj[0].reset();
+                    $('#general_setting_model').modal('hide');
+                    window.location.reload();
+                }, 1000);
+            }, function (res) {
+                hide_loading(btn_id, btn_text);
+                //     notify_alert(res.status, res.message, 'Error');
+            });
+        }
+    });
+
 
 
 }); // dom end 
