@@ -172,6 +172,13 @@ class User_model extends CI_Model {
 		$this->db->update('`users`',$update_dataset);
 	}
 
+	public function admin_detail($userId)
+	{
+		$data = array();
+		$data = $this->db->query("SELECT * FROM `admin` WHERE `id` = '$userId'")->row_array();
+		return $data;
+	}
+
 	public function user_detail($companyId,$userId)
 	{
 		$data = array();
@@ -210,10 +217,22 @@ class User_model extends CI_Model {
 			"dob" => $post_data['dob'],
 			"address" => $post_data['address'],
 			'updated_date' => DATETIME,
-
 		);
 		$this->db->where(array('id' => $id));
 		$this->db->update('users',$data);
+	}
+
+	public function admin_profile_update($post_data, $id) 
+	{
+		//print_r($post_data);die;
+		$data = array(
+			"first_name" => $post_data['first_name'],
+			"last_name" => $post_data['last_name'],
+			"email" => $post_data['email'],
+			"contact" => $post_data['mobile'],
+		);
+		$this->db->where(array('id' => $id));
+		$this->db->update('admin',$data);
 	}
 
 	
@@ -231,6 +250,33 @@ class User_model extends CI_Model {
 				);
 				$this->db->where(array('id' => $id));
 				$this->db->update('users',$data);
+				$output = array("status" => "success","message" => 'Password Updated Successfully!!', "data" => '');
+			}
+			else
+			{
+				$output = array("status" => "danger","message" => 'New password not match with confirm password.', "data" => '');
+			}
+		}
+		else
+		{
+			$output = array("status" => "danger","message" => 'Your current password do not match.', "data" => '');
+		}		
+		return $output;
+	}
+
+	public function admin_change_password($post_data, $id) 
+	{
+		$current_password = md5($post_data['password']);
+		$check_current_pass = $this->db->query("SELECT `password` FROM `admin` WHERE `id` = '$id'")->row_array();
+		if($current_password == $check_current_pass['password'])
+		{
+			if($post_data['new_password'] == $post_data['confirm_password'])
+			{
+				$data = array(
+					"password" => md5($post_data['new_password']),
+				);
+				$this->db->where(array('id' => $id));
+				$this->db->update('admin',$data);
 				$output = array("status" => "success","message" => 'Password Updated Successfully!!', "data" => '');
 			}
 			else

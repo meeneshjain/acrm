@@ -1,3 +1,189 @@
+				<?php
+				if(isset($is_super_admin) && $is_super_admin == '1')
+				{
+				?>
+				<div class="m-grid__item m-grid__item--fluid m-wrapper">
+					<div class="m-content">
+						<div class="row">
+							<div class="col-xl-3 col-lg-4">
+								<div class="m-portlet m-portlet--full-height  ">
+									<div class="m-portlet__body">
+										<div class="m-card-profile">
+											<div class="m-card-profile__title m--hide">
+												Your Profile
+											</div>
+											<div class="m-card-profile__pic">
+												<div class="m-card-profile__pic-wrapper">
+													<img src="<?php echo base_url('assets/app/media/img/users/user4.jpg');?>" alt=""/>
+												</div>
+
+											</div>
+											<div class="m-card-profile__details">
+												<span class="m-card-profile__name">
+													<?php
+													if(isset($userdetail['first_name']) && !empty($userdetail['first_name']))
+													{
+														echo ucfirst($userdetail['first_name'])." ".ucfirst($userdetail['last_name']);
+													}
+													?>
+												</span>
+												<a href="" class="m-card-profile__email m-link">
+													<?php
+													if(isset($userdetail['email']) && !empty($userdetail['email']))
+													{
+														echo $userdetail['email'];
+													}
+													?>
+												</a>
+											</div>
+										</div>
+										
+										<div class="m-portlet__body-separator"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-9 col-lg-8">
+								<div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
+									<div class="m-portlet__head">
+										<div class="m-portlet__head-tools">
+											<ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+												<li class="nav-item m-tabs__item">
+													<a class="nav-link m-tabs__link active" data-toggle="tab" href="#user_profile" role="tab">
+														<i class="flaticon-share m--hide"></i>
+														Update Profile
+													</a>
+												</li>
+												<li class="nav-item m-tabs__item">
+													<a class="nav-link m-tabs__link" data-toggle="tab" href="#user_setting" role="tab">
+														Settings
+													</a>
+												</li>
+											</ul>
+										</div>
+
+									</div>
+									<div class="tab-content">
+										<div class="tab-pane active" id="user_profile">
+											<div class="m-portlet">
+												<form class="m-form m-form--fit m-form--label-align-right" id="user_profile_activity_form" action="<?php echo base_url('users/user_profile_update');?>" data-parsley-validate >
+													<div class="m-portlet__body">
+														<div class="form-group m-form__group row">
+															<div class="col-lg-6">
+																<label>
+																	First Name:
+																</label>
+																<input type="hidden" name="id" value="<?php echo $userdetail['id'];?>">
+																<input type="text" required id="u_first_name" name="first_name" class="form-control m-input" placeholder="Enter first name" value="<?php echo $userdetail['first_name'];?>">
+																
+															</div>
+															<div class="col-lg-6">
+																<label class="">
+																	Last Name:
+																</label>
+																<input type="text" required id="u_last_name" name="last_name" class="form-control m-input" placeholder="Enter last name" value="<?php echo $userdetail['last_name'];?>">
+																
+															</div>
+														</div>
+
+														<div class="form-group m-form__group row">
+															<div class="col-lg-6">
+																<label>
+																	Mobile:
+																</label>
+																<input type="text" required id="u_mobile" name="mobile" class="form-control m-input onlynumber" placeholder="Enter contact number" value="<?php echo $userdetail['contact'];?>">
+															</div>
+															<div class="col-lg-6">
+																<label class="">
+																	Email:
+																</label>
+																<input type="email" required id="u_email" name="email" class="form-control m-input" placeholder="Enter your email" value="<?php echo $userdetail['email'];?>">
+															</div>
+														</div>
+													</div>
+													<div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+														<div class="m-form__actions m-form__actions--solid">
+															<div class="row">
+																<div class="col-lg-4"></div>
+																<div class="col-lg-8">
+																	<button type="button" id="update_user_profile_btn" class="btn btn-sm btn-primary">
+																		<i class="fa fa-save"></i> Update Detail
+																	</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+
+										<div class="tab-pane " id="user_setting">
+											<form class="m-form m-form--fit m-form--label-align-right" id="user_setting_form" action="<?php echo base_url('users/change_password');?>" data-parsley-validate >
+												<div class="m-portlet__body">
+													<div id="pswd_alrt_msg">
+														
+													</div>
+													<div class="form-group m-form__group">
+														<label for="exampleInputEmail1">
+															Current Password
+														</label>
+														<div class="input-group m-input-group m-input-group--pill">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="basic-addon1">
+																	<i class="la la-unlock"></i>
+																</span>
+															</div>
+															<input type="hidden" name="user_id" value="<?php echo $userdetail['id'];?>">
+															<input type="password" required id="u_p_current_password" name="password" class="form-control m-input" data-parsley-required-message="" placeholder="Enter you current password">
+														</div>
+													</div>
+
+													<div class="form-group m-form__group">
+														<label for="exampleInputEmail1">
+															New password
+														</label>
+														<div class="input-group m-input-group m-input-group--pill">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="basic-addon1">
+																	<i class="la la-lock"></i>
+																</span>
+															</div>
+															<input type="password" required id="u_p_new_password" name="new_password" class="form-control m-input" data-parsley-required-message="" placeholder="New Passowrd" aria-describedby="basic-addon1">
+														</div>
+													</div>
+													<div class="form-group m-form__group">
+														<label for="exampleInputEmail1">
+															Confirm Password
+														</label>
+														<div class="input-group m-input-group m-input-group--pill">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="basic-addon1">
+																	<i class="la la-lock"></i>
+																</span>
+															</div>
+															<input type="password" required id="u_p_confirm_password" name="confirm_password" class="form-control m-input" data-parsley-required-message="" placeholder="Confirm Password" aria-describedby="basic-addon1">
+														</div>
+													</div>
+												</div>
+												<div class="m-portlet__foot m-portlet__foot--fit">
+													<div class="m-form__actions">
+														<button type="button" class="btn btn-primary" id="user_setting_btn">
+															<i class="fa fa-save"></i> Update Detail
+														</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php
+				}
+				else
+				{
+				?>
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
 					<div class="m-content">
 						<div class="row">
@@ -402,3 +588,6 @@
 						</div>
 					</div>
 				</div>
+				<?php
+				}
+				?>

@@ -81,7 +81,7 @@ $(document).ready(function () {
                     notify_alert(res.status, res.message);
                     hide_loading('#update_user_profile_btn', btn_text);
                     $("#user_profile_activity_form").parsley().reset();
-                    $("#user_profile_activity_form")[0].reset();
+                    //$("#user_profile_activity_form")[0].reset();
                 }, function (res) {
                     hide_loading('#update_user_profile_btn', btn_text);
                     notify_alert(res.status, res.message, 'Error');

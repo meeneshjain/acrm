@@ -1,3 +1,9 @@
+-- ADMIN TABLE ALTER ON 09-12-2018
+
+ALTER TABLE `admin`
+ADD `email` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `last_name`,
+ADD `contact` varchar(15) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email`;
+
 -- MANISH 21-10-2018
 
 ALTER TABLE `calls`
