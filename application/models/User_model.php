@@ -115,6 +115,9 @@ class User_model extends CI_Model {
 			$data['reports_to_user_id'] = $post_data['team_lead_dd'];
 		} else if($post_data['user_role'] == '3'){
 			$data['reports_to_user_id'] = $post_data['rm_dd'];
+		} else if($post_data['user_role'] == '2'){
+			$reports_to_user_id = $reports_to_user_id = $this->db->query("SELECT `id` FROM `users` WHERE `company_id` = '".$data['loggedin_company_id']."' ORDER BY `id` ASC LIMIT 1")->row_array();
+			$data['reports_to_user_id'] = $reports_to_user_id['id'];
 		}
 		$res  = $this->db->insert('users',$data);
 	}
@@ -135,13 +138,16 @@ class User_model extends CI_Model {
 			"updated_by" => get_current_user_id(),
 		);
 		
-		/* 
+		 
 		if($post_data['user_role'] == '4'){
 			$data['reports_to_user_id'] = $post_data['team_lead_dd'];
 		} else if($post_data['user_role'] == '3'){
 			$data['reports_to_user_id'] = $post_data['rm_dd'];
-		} 
-		*/
+		} else if($post_data['user_role'] == '2'){
+			$reports_to_user_id = $reports_to_user_id = $this->db->query("SELECT `id` FROM `users` WHERE `company_id` = '".$data['loggedin_company_id']."' ORDER BY `id` ASC LIMIT 1")->row_array();
+			$data['reports_to_user_id'] = $reports_to_user_id['id'];
+		}
+		
 		$this->db->where(array('id' => $id));
 		$this->db->update('users',$data);
 	}
