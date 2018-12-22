@@ -1,3 +1,26 @@
+-- USERS TABLE ALTER ON 17-12-2018
+
+DROP TABLE IF EXISTS `chat_history`;
+CREATE TABLE `chat_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_id` int(11) NOT NULL,
+  `to_id` int(11) NOT NULL,
+  `messege` text NOT NULL,
+  `document` varchar(100) NOT NULL,
+  `document_type` enum('JPG','JPEG','PNG','GIF','PDF','XLS','XLXS','DOC','MP3','MP4') DEFAULT NULL,
+  `send_at` datetime NOT NULL,
+  `deliver_at` datetime NOT NULL,
+  `is_sent` int(11) NOT NULL,
+  `is_read` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `is_delete` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `users`
+ADD `is_login` int(11) NOT NULL;
+
 -- ADMIN TABLE ALTER ON 09-12-2018
 
 ALTER TABLE `admin`

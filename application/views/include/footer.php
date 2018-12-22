@@ -56,6 +56,10 @@
 <script src="<?php echo base_url('assets/demo/default/custom/sidebar_activities.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
 
+<script src="<?php echo base_url('assets/node_modules/socket.io-client/dist/socket.io.js'); ?>"></script>
+<?php include('node.php');?>
+
+
 <?php if(isset($view_needed_js) && $view_needed_js!=""){ ?>
 	<?php if($view_needed_js == "setting"){ ?>
 	<script src="<?php echo base_url('assets/demo/default/custom/crud/forms/widgets/summernote.js'); ?>" type="text/javascript"></script>

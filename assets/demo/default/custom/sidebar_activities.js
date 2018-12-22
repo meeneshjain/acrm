@@ -650,6 +650,43 @@ $(document).ready(function(){
 
 /* CHAT CODE GOES HERE */
 $(document).ready(function(){
+
+
+	/*$(".get_chat_onlineuser_on_tab").click(function () {
+		call_service(base_url + 'schedule/get_online_user', function (res) {
+			if (res.status == 'success') {
+				var html = '';
+				if(res.data != '')
+				{
+					$(res.data).each(function (index, value) {
+						console.log(index,value);
+						html += '<div class="m-widget4__item chat_user" style="cursor:pointer">\
+							<div class="m-widget4__img m-widget4__img--pic">\
+								<img src="'+base_url+'assets/app/media/img/users/100_4.jpg" alt="">\
+							</div>\
+							<div class="m-widget4__info">\
+								<span class="m-widget4__title">'+ res.data[index].first_name + ' '+res.data[index].last_name+'</span><br>\
+								<span class="m-widget4__sub">'+res.data[index].user_role_name+'</span>\
+							</div>\
+							<div class="m-widget4__ext">\
+								<span class="m-list-timeline__badge m-list-timeline__badge--success"></span>\
+							</div>\
+						</div>';
+					});
+				}
+				else
+				{
+					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No meetings added yet!!</div>';
+				}
+				$('#chat_users').html(html);
+			}
+		}, function (res) {
+			notify_alert('error', res.message, "Error");
+		});
+	});
+*/
+	
+
   	$("#chat_searchfield").on("keyup", function() {
     	var value = $(this).val().toLowerCase();
     	$("#chat_users .chat_user").filter(function() {
@@ -657,7 +694,7 @@ $(document).ready(function(){
     	});
   	});
 
-  	$(".chat_user").on("click",function(){
+  	$("#chat_users").on("click",".chat_user",function(){
   		$("#chat_with_user").fadeIn(100);
   		$("#chat_userlist").fadeOut(100);
   	});
@@ -666,6 +703,7 @@ $(document).ready(function(){
   		$("#chat_userlist").fadeIn(100);
   		$("#chat_with_user").fadeOut(100);
   	});
+
 });
 
 

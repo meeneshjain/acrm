@@ -382,5 +382,30 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "success","message" => '', "data" => ''));
 		}
 	}
+
+	/* USER CHAT */
+
+	public function get_online_user(){
+		$userId = $this->sessionData['logged_in'];
+		$companyId = $this->sessionData['company_id'];
+		$data = $this->schedule_model->get_online_users($companyId);
+
+		if(!empty($data))
+		{	
+			echo json_encode(array("status" => "success","message" => '', "data" => $data));
+		}
+		else
+		{
+			echo json_encode(array("status" => "success","message" => '', "data" => ''));
+		}
+	}
+
+	public function get_chat_history($f_userid,$t_userid){
+		$userId = $this->sessionData['logged_in'];
+		$companyId = $this->sessionData['company_id'];
+		$data = $this->schedule_model->get_chat_history($f_userid,$t_userid);
+
+		echo json_encode($data);
+	}
 }
 
