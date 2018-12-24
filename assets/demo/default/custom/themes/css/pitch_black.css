@@ -309,3 +309,59 @@ body {
     color: #d3d4d6 !important;
     background: #191818 !important; 
 }
+
+.m-list-timeline .m-list-timeline__items .m-list-timeline__item .m-list-timeline__text {
+    color: #bfc0c5 !important;
+}
+
+.m-widget2__item .m-widget2__desc .m-widget2__text {
+    color: #b7b9c3 !important;
+}
+
+.m-widget2__item .m-widget2__desc .m-widget2__user-name .m-widget2__link {
+    color: #989ba7 !important;
+}
+
+.nav.nav-pills .nav-link, .nav.nav-tabs .nav-link {
+    color: #a0a3ab !important;
+}
+
+.m-widget24 .m-widget24__item .m-widget24__title {
+    color: #d9dbe2 !important;
+}
+
+.daterangepicker{
+    background-color: #000 !important;
+}
+
+.daterangepicker .ranges li.active {
+    background: #db1430 !important;
+    color: #fff !important;
+    border: 1px solid #db1430 !important;
+}
+
+.card{
+    background-color: #808080 !important; 
+}
+
+#m_login{
+    background: #232323  !important;
+}
+
+.btn-focus {
+    color: #fff !important;
+    background-color: #000000 !important;
+    border-color: #232323 !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__head .m-login__title {
+    color: #a6a6bd !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .m-login__form-sub .m-checkbox {
+    color: #a6a6bd !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .m-login__form-sub .m-link {
+    color: #a6a6bd !important;
+}

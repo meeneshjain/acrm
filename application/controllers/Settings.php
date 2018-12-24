@@ -31,6 +31,7 @@ class Settings extends CI_Controller {
         $data['view_needed_js'] = $data['load_js'];
         $data['all_stages'] = $this->settings_model->get_sales_stages();
         $data['email_constants'] = get_all_email_template_constants();
+        $data['db_tables'] = get_all_db_table_n_category();
         $this->load->view('include/header',$data);
         $this->load->view('settings',$data);
         $this->load->view('include/footer', $data);
@@ -175,5 +176,22 @@ class Settings extends CI_Controller {
            $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
         }
         echo json_encode($output);
+    }
+    
+    public function database_backup(){
+         $get_data = $this->input->get(NULL, TRUE);
+         if(!empty($get_data)){
+            $response = $this->settings_model->database_backup($get_data);
+            if($response  == 1 ){
+                $output = array("status" => "success","message" => "", "data" => "");    
+            } else {
+                $output = array("status" => "error","message" => 'Unable to update, there was some error', "data" => "");    
+            }
+        } else {
+            $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
+        }
+  
+        echo json_encode($output);
+         
     }
 }

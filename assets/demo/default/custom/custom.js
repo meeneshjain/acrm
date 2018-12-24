@@ -152,7 +152,7 @@ $(document).ready(function () {
 
     $(".live_select_picker").selectpicker();
 
-    $("form").parsley({
+    $('form:not(".exclude_parsley_validation")').parsley({
         excluded: "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
     });
 

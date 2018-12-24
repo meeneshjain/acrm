@@ -654,4 +654,8 @@ truncate table users;
 
 -- meenesh region start 
 
+ALTER TABLE `admin`
+ADD `email` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `last_name`,
+ADD `contact` varchar(15) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email`;
+
 -- meenesh region end

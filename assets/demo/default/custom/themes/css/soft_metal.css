@@ -274,3 +274,25 @@ body {
  .m-portlet .m-portlet__head .m-portlet__head-text {
     color: #cfd1d6 !important;
 }
+
+#m_login{
+    background: #656b71 !important;
+}
+
+.btn-focus {
+    color: #fff  !important;
+    background-color: #4c5054 !important;
+    border-color: #4c5054 !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__head .m-login__title {
+    color: #FFF   !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .m-login__form-sub .m-checkbox {
+    color: #FFF  !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .m-login__form-sub .m-link {
+    color: #FFF  !important;
+}

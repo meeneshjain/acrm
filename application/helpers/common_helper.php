@@ -531,4 +531,49 @@ function get_global_settings($specfic_setting = null){
 	}
 }
 
+function get_all_db_table_n_category(){
+	$db_list = array(
+		"General" => array(
+			"Admin"                         => "admin",
+			"User Role"                     => "user_roles",
+			"Email Template"                => "email_template",
+			"Target Duration"               => "target_duration",
+			"Subscription"                  => "subscription",
+			"Subscription Plan"             => "subscription_plan",
+			"UOM"                           => "uom",
+			"Setting"                       => "system_settings",
+		),
+		"Employees" => array(
+			"Companies"                     => "companies",
+			"Users"                         => "users",
+			"Targets"                       => "targets",
+			"Notes"                         => "notes",
+			"Activity Log"                  => "activity_logs",
+			"Meeting"                       => "meeting",
+			"Task"                          => "task",
+			"Calls"                         => "calls",
+			"Company Email Template"        => "company_email_templates",
+		),
+		"Contact" => array(
+			"Account"      => "account",
+			"Contact/Lead" => "contact_lead",
+		),
+		"Item" => array(
+			"Item"              => "items",
+			"Price List"        => "items_price_list",
+			"Service Call"      => "item_service_call",
+			"Service Contract"  => "item_service_contract",
+		),
+		"Sales" => array(
+			"Sales Order/Quote"           => "sales_order",
+			"Sales Order/Quote Details"   => "sales_order_details",
+			"Sales Order/Quote Revision"  => "sales_order_revisions",
+			"Sales Stages"                => "sales_stages",
+		)
+		
+	);
+	
+	return $db_list;
+}
+
 ?>

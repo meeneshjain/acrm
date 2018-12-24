@@ -33,6 +33,14 @@
                                                 </span>
                                             </a>
                                         </li>
+                                        <li class="m-nav__item">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#database_back_model" class="m-nav__link get_general_settings">
+                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                <span class="m-nav__link-text">
+                                                    Database Backup
+                                                </span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -112,7 +120,14 @@
                             </div>
                         </div>
                         <div class="m-portlet__head-tools">
-
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+                                    <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon"
+                                        data-toggle="modal" data-target="#subsription_plan">
+                                        <i class="fa fa-view"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="m-portlet__body">
@@ -608,6 +623,80 @@
                 <div class="modal-footer">
                     <button type="submit" id="update_user_btn" class="btn btn-primary">
                         <i class="fa fa-check"></i> Update
+                    </button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="database_back_model" tabindex="-1" role="dialog" aria-labelledby="database_back_model_lable"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form target="_blank"  class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed exclude_parsley_validation" id="database_backup_form"
+                action="<?php echo base_url('settings/database_backup'); ?>">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="database_back_model_lable">
+                        <b>Database Backup</b>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="accordion">
+                        <div class="card">
+                        <?php foreach($db_tables as $table_group_name => $table_group){  ?>    
+                        <div class="card-header" id="<?php echo $table_group_name; ?>">
+                                <div class="row">
+                                    <div class="col-md-1" style="line-height: 25px;">
+                                        <input type="checkbox" checked="checked" class="db_parent_check" id="db_parent_check_<?php echo strtolower($table_group_name); ?>" data-section="<?php echo strtolower($table_group_name); ?>">
+                                    </div>
+                                    <div class="col-md-9 collapsed" data-toggle="collapse" data-target="#<?php echo strtolower($table_group_name); ?>" aria-expanded="false" aria-controls="<?php echo strtolower($table_group_name); ?>"><?php  echo ucfirst($table_group_name); ?> </div>
+                                    <div class="col-md-1">  
+                                        <a href="javascript:;" class="btn btn-link collapsed" data-toggle="collapse" data-target="#<?php echo strtolower($table_group_name); ?>" aria-expanded="false" aria-controls="<?php echo strtolower($table_group_name); ?>">
+                                        <i class="fa fa-plus"></i>
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="<?php echo strtolower($table_group_name); ?>" class="collapse" aria-labelledby="<?php echo strtolower($table_group_name); ?>" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table table-sm">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Table Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($table_group as $key => $table_name){ ?> 
+                                        <tr>
+                                            <td style="padding-left: 7px;"><input type="checkbox" checked="checked" name="db_table_name[]" class="child_check" data-section="<?php echo strtolower($table_group_name); ?>" id="<?php echo $table_name; ?>" value="<?php echo $table_name; ?>"></td>
+                                            <td><?php echo $key; ?></td>
+                                        </tr>
+                                         <?php } ?>
+                                    </tbody>
+                                </table> 
+                            </div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="submit" id="update_export_db_btn" class="btn btn-primary">
+                        <i class="fa fa-check"></i> Export
                     </button>
 
                     <button type="button" class="btn btn-danger" data-dismiss="modal">

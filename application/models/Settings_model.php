@@ -124,4 +124,25 @@ class Settings_model extends CI_Model {
             return 0;
         }
     }
+    
+    public function database_backup($post_data){
+        $this->load->dbutil();
+
+        $prefs = array(     
+            'format'      => 'zip',             
+            'filename'    => date("Y-m-d-H-i-s").'.zip'
+        );
+        $backup =& $this->dbutil->backup($prefs); 
+
+        $filename = 'backup-on-'. date("Y-m-d-H-i-s") .'.zip';
+        $save = $filename;
+
+        $this->load->helper('file');
+        write_file($save, $backup); 
+
+
+        $this->load->helper('download');
+        force_download($filename, $backup);
+        return 1;
+    }
 }

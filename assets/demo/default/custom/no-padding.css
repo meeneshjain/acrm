@@ -338,3 +338,12 @@ select.form-control:not([size]):not([multiple]){
     width: 30px;
     height: 30px;
 }
+
+.card-header {
+    padding: .1rem 1.2rem !important;
+    line-height: 20px !important;
+}
+
+.card-body {
+    padding: 0.65rem !important;
+}

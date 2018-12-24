@@ -100,8 +100,8 @@ define('TIMESTAMP', DATETIME);
 // company and app 
 define('APP_NAME','AkshayCRM');
 define('POWERED_BY','Akshay Softwares');
-define('POWERED_BY_FULL','Akshay software technologies limited');
-define('COMPANY_LOGO','assets/images/company_logo_light.png');
+define('POWERED_BY_FULL','Akshay Software Technologies Limited');
+define('COMPANY_LOGO','assets/images/company_logo.png');
 define('COMPANY_URL','http://akshay.com/');
 
 // email account

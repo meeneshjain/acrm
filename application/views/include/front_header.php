@@ -27,6 +27,14 @@
 		<link href="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.css'); ?>" rel="stylesheet" type="text/css" />
 		
 		<link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
+		<!-- custom theme  start -->
+		<?php 
+		$settings = get_global_settings('default_theme');
+		if(isset($settings['default_theme'])  && $settings['default_theme'] != ""){ ?>
+			<link href="<?php echo base_url('assets/demo/default/custom/themes/css/'.$settings['default_theme'].'.css'); ?>" rel="stylesheet" type="text/css" />
+		<?php } ?>
+		<!-- custom theme  end -->
+		
 		<!--end::Base Styles -->
 		<link rel="shortcut icon" href="<?php echo base_url('assets/images/favicon.png'); ?>" />
 		<script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js'); ?>"></script>

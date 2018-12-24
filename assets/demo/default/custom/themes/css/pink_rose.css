@@ -273,3 +273,43 @@ body {
 .m-portlet .m-portlet__head .m-portlet__head-text {
     color: #575962;
 }
+
+#m_login{
+    background: #342154 !important;
+}
+
+.btn-focus {
+    color: #fff  !important;
+    background-color: #9816f4 !important;
+    border-color: #9816f4 !important;
+}
+
+.btn.btn-focus {
+    color: #fff !important;
+}
+
+#m_login{
+    background: #C93756  !important;
+}
+
+.btn-focus {
+    color: #000  !important;
+    background-color: #DB5A6B !important;
+    border-color: #DB5A6B !important;
+}
+
+.btn.btn-focus.active, .btn.btn-focus.focus, .btn.btn-focus:focus, .btn.btn-focus:hover:not(:disabled) {
+    color: #000 !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__head .m-login__title {
+    color: #000   !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .m-login__form-sub .m-checkbox {
+    color: #000  !important;
+}
+
+.m-login.m-login--2.m-login-2--skin-3 .m-login__container .m-login__form .m-login__form-sub .m-link {
+    color: #000  !important;
+}
