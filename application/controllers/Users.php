@@ -166,16 +166,26 @@ class Users extends CI_Controller {
     {
     	$companyId = get_current_company();
     	$userId = $this->sessionData['logged_in'];
-
+        $is_super_admin = $this->sessionData['is_admin'];
     	//print_r($this->sessionData);
 
     	$data['page_title'] = 'User Profile';
         $data['breadcum_title'] = 'User Profile';
         $data['active_sidemenu'] = "";
         $data['load_js'] = 'user';
-        $data['userdetail'] = $this->user_model->user_detail($companyId,$userId);
 
-        $data['user_activities_data_source'] = base_url('users/get_activities');
+        $data['is_super_admin'] = $is_super_admin;
+
+        if($is_super_admin == '1')
+        {
+            $data['userdetail'] = $this->user_model->admin_detail($userId);
+        }
+        else
+        {
+            $data['userdetail'] = $this->user_model->user_detail($companyId,$userId);
+            $data['user_activities_data_source'] = base_url('users/get_activities');    
+        }
+
         //$data['user_role'] = get_user_role_list('html', NULL);
         //$data['loggedin_company_id'] = get_current_company();
         //$data['team_leaders'] = get_user_role_list('data', NULL);
@@ -187,11 +197,18 @@ class Users extends CI_Controller {
     public function user_profile_update()
     {
     	if($this->input->is_ajax_request()) {
-
-			$id = $this->input->post('id');
+            $id = $this->input->post('id');
+            $is_super_admin = $this->sessionData['is_admin'];
 			if(is_numeric($id) && !empty($id)) {
 				$post_data = $this->input->post(NULL, TRUE);
-				$data = $this->user_model->user_profile_update($post_data,$id);
+                if($is_super_admin == 1)
+                {
+                    $data = $this->user_model->admin_profile_update($post_data,$id);
+                }
+                else
+                {
+				    $data = $this->user_model->user_profile_update($post_data,$id);
+                }
 				$output = array("status" => "success","message" => 'User Updated Successfully!!', "data" => '');
 			} else {
 				$output = array("status" => "error","message" => 'User Id doesn\'t exist.', "data" => "");
@@ -207,9 +224,17 @@ class Users extends CI_Controller {
     	if($this->input->is_ajax_request()) {
 
 			$id = $this->input->post('user_id');
+            $is_super_admin = $this->sessionData['is_admin'];
 			if(is_numeric($id) && !empty($id)) {
 				$post_data = $this->input->post(NULL, TRUE);
-				$output = $this->user_model->change_password($post_data,$id);
+                if($is_super_admin == 1)
+                {
+                    $output = $this->user_model->admin_change_password($post_data,$id);
+                }
+                else
+                {
+				    $output = $this->user_model->change_password($post_data,$id);
+                }
 				//$output = array("status" => "success","message" => 'User Updated Successfully!!', "data" => '');
 			} else {
 				$output = array("status" => "error","message" => 'User Id doesn\'t exist.', "data" => "");

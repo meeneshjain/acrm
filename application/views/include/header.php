@@ -24,6 +24,9 @@ sessionStorage.fonts = true;
 <script type="text/javascript">
     var base_url = '<?php echo base_url();?>';
     var DEFAULT_IMAGE  = '<?php echo base_url(DEFAULT_IMAGE); ?>';
+
+    /*chat var*/
+    var my_socket_id = "<?php echo $sesion_data['logged_in'];?>";
 </script>
 
 <!--end::Web font -->
