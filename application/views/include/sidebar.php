@@ -124,7 +124,7 @@
 			<div class="tab-pane m-scrollable" id="m_quick_sidebar_tabs_messenger" role="tabpanel">
 				<div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
 					<div id="chat_with_user" style="display:none">
-						<button class="back-to-chat">back</button>
+						<button class="back-to-chat btn btn-outline-metal m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"><i class="fa fa-arrow-left"></i></button>
 						<div class="m-messenger__messages" id="chat_history_box">
 	
 						</div>
@@ -136,9 +136,6 @@
 								<input type="text" name="" placeholder="Type here..." class="m-messenger__form-input chattypemsginput" onkeyup="if(event.keyCode == 13){ chatMsgSend(this) }  isTyping($('#active_chat_to_user_id').val())">
 							</div>
 							<div class="m-messenger__form-tools">
-								<a href="" class="m-messenger__form-attachment">
-									<i class="la la-paperclip"></i>
-								</a>
 							</div>
 						</div>
 					</div>

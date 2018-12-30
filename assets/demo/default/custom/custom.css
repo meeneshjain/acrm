@@ -271,3 +271,52 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
     background-color: #F2DEDE !important;
     border: 1px solid #EED3D7 !important;
 }
+
+.m-messenger .m-messenger__messages .m-messenger__message {
+    display: block;
+    layout: fixed;
+}
+
+.m-messenger .m-messenger__messages .m-messenger__message.m-messenger__message--in {
+    float: left;
+    clear: both;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.m-messenger .m-messenger__messages .m-messenger__message {
+    margin: 0 0 10px 0;
+}
+
+.m-messenger .m-messenger__messages .m-messenger__message .m-messenger__message-body .m-messenger__message-content {
+    padding: 5px;
+    margin-right: 2px;
+}
+
+.m-messenger .m-messenger__messages .m-messenger__message.m-messenger__message--in .m-messenger__message-content .m-messenger__message-username {
+    color: #b5b8c3;
+    font-size: 9px;
+    padding-top: 5px;
+}
+
+.m-messenger .m-messenger__messages .m-messenger__message.m-messenger__message--out {
+    float: right;
+    clear: both;
+    margin-top: 10px;
+}
+
+.m-messenger .m-messenger__messages .m-messenger__message.m-messenger__message--out .m-messenger__message-content .m-messenger__message-username {
+    color: #b5b8c3;
+    font-size: 9px;
+    padding-top: 5px;
+}
+
+.mCustomScrollbar {
+	overflow-x: hidden !important;
+	overflow-y: scroll !important;
+	margin-top: 5px;
+}
+
+.m-messenger .m-messenger__seperator {
+    margin: 10px 0;
+}

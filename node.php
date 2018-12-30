@@ -98,8 +98,8 @@
 									<div class="m-messenger__message-body">\
 										<div class="m-messenger__message-arrow"></div>\
 										<div class="m-messenger__message-content">\
-											<div class="m-messenger__message-username">'+msg+'</div>\
-											<div class="m-messenger__message-text">'+vdate+'</div>\
+										<div class="m-messenger__message-text">'+msg+'</div>\
+										<div class="m-messenger__message-username">'+vdate+'</div>\
 										</div>\
 									</div>\
 								</div>');
