@@ -213,12 +213,13 @@
 				}
 				//document.getElementById("chatsound").play();
 				$('#chat_history_box').attr('data-activechat');
-				notifyToUser(msg.chatmsg.to_id,msg.chatmsg.messege);
+				//notifyToUser(msg.chatmsg.to_id,msg.chatmsg.messege);
+				notify_alert('info', msg.chatmsg.messege, 'Chat Notification');
 		});
 
 		function notifyToUser(id,msg)
 		{
-			var notice = new PNotify({
+			/*var notice = new PNotify({
 					title: $("#cht_usr_nm_"+id).text(),
 					text:  msg,
 					type: 'info',
@@ -230,7 +231,7 @@
 				});
 			notice.get().click(function() {
 			    notice.remove();
-			});	  
+			});	  */
 		}
 
     	function getOnlineUsers()
@@ -284,7 +285,7 @@
 			$("#chat_history_box").html('<p class="text-center" style="color:#FFF;margin-top:50px"><i class="fa fa-spinner fa-spin"></i> Please wait while load message ...!</p>');
 			var from_id = $(obj).attr('data-fuser');
 			var to_id = $(obj).attr('data-tuser');
-		  	$.get("schedule/get_chat_history/"+from_id+"/"+to_id,function(data,status){
+		  	$.get(base_url+"schedule/get_chat_history/"+from_id+"/"+to_id,function(data,status){
 		  		var html = '';
 		  		var res = $.parseJSON(data);
 		  		$.each(res, function( i, item ) {

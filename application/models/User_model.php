@@ -32,7 +32,7 @@ class User_model extends CI_Model {
 			for ( $i=0 ; $i<count($dt_columns) ; $i++ ) {
 				if ( isset($get_data['search']['value']) && $get_data['search']['value'] != "" ) {
 					$search_column = $dt_columns[$i];
-					$search_column_flag = $dt_col_searchable[$i];
+					$search_column_flag = $dt_columns[$i];
 					if($search_column_flag){
 						if(strstr($search_column, "as") !== false) {
 							$temp_search_colm = explode(" as ", $search_column);
@@ -329,7 +329,7 @@ class User_model extends CI_Model {
 			for ( $i=0 ; $i<count($dt_columns) ; $i++ ) {
 				if ( isset($get_data['search']['value']) && $get_data['search']['value'] != "" ) {
 					$search_column = $dt_columns[$i];
-					$search_column_flag = $dt_col_searchable[$i];
+					$search_column_flag = $dt_columns[$i];
 					if($search_column_flag){
 						if(strstr($search_column, "as") !== false) {
 							$temp_search_colm = explode(" as ", $search_column);
