@@ -119,27 +119,39 @@ class Schedule extends CI_Controller {
 	/* MEETING CODE GOES HERE */
 
 	public function add_meeting(){
+
+		//print_r($_POST);die;
 		if($this->input->is_ajax_request())
 		{
 			$userId = $this->sessionData['logged_in'];
 			$companyId = $this->sessionData['company_id'];
 			$data = array(
-							'company_id' => $companyId,
-							'subject' => $this->input->post('subject'),
-							'description' => $this->input->post('description'),
-							'user_ids' => implode(',', $this->input->post('meeting_invitees')),
-							'start_datetime' => $this->input->post('start_date'),
-							'end_datetime' => $this->input->post('end_date'),
-							'status_type' => $this->input->post('status_type'),
-							'alert_before_datetime' => $this->input->post('alert_datetime'),
-							'created_date' => DATETIME,
-							'created_by' => $userId,
-							'updated_date' => DATETIME,
-							'status' => '1',
-							'is_deleted' => '0'
-						);
+				'company_id' => $companyId,
+				'subject' => $this->input->post('subject'),
+				'description' => $this->input->post('description'),
+				'user_ids' => implode(',', $this->input->post('meeting_invitees')),
+				'start_datetime' => $this->input->post('start_date'),
+				'end_datetime' => $this->input->post('end_date'),
+				'status_type' => $this->input->post('status_type'),
+				'alert_before_datetime' => $this->input->post('alert_datetime'),
+				'created_date' => DATETIME,
+				'created_by' => $userId,
+				'updated_date' => DATETIME,
+				'status' => '1',
+				'is_deleted' => '0'
+			);
 			$result = $this->common_model->insert('meeting', $data);
-			echo json_encode(array("status" => "success","message" => 'Meeting Added Successfully.', "data" => $result));
+			$r_id = $this->db->insert_id();
+
+			$invitees = implode(",", $_POST['meeting_invitees']);
+
+			if(isset($_POST['meeting_invitees']) && !empty($_POST['meeting_invitees']))
+			{
+				foreach ($_POST['meeting_invitees'] as $key => $value) {
+					add_notification("MEETING",$r_id,$_POST['subject'],$_POST['description'],$this->sessionData['logged_in'],$value);
+				}
+			}
+			echo json_encode(array("status" => "success","message" => 'Meeting Added Successfully.', "data" =>$invitees ));
 
 		}
 		else

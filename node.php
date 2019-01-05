@@ -8,6 +8,14 @@
 			socket.emit( 'isTyping', {id:socket_id} );
 		}
 
+		function meeting_notify_to_user(socket_id,msg) {
+  			socket.emit( 'meeting_notify_to_user', {id:socket_id,msg:msg} );
+		}
+
+		socket.on('meeting_notify_to_user',function(data){
+			notify_alert('info', data.msg, 'Meeting Notification');
+		});
+
 		socket.on('isTyping',function(id){
 			//console.log(id +' is typing....');
 			$(".usertyping").html('is typing...');
@@ -46,18 +54,18 @@
 
 		function notifyMe(title,msg) 
 		{
-		  var regex = /(<([^>]+)>)/ig;
-		  var body = msg;
-		  var result = body.replace(regex, "");
-		  if (Notification.permission !== "granted")
-		    Notification.requestPermission();
-		  else {
-		    var notification = new Notification(title, 
-		    {
-		      icon: 'images/logo.png',
-		      body: result,
-		    });
-		  }
+		  	var regex = /(<([^>]+)>)/ig;
+		  	var body = msg;
+		  	var result = body.replace(regex, "");
+		  	if (Notification.permission !== "granted")
+		    	Notification.requestPermission();
+		  	else {
+			    var notification = new Notification(title, 
+			    {
+			      icon: 'images/logo.png',
+			      body: result,
+			    });
+		  	}
 		}
 
 	    socket.emit('join', {socket_id: mysocketid});

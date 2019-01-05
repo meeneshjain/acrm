@@ -239,6 +239,7 @@ function user_list_role_wise($userId,$companyId,$user_role_id,$selected_value=nu
     return $html;
 }
 
+
 function get_lead_source($result_type=null)
 {
 	$lead_source = array('1'=> 'Cold Call','2'=> 'Existing Customer','3'=> 'Self Generated','4'=> 'Employee','5'=> 'Partner','6'=> 'Public Relation','7'=> 'Direct Mail','8'=> 'Conference','9'=> 'Trade Show','10'=> 'Web Site','11'=> 'Worth Of Mouth');
@@ -314,6 +315,10 @@ function get_uom_list($type, $selected_value = NULL){
 
 function get_account_number($type, $selected_value = NULL){
 	return generate_drop_down('id', 'code', 'uom', $type,$selected_value);
+}
+
+function get_all_users(){
+	return generate_drop_down('id', "CONCAT(first_name,' ',last_name,' (',username,')')", 'users', 'html','');
 }
 
 
@@ -574,6 +579,22 @@ function get_all_db_table_n_category(){
 	);
 	
 	return $db_list;
+}
+
+function add_notification($type,$r_id,$title,$message,$added_by,$added_for)
+{
+	$obj =& get_instance();
+	$obj->load->database();
+	$data = array(
+		'type' => $type,
+		'related_id' => $r_id,
+		'title' => $title,
+		'message' => $message,
+		'added_by' => $added_by?$added_by:$obj->session->userdata('logged_in'),
+		'added_for' => $added_for,
+		'created_date' => date('Y-m-d H:i:s')
+	);
+	$obj->db->insert('notification', $data);
 }
 
 ?>

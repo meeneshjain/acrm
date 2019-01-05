@@ -276,6 +276,15 @@ $(document).ready(function () {
 				if (res.status == 'success') {
 					notify_alert('success', res.message, "Success");
 					hide_loading("#meeting_action_btn", btn_text);
+
+					if($("#meeting_id").val() == 0)
+					{
+						var socket_ids = res.data.split(",");
+						$.each(socket_ids,function(i,v){
+							meeting_notify_to_user(v,$("#meeting_description").val())
+						});
+					}
+
 					$("#meeting_form").parsley().reset();
 					$("#meeting_form")[0].reset();
 					$("#meeting_modal").modal('hide');
