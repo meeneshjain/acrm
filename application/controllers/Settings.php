@@ -17,7 +17,7 @@ class Settings extends CI_Controller {
         $data['breadcum_title'] = 'home';
         $data['active_sidemenu'] = "home";
         $data['load_js'] = 'setting';
-         
+        $data['is_super_admin'] = $this->sessionData['is_admin']; 
         $data['user_role']         = get_user_role_list('data', NULL);
         $data['target_duration']   = get_target_duration_list('data', NULL);
         $data['subscription_plan'] = get_subscription_plan_list('data', NULL);
@@ -32,6 +32,9 @@ class Settings extends CI_Controller {
         $data['all_stages'] = $this->settings_model->get_sales_stages();
         $data['email_constants'] = get_all_email_template_constants();
         $data['db_tables'] = get_all_db_table_n_category();
+        $data['company_subdata_source'] = base_url("settings/get_company_subscription");
+        
+        
         $this->load->view('include/header',$data);
         $this->load->view('settings',$data);
         $this->load->view('include/footer', $data);
@@ -191,7 +194,12 @@ class Settings extends CI_Controller {
             $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
         }
   
-        echo json_encode($output);
-         
+        echo json_encode($output);    
+    }
+    
+    public function get_company_subscription(){
+          $response =  $this->settings_model->get_company_subscription();
+		echo json_encode($response);
+		die;
     }
 }

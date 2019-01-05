@@ -320,3 +320,16 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 .m-messenger .m-messenger__seperator {
     margin: 10px 0;
 }
+
+.m-form .m-form__actions.m-form__actions--solid {
+    background-color: inherit;
+    border-color: #f7f8fa;
+}
+
+.width-100{
+	width : 100%
+}
+
+.m-widget1__item .m-widget1__title {
+    color: inherit !important;
+}

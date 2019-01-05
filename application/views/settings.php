@@ -121,12 +121,14 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
+                            <?php if($is_super_admin == 1){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon"
-                                        data-toggle="modal" data-target="#subsription_plan">
-                                        <i class="fa fa-view"></i>
+                                        data-toggle="modal" data-target="#subcription_company_detail" title="Company Subscription List">
+                                        <i class="fa fa-eye fa-fw"></i>
                                     </a>
                                 </li>
+                            <?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -699,6 +701,70 @@
                         <i class="fa fa-check"></i> Export
                     </button>
 
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="subcription_company_detail" tabindex="-1" role="dialog" aria-labelledby="subcription_company_detail"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="edit_sale_stages"
+                data-parsley-validate action="<?php echo base_url('settings/update_user_permissions'); ?>">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="subcription_company_detail">
+                        <b>Company Subcriptions </b>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="live_data-table subscribe_company__datatable">
+                        <div class=" table-responsive">
+                                <table class="table table-striped- table-bordered table-hover table-checkable dt_table  m-table--head-separator-primary" id="user_list_dt_table" data-source="<?php echo $company_subdata_source; ?>">
+                                    <thead class="">
+                                        <tr>
+                                            <th>
+                                             Company ID
+                                            </th>
+                                            <th>
+                                             Company Name
+                                            </th>
+                                            <th>
+                                             Company Email
+                                            </th>
+                                            <th>
+                                             Contact Number 
+                                            </th>
+                                               <th>
+                                             Current Plan 
+                                            </th>
+                                            <th>
+                                               Total Allowed 
+                                            </th>
+                                            <th>
+                                               Total Registration 
+                                            </th>
+                                            <th>
+                                             Remaining.
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  
                     <button type="button" class="btn btn-danger" data-dismiss="modal">
                         <i class="fa fa-times"></i> Close
                     </button>

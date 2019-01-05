@@ -118,6 +118,10 @@ function getEmployeeCode() {
     call_service(base_url + "users/get_employee_user_name/" + $("#logged_in_company_id").val(), function (res) {
         if (res['status'] == 'success') {
             var employee_code = res['data'];
+            var current_subscription = res['current_subscription'];
+            if ((!isNaN(current_subscription.total_left) && current_subscription.total_left <= 0)) {
+                notify_alert('info', 'Your current subscription plan is exhausted.', 'Info');
+            }
             $("#username").val(employee_code);
         }
     }, function (res) {

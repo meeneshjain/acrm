@@ -227,7 +227,7 @@
                             <input type="text" id="doj" name="doj" readonly class="form-control m-input crm_datepicker" placeholder="Date of Joining">
                         </div>
                         <div class="col-lg-4">
-                        <label > Is Active </label> <br>
+                        <label> Is Active </label> <br>
                             <span class="m-switch m-switch--icon">
                                 <label>
                                     <input type="checkbox" id="is_active" name="status" value="1">
@@ -239,15 +239,17 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <input type="hidden" name="company_id" id="logged_in_company_id" value="<?php echo $loggedin_company_id; ?>">
+                <span class="text-info width-100 pull-left">
+                <?php  if(is_numeric($current_subscription_details['total_left'])){ 
+                    echo  '<b> '. $current_subscription_details['total_registration'].' </b> out of <b>'.$current_subscription_details['total_allowed']. '</b> employees are been added as per your subscription plan.';
+                }
+                 ?>
+                </span> 
+                    <input type="hidden" name="company_id" id="logged_in_company_id" value="<?php echo $loggedin_company_id; ?>">
                     <input type="hidden" id="user_id" name="id" value="0">
-                    <button type="button" id="save_update_button_click"  class="btn btn-primary">
-                        <i class="fa fa-check"></i> Save
-                    </button>
+                    <button type="button" id="save_update_button_click"  class="btn btn-primary" <?php if(is_numeric($current_subscription_details['total_left']) && $current_subscription_details['total_left'] <= 0) {  echo 'disabled';  } ?>> <i class="fa fa-check"></i> Save  </button>
                     
-                    <button type="button" class="btn btn-danger close_modal_common" data-dismiss="modal">
-                        <i class="fa fa-times"></i> Close
-                    </button>
+                    <button type="button" class="btn btn-danger close_modal_common" data-dismiss="modal"> <i class="fa fa-times"></i> Close </button>
                 </div>
             </form>
         </div>

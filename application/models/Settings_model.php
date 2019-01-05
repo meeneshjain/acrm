@@ -145,4 +145,86 @@ class Settings_model extends CI_Model {
         force_download($filename, $backup);
         return 1;
     }
+    
+    public function get_company_subscription(){
+        
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		$get_data = $this->input->get(NULL, TRUE);
+		$dt_table = "companies as cmp";
+		$sort_column = array(true, true, true, true, true, true);
+		
+		$dt_columns = array( 'cmp.id as company_id', 'company_name', 'email_1', 'contact_1', 'sp.name as subscrion_name', ' (CASE WHEN sp.max_value !=0  THEN  sp.max_value  ELSE "N/A" end) as total_allowed', 'COUNT(us.id) as total_registration', '(CASE WHEN sp.max_value !=0  THEN  (sp.max_value - COUNT(us.id))  ELSE "N/A" end) as total_left');
+		
+        //Pagination
+		if(isset($get_data['start']) && $get_data['length'] != '-1') {
+			$this->db->limit(intVal($get_data['length']), intVal($get_data['start']));
+		}
+        
+        //Sorting
+		if(isset($get_data['order'])) {
+            $sort_column = $dt_columns[$get_data['order'][0]['column']];
+            if(strstr($sort_column, "as") !== false) {
+                $temp_sort_column = explode(" as ", $sort_column);
+               $this->db->order_by($temp_sort_column[1], ($get_data['order'][0]['dir'] === 'asc' ? 'asc' : 'desc'));
+            } else {
+                $this->db->order_by($sort_column, ($get_data['order'][0]['dir'] === 'asc' ? 'asc' : 'desc'));
+            }
+		} else {
+			$this->db->order_by('cmp.id', 'DESC');
+		}
+		
+		if ( isset($get_data['search']) && $get_data['search']['value'] != "" ) {
+			$this->db->group_start();       
+			for ( $i=0 ; $i<count($dt_columns) ; $i++ ) {
+				if ( isset($get_data['search']['value']) && $get_data['search']['value'] != "" ) {
+					$search_column = $dt_columns[$i];
+					$search_column_flag = $dt_col_searchable[$i];
+					if($search_column_flag){
+						if(strstr($search_column, "as") !== false) {
+							$temp_search_colm = explode(" as ", $search_column);
+							$this->db->or_like($temp_search_colm[0], $get_data['search']['value'], 'both'); 
+						} else {
+							$this->db->or_like($search_column, $get_data['search']['value'], 'both'); 
+						}
+					}
+				}
+			}
+			$this->db->group_end();       
+		}
+        
+		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
+		$this->db->from($dt_table);
+        $this->db->join('subscription_plan as sp', 'sp.id= cmp.subscription', 'left');
+        $this->db->join('users as us', ' us.company_id = cmp.id', 'left');
+        $this->db->group_by('cmp.id');
+		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
+		// last_query(1);
+        $dt_filtered_total = $this->db->query('SELECT FOUND_ROWS() as count;')->row()->count; //Calculate total number of filtered rows
+        $dt_total = $this->db->count_all($dt_table);//Calculate total number of rows
+
+        $output = array(
+        	"draw" => intval(@$get_data['draw']),
+        	"recordsTotal" => $dt_total,
+        	"recordsFiltered" => $dt_filtered_total,
+        	"data" => array()
+        );
+
+        foreach ($dt_result->result_array() as $aRow) {
+        	
+        	$row = array();
+            $row[] = $aRow['company_id'];
+            $row[] = $aRow['company_name'];
+            $row[] = $aRow['email_1'];
+            $row[] = $aRow['contact_1'];
+            $row[] = $aRow['subscrion_name'];
+            $row[] = $aRow['total_allowed'];
+            $row[] = $aRow['total_registration'];
+            $row[] = $aRow['total_left'];
+		
+        	$output['data'][] = $row;
+        }
+        return $output;
+	
+    }
 }

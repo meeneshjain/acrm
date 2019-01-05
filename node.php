@@ -213,10 +213,11 @@
 				}
 				//document.getElementById("chatsound").play();
 				$('#chat_history_box').attr('data-activechat');
-				notifyToUser(msg.chatmsg.to_id,msg.chatmsg.messege);
+				notify_alert('info', msg.chatmsg.messege, 'Chat Notification');
+				// notifyToUser(msg.chatmsg.to_id,msg.chatmsg.messege);
 		});
 
-		function notifyToUser(id,msg)
+		/* function notifyToUser(id,msg)
 		{
 			var notice = new PNotify({
 					title: $("#cht_usr_nm_"+id).text(),
@@ -231,7 +232,7 @@
 			notice.get().click(function() {
 			    notice.remove();
 			});	  
-		}
+		} */
 
     	function getOnlineUsers()
 		{

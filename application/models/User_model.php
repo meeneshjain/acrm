@@ -378,6 +378,22 @@ class User_model extends CI_Model {
         }
         return $output;
 	}
+	
+	public function current_subscription_details($company_id){
+		$raw_query = "
+		SELECT SQL_CALC_FOUND_ROWS cmp.id as company_id, company_name, email_1, contact_1, sp.name as subscrion_name, 
+		COUNT(us.id) as total_registration,
+		(CASE WHEN sp.max_value !=0  THEN  sp.max_value  ELSE 'N/A' end) as total_allowed,
+		(CASE WHEN sp.max_value !=0  THEN  (sp.max_value - COUNT(us.id))  ELSE 'N/A' end) as total_left
+		FROM `companies` as `cmp` LEFT JOIN `subscription_plan` as `sp` ON `sp`.`id`= `cmp`.`subscription` 
+		LEFT JOIN `users` as `us` ON `us`.`company_id` = `cmp`.`id` 
+		WHERE company_id = '$company_id'
+		GROUP BY `cmp`.`id` 
+		ORDER BY `company_id` ASC 
+		";
+		// echo $raw_query; die;
+		return $raw_query_res = $this->db->query($raw_query)->row_array();
+	}
 
 
 }
