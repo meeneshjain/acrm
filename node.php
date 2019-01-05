@@ -8,6 +8,14 @@
 			socket.emit( 'isTyping', {id:socket_id} );
 		}
 
+		function meeting_notify_to_user(socket_id,msg) {
+  			socket.emit( 'meeting_notify_to_user', {id:socket_id,msg:msg} );
+		}
+
+		socket.on('meeting_notify_to_user',function(data){
+			notify_alert('info', data.msg, 'Meeting Notification');
+		});
+
 		socket.on('isTyping',function(id){
 			//console.log(id +' is typing....');
 			$(".usertyping").html('is typing...');
@@ -46,18 +54,18 @@
 
 		function notifyMe(title,msg) 
 		{
-		  var regex = /(<([^>]+)>)/ig;
-		  var body = msg;
-		  var result = body.replace(regex, "");
-		  if (Notification.permission !== "granted")
-		    Notification.requestPermission();
-		  else {
-		    var notification = new Notification(title, 
-		    {
-		      icon: 'images/logo.png',
-		      body: result,
-		    });
-		  }
+		  	var regex = /(<([^>]+)>)/ig;
+		  	var body = msg;
+		  	var result = body.replace(regex, "");
+		  	if (Notification.permission !== "granted")
+		    	Notification.requestPermission();
+		  	else {
+			    var notification = new Notification(title, 
+			    {
+			      icon: 'images/logo.png',
+			      body: result,
+			    });
+		  	}
 		}
 
 	    socket.emit('join', {socket_id: mysocketid});
@@ -219,7 +227,7 @@
 
 		/* function notifyToUser(id,msg)
 		{
-			var notice = new PNotify({
+			/*var notice = new PNotify({
 					title: $("#cht_usr_nm_"+id).text(),
 					text:  msg,
 					type: 'info',
@@ -285,7 +293,7 @@
 			$("#chat_history_box").html('<p class="text-center" style="color:#FFF;margin-top:50px"><i class="fa fa-spinner fa-spin"></i> Please wait while load message ...!</p>');
 			var from_id = $(obj).attr('data-fuser');
 			var to_id = $(obj).attr('data-tuser');
-		  	$.get("schedule/get_chat_history/"+from_id+"/"+to_id,function(data,status){
+		  	$.get(base_url+"schedule/get_chat_history/"+from_id+"/"+to_id,function(data,status){
 		  		var html = '';
 		  		var res = $.parseJSON(data);
 		  		$.each(res, function( i, item ) {
