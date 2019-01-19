@@ -294,6 +294,24 @@ class Home_model extends CI_Model {
 		return $report_data;
 		
 	}
+	
+	public function target_vs_achivement_report(){
+		
+		$sessionData = $this->session->userdata();
+		$is_super_admin = $sessionData['is_admin'];
+		$user_role_id  = $sessionData['user_role_id'];
+		$logged_in_company = get_current_company();
+		$current_user_id = get_current_user_id();	
+		$output_data = [];
+		if($is_super_admin == 1){
+			
+		} else {
+			
+		}
+		
+		return $output_data;
+	}
+
 }
 
 

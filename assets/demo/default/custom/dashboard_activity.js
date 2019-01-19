@@ -13,7 +13,7 @@ function service_call_report() {
             console.log(res);
             var service_report_html = "";
             service_report_html = '';
-            $(".service_call_loader").hide()
+            $(".service_call_loader").hide();
 
             service_report_html = '<table class="table">\
                 <tbody>\
@@ -54,6 +54,22 @@ function service_call_report() {
         }
     }, function (res) {
         $(".service_call_loader").hide();
+        notify_alert('danger', 'There was some error, please try again.', "Error");
+    });
+}
+
+function target_vs_achievement_report() {
+    call_service(base_url + "home/target_vs_achivement_report/", function (res) {
+        if (res['status'] == 'success') {
+            console.log(res);
+            $(".target_vs_achievement_block").show();
+            $(".target_vs_achivement_loader").hide();
+        } else {
+            $(".target_vs_achivement_loader").hide();
+            notify_alert('danger', 'There was some error, please try again.', "Error");
+        }
+    }, function (res) {
+        $(".target_vs_achivement_loader").hide();
         notify_alert('danger', 'There was some error, please try again.', "Error");
     });
 }
