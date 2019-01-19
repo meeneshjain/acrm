@@ -347,3 +347,12 @@ select.form-control:not([size]):not([multiple]){
 .card-body {
     padding: 0.65rem !important;
 }
+
+._np_ntf{
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+
+._np_ntf .m-widget4__info{
+    padding: 0px !important;
+}

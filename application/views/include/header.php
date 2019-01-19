@@ -505,6 +505,8 @@ if(isset($settings['default_theme'])  && $settings['default_theme'] != ""){ ?>
     </li>
 </ul>
 </div>
+
+
 <!-- END: Horizontal Menu -->								<!-- BEGIN: Topbar -->
 <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid ">
 <div class="m-stack__item m-topbar__nav-wrapper">
@@ -542,8 +544,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
         </li>
         <li class="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" m-dropdown-toggle="click" m-dropdown-persistent="1">
             <a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
-                <span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
-                <span class="m-nav__link-icon">
+                <span class="m-nav__link-icon _m_ntf_bell">
                     <i class="flaticon-music-2"></i>
                 </span>
             </a>
@@ -553,9 +554,6 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                     <div class="m-dropdown__header m--align-center purple_red_bg">
                         <span class="m-dropdown__header-title">
                             9 New
-                        </span>
-                        <span class="m-dropdown__header-subtitle">
-                            User Notifications
                         </span>
                     </div>
                     <div class="m-dropdown__body">
@@ -577,94 +575,25 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </a>
                                 </li>
                             </ul>
+                            <style type="text/css">
+                                .o_f{
+                                    overflow: visible !important;
+                                }
+                            </style>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="topbar_notifications_notifications" role="tabpanel">
-                                    <div class="m-scrollable" data-scrollable="true" data-max-height="250" data-mobile-max-height="200">
-                                        <div class="m-list-timeline m-list-timeline--skin-light">
-                                            <div class="m-list-timeline__items">
-                                                <div class="m-list-timeline__item">
-                                                    <span class="m-list-timeline__badge -m-list-timeline__badge--state-success"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        12 new users registered
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        Just now
+                                    <div class="m-scrollable o_f" data-scrollable="true" data-max-height="250" data-mobile-max-height="200">
+                                        <div class="m-widget4 _real_time_meeting_notification">
+                                            <div class="m-widget4__item _np_ntf">
+                                                <div class="m-widget4__info">
+                                                    <span class="m-widget4__text">
+                                                        Metronic Documentation
                                                     </span>
                                                 </div>
-                                                <div class="m-list-timeline__item">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        System shutdown
-                                                        <span class="m-badge m-badge--success m-badge--wide">
-                                                            pending
-                                                        </span>
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        14 mins
-                                                    </span>
-                                                </div>
-                                                <div class="m-list-timeline__item">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        New invoice received
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        20 mins
-                                                    </span>
-                                                </div>
-                                                <div class="m-list-timeline__item">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        DB overloaded 80%
-                                                        <span class="m-badge m-badge--info m-badge--wide">
-                                                            settled
-                                                        </span>
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        1 hr
-                                                    </span>
-                                                </div>
-                                                <div class="m-list-timeline__item">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        System error -
-                                                        <a href="#" class="m-link">
-                                                            Check
-                                                        </a>
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        2 hrs
-                                                    </span>
-                                                </div>
-                                                <div class="m-list-timeline__item m-list-timeline__item--read">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span href="" class="m-list-timeline__text">
-                                                        New order received
-                                                        <span class="m-badge m-badge--danger m-badge--wide">
-                                                            urgent
-                                                        </span>
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        7 hrs
-                                                    </span>
-                                                </div>
-                                                <div class="m-list-timeline__item m-list-timeline__item--read">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        Production server down
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        3 hrs
-                                                    </span>
-                                                </div>
-                                                <div class="m-list-timeline__item">
-                                                    <span class="m-list-timeline__badge"></span>
-                                                    <span class="m-list-timeline__text">
-                                                        Production server up
-                                                    </span>
-                                                    <span class="m-list-timeline__time">
-                                                        5 hrs
-                                                    </span>
+                                                <div class="m-widget4__ext">
+                                                    <a href="#" class="m-widget4__icon ">
+                                                        <i class="la la-close _fs_1em"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

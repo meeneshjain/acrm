@@ -81,7 +81,6 @@ io.sockets.on( 'connection', function( client ) {
 
 io.sockets.on('connection', function (client) {
 	client.on( 'meeting_notify_to_user', function( data ) {
-		console.log('Server Here:'+data.msg);
 		io.sockets.in('socket_'+data.id).emit('meeting_notify_to_user', {id:data.id,msg:data.msg});
 	});
 });

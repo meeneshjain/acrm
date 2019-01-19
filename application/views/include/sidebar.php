@@ -510,56 +510,9 @@
 											Select Invitees:
 										</label>
 										<select style="width: 100%" class="form-control m-select2 select2_selectbox" id="calls_sb_invitees" name="calls_sb_invitees[]" multiple="multiple">
-											<option value="1">User1</option>
-											<option value="2">User2</option>
-											<option value="3">User3</option>
-											<option value="4">User4</option>
-											<option value="5">User5</option>
-											<option value="6">User6</option>
-											<option value="7">User7</option>
-											<option value="8">User8</option>
-											<option value="9">User9</option>
-											<option value="10">User10</option>
-											<option value="11">User11</option>
-											<option value="12">User12</option>
-											<option value="13">User13</option>
-											<option value="14">User14</option>
-											<option value="15">User15</option>
-											<option value="16">User16</option>
-											<option value="17">User17</option>
-											<option value="18">User18</option>
-											<option value="19">User19</option>
-											<option value="20">User20</option>
-											<option value="21">User21</option>
-											<option value="22">User22</option>
-											<option value="23">User23</option>
-											<option value="24">User24</option>
-											<option value="25">User25</option>
-											<option value="26">User26</option>
-											<option value="27">User27</option>
-											<option value="28">User28</option>
-											<option value="29">User29</option>
-											<option value="30">User30</option>
-											<option value="31">User31</option>
-											<option value="32">User32</option>
-											<option value="33">User33</option>
-											<option value="34">User34</option>
-											<option value="35">User35</option>
-											<option value="36">User36</option>
-											<option value="37">User37</option>
-											<option value="38">User38</option>
-											<option value="39">User39</option>
-											<option value="40">User40</option>
-											<option value="41">User41</option>
-											<option value="42">User42</option>
-											<option value="43">User43</option>
-											<option value="44">User44</option>
-											<option value="45">User45</option>
-											<option value="46">User46</option>
-											<option value="47">User47</option>
-											<option value="48">User48</option>
-											<option value="49">User49</option>
-											<option value="50">User50</option>
+											<?php
+											echo get_all_users();
+											?>
 										</select>
 									</div>
 								</div>

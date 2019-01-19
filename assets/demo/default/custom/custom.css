@@ -315,8 +315,18 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 	overflow-x: hidden !important;
 	overflow-y: scroll !important;
 	margin-top: 5px;
+	overflow: visible !important;
 }
 
 .m-messenger .m-messenger__seperator {
     margin: 10px 0;
+}
+
+.m-cust-badge{
+	margin-left: -15px;
+    margin-top: -5px;
+}
+
+._fs_1em{
+	font-size: 1em !important;
 }
