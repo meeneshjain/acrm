@@ -13,7 +13,17 @@
 		}
 
 		socket.on('meeting_notify_to_user',function(data){
-			notify_alert('info', data.msg, 'Meeting Notification');
+			notify_alert('info', data.msg, 'You have new meeting: ');
+			if($(".m-cust-badge").length>0){
+				$(".m-cust-badge").text(parseInt($(".m-cust-badge").text())+parseInt(1));
+			}
+			else
+			{
+				$("._m_ntf_bell").after('<span class="m-badge m-badge--danger m-cust-badge">1</span>');
+			}
+			
+			$("._real_time_meeting_notification").prepend('<div class="m-widget4__item _np_ntf"><div class="m-widget4__info"><span class="m-widget4__text">You have new meeting.</span></div><div class="m-widget4__ext"><a href="#" class="m-widget4__icon"><i class="la la-close _fs_1em"></i></a></div></div>');
+
 		});
 
 		socket.on('isTyping',function(id){
@@ -69,24 +79,6 @@
 		}
 
 	    socket.emit('join', {socket_id: mysocketid});
-
-	    //socket.emit('userlist', {socket_id: mysocketid});
-
-	    /*socket.on('userlist', function(data){
-			var from_id = my_socket_id;
-			$("#chat_users").html('<p class="text-center"><i class="fa fa-spinner fa-spin"></i> Please wait while getting Tips ...!</p>');
-	  		var html = '';
-	  		$.each(data.userlist, function( i, item ) {
-	  			console.log(data.socket_id+'-'+item.id);
-	  			if(from_id !== item.id)
-	  			{
-	  			var status = 'inactive';
-	  			if(item.is_login == '1'){ status = 'active'; }
-	  			html +='<div onclick="chatWithUser(this)" class="chat_user" data-fuser='+from_id+' data-tuser='+item.id+'><img src="images/boy.png" /><p><strong id="cht_usr_nm_'+item.id+'">'+item.ename+'</strong></p><div data-active="'+item.id+'" class="status '+status+'"></div></div>';
-	  			}
-			});
-			$("#chat_users").html(html);
-	    });*/
 
 	    function chatMsgSend(obj){
 			if($.trim($(obj).val()) != '')

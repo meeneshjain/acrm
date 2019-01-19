@@ -281,7 +281,7 @@ $(document).ready(function () {
 					{
 						var socket_ids = res.data.split(",");
 						$.each(socket_ids,function(i,v){
-							meeting_notify_to_user(v,$("#meeting_description").val())
+							meeting_notify_to_user(v,$("#meeting_title").val())
 						});
 					}
 
@@ -327,25 +327,43 @@ $(document).ready(function () {
 				if(res.data != '')
 				{
 					$(res.data).each(function (index, value) {
-						html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
-							<small class="pull-right">\
-								<i class="fa fa-edit text-info meeting_edit" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
-								<i class="fa fa-trash text-danger meeting_delete" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;&nbsp;&nbsp;\
-							</small>\
-							<span class="m-timeline-3__item-time">\
-								<small>'+ res.data[index].showtime + '</small>\
-							</span>\
-							<div class="m-timeline-3__item-desc">\
-								<span class="m-timeline-3__item-text">'+ res.data[index].subject + '</span>	\
-								<br>\
-								<span class="m-timeline-3__item-user-name">\
-									<a class="m-link m-link--metal m-timeline-3__item-link">'+ res.data[index].description + '</a>\
+						if(res.data[index].byme == 1){
+							html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
+								<small class="pull-right">\
+									<i class="fa fa-edit text-info meeting_edit" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
+									<i class="fa fa-trash text-danger meeting_delete" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;&nbsp;&nbsp;\
+								</small>\
+								<span class="m-timeline-3__item-time">\
+									<small>'+ res.data[index].showtime + '</small>\
 								</span>\
-								<div>\
-									<small class="text-info"><i class="fa fa-clock-o"></i> '+ res.data[index].showdate + '</small>\
+								<div class="m-timeline-3__item-desc">\
+									<span class="m-timeline-3__item-text">'+ res.data[index].subject + '</span>	\
+									<br>\
+									<span class="m-timeline-3__item-user-name">\
+										<a class="m-link m-link--metal m-timeline-3__item-link">'+ res.data[index].description + '</a>\
+									</span>\
+									<div>\
+										<small class="text-info"><i class="fa fa-clock-o"></i> '+ res.data[index].showdate + '</small>\
+									</div>\
 								</div>\
-							</div>\
-						</div>';
+							</div>';	
+						}else{
+							html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
+								<span class="m-timeline-3__item-time">\
+									<small>'+ res.data[index].showtime + '</small>\
+								</span>\
+								<div class="m-timeline-3__item-desc">\
+									<span class="m-timeline-3__item-text">'+ res.data[index].subject + '</span>	\
+									<br>\
+									<span class="m-timeline-3__item-user-name">\
+										<a class="m-link m-link--metal m-timeline-3__item-link">'+ res.data[index].description + '</a>\
+									</span>\
+									<div>\
+										<small class="text-info"><i class="fa fa-clock-o"></i> '+ res.data[index].showdate + '</small>\
+									</div>\
+								</div>\
+							</div>';
+						}
 					});
 				}
 				else
@@ -357,6 +375,14 @@ $(document).ready(function () {
 		}, function (res) {
 			notify_alert('error', res.message, "Error");
 		});
+	});
+
+	/*
+		OPEN Meeting click on notification
+	*/
+	$("._real_time_meeting_notification").on("click",function(){
+		$(".get_notes_list").click();
+		$(".get_meeting_list_on_tab a").click();
 	});
 });
 

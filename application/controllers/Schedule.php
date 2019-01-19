@@ -227,17 +227,30 @@ class Schedule extends CI_Controller {
 
 	public function get_meeting(){
 		$userId = $this->sessionData['logged_in'];
-		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		//$output['meeting_added'] =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		$output['meeting_added'] =  $this->common_model->customQueryArray("SELECT * FROM `meeting` WHERE `is_deleted` = '0' AND `created_by` = '$userId' LIMIT 25");
+		$output['meeting_attend'] = $this->common_model->customQueryArray("SELECT * FROM `meeting` WHERE FIND_IN_SET($userId,user_ids) AND `is_deleted` = '0' LIMIT 25");
 		
-		if(!empty($response))
+		$data = array_merge($output['meeting_added'],$output['meeting_attend']);
+
+		if(!empty($data))
 		{		
-			foreach ($response as $key => $value) 
+			foreach ($data as $key => $value) 
 			{
-				$response[$key]->showtime = date('h:i',strtotime($value->start_datetime));
-				$response[$key]->showdate = date('l, F d, Y',strtotime($value->start_datetime));
-				$response[$key]->description = truncated_string($value->description,100);
+				if($value['created_by'] == $userId){
+					$data[$key]['byme'] = 1;
+				}else{
+					$data[$key]['byme'] = 0;
+				}
+				$data[$key]['showtime'] = date('h:i',strtotime($value['start_datetime']));
+				$data[$key]['showdate'] = date('l, F d, Y @ h:i A',strtotime($value['start_datetime']));
+				$data[$key]['description'] = truncated_string($value['description'],100);
 			}
-			echo json_encode(array("status" => "success","message" => '', "data" => $response));
+			function cmp($a, $b) {
+			  return strtotime($b['start_datetime']) - strtotime($a['start_datetime']);
+			}
+			usort($data, "cmp");
+			echo json_encode(array("status" => "success","message" => '', "data" => $data));
 		}
 		else
 		{

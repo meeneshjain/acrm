@@ -46,11 +46,14 @@
 	<i class="la la-arrow-up"></i>
 </div>
 <!--begin::Base Styles -->
+
 <link href="<?php echo base_url('assets/vendors/base/vendors.bundle.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/demo/default/custom/no-padding.css'); ?>" rel="stylesheet" type="text/css" />
+
+
 
 <!--end::Base Styles -->
 <script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js') ?>" type="text/javascript"></script>
@@ -65,6 +68,7 @@
 <script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
 
 <!-- datatable CDN -start --> 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js" type="text/javascript"></script>
 <!-- 
 <link href="<?php // echo base_url('assets/vendors/custom/datatables/datatables.bundle.css'); ?>" rel="stylesheet" type="text/css" /> 
 <script src="<?php // echo base_url('assets/vendors/custom/datatables/datatables.bundle.js'); ?>"></script> 

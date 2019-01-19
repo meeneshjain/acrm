@@ -120,7 +120,11 @@ function cal_date_diff($date1,$date2 = null){
 function generate_drop_down($value, $text, $table, $type='html',$selected_value=null){
 	$obj =& get_instance();
 	$obj->load->database();
-	$query = $obj->db->query("SELECT $value, $text FROM $table");
+	if($table == 'users'){
+		$query = $obj->db->query("SELECT $value, $text FROM $table WHERE `id` !='".$obj->session->userdata('logged_in')."'");
+	}else{
+		$query = $obj->db->query("SELECT $value, $text FROM $table");
+	}
 	if($query->num_rows() > 0)	{
 		$output = "";
 		foreach($query->result_array() as $table_data){

@@ -114,6 +114,21 @@ class Common_model extends CI_Model {
 		return $query->result();
 	}
 
+	/**
+	 * Custom Query
+	 *
+	 * user define query exiqute
+	 *
+	 * @param string $query
+	 * @return array
+	 *
+	 */
+	public function customQueryArray($query)
+	{
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
 
 	public function customQueryCount($query)
 	{
