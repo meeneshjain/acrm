@@ -38,6 +38,7 @@ class Users extends CI_Controller {
                  $data['rm_options'] .= '<option value="'.$rm['id'].'">'.$tl_name.'</option>';
             }
         }
+        $data['current_subscription_details'] = $this->user_model->current_subscription_details($data['loggedin_company_id']);
          $this->load->view('include/header',$data);
          $this->load->view('user',$data);
          $this->load->view('include/footer');
@@ -73,7 +74,8 @@ class Users extends CI_Controller {
                   $output = array("status" => "error","message" => 'Company ID missing ', "data" => "");
                 } else {
                     $employeeID = $this->user_model->get_employee_user_name($company_id);
-				     $output = array("status" => "success","message" => 'Employee Code Generated', "data" => $employeeID);
+                    $current_subscription = $this->user_model->current_subscription_details($company_id);
+                    $output = array("status" => "success","message" => 'Employee Code Generated', "data" => $employeeID, 'current_subscription'=> $current_subscription);
                 }
               } else {
 		    	$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
@@ -179,10 +181,14 @@ class Users extends CI_Controller {
         if($is_super_admin == '1')
         {
             $data['userdetail'] = $this->user_model->admin_detail($userId);
+            $data['user_role_id'] = "";
         }
         else
         {
             $data['userdetail'] = $this->user_model->user_detail($companyId,$userId);
+            $data['user_role_id'] =  $data['userdetail']['user_role_id'];
+            $data['current_subscription_details'] = $this->user_model->current_subscription_details($data['userdetail']['company_id']);
+         //   print_r($data['current_subscription_details']); die;
             $data['user_activities_data_source'] = base_url('users/get_activities');    
         }
 

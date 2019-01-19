@@ -601,4 +601,12 @@ function add_notification($type,$r_id,$title,$message,$added_by,$added_for)
 	$obj->db->insert('notification', $data);
 }
 
+function expire_license(){
+	$expire_date = strtotime("2019-02-20");
+	if(strtotime("now") > $expire_date){
+		echo '<h2> Your License has Expired </h2>';
+		die;
+	}
+}
+
 ?>

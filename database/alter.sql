@@ -687,4 +687,22 @@ ALTER TABLE `admin`
 ADD `email` varchar(50) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `last_name`,
 ADD `contact` varchar(15) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `email`;
 
+CREATE TABLE `notification` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `type` enum('MEETING','CHAT','ACCOUNT','CONTACT','LEAD','OPPORTUNITY','TARGET','ITEM') NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `message` text NOT NULL,
+  `added_by` int NOT NULL,
+  `added_for` int NOT NULL,
+  `is_read` tinyint NOT NULL,
+  `is_deleted` tinyint NOT NULL
+);
+
+ALTER TABLE `notification`
+ADD `created_date` datetime NOT NULL AFTER `added_for`;
+
+ALTER TABLE `notification`
+ADD `related_id` int(11) NOT NULL AFTER `id`;
+
 -- meenesh region end
+
