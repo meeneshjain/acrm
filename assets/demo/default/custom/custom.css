@@ -315,7 +315,6 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 	overflow-x: hidden !important;
 	overflow-y: scroll !important;
 	margin-top: 5px;
-	overflow: visible !important;
 }
 
 .m-messenger .m-messenger__seperator {
