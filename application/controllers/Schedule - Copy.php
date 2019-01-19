@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Schedule extends CI_Controller {
     
     public $sessionData;
@@ -10,6 +11,8 @@ class Schedule extends CI_Controller {
 		$this->sessionData = $this->session->userdata();
 		check_session();
 	}
+
+
     
     public function add_notes(){
 		if($this->input->is_ajax_request())
@@ -29,12 +32,14 @@ class Schedule extends CI_Controller {
 						);
 			$result = $this->common_model->insert('notes', $data);
 			echo json_encode(array("status" => "success","message" => 'Note Added Successfully.', "data" => $result));
+
 		}
 		else
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function edit_notes(){
 		if($this->input->is_ajax_request())
 		{
@@ -54,9 +59,11 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function update_notes(){
 		if($this->input->is_ajax_request())
 		{
+
 			$data = array(
 							'subject' => $this->input->post('subject'),
 							'message' => $this->input->post('message'),
@@ -66,12 +73,14 @@ class Schedule extends CI_Controller {
 			$where = array('id' => $this->input->post('id'));
 			$this->common_model->update_data('notes',$data,$where);
 			echo json_encode(array("status" => "success","message" => 'Notes Updated Successfully', "data" => ""));
+
 		}
 		else
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function delete_notes(){
 		if($this->input->is_ajax_request())
 		{
@@ -91,6 +100,7 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
 	public function get_notes(){
 		$userId = $this->sessionData['logged_in'];
 		$response =  $this->common_model->getdata($selected = false, 'notes', $where = array('is_deleted' => 0,'user_id' => $userId), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
@@ -104,8 +114,12 @@ class Schedule extends CI_Controller {
 		}
 		die;
 	}
+
+
 	/* MEETING CODE GOES HERE */
+
 	public function add_meeting(){
+
 		//print_r($_POST);die;
 		if($this->input->is_ajax_request())
 		{
@@ -128,7 +142,9 @@ class Schedule extends CI_Controller {
 			);
 			$result = $this->common_model->insert('meeting', $data);
 			$r_id = $this->db->insert_id();
+
 			$invitees = implode(",", $_POST['meeting_invitees']);
+
 			if(isset($_POST['meeting_invitees']) && !empty($_POST['meeting_invitees']))
 			{
 				foreach ($_POST['meeting_invitees'] as $key => $value) {
@@ -136,12 +152,14 @@ class Schedule extends CI_Controller {
 				}
 			}
 			echo json_encode(array("status" => "success","message" => 'Meeting Added Successfully.', "data" =>$invitees ));
+
 		}
 		else
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function edit_meeting(){
 		if($this->input->is_ajax_request())
 		{
@@ -161,6 +179,7 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function update_meeting(){
 		if($this->input->is_ajax_request())
 		{
@@ -178,12 +197,14 @@ class Schedule extends CI_Controller {
 			$where = array('id' => $this->input->post('id'));
 			$this->common_model->update_data('meeting',$data,$where);
 			echo json_encode(array("status" => "success","message" => 'Meeting Updated Successfully', "data" => ""));
+
 		}
 		else
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function delete_meeting(){
 		if($this->input->is_ajax_request())
 		{
@@ -203,26 +224,42 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
 	public function get_meeting(){
 		$userId = $this->sessionData['logged_in'];
-		$response =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		//$output['meeting_added'] =  $this->common_model->getdata($selected = false, 'meeting', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
+		$output['meeting_added'] =  $this->common_model->customQueryArray("SELECT * FROM `meeting` WHERE `is_deleted` = '0' AND `created_by` = '$userId' LIMIT 25");
+		$output['meeting_attend'] = $this->common_model->customQueryArray("SELECT * FROM `meeting` WHERE FIND_IN_SET($userId,user_ids) AND `is_deleted` = '0' LIMIT 25");
 		
-		if(!empty($response))
+		$data = array_merge($output['meeting_added'],$output['meeting_attend']);
+
+		if(!empty($data))
 		{		
-			foreach ($response as $key => $value) 
+			foreach ($data as $key => $value) 
 			{
-				$response[$key]->showtime = date('h:i',strtotime($value->start_datetime));
-				$response[$key]->showdate = date('l, F d, Y',strtotime($value->start_datetime));
-				$response[$key]->description = truncated_string($value->description,100);
+				if($value['created_by'] == $userId){
+					$data[$key]['byme'] = 1;
+				}else{
+					$data[$key]['byme'] = 0;
+				}
+				$data[$key]['showtime'] = date('h:i',strtotime($value['start_datetime']));
+				$data[$key]['showdate'] = date('l, F d, Y @ h:i A',strtotime($value['start_datetime']));
+				$data[$key]['description'] = truncated_string($value['description'],100);
 			}
-			echo json_encode(array("status" => "success","message" => '', "data" => $response));
+			function cmp($a, $b) {
+			  return strtotime($b['start_datetime']) - strtotime($a['start_datetime']);
+			}
+			usort($data, "cmp");
+			echo json_encode(array("status" => "success","message" => '', "data" => $data));
 		}
 		else
 		{
 			echo json_encode(array("status" => "success","message" => '', "data" => ''));
 		}
 	}
+
 	/* TASK CODE GOES HERE */
+
 	public function add_task(){
 		$userId = $this->sessionData['logged_in'];
 		$companyId = $this->sessionData['company_id'];
@@ -249,6 +286,7 @@ class Schedule extends CI_Controller {
 	public function get_task(){
 		$userId = $this->sessionData['logged_in'];
 		$response =  $this->common_model->getdata($selected = false, 'task', $where = array('status' => '1','is_deleted' => '0','created_by' => $userId), $limit = false, $offset = false, $orderby=array('0'=>'created_date','1'=>'desc'));
+
 		if(!empty($response))
 		{		
 			echo json_encode(array("status" => "success","message" => '', "data" => $response));
@@ -259,6 +297,7 @@ class Schedule extends CI_Controller {
 		}
 		die;
 	}
+
 	public function mark_task_complete(){
 		if($this->input->is_ajax_request())
 		{
@@ -284,6 +323,7 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
 	}
+
 	public function delete_task(){
 		if($this->input->is_ajax_request())
 		{
@@ -303,12 +343,16 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
+
     /* CALLS CODE GOES HERE */
+
 	public function add_calls(){
 		if($this->input->is_ajax_request())
 		{
 			$userId = $this->sessionData['logged_in'];
 			$companyId = $this->sessionData['company_id'];
+
 			$alert_before_time = $this->input->post('start_date');
 			$alert_before_time = strtotime($alert_before_time);
 			$alert_before_time = strtotime("+".$this->input->post('alert_datetime')." minute", $alert_before_time);
@@ -331,16 +375,21 @@ class Schedule extends CI_Controller {
 						);
 			$result = $this->common_model->insert('calls', $data);
 			echo json_encode(array("status" => "success","message" => 'Calls Added Successfully.', "data" => $result));
+
 		}
 		else
 		{
 			echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
 		}
     }
+
     public function get_calls(){
 		$userId = $this->sessionData['logged_in'];
 		$companyId = $this->sessionData['company_id'];
+
 		$response =  $this->schedule_model->getCalls($userId,$companyId);
+
+
 		//$response =  $this->common_model->getdata($selected = false, 'calls', $where = array('is_deleted' => 0,'created_by' => $userId), $limit = 100, $offset = false, $orderby=array('0'=>'id','1'=>'desc'));
 		
 		if(!empty($response))
@@ -358,11 +407,14 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "success","message" => '', "data" => ''));
 		}
 	}
+
 	/* USER CHAT */
+
 	public function get_online_user(){
 		$userId = $this->sessionData['logged_in'];
 		$companyId = $this->sessionData['company_id'];
 		$data = $this->schedule_model->get_online_users($companyId);
+
 		if(!empty($data))
 		{	
 			echo json_encode(array("status" => "success","message" => '', "data" => $data));
@@ -372,10 +424,13 @@ class Schedule extends CI_Controller {
 			echo json_encode(array("status" => "success","message" => '', "data" => ''));
 		}
 	}
+
 	public function get_chat_history($f_userid,$t_userid){
 		$userId = $this->sessionData['logged_in'];
 		$companyId = $this->sessionData['company_id'];
 		$data = $this->schedule_model->get_chat_history($f_userid,$t_userid);
+
 		echo json_encode($data);
 	}
 }
+
