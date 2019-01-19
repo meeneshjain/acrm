@@ -126,7 +126,11 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 		$query = $obj->db->query("SELECT $value, $text FROM $table");
 	}
 	if($query->num_rows() > 0)	{
+		if($type == 'html'){
 		$output = "";
+		} else {
+			$output = array();
+		}
 		foreach($query->result_array() as $table_data){
 			if($type == 'html'){
 				
@@ -420,7 +424,11 @@ function get_company_email_templates($type, $selected_value = NULL ){
 	$text = "subject";
 	$query = $obj->db->query("SELECT $value, $text FROM company_email_templates WHERE company_id = '$logged_in_company'" );
 	if($query->num_rows() > 0)	{
+		if($type == 'html'){
 		$output = "";
+		} else {
+			$output = array();
+		}
 		foreach($query->result_array() as $table_data){
 			if($type == 'html'){
 				
@@ -451,7 +459,11 @@ function generate_new_company_templates($company_id){
 	$raw_query = "SELECT * FROM email_template WHERE is_global= 0 AND status = 1 AND is_deleted = 0";
 	$res = $obj->db->query($raw_query);
 	if($res->num_rows() > 0){
+		if($type == 'html'){
 		$output = "";
+		} else {
+			$output = array();
+		}
 		foreach($res->result_array() as $table_data){
 			$output = $table_data;
 			unset($output['id']);
@@ -530,7 +542,7 @@ function get_global_settings($specfic_setting = null){
 	$raw_query = "SELECT name, sys_value FROM system_settings WHERE status = 1 and is_deleted = 0  $specific_setting_where";
 	$res = $obj->db->query($raw_query);
 	if($res->num_rows() > 0){
-		$output = [];
+		$output = array();
 		foreach($res->result_array() as $settings){
 			$output[$settings['name']] = $settings['sys_value'];
 		}
