@@ -1,4 +1,6 @@
-<?php $sesion_data = $this->session->userdata(); ?>
+<?php 
+expire_license();
+$sesion_data = $this->session->userdata(); ?>
 <!DOCTYPE html>
 <html lang="en" >
 <!-- begin::Head -->

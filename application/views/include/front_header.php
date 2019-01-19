@@ -1,3 +1,6 @@
+<?php 
+expire_license();
+?>
 <!DOCTYPE html>
 <html lang="en" >
 	<!-- begin::Head -->
