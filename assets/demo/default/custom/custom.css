@@ -342,3 +342,11 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 .m-widget1__item .m-widget1__title {
     color: inherit !important;
 }
+
+.m-portlet.m-portlet--skin-dark .m-portlet__head .m-portlet__head-text {
+    color: inherit;
+}
+
+.m-portlet.m-portlet--skin-dark .m-portlet__head .m-portlet__head-icon {
+    color: inherit;
+}

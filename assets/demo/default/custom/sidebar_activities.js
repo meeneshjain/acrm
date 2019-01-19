@@ -123,8 +123,7 @@ $(document).ready(function () {
 		call_service(base_url + 'schedule/get_notes', function (res) {
 			if (res.status == 'success') {
 				var html = '';
-				if(res.data != '')
-				{
+				if (res.data != '') {
 					$(res.data).each(function (index, value) {
 						html += '<div class="cust_notes m-portlet m-portlet--skin-dark m-portlet--bordered-semi ' + res.data[index].color + ' custom_portlet"  data-status="0">\
 								<div class="m-portlet__head">\
@@ -173,9 +172,8 @@ $(document).ready(function () {
 								</div>\
 							</div>';
 					});
-				}	
-				else
-				{
+				}
+				else {
 					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No notes added yet!!</div>';
 				}
 				$('.custom_notes_portlet_container').html(html);
@@ -277,11 +275,10 @@ $(document).ready(function () {
 					notify_alert('success', res.message, "Success");
 					hide_loading("#meeting_action_btn", btn_text);
 
-					if($("#meeting_id").val() == 0)
-					{
+					if ($("#meeting_id").val() == 0) {
 						var socket_ids = res.data.split(",");
-						$.each(socket_ids,function(i,v){
-							meeting_notify_to_user(v,$("#meeting_title").val())
+						$.each(socket_ids, function (i, v) {
+							meeting_notify_to_user(v, $("#meeting_description").val())
 						});
 					}
 
@@ -324,10 +321,9 @@ $(document).ready(function () {
 		call_service(base_url + 'schedule/get_meeting', function (res) {
 			if (res.status == 'success') {
 				var html = '';
-				if(res.data != '')
-				{
+				if (res.data != '') {
 					$(res.data).each(function (index, value) {
-						if(res.data[index].byme == 1){
+						if (res.data[index].byme == 1) {
 							html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
 								<small class="pull-right">\
 									<i class="fa fa-edit text-info meeting_edit" data-meeting-id="'+ res.data[index].id + '" style="cursor: pointer;"></i>&nbsp;\
@@ -346,8 +342,8 @@ $(document).ready(function () {
 										<small class="text-info"><i class="fa fa-clock-o"></i> '+ res.data[index].showdate + '</small>\
 									</div>\
 								</div>\
-							</div>';	
-						}else{
+							</div>';
+						} else {
 							html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
 								<span class="m-timeline-3__item-time">\
 									<small>'+ res.data[index].showtime + '</small>\
@@ -366,8 +362,7 @@ $(document).ready(function () {
 						}
 					});
 				}
-				else
-				{
+				else {
 					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No meetings added yet!!</div>';
 				}
 				$('.custom_meeting_portlet_container').html(html);
@@ -380,7 +375,7 @@ $(document).ready(function () {
 	/*
 		OPEN Meeting click on notification
 	*/
-	$("._real_time_meeting_notification").on("click",function(){
+	$("._real_time_meeting_notification").on("click", function () {
 		$(".get_notes_list").click();
 		$(".get_meeting_list_on_tab a").click();
 	});
@@ -389,7 +384,7 @@ $(document).ready(function () {
 
 /* TASK MODULE CODE GOES HERE */
 
-$(document).ready(function(){
+$(document).ready(function () {
 	$(".task_modal_open_btn").on("click", function () {
 		$("#task_form")[0].reset();
 		$("#task_modal").modal('show');
@@ -421,9 +416,9 @@ $(document).ready(function(){
 		}
 	});
 
-		/*
-	 ******* GET LIST OF TASK ********
-	*/
+	/*
+ ******* GET LIST OF TASK ********
+*/
 	$(".get_task_list_on_tab").click(function () {
 		call_service(base_url + 'schedule/get_task', function (res) {
 			if (res.status == 'success') {
@@ -431,42 +426,39 @@ $(document).ready(function(){
 				var i = 0;
 
 				var color = ['primary', 'warning', 'brand', 'success', 'danger', 'info'];
-				if(res.data != "")
-				{
-				$(res.data).each(function (index, value) {
-					var complete = '';
-					var checked = '';
-					if(res.data[index].complete == 1)
-					{
-						complete = 'task_completed';
-						checked = 'checked';
-					}
-					html += '<div class="m-widget2__item m-widget2__item--'+color[i]+'">\
-							<span class="pull-right"><i class="fa fa-trash text-danger task_delete_btn" data-delete-id="'+res.data[index].id+'"></i></span>\
+				if (res.data != "") {
+					$(res.data).each(function (index, value) {
+						var complete = '';
+						var checked = '';
+						if (res.data[index].complete == 1) {
+							complete = 'task_completed';
+							checked = 'checked';
+						}
+						html += '<div class="m-widget2__item m-widget2__item--' + color[i] + '">\
+							<span class="pull-right"><i class="fa fa-trash text-danger task_delete_btn" data-delete-id="'+ res.data[index].id + '"></i></span>\
 							<div class="m-widget2__checkbox">\
-							<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--'+color[i]+'">\
-							<input type="checkbox" '+checked+' class="mark_task_complete" data-mark-status="'+res.data[index].complete+'" data-task-id='+res.data[index].id+'>\
+							<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--'+ color[i] + '">\
+							<input type="checkbox" '+ checked + ' class="mark_task_complete" data-mark-status="' + res.data[index].complete + '" data-task-id=' + res.data[index].id + '>\
 							<span></span>\
 							</label>\
 							</div>\
-							<div class="m-widget2__desc '+complete+'" id="tsk_cmplt_id'+res.data[index].id+'">\
-							<span class="m-widget2__text">'+res.data[index].title+'</span>\
+							<div class="m-widget2__desc '+ complete + '" id="tsk_cmplt_id' + res.data[index].id + '">\
+							<span class="m-widget2__text">'+ res.data[index].title + '</span>\
 							<br>\
 							<span class="m-widget2__user-name">\
-							<a href="#" class="m-widget2__link">'+res.data[index].description+'<br><span class="m--font-info"><i>Created On : '+res.data[index].created_date+'</i></span></a>\
+							<a href="#" class="m-widget2__link">'+ res.data[index].description + '<br><span class="m--font-info"><i>Created On : ' + res.data[index].created_date + '</i></span></a>\
 							</span>\
 							</div>\
 							</div>\
 							</div>';
 						i++;
-						if(i == 5){ i = 0; }
-				});
+						if (i == 5) { i = 0; }
+					});
 				}
-				else
-				{
+				else {
 					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No task added yet!!</div>';
 				}
-				$('.custom_task_portlet_container').html(html+'<br><br>');
+				$('.custom_task_portlet_container').html(html + '<br><br>');
 			}
 		}, function (res) {
 			notify_alert('error', res.message, "Error");
@@ -477,28 +469,24 @@ $(document).ready(function(){
 		var obj = $(this);
 		var id = obj.attr('data-task-id');
 		var status;
-		if(obj.attr('data-mark-status') == '0')
-		{
+		if (obj.attr('data-mark-status') == '0') {
 			var alertmsg = "Mark as complete?";
 			status = 1;
 		}
-		else
-		{
+		else {
 			var alertmsg = "Mark as Uncomplete?";
 			status = 0;
 		}
-		
-		call_service(base_url + "schedule/mark_task_complete/"+ id+"/"+status, function (response) {
+
+		call_service(base_url + "schedule/mark_task_complete/" + id + "/" + status, function (response) {
 			if (response.status == 'success') {
-				if(status == 1)
-				{
-					$("#tsk_cmplt_id"+id).addClass('task_completed');
-					obj.attr('data-mark-status','1');
+				if (status == 1) {
+					$("#tsk_cmplt_id" + id).addClass('task_completed');
+					obj.attr('data-mark-status', '1');
 				}
-				else
-				{
-					$("#tsk_cmplt_id"+id).removeClass('task_completed');
-					obj.attr('data-mark-status','0');						
+				else {
+					$("#tsk_cmplt_id" + id).removeClass('task_completed');
+					obj.attr('data-mark-status', '0');
 				}
 				notify_alert('success', response.message, "Success");
 			} else {
@@ -510,7 +498,7 @@ $(document).ready(function(){
 
 	});
 
-	
+
 	/*
 	******* DELETE MEETING ********
 	*/
@@ -534,8 +522,8 @@ $(document).ready(function(){
 
 /* CALLS MODULE CODE GOES HERE */
 
-$(document).ready(function(){
-	$(".table").on("click",".calls_modal", function () {
+$(document).ready(function () {
+	$(".table").on("click", ".calls_modal", function () {
 		$("#calls_sb_form").parsley().reset();
 		$("#calls_sb_form")[0].reset();
 
@@ -593,8 +581,7 @@ $(document).ready(function(){
 			console.log('Manish');
 			if (res.status == 'success') {
 				var html = '';
-				if(res.data != '')
-				{
+				if (res.data != '') {
 					$(res.data).each(function (index, value) {
 						html += '<div class="m-timeline-3__item m-timeline-3__item--info">\
 							<span class="m-timeline-3__item-time">\
@@ -613,8 +600,7 @@ $(document).ready(function(){
 						</div>';
 					});
 				}
-				else
-				{
+				else {
 					html = '<div class="text-warning text-center"><i class="fa fa-thumbs-o-down"></i> No meetings added yet!!</div>';
 				}
 				$('.custom_calls_portlet_container').html(html);
@@ -628,28 +614,24 @@ $(document).ready(function(){
 		var obj = $(this);
 		var id = obj.attr('data-task-id');
 		var status;
-		if(obj.attr('data-mark-status') == '0')
-		{
+		if (obj.attr('data-mark-status') == '0') {
 			var alertmsg = "Mark as complete?";
 			status = 1;
 		}
-		else
-		{
+		else {
 			var alertmsg = "Mark as Uncomplete?";
 			status = 0;
 		}
-		
-		call_service(base_url + "schedule/mark_calls_sb_complete/"+ id+"/"+status, function (response) {
+
+		call_service(base_url + "schedule/mark_calls_sb_complete/" + id + "/" + status, function (response) {
 			if (response.status == 'success') {
-				if(status == 1)
-				{
-					$("#tsk_cmplt_id"+id).addClass('calls_sb_completed');
-					obj.attr('data-mark-status','1');
+				if (status == 1) {
+					$("#tsk_cmplt_id" + id).addClass('calls_sb_completed');
+					obj.attr('data-mark-status', '1');
 				}
-				else
-				{
-					$("#tsk_cmplt_id"+id).removeClass('calls_sb_completed');
-					obj.attr('data-mark-status','0');						
+				else {
+					$("#tsk_cmplt_id" + id).removeClass('calls_sb_completed');
+					obj.attr('data-mark-status', '0');
 				}
 				notify_alert('success', response.message, "Success");
 			} else {
@@ -661,7 +643,7 @@ $(document).ready(function(){
 
 	});
 
-	
+
 	/*
 	******* DELETE MEETING ********
 	*/
@@ -684,7 +666,7 @@ $(document).ready(function(){
 });
 
 /* CHAT CODE GOES HERE */
-$(document).ready(function(){
+$(document).ready(function () {
 
 
 	/*$(".get_chat_onlineuser_on_tab").click(function () {
@@ -720,24 +702,24 @@ $(document).ready(function(){
 		});
 	});
 */
-	
 
-  	$("#chat_searchfield").on("keyup", function() {
-    	var value = $(this).val().toLowerCase();
-    	$("#chat_users .chat_user").filter(function() {
-      		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    	});
-  	});
 
-  	$("#chat_users").on("click",".chat_user",function(){
-  		$("#chat_with_user").fadeIn(100);
-  		$("#chat_userlist").fadeOut(100);
-  	});
+	$("#chat_searchfield").on("keyup", function () {
+		var value = $(this).val().toLowerCase();
+		$("#chat_users .chat_user").filter(function () {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
 
-  	$(".back-to-chat").on("click",function(){
-  		$("#chat_userlist").fadeIn(100);
-  		$("#chat_with_user").fadeOut(100);
-  	});
+	$("#chat_users").on("click", ".chat_user", function () {
+		$("#chat_with_user").fadeIn(100);
+		$("#chat_userlist").fadeOut(100);
+	});
+
+	$(".back-to-chat").on("click", function () {
+		$("#chat_userlist").fadeIn(100);
+		$("#chat_with_user").fadeOut(100);
+	});
 
 });
 

@@ -11,6 +11,7 @@
 		function meeting_notify_to_user(socket_id,msg) {
   			socket.emit( 'meeting_notify_to_user', {id:socket_id,msg:msg} );
 		}
+		 
 
 		socket.on('meeting_notify_to_user',function(data){
 			notify_alert('info', data.msg, 'You have new meeting: ');
