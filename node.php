@@ -256,15 +256,14 @@
 		  			var status = 'inactive';
 		  			if(res.data[index].is_login == '1'){ status = 'active'; }
 		  			var badge = '';
-		  			if(item.badge !== '0')
-		  			{
+		  			if(item.badge !== '0' && item.badge !== undefined) 	{
 		  				badge = '<span class="m-list-timeline__badge m-list-timeline__badge--success">'+item.badge+'</span>';
 		  			}
 		  			//html +='<div onclick="chatWithUser(this)" class="chat_user" data-fuser='+from_id+' data-tuser='+item.id+' data-tooltip="tooltip" data-placement="top" title="Chat with '+item.ename+'"><img src="images/boy.png" /><p><strong id="cht_usr_nm_'+item.id+'">'+item.ename+'</strong></p>'+badge+'<div data-active="'+item.id+'" class="status '+status+'"></div></div>';
 		  			
 		  			html += '<div onclick="chatWithUser(this)" class="m-widget4__item chat_user" data-fuser='+from_id+' data-tuser='+res.data[index].id+' data-tooltip="tooltip" data-placement="top" title="Chat with '+res.data[index].first_name+'" style="cursor:pointer">\
 							<div class="m-widget4__img m-widget4__img--pic">\
-								<img src="'+base_url+'assets/app/media/img/users/100_4.jpg" alt="">\
+								<img src="'+base_url+'assets/images/avatar-grey.png" alt="">\
 							</div>\
 							<div class="m-widget4__info">\
 								<span class="m-widget4__title" id="cht_usr_nm_'+res.data[index].id+'">'+ res.data[index].first_name + ' '+res.data[index].last_name+'</span><br>\
