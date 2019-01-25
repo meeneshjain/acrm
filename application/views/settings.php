@@ -92,7 +92,7 @@
                             <?php foreach($user_role as $key => $role){ ?>
                             <li class="list-group-item"> <b>
                                     <?php echo $role;  ?> </b> <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon edit_user_role_popup"
-                                        data-toggle="modal" data-target="#user_role_modal" data-role_id="<?php echo $key ?>">
+                                        data-toggle="modal" data-target="#user_role_modal" data-role_id="<?php echo $key ?>" data-role_name="<?php echo $role; ?>">
                                         <i class="fa fa-pencil"></i>
                                     </a> 
                                 </span>

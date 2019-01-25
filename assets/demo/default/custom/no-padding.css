@@ -356,3 +356,17 @@ select.form-control:not([size]):not([multiple]){
 ._np_ntf .m-widget4__info{
     padding: 0px !important;
 }
+
+.no-alert-padding {
+    padding: .55rem 0.5rem !important;
+}
+
+.m-checkbox>span, .m-radio>span.permission_form{
+    height: 15px;
+    width: 15px;
+}
+
+.m-checkbox>span, .m-radio>span.permission_form{
+    top: -3px;
+    left: 5px;
+}
