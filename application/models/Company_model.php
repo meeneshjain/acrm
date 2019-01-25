@@ -137,6 +137,9 @@ class Company_model extends CI_Model {
 		
 		generate_new_company_templates($company_id); 
 
+		// Insert User Role Permission default value
+		generate_company_user_role($company_id);
+
 	}
 
 	public function edit_detail($id)
