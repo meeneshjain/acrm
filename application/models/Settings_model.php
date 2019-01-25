@@ -230,6 +230,16 @@ class Settings_model extends CI_Model {
     
     public function get_company_urole_permission($user_role_id){
         $logged_in_company = get_current_company();
+        $select_query = "SELECT `value` FROM company_urole_permission WHERE  status = 1 AND is_deleted = 0 AND company_id='$logged_in_company' AND user_role_id='$user_role_id'";
+        return $this->db->query($select_query)->row_array()['value'];
+    }
+    
+    public function update_company_urole_permission($post_data){
+        $logged_in_company = get_current_company();
+        $permission_string = implode(',', $post_data['perm']);
         
+        $update_query = "UPDATE company_urole_permission SET `value`='$permission_string' WHERE company_id='$logged_in_company' AND user_role_id='$post_data[current_role_id]'";
+        $result = $this->db->query($update_query);
+        return 1;
     }
 }

@@ -704,5 +704,19 @@ ADD `created_date` datetime NOT NULL AFTER `added_for`;
 ALTER TABLE `notification`
 ADD `related_id` int(11) NOT NULL AFTER `id`;
 
+CREATE TABLE `company_urole_permission` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `company_id` int NOT NULL,
+  `user_role_id` int NOT NULL,
+  `value` longtext NOT NULL,
+  `status` tinyint NOT NULL,
+  `is_delete` tinyint NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL
+);
+
+ALTER TABLE `company_urole_permission`
+CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
+
 -- meenesh region end
 

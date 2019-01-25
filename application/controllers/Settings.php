@@ -33,7 +33,7 @@ class Settings extends CI_Controller {
         $data['email_constants'] = get_all_email_template_constants();
         $data['db_tables'] = get_all_db_table_n_category();
         $data['company_subdata_source'] = base_url("settings/get_company_subscription");
-        
+     
         
         $this->load->view('include/header',$data);
         $this->load->view('settings',$data);
@@ -204,16 +204,35 @@ class Settings extends CI_Controller {
     }
     
     public function get_company_urole_permission($user_role_id){
-        if($this->input->is_ajax_request()) {
-            if($user_role_id!= ""){
-                  $response = $this->settings_model->get_company_urole_permission($user_role_id);
+          if($user_role_id!= ""){
+                $permission_data = $this->settings_model->get_company_urole_permission($user_role_id);
+                if($permission_data){
+                    $output = array("status" => "success","message" => "", "data" => $permission_data);    
+                } else {
+                    $output = array("status" => "error","message" => 'No permission data found.', "data" => "");    
+                }
+        } else {
+            $output = array("status" => "error","message" => 'There was some error getting permission', "data" => ""); 
+        }
+        echo json_encode($output); 
+    }
+    
+    public function update_company_urole_permission(){
+         if($this->input->is_ajax_request()) {
+            $post_data = $this->input->post(NULL, TRUE);
+            if(!empty($post_data)){
+                 $response = $this->settings_model->update_company_urole_permission($post_data);
+                if($response  == 1 ){
+                    $output = array("status" => "success","message" => $post_data['current_role_name'] . ' permission updated', "data" => "");    
+                } else {
+                    $output = array("status" => "error","message" => 'Unable to update, there was some error', "data" => "");    
+                }
             } else {
-                $output = array("status" => "error","message" => 'There was some error getting permission', "data" => ""); 
+                $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
             }
         } else {
            $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
         }
         echo json_encode($output);
-        
     }
 }
