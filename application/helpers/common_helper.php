@@ -480,19 +480,19 @@ function generate_new_company_templates($company_id){
 function generate_company_user_role($company_id){
 	$obj =& get_instance();
 	$obj->load->database();
-	$raw_query = "SELECT * FROM user_roles WHERE status = 1 AND is_deleted = 0";
+	$raw_query = "SELECT `id`,`default_permission` FROM user_roles WHERE status = 1 AND is_deleted = 0";
 	$res = $obj->db->query($raw_query)->result_array();
 	foreach ($res as $key => $value) {
 		$data = array(
 				'company_id' => $company_id,
-				'user_role_id' => $company_id,
+				'user_role_id' => $value['id'],
+				'value' => $value['default_permission'],
 				'status' => '1',
 				'created_date' => date('Y-m-d H:i:s')
 			);
 		$obj->db->insert('company_urole_permission', $data);
 	}
 }
-
 
 function get_all_email_template_constants(){
 	$constants =  array(

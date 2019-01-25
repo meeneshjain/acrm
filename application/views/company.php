@@ -11,6 +11,9 @@
 							<div class="mr-auto">
 								<h3 class="m-subheader__title m-subheader__title--separator">
 									Company List
+                                    <?php
+                                    generate_company_user_role(1);
+                                    ?>
 								</h3>
 							</div>
 
