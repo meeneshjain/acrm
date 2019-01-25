@@ -202,4 +202,18 @@ class Settings extends CI_Controller {
 		echo json_encode($response);
 		die;
     }
+    
+    public function get_company_urole_permission($user_role_id){
+        if($this->input->is_ajax_request()) {
+            if($user_role_id!= ""){
+                  $response = $this->settings_model->get_company_urole_permission($user_role_id);
+            } else {
+                $output = array("status" => "error","message" => 'There was some error getting permission', "data" => ""); 
+            }
+        } else {
+           $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+        
+    }
 }

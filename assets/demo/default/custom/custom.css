@@ -350,3 +350,7 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 .m-portlet.m-portlet--skin-dark .m-portlet__head .m-portlet__head-icon {
     color: inherit;
 }
+
+.m-checkbox {
+    color: inherit;
+}
