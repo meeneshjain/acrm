@@ -306,7 +306,16 @@ class Home_model extends CI_Model {
 		if($is_super_admin == 1){
 			
 		} else {
-			
+			if($user_role_id == "1"){ // company admin 
+				
+			} else if($user_role_id == "2"){ // RM report
+				$target_type = "";
+				
+			} else if($user_role_id == "3"){ // TL report 
+				
+			} else if($user_role_id == "4"){ // user report 
+				
+			}
 		}
 		
 		return $output_data;

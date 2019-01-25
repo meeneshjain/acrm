@@ -265,29 +265,29 @@ $(document).ready(function (event) {
         }
     });
 
- /*    $(document).on("submit", "#database_backup_form", function (event) {
-        event.preventDefault();
-        var form_obj = $(this);
-        var btn_id = '#update_export_db_btn';
-        var obj = $(btn_id);
-        btn_text = obj.html();
-        if (form_obj.parsley().validate()) {
-            show_loading(btn_id, 'Exporting..!')
-            form_submit(form_obj.attr("id"), function (res) {
-                notify_alert(res.status, res.message);
-                setTimeout(function () {
-                    hide_loading(btn_id, btn_text);
-                    form_obj.parsley().reset();
-                    form_obj[0].reset();
-                    $('#database_back_model').modal('hide');
-                    //     window.location.reload();
-                }, 1000);
-            }, function (res) {
-                hide_loading(btn_id, btn_text);
-                //     notify_alert(res.status, res.message, 'Error');
-            });
-        }
-    }); */
+    /*    $(document).on("submit", "#database_backup_form", function (event) {
+           event.preventDefault();
+           var form_obj = $(this);
+           var btn_id = '#update_export_db_btn';
+           var obj = $(btn_id);
+           btn_text = obj.html();
+           if (form_obj.parsley().validate()) {
+               show_loading(btn_id, 'Exporting..!')
+               form_submit(form_obj.attr("id"), function (res) {
+                   notify_alert(res.status, res.message);
+                   setTimeout(function () {
+                       hide_loading(btn_id, btn_text);
+                       form_obj.parsley().reset();
+                       form_obj[0].reset();
+                       $('#database_back_model').modal('hide');
+                       //     window.location.reload();
+                   }, 1000);
+               }, function (res) {
+                   hide_loading(btn_id, btn_text);
+                   //     notify_alert(res.status, res.message, 'Error');
+               });
+           }
+       }); */
 
 
     $(document).on("change", ".db_parent_check", function () {
@@ -298,6 +298,19 @@ $(document).ready(function (event) {
             $('.child_check[data-section="' + data_section + '"]').prop('checked', false);
         }
     });
+
+    $(document).on("change", ".edit_user_role_popup", function () {
+        var obj = $(this);
+        var edit_rid = obj.attr("data-role_id");
+        $("#edit_permission_current_role_id").val(edit_rid);
+        $(".permission_loader").show();
+        call_service(base_url + "settings/get_company_urole_permission/" + edit_rid, function (res) {
+
+        });
+
+    });
+
+
 
 
 }); // dom end 

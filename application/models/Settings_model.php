@@ -227,4 +227,9 @@ class Settings_model extends CI_Model {
         return $output;
 	
     }
+    
+    public function get_company_urole_permission($user_role_id){
+        $logged_in_company = get_current_company();
+        
+    }
 }
