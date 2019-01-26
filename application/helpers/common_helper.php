@@ -494,7 +494,6 @@ function generate_company_user_role($company_id){
 	}
 }
 
-
 function get_all_email_template_constants(){
 	$constants =  array(
 		"{{base_url}}"=>"Application Path",
