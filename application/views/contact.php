@@ -1,4 +1,6 @@
-
+<?php
+$contact_perminssion = get_user_permission();
+?>
 <div class="m-grid__item m-grid__item--fluid m-wrapper">
     <div class="m-subheader">
         <div class="d-flex align-items-center">
@@ -24,29 +26,29 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
-                                <?php
-                                $user = 1;
-                                if($user == 1)
-                                {
-                                ?>
+                                <?php if(in_array('cntct_con2lead',$contact_perminssion)){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;" class="contact_to_lead_btn m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill">
                                         <i class="fa fa-user"></i>
                                     </a>
                                 </li>
-                                <?php 
-                                }
-                                ?>
+                                <?php } ?>
+
+                                <?php if(in_array('cntct_a',$contact_perminssion)){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill cont_modal_open_btn" data-form_type="add">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </li>
+                                <?php } ?>
+
+                                <?php if(in_array('cntct_d',$contact_perminssion)){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill multiple_contact_delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>

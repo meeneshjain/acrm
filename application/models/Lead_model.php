@@ -86,8 +86,9 @@ class Lead_model extends CI_Model {
         	"data" => array()
         );
 
+        $lead_permission = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
-        	
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="contacts" id="cont_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="leadchkbx"><span></span></label>';
         	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
@@ -96,13 +97,23 @@ class Lead_model extends CI_Model {
         	$row[] = $aRow['mobile'];
         	$row[] = $aRow['email_1'];
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air convert_to_opportunity_btn custom-popover" data-lead-id="'.$aRow['id'].'" data-opportunity-name="'.$aRow['first_name'].' '.$aRow['last_name'].'" data-account-name="'.$aRow['name'] .'('.$aRow['account_number'].')'.'"  data-toggle="m-popover" data-placement="left" title="Make Opportunity" data-content="Convert to Opportunity"><i class="fa fa-dollar"></i></button>
 
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-lead-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_lead" data-lead-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
-			<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="LEAD"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>
-			';
+        	$actn = '';
+
+        	if(in_array('lead_lead2opp',$lead_permission)){
+        		$actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air convert_to_opportunity_btn custom-popover" data-lead-id="'.$aRow['id'].'" data-opportunity-name="'.$aRow['first_name'].' '.$aRow['last_name'].'" data-account-name="'.$aRow['name'] .'('.$aRow['account_number'].')'.'"  data-toggle="m-popover" data-placement="left" title="Make Opportunity" data-content="Convert to Opportunity"><i class="fa fa-dollar"></i></button>';
+			}
+			if(in_array('lead_e',$lead_permission)){
+				$actn .= ' <button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-lead-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+			}
+			if(in_array('lead_d',$lead_permission)){
+				$actn .= ' <button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_lead" data-lead-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+			}
+			if(in_array('lead_call',$lead_permission)){
+				$actn .= ' <button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="LEAD"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>';
+			}
+
+			$row[] = $actn;
 
         	$output['data'][] = $row;
         }

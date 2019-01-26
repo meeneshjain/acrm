@@ -1,4 +1,6 @@
-
+<?php
+$account_perminssion = get_user_permission();
+?>
 <div class="m-grid__item m-grid__item--fluid m-wrapper">
    <div class="m-subheader ">
         <div class="d-flex align-items-center">
@@ -24,16 +26,21 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
+                                <?php if(in_array('acnt_a',$account_perminssion)){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill acnt_modal_open_btn" data-form_type="add">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </li>
+                                <?php } ?>
+
+                                <?php if(in_array('acnt_d',$account_perminssion)){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill multiple_account_delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>

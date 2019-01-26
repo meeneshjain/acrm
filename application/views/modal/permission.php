@@ -180,6 +180,18 @@
                                     Delete
                                     <span class="permission_form" ></span>
                                 </label>
+
+                                <label class="m-checkbox">
+                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="cntct_call" class="_cntct_per" <?php if(in_array("cntct_call", $permArr)){ echo 'checked'; }?>>
+                                    Add Call
+                                    <span class="permission_form" ></span>
+                                </label>
+
+                                <label class="m-checkbox">
+                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="cntct_con2lead" class="_cntct_per" <?php if(in_array("cntct_con2lead", $permArr)){ echo 'checked'; }?>>
+                                    Convert to Lead
+                                    <span class="permission_form" ></span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -212,6 +224,18 @@
                                     Delete
                                     <span class="permission_form" ></span>
                                 </label>
+
+                                <label class="m-checkbox">
+                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="lead_call" class="_lead_per" <?php if(in_array("lead_call", $permArr)){ echo 'checked'; }?>>
+                                    Add Call
+                                    <span class="permission_form" ></span>
+                                </label>
+
+                                <label class="m-checkbox">
+                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="lead_lead2opp" class="_lead_per" <?php if(in_array("lead_lead2opp", $permArr)){ echo 'checked'; }?>>
+                                    Convert to Opportunity
+                                    <span class="permission_form" ></span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -229,22 +253,14 @@
                                     View
                                     <span class="permission_form" ></span>
                                 </label>
+
                                 <label class="m-checkbox">
-                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="oprt_a" class="_oprt_per" <?php if(in_array("oprt_a", $permArr)){ echo 'checked'; }?>>
-                                    Add
-                                    <span class="permission_form" ></span>
-                                </label>
-                                <label class="m-checkbox">
-                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="oprt_e" class="_oprt_per" <?php if(in_array("oprt_e", $permArr)){ echo 'checked'; }?>>
-                                    Edit
-                                    <span class="permission_form" ></span>
-                                </label>
-                                <label class="m-checkbox">
-                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="oprt_d" class="_oprt_per" <?php if(in_array("oprt_d", $permArr)){ echo 'checked'; }?>>
-                                    Delete
+                                    <input type="checkbox" data-parsley-excluded name="perm[]" value="oprt_call" class="_oprt_per" <?php if(in_array("oprt_call", $permArr)){ echo 'checked'; }?>>
+                                    Add Call
                                     <span class="permission_form" ></span>
                                 </label>
                             </div>
+
                         </div>
                     </div>
                     <div class="m-form__group form-group" style="">

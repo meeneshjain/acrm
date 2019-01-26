@@ -87,6 +87,8 @@ class Opportunity_model extends CI_Model {
         	"data" => array()
         );
 
+        $opprtunity_perminssion = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -100,8 +102,12 @@ class Opportunity_model extends CI_Model {
         	$row[] = $this->db->query("SELECT CONCAT(`name`,' (',`probability`,')') as stage FROM sales_stages WHERE `id` = '".$aRow['opp_sales_stage']."'")->row('stage');
         	$row[] = get_lead_source($aRow['opp_lead_source']);
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="OPPORTUNITY"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>';
 
+        	if(in_array('oprt_call',$opprtunity_perminssion)){
+				$row[] = '<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="OPPORTUNITY"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>';
+			}else{
+				$row[] = '';
+			}
         	$output['data'][] = $row;
         }
         return $output;

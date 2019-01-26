@@ -24,11 +24,6 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
-                                <li class="m-portlet__nav-item">
-                                    <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill multiple_lead_delete">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
