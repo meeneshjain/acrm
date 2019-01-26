@@ -342,7 +342,9 @@ $(document).ready(function (event) {
                 form_obj.parsley().reset();
                 form_obj[0].reset();
                 $('#user_role_modal').modal('hide');
-                //     window.location.reload();
+                setTimeout(function () {
+                    window.location.reload();
+                }, 150);
             }, 1000);
         }, function (res) {
             hide_loading(btn_id, btn_text);
