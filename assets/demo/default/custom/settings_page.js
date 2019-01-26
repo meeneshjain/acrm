@@ -63,9 +63,7 @@ $(document).ready(function (event) {
         box_count++;
         var output = '<div class="form-group m-form__group row uom_data" data-block="' + box_count + '" data-is_saved="0">\
         <div class="col-lg-2" >\
-        <label>\
-                    '+ box_count + '\
-            </label>\
+        <label> '+ box_count + '</label>\
             </div >\
         <div class="col-lg-4">\
             <input type="text"  id="uom_input_code_'+ box_count + '" required name="uom[' + box_count + '][code]" value="" class="form-control m-input" placeholder="code">\
