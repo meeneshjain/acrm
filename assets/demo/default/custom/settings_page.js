@@ -52,21 +52,19 @@ $(document).ready(function (event) {
                     }
                 }
             }
-            $(".uom_loader").show();
+            $(".uom_loader").hide();
         }, function () {
             $(".uom_loader").show();
         });
     });
 
-    var box_count = $(".uom_data").length;
     $(document).on("click", ".add_more_uom", function (event) {
+        var box_count = $(".uom_data").length;
         box_count++;
         var output = '<div class="form-group m-form__group row uom_data" data-block="' + box_count + '" data-is_saved="0">\
-            <div class="col-lg-2" >\
-                <label>\
-                    '+ box_count + '\
-            </label>\
-        </div >\
+        <div class="col-lg-2" >\
+        <label> '+ box_count + '</label>\
+            </div >\
         <div class="col-lg-4">\
             <input type="text"  id="uom_input_code_'+ box_count + '" required name="uom[' + box_count + '][code]" value="" class="form-control m-input" placeholder="code">\
         </div>\
@@ -344,7 +342,9 @@ $(document).ready(function (event) {
                 form_obj.parsley().reset();
                 form_obj[0].reset();
                 $('#user_role_modal').modal('hide');
-                //     window.location.reload();
+                setTimeout(function () {
+                    window.location.reload();
+                }, 150);
             }, 1000);
         }, function (res) {
             hide_loading(btn_id, btn_text);
@@ -358,14 +358,85 @@ $(document).ready(function (event) {
     $(document).on("click", ".edit_service_call_options", function () {
         var obj = $(this);
         var edit_key = obj.attr("data-json_option_key");
-        $(".service_call_modal").show();
+        var edit_name = obj.attr("data-json_option_name");
+        $(".service_call_option_data_grid").hide();
+        $(".service_call_option_loader").show();
+        $(".service_call_option_modal_heading").html(edit_name);
+        $("#service_call_option_form").attr("action", base_url + 'settings/save_update_service_call_option/' + edit_key);
         call_service(base_url + "settings/get_service_call_option_data/" + edit_key, function (res) {
             if (res['status'] == 'success') {
+                console.log("res.data");
+                console.log(res.data);
+                var html = '';
+                var sc_count = 1;
+                for (var sci = 0; sci < res.data.length; sci++) {
+                    var current_option = res.data[sci];
+                    html += '<div class="form-group m-form__group row service_call_option_data" data-block="1" data-is_saved="1">\
+                    <div class="col-lg-2" >\
+                        <label>'+ sc_count + '</label>\</div>\
+                    <div class="col-lg-4">\
+                        <input type="text" id="service_call_option_input_code_1" required value="'+ current_option.id + '" name="service_call_option[' + sci + '][id]" class="form-control m-input" required placeholder="code"></div>\
+                        <div class="col-lg-4"> <input type="text" id="service_call_option_input_name_1" required name="service_call_option['+ sci + '][value]" value="' + current_option.value + '" class="form-control m-input" required placeholder="name"> </div>\
+                            <div class="col-lg-2"> <a href="javascript:;" class="btn btn-danger btn-sm remove_current_service_call_option"><i class="fa fa-times"></i></a> </div>\
+                    </div>';
+                    sc_count++;
+                }
+                $(".service_call_block_data").html(html);
+                /* 
+                
+                    */
+
+                $(".service_call_option_loader").hide();
+                $(".service_call_option_data_grid").show();
             } else {
-                $(".service_call_modal").hide();
+                $(".service_call_option_loader").hide();
                 notify_alert('danger', res.message, "Error");
             }
         });
+    });
+
+
+    $(document).on("click", ".add_more_service_call_option", function (event) {
+        var box_count = $(".service_call_option_data").length;
+        var output = '<div class="form-group m-form__group row service_call_option_data" data-block="1" data-is_saved="1">\
+        <div class="col-lg-2" >\
+            <label>'+ box_count + '</label>\</div>\
+        <div class="col-lg-4">\
+            <input type="text" id="service_call_option_input_code_1" required value="" name="service_call_option[' + box_count + '][id]" class="form-control m-input" required placeholder="code"></div>\
+            <div class="col-lg-4"> <input type="text" id="service_call_option_input_name_1" required name="service_call_option['+ box_count + '][value]" value="" class="form-control m-input" required placeholder="name"> </div>\
+                <div class="col-lg-2"> <a href="javascript:;" class="btn btn-danger btn-sm remove_current_service_call_option"><i class="fa fa-times"></i></a> </div>\
+        </div>';
+        $(".service_call_block_data").append(output);
+        box_count++;
+    });
+
+    $(document).on("click", ".remove_current_service_call_option", function (event) {
+        $(this).parents(".service_call_option_data").remove();
+    });
+
+
+    $(document).on("submit", "#service_call_option_form", function (event) {
+        event.preventDefault();
+        var form_obj = $(this);
+        var btn_id = '#update_service_call_option_btn';
+        var obj = $(btn_id);
+        btn_text = obj.html();
+        if (form_obj.parsley().validate()) {
+            show_loading(btn_id, 'Updating..!')
+            form_submit(form_obj.attr("id"), function (res) {
+                notify_alert(res.status, res.message);
+                setTimeout(function () {
+                    hide_loading(btn_id, btn_text);
+                    form_obj.parsley().reset();
+                    form_obj[0].reset();
+                    $('#service_call_modal').modal('hide');
+                    //     window.location.reload();
+                }, 1000);
+            }, function (res) {
+                hide_loading(btn_id, btn_text);
+                //     notify_alert(res.status, res.message, 'Error');
+            });
+        }
     });
 
 

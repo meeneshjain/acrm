@@ -235,4 +235,38 @@ class Settings extends CI_Controller {
         }
         echo json_encode($output);
     }
+    
+    public function get_service_call_option_data($json_key){
+          if($json_key!= ""){
+            $sc_json_data = $this->settings_model->get_service_call_option_data($json_key);
+            if($sc_json_data){
+                $output = array("status" => "success","message" => "", "data" => $sc_json_data);    
+            } else {
+                $output = array("status" => "info","message" => 'No service call data', "data" => "");    
+            }
+        } else {
+            $output = array("status" => "error","message" => 'There was some error getting service call option details', "data" => ""); 
+        }
+        echo json_encode($output); 
+    }
+    
+    public function save_update_service_call_option($json_key){
+         if($this->input->is_ajax_request()) {
+            $post_data = $this->input->post(NULL, TRUE);
+            if(!empty($post_data)){
+                $response = $this->settings_model->save_update_service_call_option($json_key, $post_data);
+                if($response  == 1 ){
+                    $output = array("status" => "success","message" => 'Service Call Options Updated', "data" => "");    
+                } else {
+                    $output = array("status" => "error","message" => 'Unable to update, there was some error', "data" => "");    
+                }
+            } else {
+                $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
+            }
+        } else {
+           $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+        
+    }
 }

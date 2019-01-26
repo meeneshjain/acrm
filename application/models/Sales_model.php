@@ -71,7 +71,7 @@ class Sales_model extends CI_Model {
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary">
             <input type="checkbox" name="users" id="user_'.$aRow['id'].'" value="'.$aRow['id'].'" class="usrchkbx">
-			<span></span></label>';
+			<span class="ml-3"></span></label>';
 			
 			 $row[] = ($aRow['doc_no']!="") ? $aRow['doc_no'] : "";
 			 $row[] = ($aRow['doc_date']!="") ? get_only_date($aRow['doc_date']) : "";

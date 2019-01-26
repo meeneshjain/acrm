@@ -332,9 +332,9 @@
                     <div class="m-portlet__body">
                         <ul class="list-group">
                         <?php foreach($service_call_options as $option_key => $options){ ?>
-                            <li class="list-group-item"> <b> <?php echo ucwords(str_replace("_", " ", $option_key));  ?> </b>
+                            <li class="list-group-item"> <b> <?php echo $temp =  ucwords(str_replace("_", " ", $option_key));  ?> </b>
                             
-                            <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon edit_service_call_options" data-toggle="modal" data-target="#service_call_modal" data-json_option_key="<?php echo $option_key ?>"> <i class="fa fa-pencil"></i>  </a>  </span>
+                            <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon edit_service_call_options" data-toggle="modal" data-target="#service_call_modal" data-json_option_key="<?php echo $option_key ?>" data-json_option_name="<?php echo $temp; ?>"> <i class="fa fa-pencil"></i>  </a>  </span>
                             </li>
                         <?php } ?>
                         </ul>
@@ -351,8 +351,8 @@
     data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
-            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="add_edit_uom"
-                data-parsley-validate action="<?php echo base_url('settings/save_update_uom'); ?>">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="service_call_option_form"
+                data-parsley-validate action="">
                 <div class="modal-header">
                     <h4 class="modal-title" id="service_call_option_lable">
                         <b>Service Call Option (<span class="service_call_option_modal_heading"></span>) </b> 
@@ -384,31 +384,13 @@
                                 <a href="javascript:;" class="btn btn-info btn-sm add_more_service_call_option"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
-                        <div class="service_block_data">
-                            <div class="form-group m-form__group row service_call_option_data" data-block="1" data-is_saved="0">
-                                <div class="col-lg-2">
-                                    <label>
-                                        1
-                                    </label>
-                                </div>
-                                <div class="col-lg-4">
-                                    <input type="text" id="service_call_option_input_code_1" required value="" name="service_call_option[1][code]"
-                                        class="form-control m-input" placeholder="code">
-                                </div>
-                                <div class="col-lg-4">
-                                    <input type="text" id="service_call_option_input_name_1" required name="service_call_option[1][name]" value=""
-                                        class="form-control m-input" placeholder="name">
-                                </div>
-                                <div class="col-lg-2">
-                                    <a href="javascript:;" class="btn btn-danger btn-sm remove_current_service_call_option"><i class="fa fa-times"></i></a>
-                                </div>
-
-                            </div>
+                        <div class="service_call_block_data">
+                            
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="update_uom_btn" class="btn btn-primary">
+                    <button type="submit" id="update_service_call_option_btn" class="btn btn-primary">
                         <i class="fa fa-check"></i> Update
                     </button>
 

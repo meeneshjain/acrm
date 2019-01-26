@@ -70,7 +70,7 @@ class Items_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx"><span></span></label>';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="items" id="items_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="itmckbx"><span class="ml-3"></span></label>';
 
             $imgscr = base_url('assets/images/no.jpg');
             if(!empty($aRow['logo']) && file_exists($aRow['logo']))
