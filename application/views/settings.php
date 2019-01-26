@@ -90,12 +90,16 @@
                     <div class="m-portlet__body">
                         <ul class="list-group">
                             <?php foreach($user_role as $key => $role){ ?>
-                            <li class="list-group-item"> <b>
-                                    <?php echo $role;  ?> </b> <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon edit_user_role_popup"
+                            <li class="list-group-item"> <b><?php echo $role;  ?> </b> 
+                                <?php
+                                if($this->session->userdata['user_role_id'] == 1){
+                                ?>
+                                <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon edit_user_role_popup"
                                         data-toggle="modal" data-target="#user_role_modal" data-role_id="<?php echo $key ?>" data-role_name="<?php echo $role; ?>">
                                         <i class="fa fa-pencil"></i>
                                     </a> 
                                 </span>
+                                <?php } ?>
                             </li>
                             <?php } ?>
                         </ul>
@@ -160,6 +164,7 @@
                             </div>
                         </div>
                         <div class="m-portlet__head-tools">
+                            <?php if($is_super_admin == 1){ ?>
                             <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon get_uom_list"
@@ -167,8 +172,8 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </li>
-
                             </ul>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="m-portlet__body">
@@ -207,6 +212,7 @@
                             </div>
                         </div>
                         <div class="m-portlet__head-tools">
+                            <?php if($is_super_admin == 1){ ?>
                             <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;" id="fetch_sale_stages" class="m-portlet__nav-link m-portlet__nav-link--icon"
@@ -214,12 +220,8 @@
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </li>
-                                <!-- <li class="m-portlet__nav-item">
-                                <a href="" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                                    <i class="fa fa-upload"></i>
-                                </a>
-                            </li> -->
                             </ul>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="m-portlet__body">
@@ -250,6 +252,9 @@
                             </div>
                         </div>
                         <div class="m-portlet__head-tools">
+                            <?php
+                            if($is_super_admin == 1 || $this->session->userdata['user_role_id'] == 1){
+                            ?>
                             <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;" id="fetch_email_temples" class="m-portlet__nav-link m-portlet__nav-link--icon fetch_email_temples"
@@ -258,6 +263,9 @@
                                     </a>
                                 </li>
                             </ul>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="m-portlet__body">

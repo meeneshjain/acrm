@@ -17,7 +17,7 @@ class Settings extends CI_Controller {
         $data['breadcum_title'] = 'home';
         $data['active_sidemenu'] = "home";
         $data['load_js'] = 'setting';
-        $data['is_super_admin'] = $this->sessionData['is_admin']; 
+        $data['is_super_admin']    = $this->sessionData['is_admin']; 
         $data['user_role']         = get_user_role_list('data', NULL);
         $data['target_duration']   = get_target_duration_list('data', NULL);
         $data['subscription_plan'] = get_subscription_plan_list('data', NULL);
