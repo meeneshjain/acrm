@@ -1,6 +1,8 @@
 <?php 
 expire_license();
-$sesion_data = $this->session->userdata(); ?>
+$sesion_data = $this->session->userdata(); 
+$header_permission = get_user_permission();
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <!-- begin::Head -->
@@ -410,7 +412,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 				</button>
 				<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
 					<!-- BEGIN: Aside Menu -->
-	            <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+	                <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
 						<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 							<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "home")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
 								<a  href="<?php echo base_url(); ?>" class="m-menu__link ">
@@ -438,6 +440,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 								<div class="m-menu__submenu ">
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
+                                        <?php if(in_array('comp_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
 										<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "company")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                             <a  href="<?php echo base_url('company');?>" class="m-menu__link ">
                                                 <i class="m-menu__link-icon fa fa-building"></i>
@@ -450,30 +453,37 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                 </span>
                                             </a>
                                         </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('user_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
 								     	<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "user")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                        <a  href="<?php echo base_url('users');?>" class="m-menu__link ">
-                                            <i class="m-menu__link-icon fa fa-building"></i>
-                                            <span class="m-menu__link-title">
-                                                <span class="m-menu__link-wrap">
-                                                    <span class="m-menu__link-text">
-                                                        Users
+                                            <a  href="<?php echo base_url('users');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Users
+                                                        </span>
                                                     </span>
                                                 </span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "target")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                        <a  href="<?php echo base_url('target');?>" class="m-menu__link ">
-                                            <i class="m-menu__link-icon fa fa-building"></i>
-                                            <span class="m-menu__link-title">
-                                                <span class="m-menu__link-wrap">
-                                                    <span class="m-menu__link-text">
-                                                        Targets
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('trgt_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+                                        <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "target")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('target');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Targets
+                                                        </span>
                                                     </span>
                                                 </span>
-                                            </span>
-                                        </a>
-                                    </li>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
 									</ul>
 								</div>
 							</li> 
@@ -489,7 +499,8 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 								<div class="m-menu__submenu ">
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
-									  <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "account")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                        <?php if(in_array('acnt_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+									    <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "account")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                             <a  href="<?php echo base_url('account');?>" class="m-menu__link ">
                                                 <i class="m-menu__link-icon fa fa-building"></i>
                                                 <span class="m-menu__link-title">
@@ -501,7 +512,10 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                 </span>
                                             </a>
                                         </li>
-                                          <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "contact")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                        <?php } ?>
+
+                                        <?php if(in_array('cntct_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+                                        <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "contact")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                             <a  href="<?php echo base_url('contact');?>" class="m-menu__link ">
                                                 <i class="m-menu__link-icon fa fa-building"></i>
                                                 <span class="m-menu__link-title">
@@ -513,6 +527,9 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                 </span>
                                             </a>
                                         </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('lead_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
                                         <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "lead")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                             <a  href="<?php echo base_url('lead');?>" class="m-menu__link ">
                                                 <i class="m-menu__link-icon fa fa-building"></i>
@@ -525,6 +542,9 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                 </span>
                                             </a>
                                         </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('oprt_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
                                         <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "opportunity")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                             <a  href="<?php echo base_url('opportunity');?>" class="m-menu__link ">
                                                 <i class="m-menu__link-icon fa fa-building"></i>
@@ -537,6 +557,7 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                                 </span>
                                             </a>
                                         </li>
+                                        <?php } ?>
 									</ul>
 								</div>
                             </li> 
@@ -551,32 +572,37 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 								<div class="m-menu__submenu ">
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
+                                        <?php if(in_array('squtn_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
 										<li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_quotation")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('sales/quotation');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Sales Quotation 
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                             <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_order")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('sales/order');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Sales Order 
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            </ul>
-                            </div>
+                                            <a  href="<?php echo base_url('sales/quotation');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Sales Quotation 
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+    
+                                        <?php if(in_array('sordr_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+                                         <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "sales_order")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('sales/order');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Sales Order 
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
                             </li>
                             <!--  <li class="m-menu__item <?php // if(isset($active_sidemenu) && $active_sidemenu == "item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
                                 <a  href="<?php // echo base_url('items');?>" class="m-menu__link ">
@@ -601,59 +627,70 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
 								<div class="m-menu__submenu ">
 									<span class="m-menu__arrow"></span>
 									<ul class="m-menu__subnav">
+                                        <?php if(in_array('invitm_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
 										<li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "inventory_item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('items/inventory');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Inventory Item
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                             <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('items/service');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Service Item
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_contract")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('items/service_contract');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Service Contract
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_call")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
-                                <a  href="<?php echo base_url('items/service_call');?>" class="m-menu__link ">
-                                    <i class="m-menu__link-icon fa fa-building"></i>
-                                    <span class="m-menu__link-title">
-                                        <span class="m-menu__link-wrap">
-                                            <span class="m-menu__link-text">
-                                                Service Call
-                                            </span>
-                                        </span>
-                                    </span>
-                                </a>
+                                            <a  href="<?php echo base_url('items/inventory');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Inventory Item
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('seritm_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+                                        <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_item")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('items/service');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Service Item
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('sercon_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+                                        <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_contract")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('items/service_contract');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Service Contract
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+
+                                        <?php if(in_array('sercall_v',$header_permission) || $this->session->userdata('is_admin') == 1){ ?>
+                                        <li class="m-menu__item <?php if(isset($active_sub_sidemenu) && $active_sub_sidemenu == "service_call")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                            <a  href="<?php echo base_url('items/service_call');?>" class="m-menu__link ">
+                                                <i class="m-menu__link-icon fa fa-building"></i>
+                                                <span class="m-menu__link-title">
+                                                    <span class="m-menu__link-wrap">
+                                                        <span class="m-menu__link-text">
+                                                            Service Call
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
-                </li>
-            </ul>
-        </div>
-        <!-- END: Aside Menu -->
-    </div>
+                    <!-- END: Aside Menu -->
+                </div>
 <!-- END: Left Aside -->

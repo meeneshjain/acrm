@@ -47,24 +47,24 @@
 </div>
 <!--begin::Base Styles -->
 
-<link href="<?php echo base_url('assets/vendors/base/vendors.bundle.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/demo/default/custom/no-padding.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/vendors/base/vendors.bundle.css'); ?>?q=<?php echo time();?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.css'); ?>?q=<?php echo time();?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/assets/demo/default/custom/uploadifive/uploadifive.css'); ?>?q=<?php echo time();?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/demo/default/custom/custom.css'); ?>?q=<?php echo time();?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/demo/default/custom/no-padding.css'); ?>?q=<?php echo time();?>" rel="stylesheet" type="text/css" />
 
 
 
 <!--end::Base Styles -->
-<script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('assets/demo/default/base/scripts.bundle.js') ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.js'); ?>"></script>
-<script src="<?php echo base_url('assets/demo/default/custom/components/base/bootstrap-notify.js'); ?>"></script>
+<script src="<?php echo base_url('assets/vendors/base/vendors.bundle.js') ?>?q=<?php echo time();?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/demo/default/base/scripts.bundle.js') ?>?q=<?php echo time();?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.js'); ?>?q=<?php echo time();?>"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/components/base/bootstrap-notify.js'); ?>?q=<?php echo time();?>"></script>
 
-<script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>" type="text/javascript"></script>
-<script src="<?php echo base_url('assets/demo/default/custom/uploadifive/uploadifive.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/uploadifive/uploadifive.min.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>
 
-<script src="<?php echo base_url('assets/demo/default/custom/sidebar_activities.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/sidebar_activities.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
 
 <!-- datatable CDN -start --> 
@@ -73,9 +73,9 @@
 <link href="<?php // echo base_url('assets/vendors/custom/datatables/datatables.bundle.css'); ?>" rel="stylesheet" type="text/css" /> 
 <script src="<?php // echo base_url('assets/vendors/custom/datatables/datatables.bundle.js'); ?>"></script> 
 -->
-<link href="<?php echo base_url('assets/vendors/custom/datatables/cdn/jquery.dataTables.min.css'); ?>" rel="stylesheet" type="text/css" />
-<script src="<?php echo base_url('assets/vendors/custom/datatables/cdn/jquery.dataTables.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/vendors/custom/datatables/cdn/datatable.fnReloadAjax.js'); ?>"></script>
+<link href="<?php echo base_url('assets/vendors/custom/datatables/cdn/jquery.dataTables.min.css'); ?>?q=<?php echo time();?>" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url('assets/vendors/custom/datatables/cdn/jquery.dataTables.min.js'); ?>?q=<?php echo time();?>"></script>
+<script src="<?php echo base_url('assets/vendors/custom/datatables/cdn/datatable.fnReloadAjax.js'); ?>?q=<?php echo time();?>"></script>
 <!-- datatable CDN -end --> 
 
 <script src="<?php echo base_url('assets/node_modules/socket.io-client/dist/socket.io.js'); ?>"></script>
@@ -84,14 +84,14 @@
 
 <?php if(isset($view_needed_js) && $view_needed_js!=""){ ?>
 	<?php if($view_needed_js == "setting"){ ?>
-	<script src="<?php echo base_url('assets/demo/default/custom/crud/forms/widgets/summernote.js'); ?>" type="text/javascript"></script>
+	<script src="<?php echo base_url('assets/demo/default/custom/crud/forms/widgets/summernote.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>
 	<?php } ?>
 	
 <?php } ?>
 
 <?php  if(isset($load_js) && $load_js!=""){
 	foreach(load_required_js($load_js) as $js_files){ ?>
-	<script src="<?php echo base_url('assets/demo/default/custom/'.$js_files); ?>"></script>
+	<script src="<?php echo base_url('assets/demo/default/custom/'.$js_files); ?>?q=<?php echo time();?>"></script>
 	<?php  } } ?>
 </body>
 

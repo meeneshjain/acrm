@@ -459,11 +459,11 @@ function generate_new_company_templates($company_id){
 	$raw_query = "SELECT * FROM email_template WHERE is_global= 0 AND status = 1 AND is_deleted = 0";
 	$res = $obj->db->query($raw_query);
 	if($res->num_rows() > 0){
-		if($type == 'html'){
+/*		if($type == 'html'){
 		$output = "";
 		} else {
 			$output = array();
-		}
+		}*/
 		foreach($res->result_array() as $table_data){
 			$output = $table_data;
 			unset($output['id']);
@@ -637,12 +637,17 @@ function expire_license(){
 	}
 }
 
-function get_company_urole_permission($user_role_id){
+function get_user_permission(){
+	$premission = '';
 	$obj =& get_instance();
 	$obj->load->database();
+
+	$user_role_id = $obj->session->userdata['user_role_id'];
     $logged_in_company = get_current_company();
     $select_query = "SELECT `value` FROM company_urole_permission WHERE  status = 1 AND is_deleted = 0 AND company_id='$logged_in_company' AND user_role_id='$user_role_id'";
-    return $obj->db->query($select_query)->row_array()['value'];
+    $result = $obj->db->query($select_query)->row_array();
+    $premission = explode(',', $result['value']);
+    return $premission;
 }
 
 ?>

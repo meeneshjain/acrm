@@ -50,7 +50,15 @@ class Company_model extends CI_Model {
 
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
-		$this->db->where(array('is_deleted' => '0'));
+
+		if($this->session->userdata('is_admin') == 1){
+			$this->db->where(array('is_deleted' => '0'));
+		}
+		if($this->session->userdata('user_role_id') == 1){
+			$this->db->where(array('is_deleted' => '0', 'id' => get_current_company()));
+		}
+
+
         // $this->db->join('project_participants as pp', 'p.id=pp.project_id', 'left');
 		$dt_result = $this->db->get() or die( 'MySQL Error: ' . $this->db->_error_number() ); 
 		// last_query(1);
@@ -81,11 +89,12 @@ class Company_model extends CI_Model {
         		$row[] = '<span class="m-badge m-badge--danger m-badge--wide">Inactive</span>'; 
         	}else{ $row[] = '<span class="m-badge m-badge--success m-badge--wide">Active</span>'; }
         	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button>
-			
-			<button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>
-			';
+        	if($this->session->userdata('is_admin') == 1){
+				$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button> <button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>';
+        	}
+        	else{
+				$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button>';
+        	}
 
         	$output['data'][] = $row;
         }

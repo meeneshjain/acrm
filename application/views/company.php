@@ -2,7 +2,9 @@
 
 
                 
-
+                <?php 
+                $company_permission = get_user_permission();
+                ?>
 				<div class="m-grid__item m-grid__item--fluid m-wrapper">
 
 					<!-- BEGIN: Subheader -->
@@ -70,16 +72,21 @@
                                         </div>
                                         <div class="m-portlet__head-tools">
                                             <ul class="m-portlet__nav">
+                                                <?php if($this->session->userdata('is_admin') == 1){ ?>
                                                 <li class="m-portlet__nav-item">
                                                     <a href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill add_update_click" data-form_type="add">
                                                         <i class="fa fa-plus"></i>
                                                     </a>
                                                 </li>
+                                                <?php } ?>
+
+                                                <?php if($this->session->userdata('is_admin') == 1){ ?>
                                                 <li class="m-portlet__nav-item">
                                                     <a onclick="deleteMultiple()" href="javascript:;"  class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                     				</div>
@@ -240,9 +247,9 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <label>
-                                                Prefix <a class="btn btn-warning m-btn m-btn--icon btn-sm m-btn--icon-only  m-btn--pill m-btn--air" style="width: 15px;height: 15px" data-container="body" data-toggle="m-popover" data-placement="left" data-content="Please choose Unique Prefix and use only 3 Letter."><i class="fa flaticon-questions-circular-button" style="font-size: 0.8rem"></i></a>
+                                                Prefix <a class="btn btn-warning m-btn m-btn--icon btn-sm m-btn--icon-only  m-btn--pill m-btn--air" style="width: 15px;height: 15px" data-container="body" data-toggle="m-popover" data-placement="left" data-content="Please choose Unique Prefix and use only 5 Letter."><i class="fa flaticon-questions-circular-button" style="font-size: 0.8rem"></i></a>
                                             </label>
-                                            <input type="text" required id="comp_prefix" name="company_prefix" data-parsley-required-message="" minlength="3" maxlength="3" class="form-control m-input" placeholder="Ex. ABC">
+                                            <input type="text" required id="comp_prefix" name="company_prefix" data-parsley-required-message="" minlength="5" maxlength="5" class="form-control m-input" placeholder="Ex. ABCDE">
                                         </div>
                                         
                                     </div>

@@ -2,6 +2,14 @@
 /* NOTES MODULE CODE GOES HERE */
 
 $(document).ready(function () {
+
+	$("#m_quick_sidebar_toggle").on('click',function(){
+		if($("#m_quick_sidebar_tabs li").length>0){
+			$("#m_quick_sidebar_tabs li:eq(0) a").trigger('click');
+		}
+	});
+
+
 	/*
 	 ******** TOGGLE NOTES PORTLET *******
 	*/
@@ -417,8 +425,8 @@ $(document).ready(function () {
 	});
 
 	/*
- ******* GET LIST OF TASK ********
-*/
+	 ******* GET LIST OF TASK ********
+	*/
 	$(".get_task_list_on_tab").click(function () {
 		call_service(base_url + 'schedule/get_task', function (res) {
 			if (res.status == 'success') {
@@ -701,7 +709,7 @@ $(document).ready(function () {
 			notify_alert('error', res.message, "Error");
 		});
 	});
-*/
+	*/
 
 
 	$("#chat_searchfield").on("keyup", function () {
