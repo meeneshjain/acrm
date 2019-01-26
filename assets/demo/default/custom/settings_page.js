@@ -303,20 +303,20 @@ $(document).ready(function (event) {
         var obj = $(this);
         var edit_rid = obj.attr("data-role_id");
         var edit_name = obj.attr("data-role_name");
-
+        $(".permission_loader").show();
+        $("#add_edit_permission").find("ul.parsley-errors-list").remove();
         $("#edit_permission_current_role_id").val(edit_rid);
         $("#edit_permission_current_role_name").val(edit_name);
         $(".permission_name_modal").html(edit_name);
-        $(".permission_loader").show();
+        $("input[name='perm[]']").prop("checked", false);
         call_service(base_url + "settings/get_company_urole_permission/" + edit_rid, function (res) {
             if (res['status'] == 'success') {
-                console.log("res");
-                console.log(res);
                 if (res.data != "") {
                     var permission_data = res.data.split(",");
                     if (permission_data.length > 0) {
                         for (var pi = 0; pi < permission_data.length; pi++) {
                             var current_permission = permission_data[pi];
+                            $("input[name='perm[]'][value='" + current_permission + "']").prop("checked", true);
                         }
                     }
                     $(".permission_loader").hide();
@@ -324,7 +324,7 @@ $(document).ready(function (event) {
                 }
             } else {
                 $(".permission_loader").hide();
-                notify_alert('danger', 'There was some error, please try again.', "Error");
+                notify_alert('danger', res.message, "Error");
             }
         });
     });
@@ -335,22 +335,37 @@ $(document).ready(function (event) {
         var btn_id = '#update_uuser_role_btn';
         var obj = $(btn_id);
         btn_text = obj.html();
-        if (form_obj.parsley().validate()) {
-            show_loading(btn_id, 'Updating..!')
-            form_submit(form_obj.attr("id"), function (res) {
-                notify_alert(res.status, res.message);
-                setTimeout(function () {
-                    hide_loading(btn_id, btn_text);
-                    form_obj.parsley().reset();
-                    form_obj[0].reset();
-                    $('#user_role_modal').modal('hide');
-                    //     window.location.reload();
-                }, 1000);
-            }, function (res) {
+        obj.find("ul.parsley-errors-list").remove();
+        show_loading(btn_id, 'Updating..!')
+        form_submit(form_obj.attr("id"), function (res) {
+            notify_alert(res.status, res.message);
+            setTimeout(function () {
                 hide_loading(btn_id, btn_text);
-                //     notify_alert(res.status, res.message, 'Error');
-            });
-        }
+                form_obj.parsley().reset();
+                form_obj[0].reset();
+                $('#user_role_modal').modal('hide');
+                //     window.location.reload();
+            }, 1000);
+        }, function (res) {
+            hide_loading(btn_id, btn_text);
+            //     notify_alert(res.status, res.message, 'Error');
+        });
+
+    });
+
+
+
+    $(document).on("click", ".edit_service_call_options", function () {
+        var obj = $(this);
+        var edit_key = obj.attr("data-json_option_key");
+        $(".service_call_modal").show();
+        call_service(base_url + "settings/get_service_call_option_data/" + edit_key, function (res) {
+            if (res['status'] == 'success') {
+            } else {
+                $(".service_call_modal").hide();
+                notify_alert('danger', res.message, "Error");
+            }
+        });
     });
 
 

@@ -488,7 +488,7 @@ function generate_company_user_role($company_id){
 				'user_role_id' => $value['id'],
 				'value' => $value['default_permission'],
 				'status' => '1',
-				'created_date' => date('Y-m-d H:i:s')
+				'created_date' => DATETIME
 			);
 		$obj->db->insert('company_urole_permission', $data);
 	}
@@ -530,7 +530,7 @@ function get_service_items($array_name = NULL , $all_data = 0, $type = 'array'){
 	$json_data = file_get_contents('assets/data/item_service_options.json');
 	$json_obj = json_decode($json_data, true);
 	
-	if($all_data == 1 || $array_name== ""){
+	if($all_data == 1 || $array_name == ""){
 		return $json_obj;	
 	} else {
 		$data = $json_obj[$array_name] ;
