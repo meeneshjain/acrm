@@ -637,4 +637,12 @@ function expire_license(){
 	}
 }
 
+function get_company_urole_permission($user_role_id){
+	$obj =& get_instance();
+	$obj->load->database();
+    $logged_in_company = get_current_company();
+    $select_query = "SELECT `value` FROM company_urole_permission WHERE  status = 1 AND is_deleted = 0 AND company_id='$logged_in_company' AND user_role_id='$user_role_id'";
+    return $obj->db->query($select_query)->row_array()['value'];
+}
+
 ?>
