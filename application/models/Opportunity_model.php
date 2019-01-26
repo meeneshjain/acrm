@@ -90,7 +90,7 @@ class Opportunity_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="opportunities" id="opprt_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="opprchkbx"><span></span></label>';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="opportunities" id="opprt_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="opprchkbx"><span class="ml-3"></span></label>';
         	$row[] = $aRow['first_name']." ".$aRow['last_name'];
         	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
         	$row[] = $aRow['own_fname']." ".$aRow['own_lname'];

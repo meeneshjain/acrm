@@ -15,7 +15,7 @@ $header_permission = get_user_permission();
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!--begin::Web font -->
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/webfont.js'); ?>"></script>
 <script>
 WebFont.load({
 google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},

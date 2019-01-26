@@ -75,7 +75,7 @@ class Company_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx"><span></span></label>';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="users" id="participant_'.$aRow['id'].'" value="'.$aRow['id'].'" class="compckbx"><span class="ml-3"></span></label>';
             $imgscr = base_url('assets/images/no.jpg');
             if(!empty($aRow['logo']))
             {

@@ -67,7 +67,7 @@ class Target_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="trgt" id="trgt_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="trgtchkbx"><span></span></label>';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="trgt" id="trgt_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="trgtchkbx"><span class="ml-3"></span></label>';
         	$row[] = $aRow['name'];
         	$row[] = ucfirst($aRow['target_type']);
         	$row[] = (!empty($aRow['target'])) ? $aRow['target'] : $aRow['product_id'];

@@ -68,7 +68,7 @@
 <script src="<?php echo base_url('assets/demo/default/custom/custom.js'); ?>"></script>
 
 <!-- datatable CDN -start --> 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/demo/default/custom/jquery.mousewheel.min.js'); ?>" type="text/javascript"></script>
 <!-- 
 <link href="<?php // echo base_url('assets/vendors/custom/datatables/datatables.bundle.css'); ?>" rel="stylesheet" type="text/css" /> 
 <script src="<?php // echo base_url('assets/vendors/custom/datatables/datatables.bundle.js'); ?>"></script> 

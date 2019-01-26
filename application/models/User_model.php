@@ -68,7 +68,7 @@ class User_model extends CI_Model {
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary">
             <input type="checkbox" name="users" id="user_'.$aRow['id'].'" value="'.$aRow['id'].'" class="usrchkbx">
-            <span></span></label>';
+            <span></span class="ml-3"></label>';
         
             $row[] = ($aRow['company_name']!="") ? $aRow['company_name'] : "N/A";
             $row[] = ($aRow['user_role_name']!="") ? $aRow['user_role_name'] : "N/A";
@@ -364,7 +364,7 @@ class User_model extends CI_Model {
         	$row = array();
             $row[] = '<label class="m-checkbox m-checkbox--state-primary">
             <input type="checkbox" name="usractivity" id="usractivity_'.$aRow['id'].'" value="'.$aRow['id'].'" class="usrprflckbx">
-            <span></span></label>';
+            <span class="ml-3"></span></label>';
         
 
             $row[] = $aRow['title'];

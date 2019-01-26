@@ -89,7 +89,7 @@ class Lead_model extends CI_Model {
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
-            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="contacts" id="cont_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="leadchkbx"><span></span></label>';
+            $row[] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="contacts" id="cont_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="leadchkbx"><span class="ml-3"></span></label>';
         	$row[] = $aRow['name'] ."(".$aRow['account_number'].")";
         	$row[] = $aRow['first_name']." ".$aRow['last_name'];
         	$row[] = $aRow['own_fname']." ".$aRow['own_lname'];
