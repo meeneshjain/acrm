@@ -718,5 +718,21 @@ CREATE TABLE `company_urole_permission` (
 ALTER TABLE `company_urole_permission`
 CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
 
+UPDATE `user_roles` SET
+`id` = '1',
+`code` = 'ADMIN',
+`name` = 'ADMIN',
+`default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,lead_v,lead_a,lead_e,lead_d,oprt_v,oprt_a,oprt_e,oprt_d,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d',
+`comments` = 'full',
+`status` = '1',
+`is_deleted` = '0',
+`created_date` = '2018-08-27 21:47:05',
+`updated_date` = '2018-08-27 21:47:05'
+WHERE `id` = '1';
+
+ALTER TABLE `company_urole_permission`
+CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
+
+
 -- meenesh region end
 

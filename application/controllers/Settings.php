@@ -33,7 +33,7 @@ class Settings extends CI_Controller {
         $data['email_constants'] = get_all_email_template_constants();
         $data['db_tables'] = get_all_db_table_n_category();
         $data['company_subdata_source'] = base_url("settings/get_company_subscription");
-     
+        $data['service_call_options'] = get_service_items(1 , 1, "");
         
         $this->load->view('include/header',$data);
         $this->load->view('settings',$data);
@@ -209,7 +209,7 @@ class Settings extends CI_Controller {
                 if($permission_data){
                     $output = array("status" => "success","message" => "", "data" => $permission_data);    
                 } else {
-                    $output = array("status" => "error","message" => 'No permission data found.', "data" => "");    
+                    $output = array("status" => "info","message" => 'No permission given to this user', "data" => "");    
                 }
         } else {
             $output = array("status" => "error","message" => 'There was some error getting permission', "data" => ""); 
