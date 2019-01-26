@@ -245,4 +245,25 @@ class Settings_model extends CI_Model {
         $result = $this->db->query($update_query);
         return 1;
     }
+    
+    public function get_service_call_option_data($json_key){
+        $service_call_data = get_service_items(1 , 1, "");
+        return $service_call_data[$json_key];
+    }
+    
+    public function save_update_service_call_option($json_key, $post_data){
+        $service_file = 'assets/data/item_service_options.json';
+        $json_data = file_get_contents($service_file);
+        $json_obj = json_decode($json_data, true);
+        $json_obj[$json_key] = "";
+        if(isset($post_data['service_call_option']) && $post_data['service_call_option']!=""){
+            $json_obj[$json_key] = $post_data['service_call_option'];
+        }
+        $res = file_put_contents($service_file,json_encode($json_obj));
+        if( $res > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
