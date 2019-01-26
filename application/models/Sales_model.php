@@ -66,6 +66,8 @@ class Sales_model extends CI_Model {
         	"data" => array()
         );
 
+        $sales_permission = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -82,11 +84,28 @@ class Sales_model extends CI_Model {
 			 $row[] = ($aRow['stages']!="") ? $aRow['stages'] : "";
 			$row[] = convert_db_date_time($aRow['created_date']);
         
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="get_sales_details('.$aRow['id'].')" ><i class="fa fa-edit"></i></button>
-			
-			<button onclick="delete_sale('.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>
-			';
+			$actn = '';
+
+
+			if($type == "sales_quote"){
+	        	if(in_array('squtn_e',$sales_permission)){
+	        		$actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="get_sales_details('.$aRow['id'].')" ><i class="fa fa-edit"></i></button>';
+				}
+				if(in_array('squtn_d',$sales_permission)){
+	        		$actn .= '<button onclick="delete_sale('.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>';
+				}
+			}
+
+			if($type == "sales_order"){
+				if(in_array('sordr_e',$sales_permission)){
+	        		$actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="get_sales_details('.$aRow['id'].')" ><i class="fa fa-edit"></i></button>';
+				}
+				if(in_array('sordr_d',$sales_permission)){
+	        		$actn .= '<button onclick="delete_sale('.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>';
+				}
+			}
+
+			$row[] = $actn;
 
         	$output['data'][] = $row;
         }

@@ -67,6 +67,8 @@ class Items_model extends CI_Model {
         	"data" => array()
         );
 
+        $items_permission = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -85,11 +87,28 @@ class Items_model extends CI_Model {
         	if($aRow['is_gst'] == '0'){  $row[] = '<span class="m-badge m-badge--danger m-badge--wide">No</span>'; } else { $row[] = '<span class="m-badge m-badge--success m-badge--wide">Yes</span>'; }
         	 
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
-			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
-			';
+
+        	$actn = '';
+
+        	if($type == "inventory"){
+	        	if(in_array('invitm_e',$items_permission)){
+        			$actn .='<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+				}
+				if(in_array('invitm_d',$items_permission)){
+					$actn .='<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';				}
+				}
+
+			if($type == "service"){
+				if(in_array('seritm_e',$items_permission)){
+        			$actn .='<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+				}
+				if(in_array('seritm_d',$items_permission)){
+					$actn .='<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+				}
+			}
+
+
+			$row[] = $actn;
 
         	$output['data'][] = $row;
         }
@@ -238,6 +257,8 @@ class Items_model extends CI_Model {
         	"data" => array()
         );
 
+        $items_permission = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -256,11 +277,21 @@ class Items_model extends CI_Model {
 
         	 
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item add_update_click" data-service_type="service_contract" data-service-id="'.$aRow['id'].'" data-form_type="edit" ><i class="fa fa-edit"></i></button>
-			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_service" data-service_type="service_contract" data-service-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
-			';
+
+
+        	$actn = '';
+
+        	if(in_array('sercon_e',$items_permission)){
+    			$actn .='<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item add_update_click" data-service_type="service_contract" data-service-id="'.$aRow['id'].'" data-form_type="edit" ><i class="fa fa-edit"></i></button>';
+			}
+			if(in_array('sercon_d',$items_permission)){
+				$actn .='<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_service" data-service_type="service_contract" data-service-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+			}
+
+
+
+
+			$row[] = $actn;
 
         	$output['data'][] = $row;
         }
@@ -433,6 +464,8 @@ class Items_model extends CI_Model {
         	"data" => array()
         );
 
+        $items_permission = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -459,11 +492,15 @@ class Items_model extends CI_Model {
 			$row[] =  $aRow['problem_type'];
         	 
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item add_update_click" data-service_type="service_call" data-service-id="'.$aRow['id'].'" data-form_type="edit" ><i class="fa fa-edit"></i></button>
 			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_service" data-service_type="service_call" data-service-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
-			';
+			$actn = '';
+			if(in_array('sercall_e',$items_permission)){
+    			$actn .='<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item add_update_click" data-service_type="service_contract" data-service-id="'.$aRow['id'].'" data-form_type="edit" ><i class="fa fa-edit"></i></button>';
+			}
+			if(in_array('sercall_d',$items_permission)){
+				$actn .='<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_service" data-service_type="service_contract" data-service-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+			}
+			$row[] = $actn;
 
         	$output['data'][] = $row;
 		}

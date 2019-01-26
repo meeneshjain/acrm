@@ -333,8 +333,11 @@
                         <ul class="list-group">
                         <?php foreach($service_call_options as $option_key => $options){ ?>
                             <li class="list-group-item"> <b> <?php echo $temp =  ucwords(str_replace("_", " ", $option_key));  ?> </b>
-                            
+                            <?php
+                            if($is_super_admin == 1){
+                            ?>
                             <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon edit_service_call_options" data-toggle="modal" data-target="#service_call_modal" data-json_option_key="<?php echo $option_key ?>" data-json_option_name="<?php echo $temp; ?>"> <i class="fa fa-pencil"></i>  </a>  </span>
+                            <?php } ?>
                             </li>
                         <?php } ?>
                         </ul>

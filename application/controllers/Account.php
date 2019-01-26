@@ -27,7 +27,7 @@ class Account extends CI_Controller {
 
     public function accountlist()
     {
-        $account_perminssion = get_user_permission();
+        $account_permission = get_user_permission();
 
         $companyId = $this->sessionData['company_id'];
         $response =  $this->common_model->get_datatable_json("account as a",array( 'a.id', 'a.account_number', 'a.name', 'a.description', 'a.contact_no_1', 'a.email_1', 'a.created_date', 'a.status'),array('is_deleted' => '0','company_id' => $companyId),"'id', 'DESC'");
@@ -51,10 +51,10 @@ class Account extends CI_Controller {
              
 
             $actn = '';
-            if(in_array('acnt_e',$account_perminssion)){
+            if(in_array('acnt_e',$account_permission)){
                 $actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_account" data-acnt-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
             }
-            if(in_array('acnt_d',$account_perminssion)){
+            if(in_array('acnt_d',$account_permission)){
                 $actn .= ' <button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_account" data-acnt-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
             }
 

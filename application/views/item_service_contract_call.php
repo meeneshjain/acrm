@@ -1,3 +1,7 @@
+<?php
+$contractcall_permission = get_user_permission();
+$page_name = $this->uri->segment(2);
+?>
 <div class="m-grid__item m-grid__item--fluid m-wrapper">
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
@@ -22,11 +26,25 @@
                         </div>
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
+                                
+
+                                <?php if($page_name == "service_contract"){ 
+                                if(in_array('sercon_a',$contractcall_permission)){ ?>
                                 <li class="m-portlet__nav-item">
                                     <a href="javascript:;" data-toggle="modal" data-target="#add_update_service_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill add_update_click" data-form_type="add">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </li>
+                                <?php  }  } ?>
+
+                                <?php if($page_name == "service_call"){ 
+                                    if(in_array('sercall_a',$contractcall_permission)){ ?>
+                                    <li class="m-portlet__nav-item">
+                                        <a href="javascript:;" data-toggle="modal" data-target="#add_update_service_modal" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-primary m-btn--icon m-btn--icon-only m-btn--pill add_update_click" data-form_type="add">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </li>
+                                <?php  }  } ?>
                                 <!-- <li class="m-portlet__nav-item">
                                     <a onclick="deleteMultiple()" href="javascript:;" class="m-portlet__nav-link btn btn-secondary m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill">
                                         <i class="fa fa-trash"></i>

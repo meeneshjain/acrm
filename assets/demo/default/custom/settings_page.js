@@ -118,6 +118,7 @@ $(document).ready(function (event) {
                     form_obj.parsley().reset();
                     form_obj[0].reset();
                     $('#uom_modal').modal('hide');
+                    window.location.reload();
                 }, 1000);
             }, function (res) {
                 hide_loading(btn_id, btn_text);
