@@ -38,7 +38,7 @@ class Target extends CI_Controller {
         $companyId = $this->sessionData['company_id'];
         $user_role_id = $this->sessionData['user_role_id'];
         $userId = $this->sessionData['logged_in'];
-        $data['data_source'] = base_url('target/targetlist');
+        //$data['data_source'] = base_url('target/targetlist');
         $data['target_duration'] = get_target_duration_list('html','');
         $data['downline_user'] =  $this->target_model->getDownlineUser($userId,$user_role_id);
         $this->load->view('target/rm_view',$data);
@@ -65,7 +65,7 @@ class Target extends CI_Controller {
         $companyId = $this->sessionData['company_id'];
         $user_role_id = $this->sessionData['user_role_id'];
         $userId = $this->sessionData['logged_in'];
-        $data['data_source'] = base_url('target/targetlist');
+        //$data['data_source'] = base_url('target/targetlist');
         $data['target_duration'] = get_target_duration_list('html','');
         $data['my_target'] = $this->target_model->myTarget($userId,$user_role_id);
         $data['downline_user'] =  $this->target_model->getDownlineUser($userId,$user_role_id);

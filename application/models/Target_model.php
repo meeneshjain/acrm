@@ -64,6 +64,8 @@ class Target_model extends CI_Model {
         	"data" => array()
         );
 
+        $target_permission = get_user_permission();
+
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -74,11 +76,18 @@ class Target_model extends CI_Model {
         	$row[] = $aRow['tdname'];
         	$row[] = $aRow['in_days'];
         	$row[] = convert_db_date_time($aRow['created_date']);
-			$row[] = '
-			<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_trgt" data-trgt-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>
 			
-			<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_trgt" data-trgt-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>
-			';
+
+        	$actn = '';
+
+        	if(in_array('trgt_e',$target_permission)){
+        		$actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_trgt" data-trgt-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+			}
+			if(in_array('trgt_d',$target_permission)){
+				$actn .= '<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_trgt" data-trgt-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+			}
+
+			$row[] = $actn;
 
         	$output['data'][] = $row;
         }

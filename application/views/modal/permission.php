@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="m-form__group form-group" style="">
+                    <!--  <div class="m-form__group form-group" style="">
                         <div class="alert alert-primary no-alert-padding">
                             <label class="m-checkbox">
                                 <input type="checkbox" class="_trgt_perAll" onclick="checkAll('_trgt_perAll', '_trgt_per')">
@@ -118,7 +118,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="m-form__group form-group" style="">
                         <div class="alert alert-primary no-alert-padding">
                             <label class="m-checkbox">
