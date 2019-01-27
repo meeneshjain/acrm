@@ -264,31 +264,6 @@ $(document).ready(function (event) {
         }
     });
 
-    /*    $(document).on("submit", "#database_backup_form", function (event) {
-           event.preventDefault();
-           var form_obj = $(this);
-           var btn_id = '#update_export_db_btn';
-           var obj = $(btn_id);
-           btn_text = obj.html();
-           if (form_obj.parsley().validate()) {
-               show_loading(btn_id, 'Exporting..!')
-               form_submit(form_obj.attr("id"), function (res) {
-                   notify_alert(res.status, res.message);
-                   setTimeout(function () {
-                       hide_loading(btn_id, btn_text);
-                       form_obj.parsley().reset();
-                       form_obj[0].reset();
-                       $('#database_back_model').modal('hide');
-                       //     window.location.reload();
-                   }, 1000);
-               }, function (res) {
-                   hide_loading(btn_id, btn_text);
-                   //     notify_alert(res.status, res.message, 'Error');
-               });
-           }
-       }); */
-
-
     $(document).on("change", ".db_parent_check", function () {
         var data_section = $(this).attr('data-section');
         if ($(this).is(":checked")) {
@@ -296,6 +271,58 @@ $(document).ready(function (event) {
         } else {
             $('.child_check[data-section="' + data_section + '"]').prop('checked', false);
         }
+    });
+
+
+    $(document).on("click", ".get_smtp_settings", function () {
+        var obj = $(this);
+        $(".smtp_setting_loader").removeClass('display_none');
+        $(".smtp_setting_block").addClass('display_none');
+        call_service(base_url + "settings/get_company_smtp_detail/", function (res) {
+            if (res['status'] == 'success') {
+                var smtp_detail = res.data;
+                $("#smtp_host").val(smtp_detail.host);
+                $("#smtp_port").val(smtp_detail.port);
+                $("#smtp_from_name").val(smtp_detail.from_name);
+                $("#smtp_from_email").val(smtp_detail.from_email);
+                $("#smtp_from_password").val(smtp_detail.from_password);
+                if (smtp_detail.is_configured == 1) {
+                    $("#is_smtp_configured").prop("checked", true);
+                } else {
+                    $("#is_smtp_configured").prop("checked", false);
+                }
+                $(".smtp_setting_block").removeClass('display_none');
+                $(".smtp_setting_loader").addClass('display_none');
+            } else {
+                $(".smtp_setting_loader").addClass('display_none');
+                notify_alert('danger', res.message, "Error");
+            }
+        }, function (res) {
+        });
+    });
+
+    $(document).on("submit", "#company_smtp_form", function (event) {
+        event.preventDefault();
+        var form_obj = $(this);
+        var btn_id = '#update_smtp_detail_btn';
+        var obj = $(btn_id);
+        btn_text = obj.html();
+        show_loading(btn_id, 'Updating..!')
+        form_submit(form_obj.attr("id"), function (res) {
+            notify_alert(res.status, res.message);
+            setTimeout(function () {
+                hide_loading(btn_id, btn_text);
+                form_obj.parsley().reset();
+                form_obj[0].reset();
+                $('#smtp_settings_modal').modal('hide');
+                /* setTimeout(function () {
+                    window.location.reload();
+                }, 150); */
+            }, 1000);
+        }, function (res) {
+            hide_loading(btn_id, btn_text);
+            //     notify_alert(res.status, res.message, 'Error');
+        });
     });
 
     $(document).on("click", ".edit_user_role_popup", function () {
@@ -351,7 +378,6 @@ $(document).ready(function (event) {
             hide_loading(btn_id, btn_text);
             //     notify_alert(res.status, res.message, 'Error');
         });
-
     });
 
 

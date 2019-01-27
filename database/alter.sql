@@ -734,5 +734,32 @@ ALTER TABLE `company_urole_permission`
 CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
 
 
+DROP TABLE IF EXISTS `company_email_smtp`;
+CREATE TABLE `company_email_smtp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `host` varchar(200) NOT NULL,
+  `port` varchar(200) NOT NULL,
+  `from_name` varchar(200) NOT NULL COMMENT 'smtp user name ',
+  `from_email` varchar(200) NOT NULL COMMENT 'smtp email account',
+  `from_password` varchar(200) NOT NULL COMMENT 'smtp account password',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `company_email_smtp`
+ADD `is_configured` tinyint NOT NULL AFTER `from_password`;
+
+UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,cntct_call,cntct_con2lead,lead_v,lead_a,lead_e,lead_d,lead_call,lead_lead2opp,oprt_v,oprt_call,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d' WHERE `id` = '1';
+
+UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,cntct_call,cntct_con2lead,lead_v,lead_a,lead_e,lead_d,lead_call,lead_lead2opp,oprt_v,oprt_call,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d' WHERE `id` = '2';
+
+UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,cntct_call,cntct_con2lead,lead_v,lead_a,lead_e,lead_d,lead_call,lead_lead2opp,oprt_v,oprt_call,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d' WHERE `id` = '3';
+
+UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,cntct_call,cntct_con2lead,lead_v,lead_a,lead_e,lead_d,lead_call,lead_lead2opp,oprt_v,oprt_call,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d' WHERE `id` = '4';
+
 -- meenesh region end
 

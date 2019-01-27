@@ -494,6 +494,30 @@ function generate_company_user_role($company_id){
 	}
 }
 
+function generate_company_smtp($company_id, $company_name){
+	$obj =& get_instance();
+	$obj->load->database();
+	$company_table = 'company_email_smtp';
+	$select = "SELECT * FROM `$company_table` WHERE `company_id` = '$company_id'";
+	$select_res = $obj->db->query($select);
+	if($select_res->num_rows() == 0){
+		$insert_smtp_data = array(
+			"company_id"=> $company_id,
+			"host"=> "",
+			"port"=> "25",
+			"from_name"=> $company_name,
+			"from_email"=> "",
+			"from_password"=> "",
+			"is_configured"=> 0,
+			"status"=> 1,
+			"is_deleted"=> 0,
+			"created_date"=> DATETIME,
+		);
+		
+		$obj->db->insert($company_table, $insert_smtp_data);
+	}
+}
+
 function get_all_email_template_constants(){
 	$constants =  array(
 		"{{base_url}}"=>"Application Path",

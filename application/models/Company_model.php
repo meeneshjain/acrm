@@ -118,9 +118,9 @@ class Company_model extends CI_Model {
 			'is_deleted' => '0',
 			'created_by' => '1'
 		);
-
+		$company_name = $this->input->post('company_name');
 		$companyArray = array(
-			'company_name' => $this->input->post('company_name'),
+			'company_name' => $company_name,
 			'logo' => $this->input->post('uploaded_images'),
 			'company_prefix' => $this->input->post('company_prefix'),
 			'company_code_start' => '0001',
@@ -144,11 +144,12 @@ class Company_model extends CI_Model {
 		$userArray['company_id'] = $company_id;
 		$this->db->insert('`users`', $userArray);
 		
+		// generate default smtp details for the company 
+		generate_company_smtp($company_id, $company_name);
+		// insert default email templates for the company 		
 		generate_new_company_templates($company_id); 
-
 		// Insert User Role Permission default value
 		generate_company_user_role($company_id);
-
 	}
 
 	public function edit_detail($id)
