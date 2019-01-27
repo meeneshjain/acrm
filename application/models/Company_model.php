@@ -89,6 +89,7 @@ class Company_model extends CI_Model {
         		$row[] = '<span class="m-badge m-badge--danger m-badge--wide">Inactive</span>'; 
         	}else{ $row[] = '<span class="m-badge m-badge--success m-badge--wide">Active</span>'; }
         	$row[] = date('d M,Y @ h:i A',strtotime($aRow['created_date']));
+        	
         	if($this->session->userdata('is_admin') == 1){
 				$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button> <button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>';
         	}
