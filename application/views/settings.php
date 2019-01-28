@@ -856,6 +856,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                <button type="button" id="send_test_mail" class="btn btn-info pull-left">
+                        <i class="fa fa-send"></i> Send Test Mail
+                    </button>
                     <button type="submit" id="update_smtp_detail_btn" class="btn btn-primary">
                         <i class="fa fa-check"></i> Update
                     </button>

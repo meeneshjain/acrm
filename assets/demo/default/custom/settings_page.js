@@ -300,6 +300,28 @@ $(document).ready(function (event) {
         }, function (res) {
         });
     });
+    
+    $(document).on("click", "#send_test_mail", function () {
+        $.ajax({
+            type: "POST",
+            url: base_url + 'settings/send_test_mail',
+            data: {
+                "smtp_host": $("#smtp_host").val(),
+                "smtp_port": $("#smtp_port").val(),
+                "smtp_from_name": $("#smtp_from_name").val(),
+                "smtp_from_email": $("#smtp_from_email").val(),
+                "smtp_from_password": $("#smtp_from_password").val()
+            },
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (response) {
+                notify_alert('danger', 'There was some error, Please try again.', "Error")
+            }
+        });
+
+    });
 
     $(document).on("submit", "#company_smtp_form", function (event) {
         event.preventDefault();

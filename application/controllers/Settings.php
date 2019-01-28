@@ -298,6 +298,20 @@ class Settings extends CI_Controller {
         echo json_encode($output);
     }
     
+    public function send_test_mail(){
+         if($this->input->is_ajax_request()) {
+            $post_data = $this->input->post(NULL, TRUE);
+            if(!empty($post_data)){
+                
+            } else {
+                $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
+            }
+        } else {
+           $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+    }
+    
     
     
 }
