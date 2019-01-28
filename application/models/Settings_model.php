@@ -266,4 +266,30 @@ class Settings_model extends CI_Model {
             return 0;
         }
     }
+    
+    public function get_company_smtp_detail(){
+       $logged_in_company = get_current_company();
+       $select_smpt_conf = "SELECT * FROM `company_email_smtp` WHERE `company_id` = '$logged_in_company'"; 
+       return $this->db->query($select_smpt_conf)->row_array();
+    }
+    
+    public function update_company_smtp($post_data){
+        $logged_in_company = get_current_company();
+        $update_data = array(
+            "host"=> $post_data['smtp_host'],
+            "port"=> $post_data['smtp_port'],
+            "from_name"=> $post_data['smtp_from_name'],
+            "from_email"=> $post_data['smtp_from_email'],
+            "from_password"=> $post_data['smtp_from_password']
+            
+        );
+        if(isset($post_data['is_smtp_configured']) && $post_data['is_smtp_configured']!=""){
+            $update_data['is_configured'] = 1;
+        } else {
+            $update_data['is_configured'] = 0;
+        }
+        
+        $res = $this->db->update('company_email_smtp', $update_data);
+        return 1;
+    }
 }

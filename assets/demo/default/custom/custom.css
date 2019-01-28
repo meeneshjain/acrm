@@ -354,3 +354,8 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 .m-checkbox {
     color: inherit;
 }
+
+.settings_menu_option{
+	padding-top: 1px;
+    padding-bottom: 4px;
+}

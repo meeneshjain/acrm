@@ -25,22 +25,32 @@
                                                 Common
                                             </span>
                                         </li>
-                                        <li class="m-nav__item">
+                                        <li class="m-nav__item settings_menu_option">
                                             <a href="javascript:;" data-toggle="modal" data-target="#general_setting_model" class="m-nav__link get_general_settings">
-                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                <i class="m-nav__link-icon fa fa-tint"></i>
                                                 <span class="m-nav__link-text">
                                                     General Settings
                                                 </span>
                                             </a>
                                         </li>
-                                        <li class="m-nav__item">
+                                        <li class="m-nav__item settings_menu_option">
                                             <a href="javascript:;" data-toggle="modal" data-target="#database_back_model" class="m-nav__link get_general_settings">
-                                                <i class="m-nav__link-icon flaticon-share"></i>
+                                                <i class="m-nav__link-icon fa fa-database"></i>
                                                 <span class="m-nav__link-text">
                                                     Database Backup
                                                 </span>
                                             </a>
                                         </li>
+                                        <?php if($this->session->userdata['user_role_id'] == 1) { ?>
+                                         <li class="m-nav__item settings_menu_option">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#smtp_settings_modal" class="m-nav__link get_smtp_settings">
+                                                <i class="m-nav__link-icon fa fa-envelope"></i>
+                                                <span class="m-nav__link-text">
+                                                    SMTP settings
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <?php  } ?>
                                     </ul>
                                 </div>
                             </div>
@@ -769,6 +779,85 @@
                 <div class="modal-footer">
                     <button type="submit" id="update_export_db_btn" class="btn btn-primary">
                         <i class="fa fa-check"></i> Export
+                    </button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="smtp_settings_modal" tabindex="-1" role="dialog" aria-labelledby="smtp_settings_modal_lable"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="company_smtp_form"
+                data-parsley-validate action="<?php echo base_url('settings/update_company_smtp'); ?>">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="smtp_settings_modal_lable">
+                        <b>Your SMTP settings </b>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="smtp_setting_loader display_none">
+                        <div class="col-md-12" >
+                        <div class="text-center">
+                            <i class="fa fa-spinner fa-spin rem-3"></i>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="smtp_setting_block display_none">
+                          <div class="form-group m-form__group row">
+                            <label class="text-left col-lg-3 col-form-label"> <b>Host</b> </label>
+                            <div class="col-lg-4">
+                                <input type="text" id="smtp_host" name="smtp_host" required class="form-control m-input" placeholder="SMTP Host or IP">
+                            </div>  
+                            <label class="text-left col-lg-1 col-form-label"> <b>Port</b> </label>
+                            <div class="col-lg-4">
+                                <input type="text" id="smtp_port" name="smtp_port" required class="form-control m-input" placeholder="SMTP PORT">
+                            </div>                             
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="text-left col-lg-3 col-form-label"> <b>From Name</b> </label>
+                            <div class="col-lg-9">
+                                <input type="text" id="smtp_from_name" name="smtp_from_name" required class="form-control m-input" placeholder="From Name ">
+                            </div>                             
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="text-left col-lg-3 col-form-label"> <b>From Email</b> </label>
+                            <div class="col-lg-9">
+                                <input type="text" id="smtp_from_email" name="smtp_from_email" required class="form-control m-input" placeholder="From Email">
+                            </div>                             
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <label class="text-left col-lg-3 col-form-label"> <b>From Password</b> </label>
+                            <div class="col-lg-9">
+                                <input type="text" id="smtp_from_password" name="smtp_from_password" required class="form-control m-input" placeholder="From Password">
+                            </div>                             
+                        </div>
+                        <div class="m-form__group form-group">
+                            <div class="m-checkbox-inline">
+                                <label class="text-left col-lg-3 col-form-label"> <b></b> </label>
+                                <label class="m-checkbox" for="is_smtp_configured"> 
+                                    <input type="checkbox" name="is_smtp_configured" value="1" class="is_smtp_configured" id="is_smtp_configured">
+                                    is SMTP configured ?
+                                    <span class="permission_form" ></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="update_smtp_detail_btn" class="btn btn-primary">
+                        <i class="fa fa-check"></i> Update
                     </button>
 
                     <button type="button" class="btn btn-danger" data-dismiss="modal">

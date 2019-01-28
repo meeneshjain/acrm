@@ -267,6 +267,37 @@ class Settings extends CI_Controller {
            $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
         }
         echo json_encode($output);
-        
     }
+    
+    public function get_company_smtp_detail(){
+        $company_smtp = $this->settings_model->get_company_smtp_detail();
+        if($company_smtp){
+            $output = array("status" => "success","message" => "", "data" => $company_smtp);    
+        } else {
+            $output = array("status" => "info","message" => 'SMTP details not found.', "data" => "");    
+        }
+        echo json_encode($output); 
+    }
+    
+    public function update_company_smtp(){
+         if($this->input->is_ajax_request()) {
+            $post_data = $this->input->post(NULL, TRUE);
+            if(!empty($post_data)){
+                $response = $this->settings_model->update_company_smtp($post_data);
+                if($response  == 1 ){
+                    $output = array("status" => "success","message" => 'SMTP details updated.', "data" => "");    
+                } else {
+                    $output = array("status" => "error","message" => 'Unable to update, there was some error', "data" => "");    
+                }
+            } else {
+                $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
+            }
+        } else {
+           $output =  array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");
+        }
+        echo json_encode($output);
+    }
+    
+    
+    
 }
