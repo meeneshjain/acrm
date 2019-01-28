@@ -2,7 +2,7 @@
 
 function send_mailer($email,$subject,$body,$test_mail = 0){
 
-    if($test_mail == 0)){
+    if($test_mail == 0){
         $smtp_config = get_company_smtp_configuration();
     }else{
         $smtp_config = $test_mail;
@@ -62,7 +62,7 @@ function get_company_smtp_configuration(){
     $obj =& get_instance();
     $smtp_config = array();
     $company_id = get_current_company()?get_current_company():0;
-    $obj->db->where(array("company_id"=>$company_id, "status"->"1", "is_deleted"=>""0));
+    $obj->db->where(array("company_id"=>$company_id, "status"=>"1", "is_deleted"=>"0"));
     if($company_id!= 0 && $company_id!= ""){
         $smtp_config = $obj->db->get('company_email_smtp')->row_array();     
     }
