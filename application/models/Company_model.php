@@ -151,6 +151,18 @@ class Company_model extends CI_Model {
 		generate_new_company_templates($company_id); 
 		// Insert User Role Permission default value
 		generate_company_user_role($company_id);
+
+		// Send Employee registration email
+		$mail_var = array(
+            "{{app_name_short}}" => APP_NAME,
+            "{{base_url}}" => base_url(),
+            "{{user_full_name}}" => $this->input->post('first_name').' '.$this->input->post('last_name'),
+            "{{user_name}}" => $this->input->post('username'),
+            "{{password}}" => $this->input->post('password'),
+            "{{app_name_full}}" => POWERED_BY_FULL
+        );
+
+		generate_email($this->input->post('email_address'),'company_employee_registration',$mail_var);
 	}
 
 	public function edit_detail($id)
@@ -166,7 +178,6 @@ class Company_model extends CI_Model {
 
 	public function update_detail()
 	{
-
 		$data = array(
 			'company_name' => $this->input->post('company_name'),
 			'logo' => $this->input->post('uploaded_images'),

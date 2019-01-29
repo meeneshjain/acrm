@@ -461,25 +461,25 @@
 											<div class="form-group m-form__group row">
 											<label class="text-left col-lg-4 col-form-label">Current Plan </label>
 											<div class="col-lg-6">
-												 <input type="text" id="plaan_details" disbled readonly name="plaan_details" class="form-control m-input" value="<?php echo $current_subscription_details['subscrion_name']; ?>" placeholder="Current Plan">
+												 <input type="text"  disbled readonly class="form-control m-input" value="<?php echo $current_subscription_details['subscrion_name']; ?>" placeholder="Current Plan">
 											</div>
 											</div>
 											<div class="form-group m-form__group row">
 											<label class="text-left col-lg-4 col-form-label">   Total Registration Allowed  </label>
 											<div class="col-lg-6">
-												<input type="text" id="plaan_details" disbled readonly name="plaan_details" class="form-control m-input" value="<?php echo $current_subscription_details['total_allowed']; ?>" placeholder="Total Registration Allowed ">
+												<input type="text"  disbled readonly class="form-control m-input" value="<?php echo $current_subscription_details['total_allowed']; ?>" placeholder="Total Registration Allowed ">
 											</div>
 											</div>
 											<div class="form-group m-form__group row">
 											<label class="text-left col-lg-4 col-form-label">   Total Registration Done </label>
 											<div class="col-lg-6">
-												<input type="text" id="plaan_details" disbled readonly name="plaan_details" class="form-control m-input" value="<?php echo $current_subscription_details['total_registration']; ?>" placeholder="Total Registration Done">
+												<input type="text"  disbled readonly class="form-control m-input" value="<?php echo $current_subscription_details['total_registration']; ?>" placeholder="Total Registration Done">
 											</div>
 											</div>
 											<div class="form-group m-form__group row">
 											<label class="text-left col-lg-4 col-form-label">  Remaining </label>
 											<div class="col-lg-6">
-												<input type="text" id="plaan_details" disbled readonly name="plaan_details" class="form-control m-input" value="<?php echo $current_subscription_details['total_left']; ?>" placeholder="Remaining ">
+												<input type="text"  disbled readonly class="form-control m-input" value="<?php echo $current_subscription_details['total_left']; ?>" placeholder="Remaining ">
 											</div>
 											</div>
 											<div class="form-group m-form__group row">
