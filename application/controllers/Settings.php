@@ -299,10 +299,72 @@ class Settings extends CI_Controller {
     }
     
     public function send_test_mail(){
+        error_reporting(E_ALL);
+        /* require("application/third_party/plugins/phpmailer/class.phpmailer.php");
+        $email = "meenesh@mailinator.com";
+        $subject = APP_NAME ." Test Mail";
+        $body = "Hi, <br> This is a testing mail to check what SMTP configuration worked. <br><br>";
+
+        $smtp_config['host'] = 'meeneshjain.com';
+        $smtp_config['port'] = '25';
+        $smtp_config['from_email'] = 'contact@meeneshjain.com';
+        $smtp_config['from_password'] = 'mj@123';
+        $smtp_config['from_name'] = 'Meenesh Jain';
+        $smtp_config['is_configured'] = '1';
+
+        $mail = new PHPMailer();
+
+        $mail->IsSMTP();
+        $mail->Host = $smtp_config['host'];
+
+        $mail->SMTPAuth = true;
+        //$mail->SMTPSecure = "ssl";
+        $mail->Port = $smtp_config['port'];
+        $mail->Username = $smtp_config['from_email'];
+        $mail->Password = $smtp_config['from_password'];
+
+        $mail->From = $smtp_config['from_email'];
+        $mail->FromName = $smtp_config['from_name'];
+        $mail->AddAddress($email); 
+         //$mail->AddReplyTo("mail@mail.com");
+
+        $mail->IsHTML(true);
+
+        $mail->Subject = $subject;
+        $mail->Body = $body;  //$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+        if(!$mail->Send())  {
+            return 0;
+        }  */
+         error_reporting(E_ALL);
+    $output = array();
          if($this->input->is_ajax_request()) {
             $post_data = $this->input->post(NULL, TRUE);
             if(!empty($post_data)){
                 
+                $email = $post_data['mail_id'];
+                $subject = APP_NAME ." Test Mail";
+                 $body = "Hi, <br> This is a testing mail to check what SMTP configuration worked. <br><br>";
+                $test_config = array(
+                    'host' => $post_data['host'], 
+                    'port' => $post_data['port'], 
+                    'from_email' => $post_data['from_email'], 
+                    'from_password' => $post_data['from_password'], 
+                    'from_email' => $post_data['from_email'], 
+                    'from_name' => $post_data['from_name'], 
+                    'is_configured' => 1
+                );
+                
+                $response = send_mailer($email,$subject,$body,$test_config);
+                $message = "";
+                $status = "";
+                if($response == 0){
+                    $message = "Unable to send Mail, Please check your configuration.";
+                    $status = "error";
+                } else if($response == 2){
+                    $message = "Mail sent successfully to - " . $email;
+                    $status = "success";
+                }
+                $output = array("status" => $status,"message" => $message, "data" => ""); 
             } else {
                 $output = array("status" => "error","message" => 'No Data Found', "data" => "");    
             }

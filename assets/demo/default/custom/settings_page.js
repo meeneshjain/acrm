@@ -300,26 +300,39 @@ $(document).ready(function (event) {
         }, function (res) {
         });
     });
-    
+
     $(document).on("click", "#send_test_mail", function () {
-        $.ajax({
-            type: "POST",
-            url: base_url + 'settings/send_test_mail',
-            data: {
-                "smtp_host": $("#smtp_host").val(),
-                "smtp_port": $("#smtp_port").val(),
-                "smtp_from_name": $("#smtp_from_name").val(),
-                "smtp_from_email": $("#smtp_from_email").val(),
-                "smtp_from_password": $("#smtp_from_password").val()
-            },
-            dataType: "JSON",
-            success: function (response) {
-                console.log(response);
-            },
-            error: function (response) {
-                notify_alert('danger', 'There was some error, Please try again.', "Error")
-            }
-        });
+        var btn_test = $(this).html();
+        if ($("#test_mail_id").val() != "") {
+            show_loading("#send_test_mail", 'Sending..!')
+            $.ajax({
+                type: "POST",
+                url: base_url + 'settings/send_test_mail',
+                data: {
+                    "host": $("#smtp_host").val(),
+                    "port": $("#smtp_port").val(),
+                    "from_name": $("#smtp_from_name").val(),
+                    "from_email": $("#smtp_from_email").val(),
+                    "from_password": $("#smtp_from_password").val(),
+                    "mail_id": $("#test_mail_id").val()
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    console.log(res);
+                    if (res.status == "success") {
+                        notify_alert('success', res.message, "Success")
+                    } else {
+                        notify_alert('danger', res.message, "Error")
+                    }
+                    hide_loading("#send_test_mail", btn_test)
+                },
+                error: function (res) {
+                    notify_alert('danger', 'There was some error, Please try again.', "Error")
+                }
+            });
+        } else {
+            notify_alert("danger", "Enter a test mail Id", 'Error');
+        }
 
     });
 

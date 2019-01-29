@@ -2,15 +2,16 @@
 
 function send_mailer($email,$subject,$body,$test_mail = 0){
 
+    error_reporting(E_ALL);
     if($test_mail == 0){
         $smtp_config = get_company_smtp_configuration();
     }else{
         $smtp_config = $test_mail;
     }
-
+    
     if($smtp_config['is_configured'] == 1){
-
-        require("application/third_party/phpmailer/class.phpmailer.php");
+        
+        require("application/third_party/plugins/phpmailer/class.phpmailer.php");
 
         $mail = new PHPMailer();
 
@@ -29,11 +30,12 @@ function send_mailer($email,$subject,$body,$test_mail = 0){
          //$mail->AddReplyTo("mail@mail.com");
 
         $mail->IsHTML(true);
-
         $mail->Subject = $subject;
         $mail->Body = $body;  //$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
         if(!$mail->Send())  {
             return 0;
+        } else {
+            return 2;
         }
     }else{
         return 1;

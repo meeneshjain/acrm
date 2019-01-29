@@ -856,6 +856,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                 <input type="text" id="test_mail_id" name="test_mail_id" class="form-control m-input col-sm-2" placeholder="Enter a test mail ID">
                 <button type="button" id="send_test_mail" class="btn btn-info pull-left">
                         <i class="fa fa-send"></i> Send Test Mail
                     </button>
