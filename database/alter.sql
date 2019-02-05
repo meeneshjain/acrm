@@ -846,3 +846,10 @@ INSERT INTO `states` (`id`, `country_id`, `state_name`, `created_at`, `created_b
 
 -- meenesh region end
 
+-- 5-02-2019 - Feb region start
+
+ALTER TABLE `items`
+CHANGE `code` `code` varchar(200) NOT NULL AFTER `logo`;
+
+
+-- 5-02-2019 - Feb region end

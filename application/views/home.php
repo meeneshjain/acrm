@@ -179,7 +179,7 @@
                         <div class="col-xl-7">
                             <!--begin:: Widgets/Daily Sales-->
                             <div class="m-widget14">
-                                <div class="m-widget14__header m--margin-bottom-30">
+                                <div class="m-widget14__header">
                                     <h3 class="m-widget14__title">
                                         Daily Sales
                                     </h3>
@@ -191,7 +191,7 @@
                                     <canvas id="m_chart_daily_sales"></canvas>
                                 </div> -->
                                 <div class="m-portlet__body">
-								    <div id="m_gchart_1" style="height:300px;"></div>
+								    <div id="m_gchart_1" ></div>
                                 </div>
                             </div>
                             <!--end:: Widgets/Daily Sales-->

@@ -108,11 +108,11 @@ function target_vs_achievement_report(current_user_id = null) {
             console.log(res);
             $(".target_vs_achievement_block").removeClass('display_none');
             $(".target_vs_achivement_loader").addClass('display_none');
-            $(".blank_div_heading").addClas('display_none');
+            $(".blank_div_heading").addClass('display_none');
         } else {
             $(".target_vs_achivement_loader").addClass('display_none');
             $(".target_vs_achievement_block").addClass('display_none');
-            $(".blank_div_heading").addClas('display_none');
+            $(".blank_div_heading").addClass('display_none');
             notify_alert('danger', global_error_msg, "Error");
         }
     }, function (res) {
@@ -179,6 +179,8 @@ function target_vs_achievement_google_chart() {
                     }, 10, 10]
                 ]);
                 var a = {
+                    width: 600,
+                    height: 400,
                     title: "Motivation and Energy Level Throughout the Day",
                     focusTarget: "category",
                     hAxis: {
