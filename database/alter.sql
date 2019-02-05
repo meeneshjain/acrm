@@ -761,5 +761,37 @@ UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user
 
 UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,cntct_call,cntct_con2lead,lead_v,lead_a,lead_e,lead_d,lead_call,lead_lead2opp,oprt_v,oprt_call,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d' WHERE `id` = '4';
 
+
+truncate table `system_settings`;
+INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`) VALUES
+('default_currency',	'INR',	'currency ',	1,	0,	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+('system_email',	'info@akshaycrm.com',	'email',	1,	0,	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+('default_theme',	'pitch_black',	'look_feel',	1,	0,	'2018-11-09 12:17:49',	'0000-00-00 00:00:00'),
+('available_theme',	'[{\"name\":\"purple_red\",\"title\":\"Purple Red\"},{\"name\":\"pitch_black\",\"title\":\"Pitch Black\"},{\"name\":\"just_white\",\"title\":\"Just White\"},{\"name\":\"soft_metal\",\"title\":\"Soft Metal\"},{\"name\":\"grape_fruit\",\"title\":\"Grape Fruit\"},{\"name\":\"blue_jeans\",\"title\":\"Blue Jeans\"},{\"name\":\"grass\",\"title\":\"Grass\"},{\"name\":\"pink_rose\",\"title\":\"Pink Rose\"}]',	'look_feel',	1,	0,	'2018-11-09 15:48:06',	'2018-11-09 15:48:06'),
+('is_sap_connected',	'0',	'sap_integration',	1,	0,	'2019-01-30 22:42:13',	'2019-01-30 22:42:13'),
+('sql_server_type',	'',	'sap_integration',	1,	0,	'2019-01-30 22:57:28',	'2019-01-30 22:57:28'),
+('sql_server_name',	'',	'sap_integration',	1,	0,	'2019-01-30 22:57:28',	'2019-01-30 22:57:28'),
+('sql_username',	'',	'sap_integration',	1,	0,	'2019-01-30 22:54:56',	'2019-01-30 22:54:56'),
+('sql_password',	'',	'sap_integration',	1,	0,	'2019-01-30 22:57:28',	'2019-01-30 22:57:28'),
+('sap_username',	'',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_password',	'',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_sales_order_url',	'http://akshaycrm.com/sap_integration/service.php',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_sales_quote_url',	'http://akshaycrm.com/sap_integration/service.php',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_connection_parameter_url',	'http://akshaycrm.com/sap_integration/service.php',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46');
+
+
+ALTER TABLE `targets`
+ADD `start_date` datetime NOT NULL AFTER `description`,
+ADD `end_date` datetime NOT NULL AFTER `start_date`,
+ADD `is_current_status` tinyint NOT NULL COMMENT '1 - for current target ' AFTER `end_date`;
+
+ALTER TABLE `targets`
+CHANGE `start_date` `start_date` date NOT NULL AFTER `description`,
+CHANGE `end_date` `end_date` date NOT NULL AFTER `start_date`,
+CHANGE `is_current_status` `is_current_status` tinyint(4) NOT NULL COMMENT '1 - for current target  0 - for all previous targets' AFTER `end_date`;
+
+ALTER TABLE `targets`
+CHANGE `is_current_status` `is_current_target` tinyint(4) NOT NULL COMMENT '1 - for current target  0 - for all previous targets' AFTER `end_date`;
+
 -- meenesh region end
 
