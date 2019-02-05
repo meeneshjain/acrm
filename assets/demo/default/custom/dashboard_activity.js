@@ -27,7 +27,9 @@ $(document).ready(function () {
             var rm_id = rm_obj.val();
             target_vs_achievement_report(rm_id);
         } else {
-
+            $(".target_vs_achivement_loader").addClass('display_none');
+            $(".blank_div_heading").removeClass('display_none');
+            $(".target_vs_achievement_block").addClass('display_none');
         }
     });
 
@@ -99,17 +101,24 @@ function service_call_report() {
 }
 
 function target_vs_achievement_report(current_user_id = null) {
+    $(".target_vs_achivement_loader").removeClass('display_none');
+    $(".blank_div_heading").addClass('display_none');
     call_service(base_url + "home/target_vs_achivement_report/" + current_user_id, function (res) {
         if (res['status'] == 'success') {
             console.log(res);
             $(".target_vs_achievement_block").removeClass('display_none');
             $(".target_vs_achivement_loader").addClass('display_none');
+            $(".blank_div_heading").addClas('display_none');
         } else {
             $(".target_vs_achivement_loader").addClass('display_none');
+            $(".target_vs_achievement_block").addClass('display_none');
+            $(".blank_div_heading").addClas('display_none');
             notify_alert('danger', global_error_msg, "Error");
         }
     }, function (res) {
         $(".target_vs_achivement_loader").addClass('display_none');
+        $(".blank_div_heading").removeClass('display_none');
+        $(".target_vs_achievement_block").addClass('display_none');
         notify_alert('danger', global_error_msg, "Error");
     });
 }

@@ -133,7 +133,7 @@ class Home extends CI_Controller {
 	}
 	
 	public function target_vs_achivement_report($current_user_id){
-		$response =  $this->home_model->target_vs_achivement_report($current_user_id);
+		$response =  $this->home_model->target_vs_achivement_report_section_1($current_user_id);
 	 	echo json_encode(array("status" =>'success',"message" => 'Target Report generated', "data" => $response));
 	    die;
 	}

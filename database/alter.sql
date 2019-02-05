@@ -715,6 +715,9 @@ CREATE TABLE `company_urole_permission` (
   `updated_date` datetime NOT NULL
 );
 
+ALTER TABLE `user_roles`
+CHANGE `permission` `default_permission` longtext COLLATE 'latin1_swedish_ci' NOT NULL AFTER `name`;
+
 ALTER TABLE `company_urole_permission`
 CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
 
@@ -792,6 +795,54 @@ CHANGE `is_current_status` `is_current_status` tinyint(4) NOT NULL COMMENT '1 - 
 
 ALTER TABLE `targets`
 CHANGE `is_current_status` `is_current_target` tinyint(4) NOT NULL COMMENT '1 - for current target  0 - for all previous targets' AFTER `end_date`;
+
+DROP TABLE IF EXISTS `states`;
+CREATE TABLE `states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
+  `state_name` varchar(255) NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `states` (`id`, `country_id`, `state_name`, `created_at`, `created_by`) VALUES
+(1484,	105,	'Andaman and Nicobar Islands',	1399700193,	14),
+(1485,	105,	'Andhra Pradesh',	1399700193,	14),
+(1486,	105,	'Arunachal Pradesh',	1399700193,	14),
+(1487,	105,	'Assam',	1399700193,	14),
+(1488,	105,	'Bihar',	1399700193,	14),
+(1489,	105,	'Chandigarh',	1399700193,	14),
+(1490,	105,	'Chhattisgarh',	1399700193,	14),
+(1491,	105,	'Dadra and Nagar Haveli',	1399700193,	14),
+(1492,	105,	'Daman and Diu',	1399700193,	14),
+(1493,	105,	'Delhi',	1399700193,	14),
+(1494,	105,	'Goa',	1399700193,	14),
+(1495,	105,	'Gujarat',	1399700193,	14),
+(1496,	105,	'Haryana',	1399700193,	14),
+(1497,	105,	'Himachal Pradesh',	1399700193,	14),
+(1498,	105,	'Jammu and Kashmir',	1399700193,	14),
+(1499,	105,	'Jharkhand',	1399700193,	14),
+(1500,	105,	'Karnataka',	1399700193,	14),
+(1501,	105,	'Kerala',	1399700193,	14),
+(1502,	105,	'Lakshadweep',	1399700193,	14),
+(1503,	105,	'Madhya Pradesh',	1399700194,	14),
+(1504,	105,	'Maharashtra',	1399700194,	14),
+(1505,	105,	'Manipur',	1399700194,	14),
+(1506,	105,	'Meghalaya',	1399700194,	14),
+(1507,	105,	'Mizoram',	1399700194,	14),
+(1508,	105,	'Nagaland',	1399700194,	14),
+(1509,	105,	'Orissa',	1399700194,	14),
+(1510,	105,	'Pondicherry',	1399700194,	14),
+(1511,	105,	'Punjab',	1399700194,	14),
+(1512,	105,	'Rajasthan',	1399700194,	14),
+(1513,	105,	'Sikkim',	1399700194,	14),
+(1514,	105,	'Tamil Nadu',	1399700194,	14),
+(1515,	105,	'Tripura',	1399700194,	14),
+(1516,	105,	'Uttar Pradesh',	1399700194,	14),
+(1517,	105,	'Uttaranchal',	1399700194,	14),
+(1518,	105,	'West Bengal',	1399700194,	14),
+(4564,	105,	'Telangana',	1399700181,	14);
 
 -- meenesh region end
 

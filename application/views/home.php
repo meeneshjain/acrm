@@ -113,15 +113,16 @@
         <div class="m-portlet">
             <div class="m-portlet__body  m-portlet__body--no-padding">
                 <div class="clearfix"></div>
-                <div class="target_vs_achivement_loader" style="width: 100%;">
+                <div class="target_vs_achivement_loader display_none" style="width: 100%;">
                     <div class="text-center">
                         <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="target_vs_achievement_block">
+                <div class="h4 blank_div_heading text-center">Target vs Achievement Report</div>
+                <div class="target_vs_achievement_block display_none">
                     <div class="row m-row--no-padding m-row--col-separator-xl">
-                        <div class="col-xl-3">
+                        <div class="col-xl-2">
                             <!--begin:: Widgets/Stats2-1 -->
                             <div class="m-widget1">
                                 <div class="m-widget1__item">
@@ -175,7 +176,7 @@
                             </div>
                             <!--end:: Widgets/Stats2-1 -->
                         </div>
-                        <div class="col-xl-5">
+                        <div class="col-xl-7">
                             <!--begin:: Widgets/Daily Sales-->
                             <div class="m-widget14">
                                 <div class="m-widget14__header m--margin-bottom-30">
@@ -195,7 +196,7 @@
                             </div>
                             <!--end:: Widgets/Daily Sales-->
                         </div>
-                        <div class="col-xl-4">
+                        <div class="col-xl-3">
                             <!--begin:: Widgets/Profit Share-->
                             <div class="m-widget14">
                                 <div class="m-widget14__header">

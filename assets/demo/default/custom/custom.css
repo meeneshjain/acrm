@@ -359,3 +359,7 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 	padding-top: 1px;
     padding-bottom: 4px;
 }
+
+.m-widget14__title {
+    color: inherit !important;
+}

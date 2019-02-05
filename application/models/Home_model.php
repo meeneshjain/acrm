@@ -320,7 +320,7 @@ class Home_model extends CI_Model {
 			FROM targets as t 
 			LEFT JOIN users as us ON us.id = t.assign_to_user_id 
 			LEFT JOIN target_duration as td on t.target_duration_id = td.id 
-			WHERE t.is_current_status = 1 AND t.assign_to_user_id = '$current_user_id '";
+			WHERE t.is_current_target = 1 AND t.assign_to_user_id = '$current_user_id '";
 			$select_first_section_res = $this->db->query($select_first_section);
 			if($select_first_section_res->num_rows() > 0){
 				$user_data = $select_first_section_res->row_array();
@@ -370,8 +370,12 @@ class Home_model extends CI_Model {
 		return $html_rm;
 	}
 	
+	public function target_vs_achivement_report_section_2($current_user_id){
+		
+	}
 
 }
+
 
 
 ?>
