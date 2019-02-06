@@ -54,7 +54,8 @@ class Home extends CI_Controller {
 			$data['load_js'] = 'dashboard';
 			$data['company_options'] =  get_company_list('html', '');
 			$data['top_bar_report'] =  $this->home_model->top_bar_report();
-			
+			$data['is_super_admin'] = $this->sessionData['is_admin'];
+			$data['user_role_id'] = $this->sessionData['user_role_id'];
 			$this->load->view('include/header',$data);
 			$this->load->view('home',$data);
 			$this->load->view('include/footer');		
@@ -131,10 +132,19 @@ class Home extends CI_Controller {
 		}
 	}
 	
-	public function target_vs_achivement_report(){
-		$response =  $this->home_model->target_vs_achivement_report();
+	public function target_vs_achivement_report($current_user_id){
+		$response =  $this->home_model->target_vs_achivement_report_section_1($current_user_id);
 	 	echo json_encode(array("status" =>'success',"message" => 'Target Report generated', "data" => $response));
 	    die;
+	}
+	
+	public function get_rm_list($company_id = 0){
+		if($this->input->is_ajax_request()) {
+			$rm_data  = $this->home_model->get_rm_list($company_id);
+            echo json_encode(array("status" => "success","message" => 'RM List', "data" => $rm_data));;
+		} else {
+            echo json_encode(array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => ""));
+        }
 	}
 	
 	

@@ -370,3 +370,16 @@ select.form-control:not([size]):not([multiple]){
     top: -3px;
     left: 5px;
 }
+
+.m-widget14 .m-widget14__header {
+    padding: .60rem 0 !important;
+    margin-bottom: .3rem !important;
+}
+
+.m-widget1 {
+    padding: 1.0rem !important;
+}
+
+.m-widget14 {
+    padding: 1.0rem;
+}

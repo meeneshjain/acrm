@@ -215,6 +215,21 @@ $(document).ready(function (event) {
 
                 $("#default_currency").val(general_data.default_currency);
                 $("#account_name").val(general_data.system_email);
+                $("#is_sap_connected").val(general_data.is_sap_connected);
+                $("#sap_connection_parameter_url").val(general_data.sap_connection_parameter_url);
+                $("#sap_password").val(general_data.sap_password);
+                $("#sap_sales_order_url").val(general_data.sap_sales_order_url);
+                $("#sap_sales_quote_url").val(general_data.sap_sales_quote_url);
+                $("#sap_username").val(general_data.sap_username);
+                $("#sql_password").val(general_data.sql_password);
+                $("#sql_server_name").val(general_data.sql_server_name);
+                $("#sql_server_type").val(general_data.sql_server_type);
+                $("#sql_username").val(general_data.sql_username);
+                if (general_data.is_sap_connected == 0) {
+                    $(".is_sap_configured").addClass('display_none');
+                } else if (general_data.is_sap_connected == 1) {
+                    $(".is_sap_configured").removeClass('display_none');
+                }
 
                 var theme_array = JSON.parse(general_data.available_theme);
                 var theme_block_html = '';
@@ -500,6 +515,16 @@ $(document).ready(function (event) {
             });
         }
     });
+
+    $(document).on("change", "#is_sap_connected", function () {
+        var g_obj = $(this);
+        if (g_obj.val() == 1) {
+            $(".is_sap_configured").removeClass("display_none");
+        } else if (g_obj.val() == 0) {
+            $(".is_sap_configured").addClass("display_none");
+        }
+    });
+
 
 
 }); // dom end 

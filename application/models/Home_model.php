@@ -295,33 +295,87 @@ class Home_model extends CI_Model {
 		
 	}
 	
-	public function target_vs_achivement_report(){
+	public function target_vs_achivement_report_section_1($current_user_id){
 		
 		$sessionData = $this->session->userdata();
 		$is_super_admin = $sessionData['is_admin'];
 		$user_role_id  = $sessionData['user_role_id'];
 		$logged_in_company = get_current_company();
-		$current_user_id = get_current_user_id();	
-		$output_data = [];
-		if($is_super_admin == 1){
-			
+		if($current_user_id == null || $current_user_id == 0){
+			$current_user_id = get_current_user_id();	
+		}
+		
+		$output_data = [
+		"target_type" => 0,	
+		"target_duration" => 0,	
+		"target_cost" => 0,	
+		"target_completed" => 0,	
+		"personal_current_month_target" => 0,	
+		"team_current_month_target" => 0,	
+		"total_current_month_target"=> 0,
+		];
+		
+		if($user_role_id == "1"){ // company admin 
+			$select_first_section = "SELECT t.assign_to_user_id, t.report_to_user_id, t.target_title, t.company_id, t.target_duration_id, t.target_type, t.amount, t.product, t.target, t.target_left, td.name as duration
+			FROM targets as t 
+			LEFT JOIN users as us ON us.id = t.assign_to_user_id 
+			LEFT JOIN target_duration as td on t.target_duration_id = td.id 
+			WHERE t.is_current_target = 1 AND t.assign_to_user_id = '$current_user_id '";
+			$select_first_section_res = $this->db->query($select_first_section);
+			if($select_first_section_res->num_rows() > 0){
+				$user_data = $select_first_section_res->row_array();
+				$output_data['target_type']  = ucfirst($user_data['target_type']);
+				$output_data['target_duration']  = ucfirst($user_data['duration']);
+				$output_data['target_cost']  = $user_data['target'];
+				
+				$select_target_completed = "SELECT  so.id, so.type, so.company_id, SUM(so.total_amount) as sum_total_amount, so.other_charges, so.total_tax, so.discount, SUM(so.actual_total) as sum_actual_total, so.sales_employee_id, count(sales_order_id) as total_product
+				FROM sales_order as so
+				LEFT JOIN  sales_order_details as sod ON so.id = sod.sales_order_id
+				WHERE  so.type = 'ORDER'  ";
+				if($user_data['target_type'] == "amount"){
+					
+					$output_data['target_completed']  = $user_data['sum_actual_total'];
+				} else {
+					$output_data['target_completed']  = $user_data['total_product'];
+				}
+			}  
+		} else if($user_role_id == "2"){ // RM report
+		} else if($user_role_id == "3"){ // TL report 
+		} else if($user_role_id == "4"){ // user report 
+		}
+		return $output_data;
+	}
+	
+	public function get_rm_list($company_id = 0){
+		$where= "";
+		if($company_id!= 0 && $company_id!= ""){
+			$where = " WHERE company_id = '$company_id' ";
+		}
+		
+		if($where!= ""){
+			$where .= " AND user_role_id = '2' ";
 		} else {
-			if($user_role_id == "1"){ // company admin 
-				
-			} else if($user_role_id == "2"){ // RM report
-				$target_type = "";
-				
-			} else if($user_role_id == "3"){ // TL report 
-				
-			} else if($user_role_id == "4"){ // user report 
-				
+			$where = " WHERE user_role_id = '2' ";
+		}
+		
+		$select_rm = "SELECT id, first_name, last_name, email FROM `users` $where";
+		$select_rm_res = $this->db->query($select_rm);
+		$html_rm = '';
+		if($select_rm_res->num_rows() > 0){
+			foreach($select_rm_res->result_array() as $rm_data){
+				$html_rm .= '<option value="'.$rm_data['id'].'">'.$rm_data['first_name'] . ' ' . $rm_data['last_name'] .'</option>';
 			}
 		}
 		
-		return $output_data;
+		return $html_rm;
+	}
+	
+	public function target_vs_achivement_report_section_2($current_user_id){
+		
 	}
 
 }
+
 
 
 ?>

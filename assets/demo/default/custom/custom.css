@@ -359,3 +359,20 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 	padding-top: 1px;
     padding-bottom: 4px;
 }
+
+.m-widget14__title {
+    color: inherit !important;
+}
+
+.m-widget1 .m-widget1__item .m-widget1__title {
+	font-size: .8rem !important;
+}
+
+.m-widget1 .m-widget1__item .m-widget1__desc {
+	font-size: .5rem !important;
+}
+
+.m-widget1 .m-widget1__item .m-widget1__number {
+    font-size: .99rem !important;
+    font-weight: 600;
+}

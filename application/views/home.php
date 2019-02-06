@@ -7,20 +7,24 @@
                     Dashboard
                 </h3>
                 <div class="pull-right">
+                 <?php if($is_super_admin == 1 || $user_role_id == 1){ ?>
                 <div class="row" style="margin-top: 5px;">
-                <div class="form-group m-form__group col-sm-6">
-                    <select required class="form-control m-input report_company_change" id="company_list" name="company_list">
+                    <?php if($is_super_admin == 1) { ?>
+                    <div class="form-group m-form__group col-sm-6">
+                     <select required class="form-control m-input report_company_change" id="company_list" name="company_list">
                         <option value="">Select a company</option>
                         <?php echo $company_options; ?>
                     </select>
                     </div>
-                    <div class="form-group m-form__group col-sm-6">
-                    <select required class="form-control m-input report_rm_change" id="company_list" name="company_list">
+                    <?php } ?>
+                    <div class="form-group m-form__group <?php echo ($is_super_admin == 0 ) ? "col-sm-12": "col-sm-6" ?>">
+                    <select required class="form-control m-input report_rm_change" id="rm_employee_list" name="rm_employee_list">
                         <option value="">Select a Regional Manager</option>
                         <?php echo $rm_list; ?>
                     </select>
                     </div>
                 </div>
+                 <?php } ?>
             </div>
             </div>
             </div>
@@ -109,15 +113,16 @@
         <div class="m-portlet">
             <div class="m-portlet__body  m-portlet__body--no-padding">
                 <div class="clearfix"></div>
-                <div class="target_vs_achivement_loader" style="width: 100%;">
+                <div class="target_vs_achivement_loader display_none" style="width: 100%;">
                     <div class="text-center">
                         <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="target_vs_achievement_block"  style="">
+                <div class="h4 blank_div_heading text-center">Target vs Achievement Report</div>
+                <div class="target_vs_achievement_block display_none">
                     <div class="row m-row--no-padding m-row--col-separator-xl">
-                        <div class="col-xl-4">
+                        <div class="col-xl-2">
                             <!--begin:: Widgets/Stats2-1 -->
                             <div class="m-widget1">
                                 <div class="m-widget1__item">
@@ -171,33 +176,36 @@
                             </div>
                             <!--end:: Widgets/Stats2-1 -->
                         </div>
-                        <div class="col-xl-4">
+                        <div class="col-xl-7">
                             <!--begin:: Widgets/Daily Sales-->
                             <div class="m-widget14">
-                                <div class="m-widget14__header m--margin-bottom-30">
+                                <div class="m-widget14__header">
                                     <h3 class="m-widget14__title">
                                         Daily Sales
                                     </h3>
-                                    <span class="m-widget14__desc">
+                                   <!--  <span class="m-widget14__desc">
                                         Check out each collumn for more details
-                                    </span>
+                                    </span> -->
                                 </div>
-                                <div class="m-widget14__chart" style="height:120px;">
+                                <!-- <div class="m-widget14__chart" style="height:120px;">
                                     <canvas id="m_chart_daily_sales"></canvas>
+                                </div> -->
+                                <div class="m-portlet__body">
+								    <div id="m_gchart_1" ></div>
                                 </div>
                             </div>
                             <!--end:: Widgets/Daily Sales-->
                         </div>
-                        <div class="col-xl-4">
+                        <div class="col-xl-3">
                             <!--begin:: Widgets/Profit Share-->
                             <div class="m-widget14">
                                 <div class="m-widget14__header">
                                     <h3 class="m-widget14__title">
-                                        Profit Share
+                                       Target Achievement
                                     </h3>
-                                    <span class="m-widget14__desc">
+                                   <!--  <span class="m-widget14__desc">
                                         Profit Share between customers
-                                    </span>
+                                    </span> -->
                                 </div>
                                 <div class="row  align-items-center">
                                     <div class="col">
@@ -730,3 +738,19 @@
         </div>
     </div>
 </div>
+
+<script>
+  
+  <?php if($is_super_admin == 1){ ?>
+    var get_company_list = 1;
+    var get_rm_list = 0;
+    var current_company = 0;
+  <?php } else if($user_role_id == 1){ ?>
+    var get_company_list = 0;
+    var get_rm_list = 1;
+    <?php } ?>
+    
+    <?php if($is_super_admin != 1){ ?>
+        var current_company = '<?php echo get_current_company(); ?>';
+    <?php } ?>
+</script>

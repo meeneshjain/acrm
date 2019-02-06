@@ -66,8 +66,10 @@ function check_session($user_type = NULL){
 		$uri_segment = $obj->uri->segment(1);
 		if($uri_segment!="home"){
 			$urldata = $obj->uri->segment_array();
-			$urldata =  implode("/",$urldata);
-			$returnURL = '?return_url='.$urldata;
+			if(!empty($urldata)){
+				$urldata =  implode("/",$urldata);
+				$returnURL = '?return_url='.$urldata;
+			 }
 		} 
 		$url = "";
 		if($user_type == ""){

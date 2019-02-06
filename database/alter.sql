@@ -715,6 +715,9 @@ CREATE TABLE `company_urole_permission` (
   `updated_date` datetime NOT NULL
 );
 
+ALTER TABLE `user_roles`
+CHANGE `permission` `default_permission` longtext COLLATE 'latin1_swedish_ci' NOT NULL AFTER `name`;
+
 ALTER TABLE `company_urole_permission`
 CHANGE `is_delete` `is_deleted` tinyint(4) NOT NULL AFTER `status`;
 
@@ -761,5 +764,92 @@ UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user
 
 UPDATE `user_roles` SET `default_permission` = 'comp_v,comp_a,comp_e,comp_d,user_v,user_a,user_e,user_d,trgt_v,trgt_a,trgt_e,trgt_d,acnt_v,acnt_a,acnt_e,acnt_d,cntct_v,cntct_a,cntct_e,cntct_d,cntct_call,cntct_con2lead,lead_v,lead_a,lead_e,lead_d,lead_call,lead_lead2opp,oprt_v,oprt_call,squtn_v,squtn_a,squtn_e,squtn_d,sordr_v,sordr_a,sordr_e,sordr_d,invitm_v,invitm_a,invitm_e,invitm_d,seritm_v,seritm_a,seritm_e,seritm_d,sercon_v,sercon_a,sercon_e,sercon_d,sercall_v,sercall_a,sercall_e,sercall_d,sdnts_v,sdnts_a,sdnts_e,sdnts_d,sdmtng_v,sdmtng_a,sdmtng_e,sdmtng_d,sdtsk_v,sdtsk_a,sdtsk_e,sdtsk_d,sdcalls_v,sdcalls_a,sdcalls_e,sdcalls_d' WHERE `id` = '4';
 
+
+truncate table `system_settings`;
+INSERT INTO `system_settings` (`name`, `sys_value`, `sys_group`, `status`, `is_deleted`, `created_date`, `updated_date`) VALUES
+('default_currency',	'INR',	'currency ',	1,	0,	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+('system_email',	'info@akshaycrm.com',	'email',	1,	0,	'0000-00-00 00:00:00',	'0000-00-00 00:00:00'),
+('default_theme',	'pitch_black',	'look_feel',	1,	0,	'2018-11-09 12:17:49',	'0000-00-00 00:00:00'),
+('available_theme',	'[{\"name\":\"purple_red\",\"title\":\"Purple Red\"},{\"name\":\"pitch_black\",\"title\":\"Pitch Black\"},{\"name\":\"just_white\",\"title\":\"Just White\"},{\"name\":\"soft_metal\",\"title\":\"Soft Metal\"},{\"name\":\"grape_fruit\",\"title\":\"Grape Fruit\"},{\"name\":\"blue_jeans\",\"title\":\"Blue Jeans\"},{\"name\":\"grass\",\"title\":\"Grass\"},{\"name\":\"pink_rose\",\"title\":\"Pink Rose\"}]',	'look_feel',	1,	0,	'2018-11-09 15:48:06',	'2018-11-09 15:48:06'),
+('is_sap_connected',	'0',	'sap_integration',	1,	0,	'2019-01-30 22:42:13',	'2019-01-30 22:42:13'),
+('sql_server_type',	'',	'sap_integration',	1,	0,	'2019-01-30 22:57:28',	'2019-01-30 22:57:28'),
+('sql_server_name',	'',	'sap_integration',	1,	0,	'2019-01-30 22:57:28',	'2019-01-30 22:57:28'),
+('sql_username',	'',	'sap_integration',	1,	0,	'2019-01-30 22:54:56',	'2019-01-30 22:54:56'),
+('sql_password',	'',	'sap_integration',	1,	0,	'2019-01-30 22:57:28',	'2019-01-30 22:57:28'),
+('sap_username',	'',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_password',	'',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_sales_order_url',	'http://akshaycrm.com/sap_integration/service.php',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_sales_quote_url',	'http://akshaycrm.com/sap_integration/service.php',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46'),
+('sap_connection_parameter_url',	'http://akshaycrm.com/sap_integration/service.php',	'sap_integration',	1,	0,	'2019-01-30 22:44:46',	'2019-01-30 22:44:46');
+
+
+ALTER TABLE `targets`
+ADD `start_date` datetime NOT NULL AFTER `description`,
+ADD `end_date` datetime NOT NULL AFTER `start_date`,
+ADD `is_current_status` tinyint NOT NULL COMMENT '1 - for current target ' AFTER `end_date`;
+
+ALTER TABLE `targets`
+CHANGE `start_date` `start_date` date NOT NULL AFTER `description`,
+CHANGE `end_date` `end_date` date NOT NULL AFTER `start_date`,
+CHANGE `is_current_status` `is_current_status` tinyint(4) NOT NULL COMMENT '1 - for current target  0 - for all previous targets' AFTER `end_date`;
+
+ALTER TABLE `targets`
+CHANGE `is_current_status` `is_current_target` tinyint(4) NOT NULL COMMENT '1 - for current target  0 - for all previous targets' AFTER `end_date`;
+
+DROP TABLE IF EXISTS `states`;
+CREATE TABLE `states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
+  `state_name` varchar(255) NOT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `states` (`id`, `country_id`, `state_name`, `created_at`, `created_by`) VALUES
+(1484,	105,	'Andaman and Nicobar Islands',	1399700193,	14),
+(1485,	105,	'Andhra Pradesh',	1399700193,	14),
+(1486,	105,	'Arunachal Pradesh',	1399700193,	14),
+(1487,	105,	'Assam',	1399700193,	14),
+(1488,	105,	'Bihar',	1399700193,	14),
+(1489,	105,	'Chandigarh',	1399700193,	14),
+(1490,	105,	'Chhattisgarh',	1399700193,	14),
+(1491,	105,	'Dadra and Nagar Haveli',	1399700193,	14),
+(1492,	105,	'Daman and Diu',	1399700193,	14),
+(1493,	105,	'Delhi',	1399700193,	14),
+(1494,	105,	'Goa',	1399700193,	14),
+(1495,	105,	'Gujarat',	1399700193,	14),
+(1496,	105,	'Haryana',	1399700193,	14),
+(1497,	105,	'Himachal Pradesh',	1399700193,	14),
+(1498,	105,	'Jammu and Kashmir',	1399700193,	14),
+(1499,	105,	'Jharkhand',	1399700193,	14),
+(1500,	105,	'Karnataka',	1399700193,	14),
+(1501,	105,	'Kerala',	1399700193,	14),
+(1502,	105,	'Lakshadweep',	1399700193,	14),
+(1503,	105,	'Madhya Pradesh',	1399700194,	14),
+(1504,	105,	'Maharashtra',	1399700194,	14),
+(1505,	105,	'Manipur',	1399700194,	14),
+(1506,	105,	'Meghalaya',	1399700194,	14),
+(1507,	105,	'Mizoram',	1399700194,	14),
+(1508,	105,	'Nagaland',	1399700194,	14),
+(1509,	105,	'Orissa',	1399700194,	14),
+(1510,	105,	'Pondicherry',	1399700194,	14),
+(1511,	105,	'Punjab',	1399700194,	14),
+(1512,	105,	'Rajasthan',	1399700194,	14),
+(1513,	105,	'Sikkim',	1399700194,	14),
+(1514,	105,	'Tamil Nadu',	1399700194,	14),
+(1515,	105,	'Tripura',	1399700194,	14),
+(1516,	105,	'Uttar Pradesh',	1399700194,	14),
+(1517,	105,	'Uttaranchal',	1399700194,	14),
+(1518,	105,	'West Bengal',	1399700194,	14),
+(4564,	105,	'Telangana',	1399700181,	14);
+
 -- meenesh region end
 
+-- 5-02-2019 - Feb region start
+
+ALTER TABLE `items`
+CHANGE `code` `code` varchar(200) NOT NULL AFTER `logo`;
+
+
+-- 5-02-2019 - Feb region end

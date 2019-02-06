@@ -689,7 +689,7 @@
                     <div class="form-group m-form__group row">
                             <label class="text-left col-lg-3 col-form-label"> <b>Super Admin Email</b> </label>
                             <div class="col-lg-9">
-                                <input type="text" id="account_name" name="account_name" required class="form-control m-input" placeholder="Super Admin Email ">
+                            <input type="text" id="account_name" name="account_name" required class="form-control m-input" placeholder="Super Admin Email ">
                             </div>                             
                     </div>
                     <div class="form-group m-form__group row">
@@ -697,9 +697,69 @@
                             <span class="all_theme_block col-lg-9 row">
                                 
                             </span>
-                                                         
                     </div>
-                
+                    <div class="form-group m-form__group row">
+                    <label class="text-left col-lg-3 col-form-label"> <b>Is SAP Configured</b> </label>
+                    <div class="col-lg-9">
+                        <select required class="form-control m-input" id="is_sap_connected" name="is_sap_connected">
+                            <option value="">Select Yes or No</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>                             
+                    </div>
+                    <span class="is_sap_configured display_none">
+                        <div class="form-group m-form__group row">
+                        <label class="text-left col-lg-3 col-form-label"> <b>SQL Server Type</b> </label>
+                        <div class="col-lg-3">
+                            <input type="text" id="sql_server_type" name="sql_server_type" class="form-control m-input" placeholder="SQL Server Type">
+                        </div>    
+                        <label class="text-right col-lg-3 col-form-label"> <b>SQL Server Name</b> </label>
+                        <div class="col-lg-3">
+                            <input type="text" id="sql_server_name" name="sql_server_name" class="form-control m-input" placeholder="SQL Server Name">
+                        </div>                           
+                    </div>
+                   
+                    <div class="form-group m-form__group row">
+                        <label class="text-left col-lg-3 col-form-label"> <b>SQL Userame</b> </label>
+                        <div class="col-lg-3">
+                            <input type="text" id="sql_username" name="sql_username" class="form-control m-input" placeholder="SQL Userame">
+                        </div>   
+                        <label class="text-right col-lg-3 col-form-label"> <b>SQL Password</b> </label>
+                        <div class="col-lg-3">
+                            <input type="text" id="sql_password" name="sql_password" class="form-control m-input" placeholder="SQL Password">
+                        </div>                          
+                    </div>
+                    
+                    <div class="form-group m-form__group row">
+                        <label class="text-left col-lg-3 col-form-label"> <b>SAP Username</b> </label>
+                        <div class="col-lg-3">
+                            <input type="text" id="sap_username" name="sap_username" class="form-control m-input" placeholder="SAP Username">
+                        </div>                             
+                        <label class="text-right col-lg-3 col-form-label"> <b>SAP Password</b> </label>
+                        <div class="col-lg-3">
+                            <input type="text" id="sap_password" name="sap_password" class="form-control m-input" placeholder="SAP Password">
+                        </div>                             
+                    </div>
+                     <div class="form-group m-form__group row">
+                        <label class="text-left col-lg-3 col-form-label"> <b>SAP Connection Parameter URL</b> </label>
+                        <div class="col-lg-9">
+                            <input type="text" id="sap_connection_parameter_url" name="sap_connection_parameter_url" class="form-control m-input" placeholder="SQL Connection Parameter URL">
+                        </div>                             
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <label class="text-left col-lg-3 col-form-label"> <b>SAP Sales Order URL</b> </label>
+                        <div class="col-lg-9">
+                            <input type="text" id="sap_sales_order_url" name="sap_sales_order_url" class="form-control m-input" placeholder="SAP Sales Order URL">
+                        </div>                             
+                    </div>
+                    <div class="form-group m-form__group row">
+                        <label class="text-left col-lg-3 col-form-label"> <b>SAP Sales Quote URL</b> </label>
+                        <div class="col-lg-9">
+                            <input type="text" id="sap_sales_quote_url" name="sap_sales_quote_url" class="form-control m-input" placeholder="SQL Sales Quote URL">
+                        </div>                             
+                    </div>
+                    </span>
                     </div>
                 </div>
                 <div class="modal-footer">
