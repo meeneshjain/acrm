@@ -85,6 +85,7 @@ function generate_email($sender_email,$template_key,$data){
         $suject = str_ireplace($key, $value, $subject);
         $mail_body = str_ireplace($key, $value, $mail_body);
     }
+
     send_mailer($sender_email,$subject,$mail_body,0);
 }
 
