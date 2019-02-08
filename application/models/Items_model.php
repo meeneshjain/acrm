@@ -9,7 +9,7 @@ class Items_model extends CI_Model {
 		$dt_table = "items as i";
 		$sort_column = array(false, true, true, false, false, false);
 		
-		$dt_columns = array( 'i.id', 'i.logo', 'i.code', 'i.name', 'i.type', 'i.unit', 'i.is_gst', 'i.created_date');
+		$dt_columns = array( 'i.id', 'i.logo', 'i.code', 'i.name', 'i.group_type', 'i.type', 'i.unit', 'i.is_gst', 'i.created_date');
 		
         //Pagination
 		if(isset($get_data['start']) && $get_data['length'] != '-1') {
@@ -90,6 +90,7 @@ class Items_model extends CI_Model {
 
         	$actn = '';
 
+        	$type = $aRow['group_type'];
         	if($type == "inventory"){
 	        	if(in_array('invitm_e',$items_permission)){
         			$actn .='<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';

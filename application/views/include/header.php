@@ -689,6 +689,19 @@ m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dro
                                     </ul>
                                 </div>
                             </li>
+
+                            <li class="m-menu__item <?php if(isset($active_sidemenu) && $active_sidemenu == "enquiryform")  { echo 'm-menu__item--active';  }  ?>" aria-haspopup="true" >
+                                <a  href="<?php echo base_url('enquiry_form'); ?>" class="m-menu__link ">
+                                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                                    <span class="m-menu__link-title">
+                                        <span class="m-menu__link-wrap">
+                                            <span class="m-menu__link-text">
+                                                Enquiry Form
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <!-- END: Aside Menu -->

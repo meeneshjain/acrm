@@ -14,36 +14,37 @@ class Enquiry_form extends CI_Controller {
     
     public function index() 
     {
-        $data['page_title'] = 'Account';
-        $data['breadcum_title'] = 'Account';
-        $data['active_sidemenu'] = "account";
-        $data['load_js'] = 'account';
-        $data['data_source'] = base_url('account/accountlist');
+        $data['page_title'] = 'Enquiry Form';
+        $data['breadcum_title'] = 'Enquiry Form';
+        $data['active_sidemenu'] = "enquiryform";
+        $data['load_js'] = 'enquiry';
+        $data['data_source'] = base_url('enquiry_form/enquirylist');
+
+        $companyId = $this->sessionData['company_id'];
+        $data['item_list'] = $this->common_model->customQueryArray("SELECT `id`, `name`, `code` FROM `items` WHERE `company_id` = '$companyId'");
 
         $this->load->view('include/header',$data);
-        $this->load->view('account',$data);
+        $this->load->view('enquiry',$data);
         $this->load->view('include/footer');
     }
 
-    public function accountlist()
+
+    public function enquirylist()
     {
         $account_permission = get_user_permission();
-
         $companyId = $this->sessionData['company_id'];
-        $response =  $this->common_model->get_datatable_json("enquiry_form as ef",array( 'ef.id', 'ef.organization', 'ef.organization_short_name', 'ef.account_manager', 'ef.initiated_by', 'ef.address','ef.state','ef.district','ef.district_code','ef.sub_location','ef.pincode','ef.web_address','ef.telephone','ef.email','ef.mobile','ef.order_expected', 'a.status'),array('is_deleted' => '0','company_id' => $companyId),"'id', 'DESC'");
+        $response =  $this->common_model->get_datatable_json("enquiry_form as ef",array( 'ef.id','ef.created_date','ef.organization','ef.account_manager','ef.mobile','ef.status'),array('is_deleted' => '0','company_id' => $companyId),"'id', 'DESC'");
 
-        //echo '<PRE>';print_r($response['data']);die;
 
 
         $row = array();
         foreach ($response['data'] as $key => $aRow) {
             
-            $row[$key][] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="acnt" id="acnt_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="acntchkbx"><span></span></label>';
-            $row[$key][] = $aRow['account_number'];
-            $row[$key][] = $aRow['name'];
-            $row[$key][] = $aRow['email_1'];
-            $row[$key][] = $aRow['contact_no_1'];
+            $row[$key][] = '<label class="m-checkbox m-checkbox--state-primary"><input type="checkbox" name="enquiry" id="enquiry_id_'.$aRow['id'].'" value="'.$aRow['id'].'" class="enquirychkbx"><span></span></label>';
             $row[$key][] = convert_db_date_time($aRow['created_date']);
+            $row[$key][] = $aRow['organization'];
+            $row[$key][] = $aRow['account_manager'];
+            $row[$key][] = $aRow['mobile'];
 
             if($aRow['status'] == '0'){ 
                 $row[$key][] = '<span class="m-badge m-badge--danger m-badge--wide changestats" data-id="'.$aRow['id'].'" data-status="'.$aRow['status'].'">Inactive</span>'; 
@@ -51,11 +52,11 @@ class Enquiry_form extends CI_Controller {
              
 
             $actn = '';
-            if(in_array('acnt_e',$account_permission)){
-                $actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_account" data-acnt-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+            $actn .= '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_enquiry" data-enquiry-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+                $actn .= ' <button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_enquiry" data-enquiry-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+            if(in_array('enquiry_e',$account_permission)){
             }
-            if(in_array('acnt_d',$account_permission)){
-                $actn .= ' <button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_account" data-acnt-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';
+            if(in_array('enquiry_d',$account_permission)){
             }
 
             $row[$key][] = $actn;
@@ -66,49 +67,52 @@ class Enquiry_form extends CI_Controller {
         die;
     }
 
-    public function add_update_account()
+    public function add_update_enquiry()
     {
         if($this->input->is_ajax_request())
         {
             $companyId = $this->sessionData['company_id'];
             $userId = $this->sessionData['logged_in'];
-            //echo '<pre>';print_r($this->input->post());die;
+
+            $item_list = array();
+
+            foreach ($_POST['item_ids'] as $key => $value) {
+                $item_list['items'][] = array('id'=>$value,'name'=>$_POST['item_names'][$key],'quantity'=>$_POST['item_quantity'][$key]);
+            }
 
             $data = array(
                             'company_id' => $companyId,
-                            'name' => $this->input->post('name'),
-                            'contact_no_1' => $this->input->post('contact_no_1'),
-                            'contact_no_2' => $this->input->post('contact_no_2'),
-                            'email_1' => $this->input->post('email_1'),
-                            'email_2' => $this->input->post('email_2'),
+                            'organization' => $this->input->post('organization'),
+                            'organization_short_name' => $this->input->post('organization_short_name'),
+                            'account_manager' => $this->input->post('account_manager'),
+                            'initiated_by' => $this->input->post('initiated_by'),
+                            'web_address' => $this->input->post('web_address'),
+                            'order_expected' => $this->input->post('order_expected'),
+                            'state' => $this->input->post('state'),
                             'address' => $this->input->post('address'),
-                            'description' => $this->input->post('description'),
+                            'email' => $this->input->post('email'),
+                            'mobile' => $this->input->post('mobile'),
+                            'enquiry_items' => json_encode($item_list,true),
                             'status' => '1',
                             'is_deleted' => '0',
                         );
-            //print_r($this->input->post());die;
             if(isset($_POST['id']) && !empty($_POST['id']))
             {
-                $data['updated_by'] = $userId;
-                $data['updated_date'] = DATETIME;
+                $data['created_by'] = $userId;
+                $data['modified_date'] = DATETIME;
                 $where = array('id' => $this->input->post('id'));
-                $this->common_model->update_data('account',$data,$where);
-                echo json_encode(array("status" => "success","message" => 'Account Updated Successfully', "data" => ""));
+                $this->common_model->update_data('enquiry_form',$data,$where);
+                echo json_encode(array("status" => "success","message" => 'Enquiry Updated Successfully', "data" => ""));
             }
             else
             {
                 $data['created_by'] = $userId;
                 $data['created_date'] = DATETIME;
-                $result = $this->common_model->insert('account', $data);
+                $result = $this->common_model->insert('enquiry_form', $data);
                 $account_id = $this->db->insert_id();
-
-                $code = "ACNT".str_pad($account_id, 6, '0', STR_PAD_LEFT);
-                $where = array('id' => $account_id);
-                $this->common_model->update_data('account',array('account_number'=>$code),$where);
-                echo json_encode(array("status" => "success","message" => 'Account Added Successfully.', "data" => $result));
+                echo json_encode(array("status" => "success","message" => 'Enquiry Added Successfully.', "data" => $result));
             }
             die;
-
         }
         else
         {
@@ -116,7 +120,7 @@ class Enquiry_form extends CI_Controller {
         }
     }
 
-    public function edit_account()
+    public function edit_enquiry()
     {
         if($this->input->is_ajax_request())
         {
@@ -125,12 +129,12 @@ class Enquiry_form extends CI_Controller {
             if(is_numeric($id) && !empty($id))
             {
                 $userId = $this->sessionData['logged_in'];
-                $data = $this->common_model->getdata($selected = 'id,account_number,name,contact_no_1,contact_no_2,email_1,email_2,description,address,status,created_date','account', $where = array('id' => $id,'company_id' => $companyId), $limit = false, $offset = false, $orderby=false);
+                $data = $this->common_model->getdata($selected = 'id, organization, organization_short_name, account_manager, initiated_by, address, state, web_address, email, mobile, order_expected, enquiry_items, created_by','enquiry_form', $where = array('id' => $id,'company_id' => $companyId), $limit = false, $offset = false, $orderby=false);
                 echo json_encode(array("status" => "success","message" => '', "data" => $data));
             }
             else
             {
-                echo json_encode(array("status" => "error","message" => 'Account Id doesn\'t exist.', "data" => ""));
+                echo json_encode(array("status" => "error","message" => 'Enquiry Id doesn\'t exist.', "data" => ""));
             }
         }
         else
@@ -139,7 +143,7 @@ class Enquiry_form extends CI_Controller {
         }
     }
 
-    public function delete_account()
+    public function delete_enquiry()
     {
         if($this->input->is_ajax_request())
         {
@@ -147,12 +151,12 @@ class Enquiry_form extends CI_Controller {
             if(is_numeric($id) && !empty($id))
             {
                 $data = array('is_deleted' => '1','updated_date' => DATETIME);
-                $res_data = $this->common_model->update_data('account',$data,array('id' => $id));
-                echo json_encode(array("status" => "success","message" => 'Account Deleted Successfully!!', "data" => ''));
+                $res_data = $this->common_model->update_data('enquiry_form',$data,array('id' => $id));
+                echo json_encode(array("status" => "success","message" => 'Enquiry Deleted Successfully!!', "data" => ''));
             }
             else
             {
-                echo json_encode(array("status" => "error","message" => 'Account Id doesn\'t exist.', "data" => ""));
+                echo json_encode(array("status" => "error","message" => 'Enquiry Id doesn\'t exist.', "data" => ""));
             }
         }
         else
@@ -161,7 +165,7 @@ class Enquiry_form extends CI_Controller {
         }
     }
 
-    public function multiple_delete_account(){
+    public function multiple_delete_enquiry(){
         if($this->input->is_ajax_request())
         {
             $get_data = $this->input->get('ids', TRUE);
@@ -172,13 +176,13 @@ class Enquiry_form extends CI_Controller {
                 foreach ($ids as $key => $value) 
                 {
                     $data = array('is_deleted' => '1','updated_date' => DATETIME);
-                    $res_data = $this->common_model->update_data('account',$data,array('id' => $value));
+                    $res_data = $this->common_model->update_data('enquiry_form',$data,array('id' => $value));
                 }
-                echo json_encode(array("status" => "success","message" => 'Account Deleted Successfully!!', "data" => ''));
+                echo json_encode(array("status" => "success","message" => 'Enquiry Deleted Successfully!!', "data" => ''));
             }
             else
             {
-                echo json_encode(array("status" => "error","message" => 'Account Id doesn\'t exist.', "data" => ""));
+                echo json_encode(array("status" => "error","message" => 'Enquiry Id doesn\'t exist.', "data" => ""));
             }
         }
         else
