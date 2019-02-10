@@ -64,7 +64,6 @@
 <script src="<?php echo base_url('assets/demo/default/custom/form-parsley/parsley.js'); ?>?q=<?php echo time();?>"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/components/base/bootstrap-notify.js'); ?>?q=<?php echo time();?>"></script>
 
-<script src="<?php echo base_url('assets/app/js/dashboard.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>
 <script src="<?php echo base_url('assets/demo/default/custom/uploadifive/uploadifive.min.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>
 
 <script src="<?php echo base_url('assets/demo/default/custom/sidebar_activities.js'); ?>?q=<?php echo time();?>" type="text/javascript"></script>

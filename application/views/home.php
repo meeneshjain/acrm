@@ -220,19 +220,19 @@
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-accent"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    37% Sport Tickets
+                                                    My Target - <span class="my_target_box">15</span> 
                                                 </span>
                                             </div>
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-warning"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    47% Business Events
+                                                    Teams Target - <span class="team_target_box">25</span> 
                                                 </span>
                                             </div>
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-brand"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    19% Others
+                                                    Total Target - <span class="team_target_box">40</span> 
                                                 </span>
                                             </div>
                                         </div>
