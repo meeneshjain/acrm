@@ -196,6 +196,17 @@ class Sales_model extends CI_Model {
 		$res  = $this->db->insert('sales_order',$insert_data_hdr);
 		if($res){
 			$sales_order_id = $this->db->insert_id();
+
+			if($type == 'sales_order'){
+				$company_user_detail = $this->db->query("SELECT uc.`email`, c.company_name FROM `users` as uc LEFT JOIN companies as c ON  c.id = company_id WHERE `user_role_id` = '1' AND `company_id` = '".$post_data['company_id']."'")->row();
+				$mail_var = array(
+		            "{{company_name}}" => $company_name['company_name'],
+		            "{{base_url}}" => base_url(),
+		            "{{employee_name}}" => $post_data['sales_employee'],
+		        );
+				generate_email($company_user_detail['email'],'sales_order_generated',$mail_var);
+			}
+
 			if($post_data['status'] == "negotiation"){
 				if(isset($post_data['is_new_revision']) && $post_data['is_new_revision']!=""){
 					$insert_data_revision = array(
@@ -316,9 +327,6 @@ class Sales_model extends CI_Model {
 				}
 			}
 		}
-		
-		
-	
 	}
 	
 	function get_sales_details($id){

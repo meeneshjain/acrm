@@ -331,6 +331,9 @@ function get_all_users(){
 	return generate_drop_down('id', "CONCAT(first_name,' ',last_name,' (',username,')')", 'users', 'html','');
 }
 
+function get_states(){
+	return generate_drop_down('id', "name", 'state', 'html','');
+}
 
 function active_inactive_dp($type="html", $selectedstats = null ){
 	$array = array(
@@ -390,7 +393,8 @@ function load_required_js($page_name){
 		"contact" => array('contact.js'),
 		"lead" => array('lead.js'),
 		"opportunity" => array('opportunity.js'),
-		"target" => array('target.js')
+		"target" => array('target.js'),
+		"enquiry" => array('enquiry.js')
 	);
 	return $js_list[$page_name];
 }
