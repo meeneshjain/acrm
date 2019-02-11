@@ -851,5 +851,76 @@ INSERT INTO `states` (`id`, `country_id`, `state_name`, `created_at`, `created_b
 ALTER TABLE `items`
 CHANGE `code` `code` varchar(200) NOT NULL AFTER `logo`;
 
+/* Manish */
+DROP TABLE IF EXISTS `enquiry_form`;
+CREATE TABLE `enquiry_form` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_id` int(11) NOT NULL,
+  `organization` varchar(100) NOT NULL,
+  `organization_short_name` varchar(50) NOT NULL,
+  `account_manager` varchar(100) NOT NULL,
+  `initiated_by` varchar(100) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `state` int(11) NOT NULL,
+  `web_address` varchar(100) NOT NULL,
+  `telephone` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mobile` varchar(50) NOT NULL,
+  `order_expected` date NOT NULL,
+  `enquiry_items` longtext NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `is_deleted` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `state`;
+CREATE TABLE `state` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `state` (`id`, `country_id`, `name`, `status`) VALUES
+(1, 1,  'ANDHRA PRADESH', 1),
+(2, 1,  'ASSAM',  1),
+(3, 1,  'ARUNACHAL PRADESH',  1),
+(4, 1,  'BIHAR',  1),
+(5, 1,  'GUJRAT', 1),
+(6, 1,  'HARYANA',  1),
+(7, 1,  'HIMACHAL PRADESH', 1),
+(8, 1,  'JAMMU & KASHMIR',  1),
+(9, 1,  'KARNATAKA',  1),
+(10,  1,  'KERALA', 1),
+(11,  1,  'MADHYA PRADESH', 1),
+(12,  1,  'MAHARASHTRA',  1),
+(13,  1,  'MANIPUR',  1),
+(14,  1,  'MEGHALAYA',  1),
+(15,  1,  'MIZORAM',  1),
+(16,  1,  'NAGALAND', 1),
+(17,  1,  'ORISSA', 1),
+(18,  1,  'PUNJAB', 1),
+(19,  1,  'RAJASTHAN',  1),
+(20,  1,  'SIKKIM', 1),
+(21,  1,  'TAMIL NADU', 1),
+(22,  1,  'TRIPURA',  1),
+(23,  1,  'UTTAR PRADESH',  1),
+(24,  1,  'WEST BENGAL',  1),
+(25,  1,  'DELHI',  1),
+(26,  1,  'GOA',  1),
+(27,  1,  'PONDICHERY', 1),
+(28,  1,  'LAKSHDWEEP', 1),
+(29,  1,  'DAMAN & DIU',  1),
+(30,  1,  'DADRA & NAGAR',  1),
+(31,  1,  'CHANDIGARH', 1),
+(32,  1,  'ANDAMAN & NICOBAR',  1),
+(33,  1,  'UTTARANCHAL',  1),
+(34,  1,  'JHARKHAND',  1),
+(35,  1,  'CHATTISGARH',  1);
+
+/* /Manish*/
 -- 5-02-2019 - Feb region end
