@@ -210,7 +210,7 @@
                                 <div class="row  align-items-center">
                                     <div class="col">
                                         <div id="m_chart_profit_share" class="m-widget14__chart" style="height: 160px">
-                                            <div class="m-widget14__stat">
+                                            <div class="m-widget14__stat total_target_box">
                                                 45
                                             </div>
                                         </div>
@@ -232,7 +232,7 @@
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-brand"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    Total Target - <span class="team_target_box">40</span> 
+                                                    Total Target - <span class="total_target_box">40</span> 
                                                 </span>
                                             </div>
                                         </div>
@@ -740,7 +740,8 @@
 </div>
 
 <script>
-  
+   var get_company_list = 0;
+    var get_rm_list = 0;
   <?php if($is_super_admin == 1){ ?>
     var get_company_list = 1;
     var get_rm_list = 0;

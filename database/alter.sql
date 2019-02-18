@@ -851,6 +851,12 @@ INSERT INTO `states` (`id`, `country_id`, `state_name`, `created_at`, `created_b
 ALTER TABLE `items`
 CHANGE `code` `code` varchar(200) NOT NULL AFTER `logo`;
 
+UPDATE `system_settings` SET `sys_value` = 'http://sap.akshay.com:8090/CRMService/CRM/AddSalesOrder' WHERE `id` = '12';
+UPDATE `system_settings` SET `sys_value` = 'http://sap.akshay.com:8090/CRMService/CRM/AddSalesQuotation' WHERE `id` = '13';
+UPDATE `system_settings` SET `sys_value` = 'http://akshaycrm.com/sap_integration/service.php' WHERE `id` = '14';
+
+-- meenesh 
+
 /* Manish */
 DROP TABLE IF EXISTS `enquiry_form`;
 CREATE TABLE `enquiry_form` (

@@ -148,5 +148,40 @@ class Home extends CI_Controller {
 	}
 	
 	
+	public function testsap_service(){
+		$settings = get_global_settings();
+		if($settings['is_sap_connected'] == 1 ){
+			$url = $settings['sap_sales_quote_url'];
+			
+			$url = $settings['sap_sales_order_url'];
+			
+			$ch = curl_init( $url );
+			$data = array(
+				"E_Mail"=> "swapnil@akshay.com",
+				"PaymentTerm"=> "Net-45",
+				"ItemDesctripion"=> array(
+					"0" => array("ItemCode" => "421520", "Quantity" => "2", "PriceBefDisc" => "350000",  "Discount" => "10"),
+					"1" => array("ItemCode" => "421613", "Quantity" => "2", "PriceBefDisc" => "350000",  "Discount" => "10"),
+				),
+			);
+			$submit_data = array( "SODetails"=> ($data) );
+			// print_r(json_encode($submit_data)); die;
+			$payload = json_encode( $submit_data );
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			$response = curl_exec($ch);
+			curl_close($ch);
+			echo $response;
+			/* $output = json_decode($response, true);
+			if(is_array($output)){
+				echo $response;
+			} else {
+				echo 0;
+			} */
+		}
+	}
+	
+	
 
 }

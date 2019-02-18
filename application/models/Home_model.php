@@ -161,7 +161,7 @@ class Home_model extends CI_Model {
 				$array_user_id = explode(",", $get_reporto_user_res);
 				$array_user_id = array_push($array_user_id, $current_user_id);	
 				
-			   $company_user_id =  implode(",", $array_user_id);
+			   $company_user_id =  (is_array($array_user_id)) ? implode(",", $array_user_id) : $array_user_id;
 			   $so_extra_where = " AND company_id = '$logged_in_company' AND  sales_employee IN ('$company_user_id')";
 			   $contact_lead_extra_where = " AND company_id = '$logged_in_company' AND owner_id IN ('$company_user_id')";
 				 

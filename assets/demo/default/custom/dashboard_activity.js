@@ -106,6 +106,12 @@ function target_vs_achievement_report(current_user_id = null) {
     call_service(base_url + "home/target_vs_achivement_report/" + current_user_id, function (res) {
         if (res['status'] == 'success') {
             console.log(res);
+            $(".target_type_section").html(res.data.target_type + '(' + res.data.target_duration + ')');
+            $(".target_cost_section").html(res.data.target_cost);
+            $(".target_completed_section").html(res.data.target_completed);
+            $(".my_target_box").html(res.data.personal_current_month_target);
+            $(".team_target_box").html(res.data.team_current_month_target);
+            $(".total_target_box").html(res.data.total_current_month_target);
             $(".target_vs_achievement_block").removeClass('display_none');
             $(".target_vs_achivement_loader").addClass('display_none');
             $(".blank_div_heading").addClass('display_none');
@@ -254,7 +260,7 @@ function target_vs_achievement_google_chart() {
                 }), e.element.animate(a, !1)
             }
         }), e.on("created", function () {
-            //  window.__anim21278907124 && (clearTimeout(window.__anim21278907124), window.__anim21278907124 = null), window.__anim21278907124 = setTimeout(e.update.bind(e), 10)
+            window.__anim21278907124 && (clearTimeout(window.__anim21278907124), window.__anim21278907124 = null), window.__anim21278907124 = setTimeout(e.update.bind(e), 3e3)
         })
     }
 }
