@@ -146,6 +146,11 @@ class Target extends CI_Controller {
             //echo '<pre>';print_r($this->input->post());die;
 
             //print_r($this->input->post());die;
+
+            
+            //$check_exist_target = 
+
+
             if(isset($_POST['id']) && !empty($_POST['id']))
             {
                 $data['target_title'] = $this->input->post('trgt_name');
@@ -164,13 +169,19 @@ class Target extends CI_Controller {
                 $data['target_type'] = $this->input->post('trgt_type');
                 $data['target'] = $this->input->post('trgt_target');
                 $data['description'] = $this->input->post('trgt_description');
+                $data['start_date'] = $this->input->post('trgt_start_date');
+                $data['end_date'] = $this->input->post('trgt_end_date');
                 $data['company_id'] = $companyId;
+                $data['is_current_target'] = 1;
                 $data['assign_to_user_id'] = $this->input->post('trgt_user_id');
                 $data['report_to_user_id'] = $userId;
                 $data['status'] = '1';
                 $data['is_deleted'] = '0';
                 $data['created_by'] = $userId;
                 $data['created_date'] = DATETIME;
+
+                //echo '<pre>';print_r($data);die;
+                $this->common_model->update_data('targets', array('is_current_target' => '0'),array('assign_to_user_id' => $this->input->post('trgt_user_id')));
                 $result = $this->common_model->insert('targets', $data);
                 //$account_id = $this->db->insert_id();
                 echo json_encode(array("status" => "success","message" => 'Target Added Successfully.', "data" => ""));
@@ -223,12 +234,17 @@ class Target extends CI_Controller {
                             'target_title' => $this->input->post('title')[$key],
                             'target_duration_id' => $this->input->post('target_duration'),
                             'target_type' => $this->input->post('target_type'),
+                            'start_date' => $this->input->post('start_date'),
+                            'is_current_target' => 1,
+                            'end_date' => $this->input->post('end_date'),
                             'target' => $this->input->post('target')[$key],
                             'status' => '1',
                             'is_deleted' => '0',
                             'created_by' => $userId,
                             'created_date' => DATETIME
                         );
+                        //echo '<pre>';print_r($data);die;
+                        $this->common_model->update_data('targets', array('is_current_target' => '0'),array('assign_to_user_id' => $value));
                         $result = $this->common_model->insert('targets', $data);
                     }
                 }
@@ -242,11 +258,11 @@ class Target extends CI_Controller {
 
             //echo $result;
             echo json_encode(array("status" => "success","message" => 'Target Added Successfully.', "data" => $result));die;
-            //echo '<pre>';print_r($data);
+            /*echo '<pre>';print_r($data);
             echo '<pre>';print_r($this->input->post());die;
             $companyId = $this->sessionData['company_id'];
             $userId = $this->sessionData['logged_in'];
-            //echo '<pre>';print_r($this->input->post());die;
+            echo '<pre>';print_r($this->input->post());die;
 
             $data = array(
                             'company_id' => $companyId,
@@ -257,7 +273,7 @@ class Target extends CI_Controller {
                             'product' => $this->input->post('trgt_product'),
                             'description' => $this->input->post('trgt_description'),
                         );
-            //print_r($this->input->post());die;
+            print_r($this->input->post());die;
             if(isset($_POST['id']) && !empty($_POST['id']))
             {
                 $data['updated_by'] = $userId;
@@ -277,7 +293,7 @@ class Target extends CI_Controller {
                 $account_id = $this->db->insert_id();
                 echo json_encode(array("status" => "success","message" => 'Target Added Successfully.', "data" => $result));
             }
-            die;
+            die;*/
         }
         else
         {

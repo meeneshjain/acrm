@@ -98,7 +98,8 @@ class Target_model extends CI_Model {
     {
     	$roleArray = array('1' => 'ADMIN','2' => 'REGIONAL MANAGER','3'=>'TEAM LEADER','4' => 'USER');
     	$data['role'] = $roleArray[$user_role_id];
-    	$data['target'] = $this->db->query("SELECT t.id,t.target_title,t.target_type,t.target,t.target_left,t.target_duration_id,td.name,td.in_days FROM targets as t,target_duration as td WHERE t.target_duration_id = td.id AND assign_to_user_id = '".$userId."'")->result_array();
+    	$data['target'] = $this->db->query("SELECT t.id,t.target_title,t.target_type,t.target,t.target_left,t.target_duration_id,t.start_date,t.end_date,td.name,td.in_days FROM targets as t,target_duration as td WHERE t.target_duration_id = td.id AND is_current_target = '1' AND t.end_date >= now() AND assign_to_user_id = '".$userId."'")->result_array();
+    	//echo $this->db->last_query();
     	return $data;
     }
 
@@ -110,7 +111,7 @@ class Target_model extends CI_Model {
         foreach ($data as $key => $value) 
         {
         	$data[$key]['reported_users'] = $this->db->query("SELECT COUNT(`id`) as count FROM `users` WHERE `reports_to_user_id` = '".$value['id']."'")->row()->count;
-        	$data[$key]['target'] = $this->db->query("SELECT t.id,t.target_title,t.target_type,t.target,t.amount,t.product,td.name,td.in_days FROM targets as t,target_duration as td WHERE t.target_duration_id = td.id AND assign_to_user_id = '".$value['id']."'")->result_array();
+        	$data[$key]['target'] = $this->db->query("SELECT t.id,t.target_title,t.target_type,t.target,t.amount,t.product,td.name,td.in_days FROM targets as t,target_duration as td WHERE t.target_duration_id = td.id AND is_current_target = '1' AND t.end_date >= now() AND assign_to_user_id = '".$value['id']."'")->result_array();
         }
         //echo '<PRE>';print_r($data);die;
         return $data;

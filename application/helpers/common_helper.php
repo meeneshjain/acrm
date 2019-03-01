@@ -124,6 +124,8 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 	$obj->load->database();
 	if($table == 'users'){
 		$query = $obj->db->query("SELECT $value, $text FROM $table WHERE `id` !='".$obj->session->userdata('logged_in')."'");
+	}else if($table == 'target_duration'){
+		$query = $obj->db->query("SELECT $value, $text FROM $table WHERE `is_deleted` ='0'");
 	}else{
 		$query = $obj->db->query("SELECT $value, $text FROM $table");
 	}
@@ -660,7 +662,7 @@ function add_notification($type,$r_id,$title,$message,$added_by,$added_for)
 }
 
 function expire_license(){
-	$expire_date = strtotime("2019-02-20");
+	$expire_date = strtotime("2020-02-20");
 	if(strtotime("now") > $expire_date){
 		echo '<h2> Your License has Expired </h2>';
 		die;

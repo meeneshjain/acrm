@@ -39,7 +39,7 @@
                                                     Target Assign
                                                 </span>
                                                 <span class="m-widget6__text m--font-boldest m--font-brand">
-                                                    : <?php echo $my_target['target'][0]['target']-$my_target['target'][0]['target_left'];?>
+                                                    : <?php echo $my_target['target'][0]['target_left'];?>
                                                 </span>
                                             </div>
                                             <div class="m-widget6__item">
@@ -47,7 +47,7 @@
                                                     Target Left
                                                 </span>
                                                 <span class="m-widget6__text m--font-boldest m--font-brand">
-                                                    : <?php echo $my_target['target'][0]['target_left'];?>
+                                                    : <?php echo $my_target['target'][0]['target']-$my_target['target'][0]['target_left'];?>
                                                 </span>
                                             </div>
                                         </div>
@@ -80,6 +80,8 @@
                             <input type="hidden" name="my_target_id" value="<?php echo $my_target['target'][0]['id'];?>">
                             <input type="hidden" id="total_target_value" name="total_target" value="<?php echo $my_target['target'][0]['target'];?>">
                             <input type="hidden" name="target_left" value="<?php echo $my_target['target'][0]['target_left'];?>">
+                            <input type="hidden" name="start_date" value="<?php echo $my_target['target'][0]['start_date'];?>">
+                            <input type="hidden" name="end_date" value="<?php echo $my_target['target'][0]['end_date'];?>">
                             <input type="hidden" id="target_type" name="target_type" value="<?php echo $my_target['target'][0]['target_type'];?>">
                             <input type="hidden" name="target_duration" value="<?php echo $my_target['target'][0]['target_duration_id'];?>">
                             <table class="m-datatable m-table--head-bg-brand" width="100%">

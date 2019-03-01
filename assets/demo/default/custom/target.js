@@ -28,6 +28,18 @@ $(document).ready(function () {
 		$("#rm_trgt_modal").modal('show');
 		$("#trgt_type,#trgt_duration").removeAttr('disabled');
 
+		$("#trgt_start_date,#trgt_end_date").datepicker({
+                                todayHighlight: !0,
+                                orientation: "bottom left",
+                                templates: {
+                                    leftArrow: '<i class="la la-angle-left"></i>',
+                                    rightArrow: '<i class="la la-angle-right"></i>'
+                                },
+                                format: "yyyy-mm-dd",
+                                autoclose: !0,
+                                minDate:!0,
+                            });;
+
 		$("#rm_trgt_form").attr('action', base_url + 'target/add_update_target')
 		$(".rm_trgt_modal_heading").html('ADD NEW TARGET');
 		$("#rm_trgt_action_btn").html('<i class="fa fa-save"></i> Save');
@@ -59,6 +71,7 @@ $(document).ready(function () {
 
 	// EDIT DETAIL FOR RM
 	$(".target_view_data").on("click",".rm_edit_trgt", function (e) {
+		$("#trgt_start_date,#trgt_end_date").datepicker("destroy");;
 		var id = $(this).attr('data-trgt-id');
 		$("#rm_trgt_form").parsley().reset();
 		call_service(base_url + 'target/edit_target/' + id,
@@ -76,8 +89,11 @@ $(document).ready(function () {
 					$("#trgt_duration").val(res.data[0].target_duration_id);
 					$("#trgt_type").val(res.data[0].target_type);
 					$("#trgt_target").val(res.data[0].target);
+					$("#trgt_start_date").val(res.data[0].start_date);
+					$("#trgt_end_date").val(res.data[0].end_date);
 					$("#trgt_description").val(res.data[0].description);
 				
+
 					$("#trgt_type,#trgt_duration").attr('disabled','disabled');
 
 					// IS used for check not less than assigned target

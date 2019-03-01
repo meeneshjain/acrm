@@ -150,11 +150,25 @@
                                                     </div> 
                                                 </div>
                                                 <div class="form-group m-form__group row">
+                                                    <div class="col-lg-6">
+                                                        <label>
+                                                            Start Date
+                                                        </label>
+                                                        <input type="text" readonly required id="trgt_start_date" name="trgt_start_date" class="form-control m-input trgt_datepicker" placeholder="Start Date">
+                                                    </div>
+                                                    <div class="col-lg-6" id="trgt_type_amount">
+                                                        <label>
+                                                           End Date
+                                                        </label>
+                                                        <input type="text" readonly required id="trgt_end_date" name="trgt_end_date" class="form-control m-input trgt_datepicker" placeholder="End Date">
+                                                    </div> 
+                                                </div>
+                                                <div class="form-group m-form__group row">
                                                     <div class="col-lg-12">
                                                         <label>
                                                             Description
                                                         </label>
-                                                        <textarea class="form-control m-input" id="trgt_description" name="trgt_description"></textarea>
+                                                        <textarea class="form-control m-input" id="trgt_description" name="trgt_description" placeholder="description"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,3 +185,16 @@
                                 </div>
                             </div>
                         </div>
+                        <script type="text/javascript">
+                            /*$(".trgt_datepicker").datepicker({
+                                todayHighlight: !0,
+                                orientation: "bottom left",
+                                templates: {
+                                    leftArrow: '<i class="la la-angle-left"></i>',
+                                    rightArrow: '<i class="la la-angle-right"></i>'
+                                },
+                                format: "yyyy-mm-dd",
+                                autoclose: !0,
+                                minDate:0,
+                            });*/
+                        </script>
