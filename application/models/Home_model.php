@@ -161,7 +161,7 @@ class Home_model extends CI_Model {
 				$array_user_id = explode(",", $get_reporto_user_res);
 				$array_user_id = array_push($array_user_id, $current_user_id);	
 				
-			   $company_user_id =  implode(",", $array_user_id);
+			   $company_user_id =  (is_array($array_user_id)) ? implode(",", $array_user_id) : $array_user_id;
 			   $so_extra_where = " AND company_id = '$logged_in_company' AND  sales_employee IN ('$company_user_id')";
 			   $contact_lead_extra_where = " AND company_id = '$logged_in_company' AND owner_id IN ('$company_user_id')";
 				 
@@ -181,6 +181,8 @@ class Home_model extends CI_Model {
 
 			$total_open_opportunity = "SELECT COUNT(id) as total_open_opportunity from contact_lead WHERE is_type = '2' and opp_sales_stage NOT IN (8,9) $contact_lead_extra_where";
 			$report_data['total_open_opportunity'] = $this->db->query($total_open_opportunity)->row()->total_open_opportunity;
+			
+			
 		}
 		
 		return $report_data;
@@ -246,8 +248,11 @@ class Home_model extends CI_Model {
 				 }
 				$array_user_id = explode(",", $get_reporto_user_res);
 				$array_user_id = array_push($array_user_id, $current_user_id);	
-				
-			   $company_user_id =  implode(",", $array_user_id);
+				if(is_array($array_user_id)){
+					$company_user_id =  implode(",", $array_user_id);
+				} else {
+					$company_user_id =  $array_user_id;
+				}
 			   $so_where = " AND so.company_id = '$logged_in_company' AND  sales_employee IN ('$company_user_id')";
 			   $sq_where = " AND so.company_id = '$logged_in_company' AND sales_employee IN ('$company_user_id')";
 			   
@@ -315,7 +320,7 @@ class Home_model extends CI_Model {
 		"total_current_month_target"=> 0,
 		];
 		
-		if($user_role_id == "1"){ // company admin 
+		// if($user_role_id == "1" || $user_role_id == "2" || $user_role_id == "3"){ // company admin 
 			$select_first_section = "SELECT t.assign_to_user_id, t.report_to_user_id, t.target_title, t.company_id, t.target_duration_id, t.target_type, t.amount, t.product, t.target, t.target_left, td.name as duration
 			FROM targets as t 
 			LEFT JOIN users as us ON us.id = t.assign_to_user_id 
@@ -331,18 +336,67 @@ class Home_model extends CI_Model {
 				$select_target_completed = "SELECT  so.id, so.type, so.company_id, SUM(so.total_amount) as sum_total_amount, so.other_charges, so.total_tax, so.discount, SUM(so.actual_total) as sum_actual_total, so.sales_employee_id, count(sales_order_id) as total_product
 				FROM sales_order as so
 				LEFT JOIN  sales_order_details as sod ON so.id = sod.sales_order_id
-				WHERE  so.type = 'ORDER'  ";
+				WHERE  so.type = 'ORDER' AND sales_employee_id ='$current_user_id' GROUP BY sales_employee_id ";
+				$select_target_res = $this->db->query($select_target_completed);
+				$achieve_complete = $select_target_res->row_array();
 				if($user_data['target_type'] == "amount"){
-					
-					$output_data['target_completed']  = $user_data['sum_actual_total'];
+					$output_data['target_completed']  = $achieve_complete['sum_actual_total'];
 				} else {
-					$output_data['target_completed']  = $user_data['total_product'];
+					$output_data['target_completed']  = $achieve_complete['total_product'];
 				}
 			}  
-		} else if($user_role_id == "2"){ // RM report
-		} else if($user_role_id == "3"){ // TL report 
-		} else if($user_role_id == "4"){ // user report 
-		}
+				
+			// target vs acheievement 6 months graph 
+			$x_axis = [];
+			$target_data = array("data"=> "", "columns"=> "", "target"=> "", "achievement"=> ""  );
+			for($i= 5; $i>=0; $i--){
+				$current_mmonth =  date('M', strtotime("-$i month"));
+				$start_date = date("Y-m-01", strtotime("-$i month"));
+				$end_date = date("Y-m-t", strtotime("-$i month"));
+				$my_targets = "SELECT id, assign_to_user_id, report_to_user_id, target_title, company_id, target_duration_id, target_type, amount, product, `target`, target_left, `description`, `start_date`, end_date, is_current_target FROM targets WHERE assign_to_user_id = '$current_user_id' AND (`start_date`  <=  '$start_date' AND  `end_date` >=  '$end_date' )"; 
+				$target_res = $this->db->query($my_targets);
+				
+				if($target_res->num_rows() > 0){
+					$current_target_data = $target_res->row_array();
+					$target = $current_target_data['target'];
+					if($current_target_data['target_duration_id'] == 4){
+						$target = $target/3;
+					}
+					 
+					$target_data['data'][$current_mmonth]["target_duration_id"] = $current_target_data['target_duration_id'];
+					$target_data['data'][$current_mmonth]["target_type"] = $current_target_data['target_type'];
+					$target_data['data'][$current_mmonth]["target"] = $target;
+					$target_data['data'][$current_mmonth]["target_left"] = $current_target_data['target_left'];
+					if($user_role_id == 4){
+						$target_data['target'][] = floatval($target);	
+					} else {
+						$target_data['target'][] = floatval($target_data['data'][$current_mmonth]["target_left"]);
+					}
+					
+					$achieve_query  = "SELECT  so.id, so.type, so.company_id, SUM(so.total_amount) as sum_total_amount, so.other_charges, so.total_tax, so.discount, SUM(so.actual_total) as sum_actual_total, so.sales_employee_id, count(sales_order_id) as total_product FROM sales_order as so LEFT JOIN  sales_order_details as sod ON so.id = sod.sales_order_id WHERE  so.type = 'ORDER' AND sales_employee_id ='$current_user_id' AND (`doc_date`  <=  '$start_date' AND  `doc_date` >=  '$end_date' )";
+					$achieve_res = $this->db->query($achieve_query);
+					if($achieve_res->num_rows() > 0){
+						$achieve_target_data = $achieve_res->row_array();
+						if($current_target_data['target_type'] == "amount"){
+							$target_data['data'][$current_mmonth]['target_completed']  = ($achieve_target_data['sum_actual_total']!="") ? $achieve_target_data['sum_actual_total'] : "0";
+						} else {
+							$target_data['data'][$current_mmonth]['target_completed']  = ($achieve_target_data['total_product']!="") ? $achieve_target_data['total_product'] : "0";
+						}
+						$target_data['achievement'][] = floatval($target_data['data'][$current_mmonth]['target_completed']);
+					}
+				} else {
+					$target_data['data'][$current_mmonth] = array("target_duration_id", "target_type", "target","target_left");
+					$target_data['target'][] = 0;
+					$target_data['achievement'][] = 0;
+				}
+				
+				$x_axis[] = $current_mmonth;
+			}
+			$target_data['columns'] = $x_axis;
+			$output_data['6_month_report'] = $target_data;
+			
+	
+		// }
 		return $output_data;
 	}
 	

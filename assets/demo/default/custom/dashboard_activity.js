@@ -1,5 +1,5 @@
 var global_error_msg = 'There was some error, please try again.';
-target_vs_achievement_google_chart();
+// target_vs_achievement_google_chart();
 $(document).ready(function () {
     $(".service_datatable").html('');
     if (get_rm_list == 1) {
@@ -10,7 +10,11 @@ $(document).ready(function () {
 
     setTimeout(function () {
         service_call_report();
+        if (current_user_id != 0) {
+            target_vs_achievement_report(current_user_id);
+        }
     }, 100);
+
 
     $(document).on("change", "#company_list", function () {
         var c_obj = $(this);
@@ -106,9 +110,17 @@ function target_vs_achievement_report(current_user_id = null) {
     call_service(base_url + "home/target_vs_achivement_report/" + current_user_id, function (res) {
         if (res['status'] == 'success') {
             console.log(res);
+            $(".target_type_section").html(res.data.target_type + '(' + res.data.target_duration + ')');
+            $(".target_cost_section").html(res.data.target_cost);
+            $(".target_completed_section").html(res.data.target_completed);
+            $(".my_target_box").html(res.data.personal_current_month_target);
+            $(".team_target_box").html(res.data.team_current_month_target);
+            $(".total_target_box").html(res.data.total_current_month_target);
             $(".target_vs_achievement_block").removeClass('display_none');
             $(".target_vs_achivement_loader").addClass('display_none');
             $(".blank_div_heading").addClass('display_none');
+            target_vs_achievement_highchart(res.data['6_month_report']);
+            my_target_pie_chart();
         } else {
             $(".target_vs_achivement_loader").addClass('display_none');
             $(".target_vs_achievement_block").addClass('display_none');
@@ -123,7 +135,109 @@ function target_vs_achievement_report(current_user_id = null) {
     });
 }
 
-function target_vs_achievement_google_chart() {
+function my_target_pie_chart() {
+    // load pie chart 
+    if (0 != $("#m_chart_profit_share").length) {
+        var e = new Chartist.Pie("#m_chart_profit_share", {
+            series: [{
+                value: 32,
+                className: "custom",
+                meta: {
+                    color: mApp.getColor("brand")
+                }
+            }, {
+                value: 32,
+                className: "custom",
+                meta: {
+                    color: mApp.getColor("accent")
+                }
+            }, {
+                value: 36,
+                className: "custom",
+                meta: {
+                    color: mApp.getColor("warning")
+                }
+            }],
+            labels: [1, 2, 3]
+        }, {
+                donut: !0,
+                donutWidth: 17,
+                showLabel: !1
+            });
+        e.on("draw", function (e) {
+            if ("slice" === e.type) {
+                var t = e.element._node.getTotalLength();
+                e.element.attr({
+                    "stroke-dasharray": t + "px " + t + "px"
+                });
+                var a = {
+                    "stroke-dashoffset": {
+                        id: "anim" + e.index,
+                        dur: 1e3,
+                        from: -t + "px",
+                        to: "0px",
+                        easing: Chartist.Svg.Easing.easeOutQuint,
+                        fill: "freeze",
+                        stroke: e.meta.color
+                    }
+                };
+                0 !== e.index && (a["stroke-dashoffset"].begin = "anim" + (e.index - 1) + ".end"), e.element.attr({
+                    "stroke-dashoffset": -t + "px",
+                    stroke: e.meta.color
+                }), e.element.animate(a, !1)
+            }
+        }), e.on("created", function () {
+            window.__anim21278907124 && (clearTimeout(window.__anim21278907124), window.__anim21278907124 = null), window.__anim21278907124 = setTimeout(e.update.bind(e), 3e3)
+        })
+    }
+}
+
+function target_vs_achievement_highchart(report_data) {
+    var chart_series = [];
+    Highcharts.chart('target_vs_achievement', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Target vs Achievement'
+        },
+        xAxis: {
+            categories: report_data.columns,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Achievement'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Target',
+            data: report_data.target
+
+        }, {
+            name: 'Achievement',
+            data: report_data.achievement
+
+        }]
+    });
+}
+
+/* function target_vs_achievement_google_chart() {
     var target_archievement = {
         init: function () {
             google.load("visualization", "1", {
@@ -136,55 +250,55 @@ function target_vs_achievement_google_chart() {
             var e;
             ! function () {
                 var e = new google.visualization.DataTable;
-                e.addColumn("timeofday", "Time of Day"), e.addColumn("number", "Motivation Level"), e.addColumn("number", "Energy Level"), e.addRows([
-                    [{
-                        v: [8, 0, 0],
-                        f: "8 am"
-                    }, 1, .25],
-                    [{
-                        v: [9, 0, 0],
-                        f: "9 am"
-                    }, 2, .5],
-                    [{
-                        v: [10, 0, 0],
-                        f: "10 am"
-                    }, 3, 1],
-                    [{
-                        v: [11, 0, 0],
-                        f: "11 am"
-                    }, 4, 2.25],
-                    [{
-                        v: [12, 0, 0],
-                        f: "12 pm"
-                    }, 5, 2.25],
-                    [{
-                        v: [13, 0, 0],
-                        f: "1 pm"
-                    }, 6, 3],
-                    [{
-                        v: [14, 0, 0],
-                        f: "2 pm"
-                    }, 7, 4],
-                    [{
-                        v: [15, 0, 0],
-                        f: "3 pm"
-                    }, 8, 5.25],
-                    [{
-                        v: [16, 0, 0],
-                        f: "4 pm"
-                    }, 9, 7.5],
-                    [{
-                        v: [17, 0, 0],
-                        f: "5 pm"
-                    }, 10, 10]
-                ]);
+                e.addColumn("timeofday", "Timeline"),
+                    e.addColumn("number", "Assigned Target"),
+                    e.addColumn("number", "Achieved Target"),
+                    e.addRows([
+                        [{ v: [8, 0, 0], f: "8" }, 1, .25],
+                        [{
+                            v: [9, 0, 0],
+                            f: "9"
+                        }, 2, .5],
+                        [{
+                            v: [10, 0, 0],
+                            f: "10"
+                        }, 3, 1],
+                        [{
+                            v: [11, 0, 0],
+                            f: "11"
+                        }, 4, 2.25],
+                        [{
+                            v: [12, 0, 0],
+                            f: "12"
+                        }, 5, 2.25],
+                        [{
+                            v: [13, 0, 0],
+                            f: "1"
+                        }, 6, 3],
+                        [{
+                            v: [14, 0, 0],
+                            f: "2"
+                        }, 7, 4],
+                        [{
+                            v: [15, 0, 0],
+                            f: "3"
+                        }, 8, 5.25],
+                        [{
+                            v: [16, 0, 0],
+                            f: "4"
+                        }, 9, 7.5],
+                        [{
+                            v: [17, 0, 0],
+                            f: "5"
+                        }, 10, 10]
+                    ]);
                 var a = {
                     width: 600,
                     height: 400,
-                    title: "Motivation and Energy Level Throughout the Day",
+                    title: "Targets Report",
                     focusTarget: "category",
                     hAxis: {
-                        title: "Time of Day",
+                        title: "Timeline",
                         format: "h:mm a",
                         viewWindow: {
                             min: [7, 30, 0],
@@ -192,28 +306,14 @@ function target_vs_achievement_google_chart() {
                         }
                     },
                     vAxis: {
-                        title: "Rating (scale of 1-10)"
+                        title: "Target Achieved"
                     }
                 };
-                new google.visualization.ColumnChart(document.getElementById("m_gchart_1")).draw(e, a)
-            }(), (e = new google.visualization.DataTable).addColumn("number", "Day"), e.addColumn("number", "Guardians of the Galaxy"), e.addColumn("number", "The Avengers"), e.addColumn("number", "Transformers: Age of Extinction"), e.addRows([
-                [1, 37.8, 80.8, 41.8],
-                [2, 30.9, 69.5, 32.4],
-                [3, 25.4, 57, 25.7],
-                [4, 11.7, 18.8, 10.5],
-                [5, 11.9, 17.6, 10.4],
-                [6, 8.8, 13.6, 7.7],
-                [7, 7.6, 12.3, 9.6],
-                [8, 12.3, 29.2, 10.6],
-                [9, 16.9, 42.9, 14.8],
-                [10, 12.8, 30.9, 11.6],
-                [11, 5.3, 7.9, 4.7],
-                [12, 6.6, 8.4, 5.2],
-                [13, 4.8, 6.3, 3.6],
-                [14, 4.2, 6.2, 3.4]
-            ])
+                new google.visualization.ColumnChart(document.getElementById("target_vs_achievement")).draw(e, a)
+            }()
 
         }
     };
     target_archievement.init();
 }
+ */

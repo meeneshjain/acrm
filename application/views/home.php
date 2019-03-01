@@ -180,9 +180,9 @@
                             <!--begin:: Widgets/Daily Sales-->
                             <div class="m-widget14">
                                 <div class="m-widget14__header">
-                                    <h3 class="m-widget14__title">
+                                   <!--  <h3 class="m-widget14__title">
                                         Daily Sales
-                                    </h3>
+                                    </h3> -->
                                    <!--  <span class="m-widget14__desc">
                                         Check out each collumn for more details
                                     </span> -->
@@ -191,7 +191,7 @@
                                     <canvas id="m_chart_daily_sales"></canvas>
                                 </div> -->
                                 <div class="m-portlet__body">
-								    <div id="m_gchart_1" ></div>
+								    <div id="target_vs_achievement" ></div>
                                 </div>
                             </div>
                             <!--end:: Widgets/Daily Sales-->
@@ -210,7 +210,7 @@
                                 <div class="row  align-items-center">
                                     <div class="col">
                                         <div id="m_chart_profit_share" class="m-widget14__chart" style="height: 160px">
-                                            <div class="m-widget14__stat">
+                                            <div class="m-widget14__stat total_target_box">
                                                 45
                                             </div>
                                         </div>
@@ -220,19 +220,19 @@
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-accent"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    37% Sport Tickets
+                                                    My Target - <span class="my_target_box">15</span> 
                                                 </span>
                                             </div>
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-warning"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    47% Business Events
+                                                    Teams Target - <span class="team_target_box">25</span> 
                                                 </span>
                                             </div>
                                             <div class="m-widget14__legend">
                                                 <span class="m-widget14__legend-bullet m--bg-brand"></span>
                                                 <span class="m-widget14__legend-text">
-                                                    19% Others
+                                                    Total Target - <span class="total_target_box">40</span> 
                                                 </span>
                                             </div>
                                         </div>
@@ -740,14 +740,20 @@
 </div>
 
 <script>
-  
-  <?php if($is_super_admin == 1){ ?>
-    var get_company_list = 1;
+   var get_company_list = 0;
     var get_rm_list = 0;
-    var current_company = 0;
+  <?php if($is_super_admin == 1){ ?>
+    get_company_list = 1;
+    get_rm_list = 0;
+    current_company = 0;
   <?php } else if($user_role_id == 1){ ?>
-    var get_company_list = 0;
-    var get_rm_list = 1;
+    get_company_list = 0;
+    get_rm_list = 1;
+    <?php }  ?>
+    
+    var current_user_id = 0;
+    <?php if($user_role_id == 2 || $user_role_id == 3 || $user_role_id == 4){ ?>
+        current_user_id = <?php echo get_current_user_id() ?>
     <?php } ?>
     
     <?php if($is_super_admin != 1){ ?>
