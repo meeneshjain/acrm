@@ -376,3 +376,7 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
     font-size: .99rem !important;
     font-weight: 600;
 }
+
+text.highcharts-credits {
+    display: none;
+}

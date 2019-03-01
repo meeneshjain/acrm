@@ -1,5 +1,5 @@
 var global_error_msg = 'There was some error, please try again.';
-target_vs_achievement_google_chart();
+// target_vs_achievement_google_chart();
 $(document).ready(function () {
     $(".service_datatable").html('');
     if (get_rm_list == 1) {
@@ -10,7 +10,11 @@ $(document).ready(function () {
 
     setTimeout(function () {
         service_call_report();
+        if (current_user_id != 0) {
+            target_vs_achievement_report(current_user_id);
+        }
     }, 100);
+
 
     $(document).on("change", "#company_list", function () {
         var c_obj = $(this);
@@ -115,6 +119,8 @@ function target_vs_achievement_report(current_user_id = null) {
             $(".target_vs_achievement_block").removeClass('display_none');
             $(".target_vs_achivement_loader").addClass('display_none');
             $(".blank_div_heading").addClass('display_none');
+            target_vs_achievement_highchart(res.data['6_month_report']);
+            my_target_pie_chart();
         } else {
             $(".target_vs_achivement_loader").addClass('display_none');
             $(".target_vs_achievement_block").addClass('display_none');
@@ -129,87 +135,8 @@ function target_vs_achievement_report(current_user_id = null) {
     });
 }
 
-function target_vs_achievement_google_chart() {
-    var target_archievement = {
-        init: function () {
-            google.load("visualization", "1", {
-                packages: ["corechart", "bar", "line"]
-            }), google.setOnLoadCallback(function () {
-                target_archievement.runDemos()
-            })
-        },
-        runDemos: function () {
-            var e;
-            ! function () {
-                var e = new google.visualization.DataTable;
-                e.addColumn("timeofday", "Timeline"), e.addColumn("number", "Assigned Target"), e.addColumn("number", "Achieved Target"), e.addRows([
-                    [{
-                        v: [8, 0, 0],
-                        f: "8"
-                    }, 1, .25],
-                    [{
-                        v: [9, 0, 0],
-                        f: "9"
-                    }, 2, .5],
-                    [{
-                        v: [10, 0, 0],
-                        f: "10"
-                    }, 3, 1],
-                    [{
-                        v: [11, 0, 0],
-                        f: "11"
-                    }, 4, 2.25],
-                    [{
-                        v: [12, 0, 0],
-                        f: "12"
-                    }, 5, 2.25],
-                    [{
-                        v: [13, 0, 0],
-                        f: "1"
-                    }, 6, 3],
-                    [{
-                        v: [14, 0, 0],
-                        f: "2"
-                    }, 7, 4],
-                    [{
-                        v: [15, 0, 0],
-                        f: "3"
-                    }, 8, 5.25],
-                    [{
-                        v: [16, 0, 0],
-                        f: "4"
-                    }, 9, 7.5],
-                    [{
-                        v: [17, 0, 0],
-                        f: "5"
-                    }, 10, 10]
-                ]);
-                var a = {
-                    width: 600,
-                    height: 400,
-                    title: "Targets Report",
-                    focusTarget: "category",
-                    hAxis: {
-                        title: "Timeline",
-                        format: "h:mm a",
-                        viewWindow: {
-                            min: [7, 30, 0],
-                            max: [17, 30, 0]
-                        }
-                    },
-                    vAxis: {
-                        title: "Tar\get Achieved"
-                    }
-                };
-                new google.visualization.ColumnChart(document.getElementById("m_gchart_1")).draw(e, a)
-            }()
-
-        }
-    };
-    target_archievement.init();
-
+function my_target_pie_chart() {
     // load pie chart 
-
     if (0 != $("#m_chart_profit_share").length) {
         var e = new Chartist.Pie("#m_chart_profit_share", {
             series: [{
@@ -264,3 +191,129 @@ function target_vs_achievement_google_chart() {
         })
     }
 }
+
+function target_vs_achievement_highchart(report_data) {
+    var chart_series = [];
+    Highcharts.chart('target_vs_achievement', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Target vs Achievement'
+        },
+        xAxis: {
+            categories: report_data.columns,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Achievement'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Target',
+            data: report_data.target
+
+        }, {
+            name: 'Achievement',
+            data: report_data.achievement
+
+        }]
+    });
+}
+
+/* function target_vs_achievement_google_chart() {
+    var target_archievement = {
+        init: function () {
+            google.load("visualization", "1", {
+                packages: ["corechart", "bar", "line"]
+            }), google.setOnLoadCallback(function () {
+                target_archievement.runDemos()
+            })
+        },
+        runDemos: function () {
+            var e;
+            ! function () {
+                var e = new google.visualization.DataTable;
+                e.addColumn("timeofday", "Timeline"),
+                    e.addColumn("number", "Assigned Target"),
+                    e.addColumn("number", "Achieved Target"),
+                    e.addRows([
+                        [{ v: [8, 0, 0], f: "8" }, 1, .25],
+                        [{
+                            v: [9, 0, 0],
+                            f: "9"
+                        }, 2, .5],
+                        [{
+                            v: [10, 0, 0],
+                            f: "10"
+                        }, 3, 1],
+                        [{
+                            v: [11, 0, 0],
+                            f: "11"
+                        }, 4, 2.25],
+                        [{
+                            v: [12, 0, 0],
+                            f: "12"
+                        }, 5, 2.25],
+                        [{
+                            v: [13, 0, 0],
+                            f: "1"
+                        }, 6, 3],
+                        [{
+                            v: [14, 0, 0],
+                            f: "2"
+                        }, 7, 4],
+                        [{
+                            v: [15, 0, 0],
+                            f: "3"
+                        }, 8, 5.25],
+                        [{
+                            v: [16, 0, 0],
+                            f: "4"
+                        }, 9, 7.5],
+                        [{
+                            v: [17, 0, 0],
+                            f: "5"
+                        }, 10, 10]
+                    ]);
+                var a = {
+                    width: 600,
+                    height: 400,
+                    title: "Targets Report",
+                    focusTarget: "category",
+                    hAxis: {
+                        title: "Timeline",
+                        format: "h:mm a",
+                        viewWindow: {
+                            min: [7, 30, 0],
+                            max: [17, 30, 0]
+                        }
+                    },
+                    vAxis: {
+                        title: "Target Achieved"
+                    }
+                };
+                new google.visualization.ColumnChart(document.getElementById("target_vs_achievement")).draw(e, a)
+            }()
+
+        }
+    };
+    target_archievement.init();
+}
+ */

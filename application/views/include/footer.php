@@ -11,7 +11,7 @@
 					</a>
 				</span>
 			</div>
-			<div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+			<!-- <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
 				<ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
 					<li class="m-nav__item">
 						<a href="#" class="m-nav__link">
@@ -26,7 +26,7 @@
 						</a>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </footer>
@@ -55,7 +55,10 @@
 
 <?php $uri = $this->uri->segment(2);
 	if($uri == "dashboard" || $uri == "index" || $uri == ""){ ?>
-	<script src="//www.google.com/jsapi" type="text/javascript"></script>
+	<!-- <script src="//www.google.com/jsapi" type="text/javascript"></script> -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script> -->
 <?php } ?>
 
 <!--end::Base Styles -->
