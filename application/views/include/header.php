@@ -1,5 +1,9 @@
 <?php 
 expire_license();
+if(empty(SYSTEM_LICENSE) && SYSTEM_LICENSE!=1){
+    echo '<h2> No License Found </h2>'; 
+    die;
+}
 $sesion_data = $this->session->userdata(); 
 $header_permission = get_user_permission();
 ?>

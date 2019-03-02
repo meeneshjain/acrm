@@ -104,6 +104,8 @@ define('POWERED_BY_FULL','Akshay Software Technologies Limited');
 define('COMPANY_LOGO','assets/images/company_logo.png');
 define('COMPANY_URL','http://akshay.com/');
 
+// 
+define('SYSTEM_LICENSE','1');
 // email account
 
 define('SEND_EMAILS',1);

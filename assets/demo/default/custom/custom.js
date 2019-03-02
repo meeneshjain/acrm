@@ -103,6 +103,24 @@ function checkAll(clsAll, cls) {
     });
 }
 
+function format_date(change_date) {
+    var ftoday = new Date(change_date);
+    var dd = ftoday.getDate();
+
+    var mm = ftoday.getMonth() + 1;
+    var yyyy = ftoday.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    ftoday = yyyy + '-' + mm + '-' + dd;
+    console.log(ftoday);
+    return ftoday;
+}
+
 //ready goes here 
 var table_object = [];
 var default_image = base_url + "assets/images/no.jpg";

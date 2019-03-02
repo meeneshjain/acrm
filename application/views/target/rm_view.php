@@ -125,7 +125,7 @@
                                                             Target Duration
                                                         </label>
                                                         <select required id="trgt_duration" name="trgt_duration" class="form-control m-input">
-                                                            <option value="">--Target Duration--</option>
+                                                          <!--   <option value="">--Target Duration--</option> -->
                                                             <?php 
                                                             echo ($target_duration);
                                                             ?>

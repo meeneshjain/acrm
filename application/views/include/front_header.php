@@ -1,5 +1,9 @@
 <?php 
 expire_license();
+if(empty(SYSTEM_LICENSE) && SYSTEM_LICENSE!=1){
+	echo 'No License Found'; 
+	die;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" >

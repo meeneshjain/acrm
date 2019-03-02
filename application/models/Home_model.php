@@ -348,9 +348,13 @@ class Home_model extends CI_Model {
 				
 			// target vs acheievement 6 months graph 
 			$x_axis = [];
-			$target_data = array("data"=> "", "columns"=> "", "target"=> "", "achievement"=> ""  );
+			$target_data = array("data"=> [], "columns"=> [], "target"=> [], "achievement"=> []  );
 			for($i= 5; $i>=0; $i--){
 				$current_mmonth =  date('M', strtotime("-$i month"));
+				$target_data['data'][] = $current_mmonth;
+				if(!isset($target_data['data'][$current_mmonth])){
+					$target_data['data'][$current_mmonth] = array("target_duration_id"=> "", "target_type"=>"", "target"=>"","target_left"=>"");
+				}
 				$start_date = date("Y-m-01", strtotime("-$i month"));
 				$end_date = date("Y-m-t", strtotime("-$i month"));
 				$my_targets = "SELECT id, assign_to_user_id, report_to_user_id, target_title, company_id, target_duration_id, target_type, amount, product, `target`, target_left, `description`, `start_date`, end_date, is_current_target FROM targets WHERE assign_to_user_id = '$current_user_id' AND (`start_date`  <=  '$start_date' AND  `end_date` >=  '$end_date' )"; 
@@ -385,7 +389,7 @@ class Home_model extends CI_Model {
 						$target_data['achievement'][] = floatval($target_data['data'][$current_mmonth]['target_completed']);
 					}
 				} else {
-					$target_data['data'][$current_mmonth] = array("target_duration_id", "target_type", "target","target_left");
+					$target_data['data'][$current_mmonth] = array("target_duration_id"=> "", "target_type"=>"", "target"=>"","target_left"=>"");
 					$target_data['target'][] = 0;
 					$target_data['achievement'][] = 0;
 				}
