@@ -6,6 +6,17 @@ if(empty(SYSTEM_LICENSE) && SYSTEM_LICENSE!=1){
 }
 $sesion_data = $this->session->userdata(); 
 $header_permission = get_user_permission();
+
+$targetExpireWarning = '';
+
+if(!empty($sesion_data['target_expiry_date'])){
+    $targetExpireOnDate = $sesion_data['target_expiry_date'];
+    $firstDay = date('Y-m-d', strtotime('-9 days', strtotime($targetExpireOnDate)));
+    if($firstDay <= date('Y-m-d') && $targetExpireOnDate > date('Y-m-d'))  {
+        $targetExpireWarning = 'Hello '.ucfirst($sesion_data['full_name']).' Your target is going to expire on '.date('d M Y',strtotime($targetExpireOnDate));    
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -95,185 +106,23 @@ if(isset($settings['default_theme'])  && $settings['default_theme'] != ""){ ?>
 <button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark " id="m_aside_header_menu_mobile_close_btn">
 <i class="la la-close"></i>
 </button>
+<?php if(!empty($targetExpireWarning)){ ?>
 <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "  >
-<!-- <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
-    
-    <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
-        <a  href="javascript:;" class="m-menu__link m-menu__toggle">
-            <i class="m-menu__link-icon flaticon-line-graph"></i>
-            <span class="m-menu__link-text">
-                Reports
-            </span>
-            <i class="m-menu__hor-arrow la la-angle-down"></i>
-            <i class="m-menu__ver-arrow la la-angle-right"></i>
-        </a>
-        <div class="m-menu__submenu  m-menu__submenu--fixed m-menu__submenu--left" style="width:1000px">
-            <span class="m-menu__arrow m-menu__arrow--adjust"></span>
-            <div class="m-menu__subnav">
-                <ul class="m-menu__content">
-                    <li class="m-menu__item">
-                        <h3 class="m-menu__heading m-menu__toggle">
-                            <span class="m-menu__link-text">
-                                Finance Reports
-                            </span>
-                            <i class="m-menu__ver-arrow la la-angle-right"></i>
-                        </h3>
-                        <ul class="m-menu__inner">
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-icon flaticon-map"></i>
-                                    <span class="m-menu__link-text">
-                                        Annual Reports
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-icon flaticon-user"></i>
-                                    <span class="m-menu__link-text">
-                                        HR Reports
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-icon flaticon-clipboard"></i>
-                                    <span class="m-menu__link-text">
-                                        IPO Reports
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-icon flaticon-graphic-1"></i>
-                                    <span class="m-menu__link-text">
-                                        Finance Margins
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-icon flaticon-graphic-2"></i>
-                                    <span class="m-menu__link-text">
-                                        Revenue Reports
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="m-menu__item">
-                        <h3 class="m-menu__heading m-menu__toggle">
-                            <span class="m-menu__link-text">
-                                Project Reports
-                            </span>
-                            <i class="m-menu__ver-arrow la la-angle-right"></i>
-                        </h3>
-                        <ul class="m-menu__inner">
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-bullet m-menu__link-bullet--line">
-                                        <span></span>
-                                    </i>
-                                    <span class="m-menu__link-text">
-                                        Coca Cola CRM
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-bullet m-menu__link-bullet--line">
-                                        <span></span>
-                                    </i>
-                                    <span class="m-menu__link-text">
-                                        Delta Airlines Booking Site
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-bullet m-menu__link-bullet--line">
-                                        <span></span>
-                                    </i>
-                                    <span class="m-menu__link-text">
-                                        Malibu Accounting
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-bullet m-menu__link-bullet--line">
-                                        <span></span>
-                                    </i>
-                                    <span class="m-menu__link-text">
-                                        Vineseed Website Rewamp
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-bullet m-menu__link-bullet--line">
-                                        <span></span>
-                                    </i>
-                                    <span class="m-menu__link-text">
-                                        Zircon Mobile App
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="m-menu__item "  m-menu-link-redirect="1" aria-haspopup="true">
-                                <a  href="header/actions.html" class="m-menu__link ">
-                                    <i class="m-menu__link-bullet m-menu__link-bullet--line">
-                                        <span></span>
-                                    </i>
-                                    <span class="m-menu__link-text">
-                                        Mercury CMS
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </li>
-</ul> -->
+    <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+        <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  m-menu-submenu-toggle="click" m-menu-link-redirect="1" aria-haspopup="true">
+        <marquee style="position: fixed;width:60%;"><span style="border-radius:10px" class="m-badge m-badge--warning m-badge--wide"><?php echo $targetExpireWarning;?></span></marquee>
+        </li>
+    </ul>
 </div>
+<?php }?>
 
 
 <!-- END: Horizontal Menu -->								<!-- BEGIN: Topbar -->
 <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid ">
 <div class="m-stack__item m-topbar__nav-wrapper">
+
     <ul class="m-topbar__nav m-nav m-nav--inline">
-        <li class="
-m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light" 
-m-dropdown-toggle="click" id="m_quicksearch" m-quicksearch-mode="dropdown" m-dropdown-persistent="1">
-            <a href="#" class="m-nav__link m-dropdown__toggle">
-                <span class="m-nav__link-icon">
-                    <i class="flaticon-search-1"></i>
-                </span>
-            </a>
-            <div class="m-dropdown__wrapper">
-                <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
-                <div class="m-dropdown__inner ">
-                    <div class="m-dropdown__header">
-                        <form  class="m-list-search__form">
-                            <div class="m-list-search__form-wrapper">
-                                <span class="m-list-search__form-input-wrapper">
-                                    <input id="m_quicksearch_input" autocomplete="off" type="text" name="q" class="m-list-search__form-input" value="" placeholder="Search...">
-                                </span>
-                                <span class="m-list-search__form-icon-close" id="m_quicksearch_close">
-                                    <i class="la la-remove"></i>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="m-dropdown__body">
-                        <div class="m-dropdown__scrollable m-scrollable" data-scrollable="true" data-max-height="300" data-mobile-max-height="200">
-                            <div class="m-dropdown__content"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
+        
         <li class="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" m-dropdown-toggle="click" m-dropdown-persistent="1">
             <a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
                 <span class="m-nav__link-icon _m_ntf_bell">

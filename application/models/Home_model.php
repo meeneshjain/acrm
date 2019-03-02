@@ -338,11 +338,13 @@ class Home_model extends CI_Model {
 				LEFT JOIN  sales_order_details as sod ON so.id = sod.sales_order_id
 				WHERE  so.type = 'ORDER' AND sales_employee_id ='$current_user_id' GROUP BY sales_employee_id ";
 				$select_target_res = $this->db->query($select_target_completed);
-				$achieve_complete = $select_target_res->row_array();
-				if($user_data['target_type'] == "amount"){
-					$output_data['target_completed']  = $achieve_complete['sum_actual_total'];
-				} else {
-					$output_data['target_completed']  = $achieve_complete['total_product'];
+					if($select_target_res->num_rows() > 0){
+						$achieve_complete = $select_target_res->row_array();
+					if($user_data['target_type'] == "amount"){
+						$output_data['target_completed']  = $achieve_complete['sum_actual_total'];
+					} else {
+						$output_data['target_completed']  = $achieve_complete['total_product'];
+					}	
 				}
 			}  
 				
@@ -430,6 +432,12 @@ class Home_model extends CI_Model {
 	
 	public function target_vs_achivement_report_section_2($current_user_id){
 		
+	}
+
+	public function get_my_target($userId){
+		$query = "SELECT * FROM `targets` WHERE `assign_to_user_id` = '".$userId."' AND `is_current_target` = '1' ORDER BY `id` DESC LIMIT 1";
+		$result = $this->db->query($query);
+		return $result->row_array();
 	}
 
 }

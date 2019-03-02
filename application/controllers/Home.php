@@ -84,6 +84,11 @@ class Home extends CI_Controller {
 				'logged_in'      => $login_check['row']['id'],
 			);
 
+			$session_data['target_expiry_date'] = '';
+			if($login_check['is_super_admin'] != 1 && $login_check['row']['user_role_id'] != 1){
+				$check_target_expiry = $this->home_model->get_my_target($login_check['row']['id']);
+				$session_data['target_expiry_date'] = $check_target_expiry['end_date'];
+			}
 			$this->session->set_userdata($session_data);
 			$status =  'success';
 			$status_message = "";
