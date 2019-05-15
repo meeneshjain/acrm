@@ -198,9 +198,9 @@ class Sales_model extends CI_Model {
 			$sales_order_id = $this->db->insert_id();
 
 			if($type == 'sales_order'){
-				$company_user_detail = $this->db->query("SELECT uc.`email`, c.company_name FROM `users` as uc LEFT JOIN companies as c ON  c.id = company_id WHERE `user_role_id` = '1' AND `company_id` = '".$post_data['company_id']."'")->row();
+				$company_user_detail = $this->db->query("SELECT uc.`email`, c.company_name FROM `users` as uc LEFT JOIN companies as c ON  c.id = company_id WHERE `user_role_id` = '1' AND `company_id` = '".$post_data['company_id']."'")->row_array();
 				$mail_var = array(
-		            "{{company_name}}" => $company_name['company_name'],
+		            "{{company_name}}" => $company_user_detail['company_name'],
 		            "{{base_url}}" => base_url(),
 		            "{{employee_name}}" => $post_data['sales_employee'],
 		        );

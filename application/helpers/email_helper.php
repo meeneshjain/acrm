@@ -74,19 +74,20 @@ function get_company_smtp_configuration(){
 
 function generate_email($sender_email,$template_key,$data){
     $obj =& get_instance();
-    $logged_in_company = get_current_company();
+	
+	$logged_in_company = get_current_company();
     $company_query = "";
     $template_query = "SELECT `subject`, `body` FROM company_email_templates WHERE  status = 1 AND is_deleted = 0 AND company_id='$logged_in_company' AND `template_key` = '$template_key'";
     $result = $obj->db->query($template_query)->row_array();
-
-    $suject = $result['subject'];
-    $mail_body = $result['body'];
-    foreach ($data as $key => $value) {
-        $suject = str_ireplace($key, $value, $subject);
-        $mail_body = str_ireplace($key, $value, $mail_body);
-    }
-
-    send_mailer($sender_email,$subject,$mail_body,0);
+    if(isset($result) && !empty($result)){
+		$subject = $result['subject'];
+		$mail_body = $result['body'];
+		foreach ($data as $key => $value) {
+			$subject = str_ireplace($key, $value, $subject);
+			$mail_body = str_ireplace($key, $value, $mail_body);
+		}
+		send_mailer($sender_email,$subject,$mail_body,0);
+	}	
 }
 
 

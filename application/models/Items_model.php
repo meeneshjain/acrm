@@ -68,6 +68,7 @@ class Items_model extends CI_Model {
         );
 
         $items_permission = get_user_permission();
+        
 
         foreach ($dt_result->result_array() as $aRow) {
         	
@@ -90,14 +91,16 @@ class Items_model extends CI_Model {
 
         	$actn = '';
 
-        	$type = $aRow['group_type'];
+        	$type = strtolower($aRow['group_type']);
+        	
         	if($type == "inventory"){
 	        	if(in_array('invitm_e',$items_permission)){
         			$actn .='<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
 				}
 				if(in_array('invitm_d',$items_permission)){
-					$actn .='<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';				}
+					$actn .='<button class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air delete_item" data-item-id="'.$aRow['id'].'"><i class="fa fa-trash-o"></i></button>';				
 				}
+			}
 
 			if($type == "service"){
 				if(in_array('seritm_e',$items_permission)){
