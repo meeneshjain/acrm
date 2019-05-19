@@ -270,7 +270,7 @@ function get_lead_source($result_type=null)
 	}
 	else
 	{
-		if(count($lead_source[$result_type])>0)
+		if($lead_source[$result_type]!= "")
 		{
 			$output .= $lead_source[$result_type];
 		}
@@ -293,13 +293,17 @@ function get_opportunity_type($result_type=null)
 	}
 	else
 	{
-		if(count($oppr_type[$result_type])>0)
-		{
-			$output .= $oppr_type[$result_type];
+		if(isset($oppr_type[$result_type]) && !empty($oppr_type[$result_type])){
+			if($oppr_type[$result_type]!= "")
+			{
+				$output .= $oppr_type[$result_type];
+			}	
 		}
+		
 	}
 	return $output;
 }
+
 
 
 function get_company_list($type, $selected_value = NULL){
@@ -667,7 +671,7 @@ function add_notification($type,$r_id,$title,$message,$added_by,$added_for)
 }
 
 function expire_license(){
-	$expire_date = strtotime("2019-07-10");
+	$expire_date = strtotime("2019-06-30");
 	if(strtotime("now") > $expire_date){
 		echo '<h2> Your License has Expired </h2>';
 		die;
