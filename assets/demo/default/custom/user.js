@@ -145,8 +145,13 @@ function getDetail(id) {
             $("#dob").val(data_res.dob);
             $("#doj").val(data_res.doj);
             $("#changed_images").attr("src", user_image);
+            $("#uploaded_images").attr("src", data_res.profile_pic);
             if (user_image != DEFAULT_IMAGE) {
-                $(".deleteImage").show();
+                if(data_res.profile_pic != ''){
+                    $(".deleteImage").show();
+                }else{
+                    $("#changed_images").attr("src", DEFAULT_IMAGE);
+                }
             }
             $("#is_active").prop("checked", ((data_res.status == 1) ? true : false));
             $("#user_id").val(data_res.id);

@@ -88,9 +88,12 @@ $page_name = $this->uri->segment(2);
                         <div class="form-group m-form__group row">
                             <label class="text-left col-lg-2 col-form-label">Service Contract Serial </label>
                             <div class="col-lg-3">
-                                <select class="form-control m-input" id="service_contract_id" name="service_contract_id">
+                                <!--<select class="form-control m-input" id="service_contract_id" name="service_contract_id">
                                     <option value="">Select Service Contract</option>
-                                </select>
+                                </select>-->
+                                <select required style="width: 100%" class="form-control m-select2 select2_selectbox" id="service_contract_id" name="service_contract_id">
+                                    <option value="">Select Service Contract</option>
+								</select>
                             </div>
                             <div class="col-lg-1 service_contract_serial_loader display_none">
                                 <div class="text-left mt-1">

@@ -289,7 +289,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Email
                                 </label>
-                                <input type="text" required id="lead_email_1" name="email_1" class="form-control m-input" placeholder="Enter email address">
+                                <input type="email" required id="lead_email_1" name="email_1" class="form-control m-input" placeholder="Enter email address">
                             </div> 
                         </div>
 
@@ -304,7 +304,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Other Email
                                 </label>
-                                <input type="text" id="lead_other_email" name="other_email" class="form-control m-input" placeholder="Enter contact Name">
+                                <input type="email" id="lead_other_email" name="other_email" class="form-control m-input" placeholder="Enter contact Name">
                             </div>
                             <div class="col-lg-4">
                                 <label>
@@ -331,7 +331,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Website
                                 </label>
-                                <input type="text" id="lead_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
+                                <input type="url" id="lead_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
                             </div>
                         </div>
 

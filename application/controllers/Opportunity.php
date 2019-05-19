@@ -62,8 +62,6 @@ class Opportunity extends CI_Controller {
         die;
     }
 
-    
-     
 }
 
 ?>

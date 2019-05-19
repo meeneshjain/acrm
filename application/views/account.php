@@ -144,7 +144,7 @@ $account_permission = get_user_permission();
                                 <label>
                                     Eamil Address
                                 </label>
-                                <input type="text" required id="acnt_email"  name="email_1" class="form-control m-input" onblur="checkDuplicate(this,'email_1')" placeholder="Enter email address">
+                                <input type="email" required id="acnt_email"  name="email_1" class="form-control m-input" onblur="checkDuplicate(this,'email_1')" placeholder="Enter email address">
                             </div>
                         </div>
 
@@ -159,7 +159,7 @@ $account_permission = get_user_permission();
                                 <label>
                                     Other Email Adress
                                 </label>
-                                <input type="text" id="acnt_other_contact" name="email_2" class="form-control m-input" placeholder="Enter Other Email Adress">
+                                <input type="email" id="acnt_other_contact" name="email_2" class="form-control m-input" placeholder="Enter Other Email Adress">
                             </div>
                         </div>
 

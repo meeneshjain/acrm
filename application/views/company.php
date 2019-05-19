@@ -289,7 +289,7 @@
                                                 <label>
                                                     Email ID
                                                 </label>
-                                                <input type="text" id="email_address" name="email_address" class="form-control m-input only_number" placeholder="Enter Email">
+                                                <input type="email" id="email_address" name="email_address" class="form-control m-input only_number" placeholder="Enter Email">
                                             </div>
                                             
                                         </div>

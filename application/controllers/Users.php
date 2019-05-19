@@ -45,7 +45,11 @@ class Users extends CI_Controller {
      }
      
     public function get_all_users(){
-        $companyId = get_current_company();
+        if($this->session->userdata('is_admin') == 1){
+            $companyId = 'SA'; // Super admin
+		}else{
+            $companyId = get_current_company();
+		}
         $response =  $this->user_model->get_all_users($companyId);
 		echo json_encode($response);
 		die;
