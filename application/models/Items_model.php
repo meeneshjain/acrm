@@ -1,6 +1,21 @@
 <?php 
 class Items_model extends CI_Model {	
 
+	public function check_item_exist($item_master_id = 0, $item_code){
+		$where = "WHERE  code = '$item_code' ";
+		if($item_master_id != 0){
+		 	$where .= " AND `id` != '$item_master_id' ";
+		}
+		
+		$select_raw = "SELECT id, code, name from items $where";
+		$select_res = $this->db->query($select_raw);
+		if($select_res->num_rows() > 0){
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
 	public function itemlist($companyId, $item_type)
 	{
 		error_reporting(E_ALL);

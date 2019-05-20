@@ -84,6 +84,11 @@ class Items extends CI_Controller {
             //print_r($this->input->post());die;
             if(isset($_POST['id']) && !empty($_POST['id']))
             {
+                $is_exists = $this->items_model->check_item_exist( $this->input->post('id'), $this->input->post('code'));
+                if( $is_exists == 1){
+                    echo json_encode(array("status" => "error","message" => 'Item Code Already Exists.'));
+                    die;
+                }
                 $data['updated_date'] = DATETIME;
                 $where = array('id' => $this->input->post('id'));
                 $this->common_model->update_data('items',$data,$where);
@@ -95,6 +100,11 @@ class Items extends CI_Controller {
             }
             else
             {
+                $is_exists = $this->items_model->check_item_exist(0, $this->input->post('code'));
+                 if( $is_exists == 1){
+                    echo json_encode(array("status" => "error","message" => 'Item Code Already Exists.'));
+                    die;
+                }
                 $data['created_date'] = DATETIME;
                 $result = $this->common_model->insert('items', $data);
                 $item_id = $this->db->insert_id();

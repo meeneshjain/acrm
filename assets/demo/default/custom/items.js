@@ -39,6 +39,10 @@ $(document).ready(function () {
 					$("#item_form")[0].reset();
 					$("#item_modal").modal('hide');
 					reloadTable("#item_list_dt_table");
+				} else if (res.status == 'error') {
+					hide_loading("#item_action_btn", btn_text);
+					notify_alert('error', res.message, "Error");
+					$("#item_code").val('');
 				}
 			}, function (res) {
 				notify_alert('danger', res.message, "Error");

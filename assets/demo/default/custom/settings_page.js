@@ -525,7 +525,18 @@ $(document).ready(function (event) {
         }
     });
 
+    $(document).on("click", ".import_data_click", function () {
+        var obj = $(this);
+        var button_title = '<i class="fa fa-save"></i> Import';
+        var form_action = base_url + "settings/import_data";
 
+        var import_key = obj.data("import_key");
+        var import_label = obj.data("import_label");
+        $("#import_data_option_form").attr('action', form_action);
+        $("#import_data_option_lable").html(import_label);
+        $("#update_import_data_option_btn").html(button_title);
+        $("#import_data_modal").modal('show');
+    });
 
 }); // dom end 
 

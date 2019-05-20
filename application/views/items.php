@@ -142,6 +142,12 @@ $items_permission = get_user_permission();
                             </div>
                             <div class="col-lg-8">
                                 <div class="form-group m-form__group row">
+                                <div class="col-lg-6">
+                                        <label>
+                                            Item Code:
+                                        </label>
+                                        <input required type="text" id="item_code" name="code" class="form-control m-input" placeholder="Enter Item Code">
+                                    </div>    
                                     <div class="col-lg-6">
                                         <label>
                                             Item Name:
@@ -150,13 +156,6 @@ $items_permission = get_user_permission();
                                         <input required type="text" id="item_name" name="name" class="form-control m-input" placeholder="Enter Item name">
 
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label>
-                                            Item Code:
-                                        </label>
-                                        <input required type="text" id="item_code" name="code" class="form-control m-input" placeholder="Enter Item Code">
-                                    </div>
-                                    
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-lg-6">

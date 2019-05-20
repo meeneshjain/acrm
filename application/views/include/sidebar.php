@@ -341,7 +341,7 @@ $sidebar_permission = get_user_permission();
 								<label for="meeting_invitees" class="form-control-label">
 									Select Invitees:
 								</label>
-								<select required style="width: 100%" class="form-control m-select2 select2_selectbox" id="meeting_invitees" name="meeting_invitees[]" multiple="multiple">
+								<select required style="width: 100%" class="form-control m-select2 select2_selectbox" id="meeting_invitees" name="meeting_invitees[]" multiple="multiple" data-placeholder="Select Invitees">
 									<?php
 									echo get_all_users();
 									?>

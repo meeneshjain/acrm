@@ -164,7 +164,7 @@ $(document).ready(function () {
     });
 
     $(".select2_selectbox").select2({
-        placeholder: ""
+        placeholder: $(this).data("placeholder")
     });
 
 

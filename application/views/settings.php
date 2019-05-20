@@ -86,16 +86,6 @@
                                 </h2>
                             </div>
                         </div>
-                        <div class="m-portlet__head-tools">
-                            <!-- <ul class="m-portlet__nav">
-                                <li class="m-portlet__nav-item">
-                                    <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon"
-                                        data-toggle="modal" data-target="#user_role_modal">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </li>
-                            </ul> -->
-                        </div>
                     </div>
                     <div class="m-portlet__body">
                         <ul class="list-group">
@@ -289,6 +279,7 @@
                 </div>
 
             </div>
+            
             <div class="col-lg-4">
                 <div class="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
                     <div class="m-portlet__head">
@@ -353,9 +344,79 @@
                         </ul>
                     </div>
                 </div>
+                <div class="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="flaticon-statistics"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                  Import
+                                </h3>
+                                <h2 class="m-portlet__head-label m-portlet__head-label--warning">
+                                    <span>
+                                       Import Master Data
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
 
-
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <ul class="list-group">
+                            <li class="list-group-item"> <b> <?php echo 'Item Master';  ?> </b>  <?php
+                           // if($is_super_admin == 1){
+                            ?>
+                            <span class="pull-right"> <a href="javascript:;" class="m-portlet__nav-link m-portlet__nav-link--icon import_data_click" data-toggle="modal" data-target="#import_data_model" data-import_key="<?php echo 'item_master' ?>" data-import_label="Import Item Master"> <i class="fa fa-cloud-upload"></i>  </a>  </span>
+                            <?php  // } ?>  
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="import_data_model" tabindex="-1" role="dialog" aria-labelledby="import_data_option_lable" aria-hidden="true"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="import_data_option_form"
+                data-parsley-validate action="">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="import_data_option_lable"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group m-form__group row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <label for="select_company_import">
+                                    Select Company
+                                </label>
+                                <select required class="form-control m-input" id="select_company_import" name="select_company_import">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="update_import_data_option_btn" class="btn btn-primary">
+                        <i class="fa fa-check"></i> Update
+                    </button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

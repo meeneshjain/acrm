@@ -666,7 +666,7 @@ function add_notification($type,$r_id,$title,$message,$added_by,$added_for)
 }
 
 function expire_license(){
-	$expire_date = strtotime("2019-06-30");
+	$expire_date = strtotime("2019-05-30");
 	if(strtotime("now") > $expire_date){
 		echo '<h2> Your License has Expired </h2>';
 		die;

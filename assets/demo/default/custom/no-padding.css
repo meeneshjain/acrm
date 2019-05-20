@@ -383,3 +383,11 @@ select.form-control:not([size]):not([multiple]){
 .m-widget14 {
     padding: 1.0rem;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+   padding: .1rem .8rem;     
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 13px !important;
+}

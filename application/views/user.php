@@ -80,7 +80,7 @@
         </div>
     </div>
 
-<div class="modal fade" id="add_update_user_modal" tabindex="-1" role="dialog" aria-labelledby="add_update_user_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="add_update_user_modal" role="dialog" aria-labelledby="add_update_user_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="user_form" action=""  data-parsley-validate>
@@ -101,24 +101,34 @@
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
                                 <label>User Role </label>
-                                <select required class="form-control m-input" id="user_role" name="user_role">
+                                <!-- <select required class="form-control m-input" id="user_role" name="user_role">
                                     <option value="">Select User Role</option>
+                                    <?php // echo $user_role;?>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="user_role" name="user_role" data-placeholder="Select User Roles">
                                     <?php echo $user_role;?>
-                                </select>
+								</select>
+                                
                             </div>
                             <div class="col-lg-4 user_role_group" id="team_lead_dropdown" style="display:none"> 
                                 <label> Team Lead Name  </label>
-                                <select required class="form-control m-input" id="team_lead_dd" name="team_lead_dd">
+                                <!-- <select required class="form-control m-input" id="team_lead_dd" name="team_lead_dd">
                                     <option value="">Assign Team Leader</option>
+                                    <?php // echo $tl_options;?>
+                                </select> -->
+                                 <select required style="width: 100%" class="form-control select2_selectbox" id="team_lead_dd" name="team_lead_dd" data-placeholder="Assign Team Lead">
                                     <?php echo $tl_options;?>
-                                </select>
+								</select>
                             </div>
                             <div class="col-lg-4 user_role_group" id="rm_dropdown" style="display:none"> 
                                 <label> Regional Manager Name  </label>
-                                <select required class="form-control m-input" id="rm_dd" name="rm_dd">
+                               <!--  <select required class="form-control m-input" id="rm_dd" name="rm_dd">
                                     <option value="">Assign Regional Manager</option>
+                                    <?php // echo $rm_options;?>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="rm_dd" name="rm_dd" data-placeholder="Assign Regional Manager">
                                     <?php echo $rm_options;?>
-                                </select>
+								</select>
                             </div>
                         </div>
                     </div>

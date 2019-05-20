@@ -68,9 +68,8 @@ $page_name = $this->uri->segment(2);
             </div>
         </div>
     </div>
-    
-    
-    <div class="modal fade" id="add_update_service_modal" tabindex="-1" role="dialog" aria-labelledby="add_update_service_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+   
+    <div class="modal fade" id="add_update_service_modal"  role="dialog" aria-labelledby="add_update_service_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-mlg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="item_service_form_obj" action=""  data-parsley-validate>
@@ -88,9 +87,12 @@ $page_name = $this->uri->segment(2);
                         <div class="form-group m-form__group row">
                             <label class="text-left col-lg-2 col-form-label">Service Contract Serial </label>
                             <div class="col-lg-3">
-                                <select class="form-control m-input" id="service_contract_id" name="service_contract_id">
+                                <!-- <select class="form-control m-input" id="service_contract_id" name="service_contract_id">
                                     <option value="">Select Service Contract</option>
-                                </select>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="service_contract_id" name="service_contract_id" data-placeholder="Select Service Contract">
+                                    <option value="">Service Contract</option>
+								</select>
                             </div>
                             <div class="col-lg-1 service_contract_serial_loader display_none">
                                 <div class="text-left mt-1">
@@ -104,9 +106,12 @@ $page_name = $this->uri->segment(2);
                       <div class="form-group m-form__group row">
                             <label class="text-left col-lg-2 col-form-label">Account Code </label>
                             <div class="col-lg-3">
-                                <select required class="form-control m-input" id="account_code" name="account_code">
+                               <!--  <select required class="form-control m-input" id="account_code" name="account_code">
                                     <option value="">Account Code</option>
-                                </select>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="account_code" name="account_code" data-placeholder="Select Account Code">
+                                    <option value="">Account Code</option>
+								</select>
                             </div>
                             <div class="col-lg-2"></div>
                             <label class="text-left col-lg-2 col-form-label">   Start Date  </label>
@@ -130,9 +135,12 @@ $page_name = $this->uri->segment(2);
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">Contact Person </label>
                             <div class="col-lg-3">
-                                  <select required class="form-control m-input" id="contact_person" required name="contact_person">
+                                  <!-- <select required class="form-control m-input" id="contact_person" required name="contact_person">
                                     <option value="">Select Contact Person</option>
-                                </select>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="contact_person" name="contact_person" data-placeholder="Select Contact Person">
+                                    <option value="">Contact Person</option>
+								</select>
                                 </div>
                               <div class="col-lg-2"></div>
                              <label class="text-left col-lg-2 col-form-label contract_block">
@@ -161,9 +169,12 @@ $page_name = $this->uri->segment(2);
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">Item Code </label>
                             <div class="col-lg-3">
-                                  <select required class="form-control m-input" id="item_code" required name="item_code">
+                                 <!--  <select required class="form-control m-input" id="item_code" required name="item_code">
                                     <option value="">Select Item Code</option>
-                                </select>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="item_code" name="item_code" data-placeholder="Select Item Code">
+                                    <option value="">Item Code</option>
+								</select>
                                 </div>
                               <div class="col-lg-2"></div>
                              <label class="text-left col-lg-2 col-form-label contract_block">

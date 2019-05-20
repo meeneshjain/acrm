@@ -60,8 +60,9 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", "#user_role", function () {
+    $(document).on("change", "#user_role", function () {
         var obj = $(this);
+
         $(".user_role_group").hide();
         if (obj.val() == "4") {
             $("#team_lead_dropdown").show();
