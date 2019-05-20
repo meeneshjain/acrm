@@ -100,9 +100,10 @@ $(document).ready(function () {
     $(document).on("click", ".add_more_rows", function () {
         var block_count = $(".item_list_data").length;
         block_count++;
+        var select2_class = "select2_id_" + block_count;
         var output = `<tr class="item_list_data" data-is_saved="0">
             <td> <div class="form-control m-input" >`+ block_count + `</div> </td>
-            <td>  <select id="item_code_`+ block_count + `" name="item_detail[` + block_count + `][id]" required class="form-control m-input item_code_list" placeholder="Item Code">
+            <td>  <select id="item_code_`+ block_count + `" name="item_detail[` + block_count + `][id]" required class="form-control m-input item_code_list ` + select2_class + `" style="width:100%" data-placeholder="Item Code">
             `+ item_options + `
                 </select> </td>
             <td>
@@ -113,7 +114,7 @@ $(document).ready(function () {
             <input type="text" id="quantity_`+ block_count + `" data-item_price_quantity="price_` + block_count + `" name="item_detail[` + block_count + `][quantity]" value="1" required class="form-control m-input item_price_quantity" placeholder="Quantity">
             </td>
             <td>
-            <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" class="form-control m-input price_list_select" placeholder="Price">
+            <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" class="form-control m-input price_list_select ` + select2_class + `" style="width:100%" data-placeholder="Price">
             </select>
             </td>
             <td>
@@ -134,8 +135,8 @@ $(document).ready(function () {
             </td>
             </tr>`;
 
-
         $(".item_detail_section").append(output);
+        $("." + select2_class).select2({ placeholder: $(this).data("placeholder") });
     });
 
     $(document).on("click", ".remove_crrent_row", function () {
@@ -149,6 +150,7 @@ $(document).ready(function () {
                         obj.parents(".item_list_data").slideUp(function () {
                             notify_alert(res.status, res.message);
                             $(this).remove();
+                            final_total();
                         });
                     } else {
                         notify_alert('danger', 'There was some error, please try again.', "Error");
@@ -158,21 +160,31 @@ $(document).ready(function () {
         } else {
             obj.parents(".item_list_data").slideUp(function () {
                 $(this).remove();
+                final_total();
             });
         }
-        final_total();
+
     });
 
     $(document).on("change", "#account_code", function () {
         var obj = $(this);
         $("#contact_no").val("");
         $("#account_name").val("");
+        $("#gst_number").val('');
+        $("#delivery_address").val('');
         if (obj.val() != "") {
             call_service(base_url + "sales/get_account_contacts/" + obj.val(), function (res) {
                 if (res['status'] == 'success') {
-                    var out = '<option value="">Select Contact Person</option>\n';
+                    console.log("res.account_info.length ", res.account_info.gst_no);
+
+                    if (res.account_info) {
+                        $("#gst_number").val(res.account_info.gst_no);
+                        $("#delivery_address").val(res.account_info.address);
+                    }
+
+                    var out = '<option value="">Select Business Partner</option>\n';
                     for (var aci = 0; aci < res['contact_list'].length; aci++) {
-                        out += '<option value="' + res['contact_list'][aci]['id'] + '" data-contact_number="' + res['contact_list'][aci]['contact_number'] + '" data-contact_name="' + res['contact_list'][aci]['full_name'] + '">' + res['contact_list'][aci]['full_name'] + '</option>\n';
+                        out += '<option value="' + res['contact_list'][aci]['id'] + '" data-contact_number="' + res['contact_list'][aci]['contact_number'] + '" data-contact_name="' + res['contact_list'][aci]['full_name'] + '" data-pan_no="' + res['contact_list'][aci]['pan_no'] + '">' + res['contact_list'][aci]['full_name'] + '</option>\n';
                     }
                     $("#contact_person").html(out);
 
@@ -181,16 +193,18 @@ $(document).ready(function () {
             });
             $("#account_name").val(obj.find('option:selected').attr('data-account_name'));
         } else {
-            $("#contact_person").html('<option value="">Select Contact Person</option>\n');
+            $("#contact_person").html('<option value="">Select Business Partner</option>\n');
         }
     });
 
     $(document).on("change", "#contact_person", function () {
         var obj = $(this);
         $("#contact_no").val("");
+        $('#pan_no').val("");
         if (obj.val() != "") {
             $("#contact_no").val($("#contact_person").find('option:selected').attr('data-contact_number'));
             $("#contact_person_name").val($("#contact_person").find('option:selected').attr('data-contact_name'));
+            $("#pan_no").val($("#contact_person").find('option:selected').attr('data-pan_no'));
         }
     });
 
@@ -292,7 +306,7 @@ $(document).ready(function () {
             $("#is_new_sales_order").val(1);
             $(".loader_block").show();
             $("#is_new_sales_order").val(1);
-            get_sales_details(sales_order_id);
+            get_sales_details(sales_order_id, 'quote');
             $("#ref_quote_no").val(sales_order_id);
         } else if ($(obj).val() == "0") {
             reset_form();
@@ -336,8 +350,12 @@ function actual_total() {
     var total_tax = ($("#total_tax").val() != "") ? parseFloat($("#total_tax").val()) : 0;
     var discount = ($("#final_discount").val() != "") ? parseFloat($("#final_discount").val()) : 0;
     var full_total = (total + other_charges);
-    if (total_tax != 0) {
+    /* if (total_tax != 0) {
         full_total = parseFloat(full_total + (full_total * (total_tax / 100)));
+    } */
+    if (total_tax != 0) {
+        var other_charges_tax = parseFloat(other_charges * (total_tax / 100));
+        full_total = total + other_charges + other_charges_tax
     }
     var actual_total = full_total;
     if (discount != 0) {
@@ -345,8 +363,6 @@ function actual_total() {
     }
     $("#actual_total").val(actual_total.toFixed(2));
 }
-
-
 
 function calculate_row_amount(price, discount, quantity, tax) {
     if (price == undefined || price == "") {
@@ -414,7 +430,7 @@ function generate_account_list(account_list_array, selected_account) {
                 selected = "selected";
             }
         }
-        out += '<option value="' + account_list_array[aci]['id'] + '" data-account_name="' + account_list_array[aci]['name'] + '" ' + selected + '>' + account_list_array[aci]['account_number'] + '</option>\n';
+        out += '<option value="' + account_list_array[aci]['id'] + '" data-account_name="' + account_list_array[aci]['name'] + '" data-gst_no="' + account_list_array[aci]['gst_no'] + '"  ' + selected + '>' + account_list_array[aci]['name'] + '  (' + account_list_array[aci]['account_number'] + ') ' + '</option>\n';
     }
     $("#account_code").html(out);
 }
@@ -426,7 +442,18 @@ function get_sales_details(id, called_from) {
             var header_data = res['header'];
             generate_account_list(res['account_list'], header_data['account_id']);
             setTimeout(function () {
-                $("#account_code").trigger('change');
+                // $("#account_code").trigger('change');
+                call_service(base_url + "sales/get_account_contacts/" + header_data['account_id'], function (res) {
+                    if (res['status'] == 'success') {
+                        var out = '<option value="">Select Business Partner</option>\n';
+                        for (var aci = 0; aci < res['contact_list'].length; aci++) {
+                            out += '<option value="' + res['contact_list'][aci]['id'] + '" data-contact_number="' + res['contact_list'][aci]['contact_number'] + '" data-contact_name="' + res['contact_list'][aci]['full_name'] + '" data-pan_no="' + res['contact_list'][aci]['pan_no'] + '">' + res['contact_list'][aci]['full_name'] + '</option>\n';
+                        }
+                        $("#contact_person").html(out);
+
+                    }
+                }, function (res) {
+                });
                 setTimeout(function () {
                     $("#contact_person").val(header_data.contact_person_id);
                     $("#contact_person").trigger('change');
@@ -451,9 +478,7 @@ function get_sales_details(id, called_from) {
             if ($("#form_name").val() != "sales_order") {
                 $("#ref_quote_no").val(header_data.sales_quote_ref_id);
             }
-
             $(".ref_quote_no_label label").html(header_data.sales_quote_ref_id);
-
             $("#pay_terms").val(header_data.pay_terms);
             $("#remark").val(header_data.remarks);
             $("#total_amount").val(header_data.total_amount);
@@ -462,7 +487,11 @@ function get_sales_details(id, called_from) {
             $("#final_discount").val(header_data.discount);
             $("#actual_total").val(header_data.actual_total);
             $("#sales_order_quotation_id").val(header_data.id);
-            $("#sale_stages").val(header_data.stages);
+            if (called_from != "quote") {
+                $("#sale_stages").val(header_data.stages);
+            } else {
+                $("#sale_stages").val('draft');
+            }
             is_new_revision = 0;
             if (header_data.stages == "negotiation") {
                 $(".revision_box_show").show();
@@ -478,8 +507,13 @@ function get_sales_details(id, called_from) {
                 var output = "";
                 for (var i = 0; i < res['details'].length; i++) {
                     var item_data = res['details'][i];
+                    console.log("item_data ", item_data);
                     item_options = generate_item_list(res.item_list, item_data['item_id']);
-                    var price_list_array = res.item_list[i].price_list.split("::");
+                    var getItemIndex = res.item_list.findIndex(function (obj) {
+                        return (obj.id == item_data['item_id'])
+                    });
+                    var price_list_array = res.item_list[getItemIndex].price_list.split("::");
+                    console.log("price_list_array ", price_list_array);
                     var selected_price_list = '<option value="">Select Price</option>\n';
                     var selected_account = '';
                     var count = 1;
@@ -494,9 +528,10 @@ function get_sales_details(id, called_from) {
                         count++;
                     }
                     block_count++;
+                    var select22_class = "select22_id_" + block_count;
                     output += `<tr class="item_list_data" data-is_saved="1">
                     <td> <div class="form-control m-input" >` + block_count + `</div> </td>
-                    <td>  <select id="item_code_`+ block_count + `" name="item_detail[` + block_count + `][id]" required class="form-control m-input item_code_list" placeholder="Item Code">
+                    <td>  <select id="item_code_`+ block_count + `" name="item_detail[` + block_count + `][id]" required class="form-control m-input item_code_list ` + select22_class + `" style="width: 100%" data-placeholder="Item Code">
                     `+ item_options + `
                         </select> </td>
                     <td>
@@ -507,7 +542,7 @@ function get_sales_details(id, called_from) {
                     <input type="text" id="quantity_`+ block_count + `" data-item_price_quantity="price_` + block_count + `" name="item_detail[` + block_count + `][quantity]" required class="form-control m-input item_price_quantity" placeholder="Quantity" value="` + item_data['quantity'] + `">
                     </td>
                     <td>
-                    <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" class="form-control m-input price_list_select" placeholder="Price">
+                    <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" style="width: 100%" class="form-control m-input price_list_select ` + select22_class + `" data-placeholder="Price">
                     `+ selected_price_list + `
                     </select>
                     </td>
@@ -530,7 +565,9 @@ function get_sales_details(id, called_from) {
                     </td>
                     </tr>`;
                 }
+
                 $(".item_detail_section").html(output);
+                $("." + select22_class).select2({ placeholder: $(this).data("placeholder") });
             }
 
         }

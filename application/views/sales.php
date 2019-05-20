@@ -76,7 +76,7 @@ $sales_permission = get_user_permission();
                                               Account Name
                                             </th>
                                             <th>
-                                             Contact Person
+                                             Business Partner
                                             </th>
                                             <th>
                                               Contact No
@@ -104,7 +104,7 @@ $sales_permission = get_user_permission();
         </div>
     </div>
 
-<div class="modal fade" id="add_update_user_modal" tabindex="-1" role="dialog" aria-labelledby="add_update_user_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="add_update_user_modal" role="dialog" aria-labelledby="add_update_user_modal_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-mlg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="sales_action_form" action=""  data-parsley-validate>
@@ -127,8 +127,11 @@ $sales_permission = get_user_permission();
                             <div class="col-lg-3 pull-right  ">
                            <!--  <input type="text" id="ref_quote_no" name="ref_quote_no" class="form-control m-input ref_quote_no_block" placeholder="Reference Quotation Number"> -->
                            <div class="ref_sales_order_input">
-                               <select class="form-control m-input" id="ref_quote_no" name="ref_quote_no">
+                              <!--  <select class="form-control m-input" id="ref_quote_no" name="ref_quote_no">
                                    <option value="">Select Sales Quotation Number</option>
+                                </select> -->
+                                <select style="width: 100%" class="form-control select2_selectbox" id="ref_quote_no" name="ref_quote_no" data-placeholder="Select Sales Quotation Number">
+                                  <option value="">Select Sales Quotation Number</option>
                                 </select>
                             </div>
                             <div class="ref_quote_no_label" style="display:none;">
@@ -143,9 +146,13 @@ $sales_permission = get_user_permission();
                         <div class="form-group m-form__group row">
                             <label class="text-left col-lg-2 col-form-label">Account Code </label>
                             <div class="col-lg-3">
-                                <select required class="form-control m-input" id="account_code" name="account_code">
+                               <!--  <select required class="form-control m-input" id="account_code" name="account_code">
                                     <option value="">Account Code</option>
-                                    <?php echo $account_numbers; ?>
+                                    <?php // echo $account_numbers; ?>
+                                </select> -->
+                                <select style="width: 100%" class="form-control select2_selectbox" id="account_code" name="account_code" data-placeholder="Account Code">
+                                  <option value="">Account Code</option>
+                                  <?php echo $account_numbers; ?>
                                 </select>
                             </div>
                             <div class="col-lg-2"></div>
@@ -194,21 +201,13 @@ $sales_permission = get_user_permission();
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">PAN No. </label>
+                                <label class="text-left col-lg-2 col-form-label">Business Partner </label>
                             <div class="col-lg-3">
-                                  <input type="text" id="pan_no" name="pan_no" class="form-control m-input" placeholder="Enter PAN No. Address">
-                                </div>
-                              <div class="col-lg-2"></div>
-                              <label class="text-left col-lg-2 col-form-label"> Sales Employee </label>
-                            <div class="col-lg-3 pull-right">
-                                <input type="text" id="sales_employee" required name="sales_employee" class="form-control m-input" placeholder="Enter Sales Employee" value="<?php echo  $sales_employee_name; ?>">
-                            </div>     
-                        </div>
-                        <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">Contact Person </label>
-                            <div class="col-lg-3">
-                                  <select required class="form-control m-input" id="contact_person" required name="contact_person">
-                                    <option value="">Select Contact Person</option>
+                                 <!--  <select required class="form-control m-input" id="contact_person" required name="contact_person">
+                                    <option value="">Select Business Partner</option>
+                                </select> -->
+                                  <select required style="width: 100%" class="form-control select2_selectbox" id="contact_person" name="contact_person" data-placeholder="Select Business Partner">
+                                  <option value="">Select Business Partner</option>
                                 </select>
                                 </div>
                               <div class="col-lg-2"></div>
@@ -217,6 +216,17 @@ $sales_permission = get_user_permission();
                                   <input type="text" id="contact_no" required readonly name="contact_no" class="form-control m-input" placeholder="Enter Contact Number">
                                   <input type="hidden" id="contact_person_name" required readonly name="contact_name" class="form-control m-input" placeholder="">
                                 </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                                <label class="text-left col-lg-2 col-form-label">PAN No. </label>
+                            <div class="col-lg-3">
+                                  <input type="text" id="pan_no" name="pan_no" class="form-control m-input" placeholder="Enter PAN No.">
+                                </div>
+                              <div class="col-lg-2"></div>
+                              <label class="text-left col-lg-2 col-form-label"> Sales Employee </label>
+                            <div class="col-lg-3 pull-right">
+                                <input type="text" id="sales_employee" required name="sales_employee" class="form-control m-input" placeholder="Enter Sales Employee" value="<?php echo  $sales_employee_name; ?>">
+                            </div>     
                         </div>
                          <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">
@@ -319,9 +329,9 @@ $sales_permission = get_user_permission();
                             <input type="text" id="other_charges"  name="other_charges" class="form-control m-input actual_calculator" placeholder="Other Charges">
                         </div>
                         <div class="input-group m-form__group">
-                         <label class="text-left col-lg-5 col-form-label"> Total Tax </label>
+                         <label class="text-left col-lg-5 col-form-label"> Tax on other charges </label>
                             <div class="col-lg-6 pull-right">
-                            <input type="text" id="total_tax"  name="total_tax" class="form-control m-input actual_calculator pull-left" placeholder="Total Tax">
+                            <input type="text" id="total_tax"  name="total_tax" class="form-control m-input actual_calculator pull-left" placeholder="Tax on other charges">
                             <div class="input-group-append" style="margin-top: -3px;">
                                 <span class="input-group-text" id="basic-addon2">
                                   %

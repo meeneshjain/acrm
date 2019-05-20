@@ -162,6 +162,15 @@ $account_permission = get_user_permission();
                                 <input type="email" id="acnt_other_contact" name="email_2" class="form-control m-input" placeholder="Enter Other Email Adress">
                             </div>
                         </div>
+                        
+                         <div class="form-group m-form__group row">                        
+                            <div class="col-lg-6">   
+                                <label>
+                                    GST  Number
+                                </label>
+                                <input type="text" id="gst_no" name="gst_no" class="form-control m-input" placeholder="Enter GSTN">
+                            </div>
+                        </div>
 
                         <div class="form-group m-form__group row">
                             <div class="col-lg-12">

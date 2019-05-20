@@ -381,7 +381,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="import_data_model" tabindex="-1" role="dialog" aria-labelledby="import_data_option_lable" aria-hidden="true"
+<div class="modal fade" id="import_data_model" role="dialog" aria-labelledby="import_data_option_lable" aria-hidden="true"
     data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
@@ -396,18 +396,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <?php if($is_super_admin == 1){ ?>
                     <div class="form-group m-form__group row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <label for="select_company_import">
-                                    Select Company
-                                </label>
-                                <select required class="form-control m-input" id="select_company_import" name="select_company_import">
-                                    
-                                </select>
-                            </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="select_company_import">
+                                Select Company
+                            </label>
+                            <select required class="form-control m-input select2_selectbox" style="width:100%" id="select_company_import" name="select_company_import"></select>
                         </div>
+                    </div>
+                    <?php } else { ?>
+                        <div class="form-group m-form__group row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="current_company_loggedin">
+                                Company
+                            </label>
+                            <input  readonly class="form-control" id="current_company_loggedin" name="current_company_loggedin" value="">
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
                 <div class="modal-footer">
+                      <input  type="hidden" class="form-control" id="current_logged_id" name="current_logged_id" value="<?php echo get_current_company(); ?>">
                     <button type="submit" id="update_import_data_option_btn" class="btn btn-primary">
                         <i class="fa fa-check"></i> Update
                     </button>
@@ -626,7 +636,7 @@
 
 <?php $this->load->view("modal/permission.php"); ?>
 
-<div class="modal fade" id="email_template_modal" tabindex="-1" role="dialog" aria-labelledby="email_template_modal_label"
+<div class="modal fade" id="email_template_modal" role="dialog" aria-labelledby="email_template_modal_label"
     aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-slg" role="document">
         <div class="modal-content">
@@ -656,7 +666,7 @@
                                 <label for="email_template_chooser">
                                     Select Template
                                 </label>
-                                <select required class="form-control m-input" id="email_template_chooser" name="email_template_chooser"></select>
+                                <select required class="form-control m-input select2_selectbox" style="width:100%" id="email_template_chooser" name="email_template_chooser"></select>
                             </div>
                         </div>
 

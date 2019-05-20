@@ -385,9 +385,29 @@ select.form-control:not([size]):not([multiple]){
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-   padding: .1rem .8rem;     
+   padding: .0rem .8rem;     
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
     top: 13px !important;
 }
+
+.select2-container--default .select2-search--dropdown {
+    padding: 10px 10px !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+    padding: 2px !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 23px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 23px !important;
+}
+

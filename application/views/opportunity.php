@@ -77,7 +77,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="convert_to_opportunity_modal" tabindex="-1" role="dialog" aria-labelledby="convert_to_opportunity_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="convert_to_opportunity_modal" role="dialog" aria-labelledby="convert_to_opportunity_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -153,12 +153,14 @@
                                 <label>
                                     Sales Stage
                                 </label>
-                                <select required id="oppr_stage" name="oppr_stage" class="form-control m-input" >
+                                <!-- <select required id="oppr_stage" name="oppr_stage" class="form-control m-input" >
                                     <option value="">--Select Sales Stage--</option>
-                                    <?php 
-                                    echo ($sales_stages);
-                                    ?>
-                                </select>
+                                    <?php echo ($sales_stages);?>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="oppr_stage" name="oppr_stage" data-placeholder="Select Sale Stages">
+                                  <option value="">--Select Sales Stage--</option>
+                                     <?php echo ($sales_stages);?>
+								</select>
                             </div> 
                             <div class="col-lg-6">
                                 <label>
@@ -172,10 +174,14 @@
                                 <label>
                                     Lead Source
                                 </label>
-                                <select required id="oppr_source" name="oppr_source" class="form-control m-input">
+                                <!-- <select required id="oppr_source" name="oppr_source" class="form-control m-input">
                                     <option value="">--Lead Source--</option>
                                     <?php echo $lead_source;?>
-                                </select>
+                                </select> -->
+                                 <select required style="width: 100%" class="form-control select2_selectbox" id="oppr_source" name="oppr_source" data-placeholder="Select Lead Source">
+                                  <option value="">--Lead Source--</option>
+                                    <?php echo $lead_source;?>
+								</select>
                             </div> 
                             <div class="col-lg-6">
                                 <label>
@@ -206,7 +212,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="lead_modal" tabindex="-1" role="dialog" aria-labelledby="lead_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="lead_modal" role="dialog" aria-labelledby="lead_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="lead_form" action=""  data-parsley-validate>
@@ -227,29 +233,36 @@
                                 <label>
                                     Account Name
                                 </label>
-                                <select required id="lead_account" name="account_name" class="form-control m-input">
+                               <!--  <select required id="lead_account" name="account_name" class="form-control m-input">
                                     <option value=""> Select Account</option>
-                                    <?php
-                                    if(isset($account_list) && !empty($account_list))
-                                    {
-                                        foreach ($account_list as $key => $value) 
-                                        {
+                                    <?php /*  if(isset($account_list) && !empty($account_list))  {
+                                        foreach ($account_list as $key => $value)  {
                                             echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
                                         }
-                                    }
-                                    ?>
-                                </select>
+                                    }   */ ?>
+                                </select> -->
+                                 <select required style="width: 100%" class="form-control select2_selectbox" id="lead_account" name="account_name" data-placeholder="Select Account">
+                                  <option value=""> Select Account</option>
+                                     <?php  if(isset($account_list) && !empty($account_list))  {
+                                        foreach ($account_list as $key => $value)  {
+                                            echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
+                                        }
+                                    }   ?>
+								</select>
+                                
                             </div> 
                             <div class="col-lg-4">
                                 <label>
                                     Lead Owner
                                 </label>
-                                    <select required id="lead_owner_id" name="owner_id" class="form-control">
+                                  <!--   <select required id="lead_owner_id" name="owner_id" class="form-control">
                                     <option>- Select User-</option>
-                                    <?php 
-                                    echo $user_list;
-                                    ?>
-                                </select>
+                                    <?php //  echo $user_list; ?>
+                                </select> -->
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="lead_owner_id" name="owner_id" data-placeholder="Select User">
+                                  <option value=""> Select Account</option>
+                                     <?php echo $user_list; ?>
+								</select>
                             </div> 
                         </div>
 

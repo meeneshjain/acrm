@@ -374,6 +374,14 @@ class Settings extends CI_Controller {
         echo json_encode($output);
     }
     
-    
+    public function get_current_company_details(){
+         $company_info = $this->settings_model->get_current_company_details();
+        if($company_info){
+            $output = array("status" => "success","message" => "", "data" => $company_info);    
+        } else {
+            $output = array("status" => "info","message" => 'Invalid Logged in company.', "data" => "");    
+        }
+        echo json_encode($output); 
+    }
     
 }

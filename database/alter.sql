@@ -888,3 +888,8 @@ INSERT INTO `state` (`id`, `country_id`, `name`, `status`) VALUES
 
 /* /Manish*/
 -- 5-02-2019 - Feb region end
+
+
+ALTER TABLE `account` ADD `gst_no` varchar(100) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `optional_contact`;
+
+ALTER TABLE `contact_lead`ADD `pan_no` varchar(100) NOT NULL AFTER `convert_lead_date`;

@@ -51,6 +51,7 @@ class Sales_model extends CI_Model {
 		} else if($type == "sales_order"){
 			$this->db->where(array('type' => 'ORDER'));	
 		}
+		$this->db->where(array('sl.company_id' => get_current_company()));	
 		$this->db->where(array('sl.status' => '1', 'sl.is_deleted' => '0'));
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
@@ -121,10 +122,16 @@ class Sales_model extends CI_Model {
 		return strtoupper('DOC').$company_id.'00'.date('Y').''.$final_code;
 	}
 	
+	function get_account_info($account_id){
+		$query = "SELECT * FROM `account` WHERE `id` = '$account_id' AND `status` = '1'";
+		$data = $this->db->query($query)->row_array();
+		return $data;
+	}
+	
 	function get_account_list($company_id){
-		$data = $this->db->query("SELECT id, account_number, `name` 
+		$data = $this->db->query("SELECT id, account_number, `name` , `gst_no`
 		FROM `account` 
-		WHERE `status` = '1'")->result_array(); //  AND `company_id` = '$company_id'
+		WHERE `status` = '1' AND  `company_id` = '$company_id'")->result_array();
 		return $data;
 	}
 	
@@ -133,20 +140,20 @@ class Sales_model extends CI_Model {
 		CONCAT_WS('::', ipl.price1, ipl.price2, ipl.price3, ipl.price4, ipl.price5) as price_list
 		FROM `items` as it 
 		LEFT JOIN items_price_list as ipl ON it.id = ipl.item_id
-		WHERE it.`status` = '1'
-       GROUP BY id")->result_array(); //  AND `company_id` = '$company_id'
+		WHERE it.`status` = '1' AND it.`company_id` = '$company_id'
+       GROUP BY id")->result_array(); 
 		return $data;
 	}
 	
 	function get_sales_quote_list($company_id){
-		$data = $this->db->query("SELECT *
-		FROM `sales_order` as so 
-		WHERE so.`type` = 'QUOTATION'")->result_array(); //  AND `company_id` = '$company_id'
+		//$raw_query = "SELECT * FROM `sales_order` as so WHERE so.`type` = 'QUOTATION' AND `company_id` = '$company_id'";
+		$raw_query = "SELECT * FROM `sales_order` as so WHERE so.stages = 'approved' AND so.`type` = 'QUOTATION' AND `company_id` = '$company_id'";
+		$data = $this->db->query($raw_query)->result_array(); 
 		return $data;
 	}
 	
 	function get_account_contacts($account_id){
-		$data = $this->db->query("SELECT id, CONCAT(first_name, ' ', last_name) as full_name, mobile as contact_number
+		$data = $this->db->query("SELECT id, CONCAT(first_name, ' ', last_name) as full_name, mobile as contact_number, pan_no 
 		FROM `contact_lead` 
 		WHERE `status` = '1' AND `account_id` = '$account_id'")->result_array(); //  AND `company_id` = '$company_id'
 		return $data;

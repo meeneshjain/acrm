@@ -133,13 +133,13 @@ $page_name = $this->uri->segment(2);
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">Contact Person </label>
+                                <label class="text-left col-lg-2 col-form-label">Business Partner </label>
                             <div class="col-lg-3">
                                   <!-- <select required class="form-control m-input" id="contact_person" required name="contact_person">
-                                    <option value="">Select Contact Person</option>
+                                    <option value="">Select Business Partner</option>
                                 </select> -->
-                                <select required style="width: 100%" class="form-control select2_selectbox" id="contact_person" name="contact_person" data-placeholder="Select Contact Person">
-                                    <option value="">Contact Person</option>
+                                <select required style="width: 100%" class="form-control select2_selectbox" id="contact_person" name="contact_person" data-placeholder="Select Business Partner">
+                                    <option value="">Business Partner</option>
 								</select>
                                 </div>
                               <div class="col-lg-2"></div>
@@ -181,7 +181,7 @@ $page_name = $this->uri->segment(2);
                                         Free Services
                                     </label>
                             <div class="col-lg-3 pull-right contract_block">
-                                <select required class="form-control m-input" id="free_services" name="free_services">
+                                <select required class="form-control m-input select2_selectbox" style="width:100%" id="free_services" name="free_services">
                                 </select>
                             </div>
                         </div>
@@ -205,7 +205,7 @@ $page_name = $this->uri->segment(2);
                                       <input type="text" id="reponse_time" required name="reponse_time" class="form-control m-input">
                                   </div>
                                   <div class="col-md-7 get_closer_left">
-                                      <select required class="form-control m-input" id="response_time_type" name="response_time_type">
+                                      <select required class="form-control m-input select2_selectbox" style="width:100%" id="response_time_type" name="response_time_type">
                                       <option value="hours">Hour(s)</option>
                                       <option value="days">(Days)</option>
                                     </select>
@@ -218,7 +218,7 @@ $page_name = $this->uri->segment(2);
                                       <input type="text" id="resolution_time" required  name="resolution_time" class="form-control m-input">
                                   </div>
                                   <div class="col-md-7 get_closer_left">
-                                      <select required class="form-control m-input" id="resolution_time_type" name="resolution_time_type">
+                                      <select required class="form-control m-input select2_selectbox" style="width:100%" id="resolution_time_type" name="resolution_time_type">
                                       <option value="hours">Hour(s)</option>
                                       <option value="days">(Days)</option>
                                     </select>
@@ -232,7 +232,7 @@ $page_name = $this->uri->segment(2);
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">Priority </label>
                             <div class="col-lg-3">
-                                <select required class="form-control m-input" id="priority" required name="priority">
+                                <select required class="form-control m-input select2_selectbox" style="width:100%" id="priority" required name="priority">
                                     <option value="">Select Priority</option>
                                 </select>
                                 </div>
@@ -247,7 +247,7 @@ $page_name = $this->uri->segment(2);
                         <div class="form-group m-form__group row">
                                 <label class="text-left col-lg-2 col-form-label">Call Status </label>
                             <div class="col-lg-3">
-                                <select required class="form-control m-input" id="call_status" required name="call_status">
+                                <select required class="form-control m-input select2_selectbox" style="width:100%" id="call_status" required name="call_status">
                                     <option value="">Select Call Status</option>
                                 </select>
                                 </div>
@@ -282,7 +282,7 @@ $page_name = $this->uri->segment(2);
                                 Problem Origin
                             </label>
                             <div class="col-lg-3 pull-right">
-                               <select required class="form-control m-input" id="problem_origin" name="problem_origin">
+                               <select required class="form-control m-input select2_selectbox" style="width:100%" id="problem_origin" name="problem_origin">
                                     <option value="">Select Origin</option>
                                 </select>
                             </div>
@@ -299,7 +299,7 @@ $page_name = $this->uri->segment(2);
                                     Problem Type
                                 </label>
                                 <div class="col-lg-3 pull-right">
-                                <select required class="form-control m-input" id="problem_type" name="problem_type">
+                                <select required class="form-control m-input select2_selectbox" style="width:100%" id="problem_type" name="problem_type">
                                         <option value="">Select Type</option>
                                     </select>
                                 </div>
@@ -316,7 +316,7 @@ $page_name = $this->uri->segment(2);
                                     Problem Subtype
                                 </label>
                                 <div class="col-lg-3 pull-right">
-                                <select class="form-control m-input" id="problem_subtype" name="problem_subtype">
+                                <select class="form-control m-input select2_selectbox" style="width:100%" id="problem_subtype" name="problem_subtype">
                                         <option value="">Select Subtype</option>
                                     </select>
                                 </div>
@@ -333,7 +333,7 @@ $page_name = $this->uri->segment(2);
                                     Call Type
                                 </label>
                                 <div class="col-lg-3 pull-right">
-                                <select class="form-control m-input" id="call_type" name="call_type">
+                                <select class="form-control m-input select2_selectbox" style="width:100%" id="call_type" name="call_type">
                                         <option value="">Select Call Type</option>
                                     </select>
                                 </div>

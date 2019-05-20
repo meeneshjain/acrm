@@ -105,7 +105,7 @@ $items_permission = get_user_permission();
 </div>
 
 
-<div class="modal fade" id="item_modal" tabindex="-1" role="dialog" aria-labelledby="item_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="item_modal" role="dialog" aria-labelledby="item_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="item_form" action=""  data-parsley-validate>
@@ -162,7 +162,7 @@ $items_permission = get_user_permission();
                                         <label>
                                             Item Type:
                                         </label>
-                                        <select required class="form-control m-input" id="item_type" name="type">
+                                        <select required class="form-control m-input select2_selectbox" style="width:100%" id="item_type" name="type">
                                             <option value=""> --Select Type --</option>
                                             <option value="SERIAL"> SERIAL</option>
                                             <option value="BATCH"> BATCH</option>
@@ -174,7 +174,7 @@ $items_permission = get_user_permission();
                                         <label>
                                             Item Group:
                                         </label>
-                                        <select id="item_group" disabled  name="group" class="form-control m-input">
+                                        <select id="item_group" disabled  name="group" class="form-control m-input select2_selectbox" style="width:100%">
                                             <option value="SERVICE">Service</option>
                                             <option value="INVENTORY">Inventory</option>
                                         </select>
@@ -185,7 +185,7 @@ $items_permission = get_user_permission();
                                         <label>
                                             Price List:
                                         </label>
-                                        <select id="item_price_list" name="price_list" class="form-control m-input">
+                                        <select id="item_price_list" name="price_list" class="form-control m-input select2_selectbox" style="width:100%">
                                             <option value="price1"> Price 1 </option>
                                             <option value="price2"> Price 2 </option>
                                             <option value="price3"> Price 3 </option>
@@ -204,11 +204,11 @@ $items_permission = get_user_permission();
                                                     INR
                                                 </span>
                                             </div>
-                                            <input required type="text" id="itm_price1" name="price1" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price1">
-                                            <input required type="text" id="itm_price2" name="price2" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price2" style="display: none;">
-                                            <input required type="text" id="itm_price3" name="price3" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price3" style="display: none;">
-                                            <input required type="text" id="itm_price4" name="price4" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price4" style="display: none;">
-                                            <input required type="text" id="itm_price5" name="price5" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price5" style="display: none;">
+                                            <input required type="text" id="itm_price1" name="price1" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price 1">
+                                            <input required type="text" id="itm_price2" name="price2" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price 2" style="display: none;">
+                                            <input required type="text" id="itm_price3" name="price3" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price 3" style="display: none;">
+                                            <input required type="text" id="itm_price4" name="price4" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price 4" style="display: none;">
+                                            <input required type="text" id="itm_price5" name="price5" data-parsley-required-message="" class="form-control m-input itm_prc_input" placeholder="Enter price 5" style="display: none;">
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@ $items_permission = get_user_permission();
                                     UOM:
                                 </label>
                                 <div class="m-input-icon m-input-icon--right">
-                                    <select id="item_uom" name="item_uom" class="form-control m-input">
+                                    <select id="item_uom" name="item_uom" class="form-control m-input select2_selectbox" style="width:100%">
                                         <?php echo $uom_list;?>
                                     </select>
                                 </div>

@@ -85,7 +85,7 @@ $lead_permission = get_user_permission();
     </div>
 </div>
 
-<div class="modal fade" id="convert_to_opportunity_modal" tabindex="-1" role="dialog" aria-labelledby="convert_to_opportunity_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="convert_to_opportunity_modal" role="dialog" aria-labelledby="convert_to_opportunity_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -123,7 +123,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Currency
                                 </label>
-                                <select required id="oppr_currency" name="oppr_currency" class="form-control m-input">
+                                <select required id="oppr_currency" name="oppr_currency" class="form-control m-input select2_selectbox" style="width:100%">
                                     <option value="">--Currency--</option>
                                     <option value="INR"><i class="fa fa-inr"></i> INR</option>
                                     <option value="DOLLAR"><i class="fa fa-dollar"></i> Dollar</option>
@@ -149,7 +149,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Type
                                 </label>
-                                <select required id="oppr_type" name="oppr_type" class="form-control m-input">
+                                <select required id="oppr_type" name="oppr_type" class="form-control m-input select2_selectbox" style="width:100%">
                                     <option value="">--Select Type--</option>
                                     <?php echo $opp_type;?>
                                 </select>
@@ -160,7 +160,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Sales Stage
                                 </label>
-                                <select required id="oppr_stage" name="oppr_stage" class="form-control m-input" >
+                                <select required id="oppr_stage" name="oppr_stage" class="form-control m-input select2_selectbox" style="width:100%" >
                                     <option value="">--Select Sales Stage--</option>
                                     <?php 
                                     echo ($sales_stages);
@@ -179,7 +179,7 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Lead Source
                                 </label>
-                                <select required id="oppr_source" name="oppr_source" class="form-control m-input">
+                                <select required id="oppr_source" name="oppr_source" class="form-control m-input select2_selectbox" style="width:100%">
                                     <option value="">--Lead Source--</option>
                                     <?php echo $lead_source;?>
                                 </select>
@@ -214,7 +214,7 @@ $lead_permission = get_user_permission();
     </div>
 </div>
 
-<div class="modal fade" id="lead_modal" tabindex="-1" role="dialog" aria-labelledby="lead_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="lead_modal" role="dialog" aria-labelledby="lead_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="lead_form" action=""  data-parsley-validate>
@@ -235,20 +235,24 @@ $lead_permission = get_user_permission();
                                 <label>
                                     Account Name
                                 </label>
-                                <select required id="lead_account" name="account_name" class="form-control m-input">
+                                <!-- <select required id="lead_account" name="account_name" class="form-control m-input">
                                     <option value=""> Select Account</option>
-                                    <?php
-                                    if(isset($account_list) && !empty($account_list))
-                                    {
-                                        foreach ($account_list as $key => $value) 
-                                        {
+                                    <?php /* if(isset($account_list) && !empty($account_list))  {
+                                        foreach ($account_list as $key => $value)   {
                                             echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
                                         }
-                                    }
-                                    ?>
-                                </select>
+                                    }  */  ?>
+                                </select> -->
+                                 <select required style="width: 100%" class="form-control select2_selectbox" id="lead_account" name="account_name" data-placeholder="Select Account">
+                                 <option value=""> Select Account</option>
+                                      <?php if(isset($account_list) && !empty($account_list))  {
+                                        foreach ($account_list as $key => $value)   {
+                                            echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
+                                        }
+                                    }  ?>
+								</select>
                             </div> 
-                            <div class="col-lg-4">
+                           <!--  <div class="col-lg-4">
                                 <label>
                                     Lead Owner
                                 </label>
@@ -258,6 +262,15 @@ $lead_permission = get_user_permission();
                                     echo $user_list;
                                     ?>
                                 </select>
+                            </div>  -->
+                            <div class="col-lg-4">
+                                <label>
+                                    Lead Owner
+                                </label>
+                                    <select required style="width: 100%" class="form-control select2_selectbox" id="owner_id" name="account_name" data-placeholder="Select User">
+                                    <option>- Select User-</option>
+                                      <?php  echo $user_list; ?>
+								</select>
                             </div> 
                         </div>
 

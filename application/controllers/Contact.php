@@ -15,10 +15,10 @@ class Contact extends CI_Controller {
     public function index() 
     {
         $this->load->model('contact_model');
-        $companyId = $this->sessionData['company_id'];
+        $companyId = get_current_company();
         $user_role_id = $this->sessionData['user_role_id'];
         $userId = $this->sessionData['logged_in'];
-        $data['page_title'] = 'Contact';
+        $data['page_title'] = 'Business Partner';
         $data['breadcum_title'] = 'Contact';
         $data['active_sidemenu'] = "contact";
         $data['load_js'] = 'contact';
@@ -42,14 +42,14 @@ class Contact extends CI_Controller {
 
     public function contactlist()
     {
+       //  echo $companyId = get_current_company();; die;
         $this->load->model('contact_model');
         if($this->session->userdata('is_admin') == 1){
             $companyId =  'SA'; // Super Admin
-        }else if($this->session->userdata('user_role_id') == 1){
-            $companyId =  'CA'; // Company Admin
-        }
-        else{
-            $companyId = $this->sessionData['company_id'];
+        } else if($this->session->userdata('user_role_id') == 1){
+            $companyId = get_current_company();  // 'CA'; // Company Admin
+        } else{
+            $companyId = get_current_company();
         }
         $response =  $this->contact_model->contactlist($companyId);
         echo json_encode($response);
@@ -62,7 +62,7 @@ class Contact extends CI_Controller {
         if($this->input->is_ajax_request())
         {
             $data = array();
-            $companyId = $this->sessionData['company_id'];
+            $companyId = get_current_company();
             $account_list = $this->common_model->getdata($selected = 'id,account_number as text','account', $where = array('is_deleted' => '0','status' => '1','company_id' => $companyId), $limit = false, $offset = false, $orderby= false);
 
             $record = json_decode(json_encode($account_list),true);
@@ -83,7 +83,7 @@ class Contact extends CI_Controller {
     {
         if($this->input->is_ajax_request())
         {
-            $companyId = $this->sessionData['company_id'];
+            $companyId = get_current_company();
             $userId = $this->sessionData['logged_in'];
             //echo '<pre>';print_r($this->input->post());die;
 
@@ -109,6 +109,7 @@ class Contact extends CI_Controller {
                             'secondary_pincode' => $this->input->post('secondary_pincode'),
                             'secondary_country' => $this->input->post('secondary_country'),
                             'description' => $this->input->post('description'),
+                            'pan_no' => $this->input->post('pan_no'),
                             'status' => '1',
                             'is_deleted' => '0',
                         );
@@ -120,7 +121,7 @@ class Contact extends CI_Controller {
 
                 $where = array('id' => $this->input->post('id'));
                 $this->common_model->update_data('contact_lead',$data,$where);
-                echo json_encode(array("status" => "success","message" => 'Contact Updated Successfully', "data" => ""));
+                echo json_encode(array("status" => "success","message" => 'Business Partner Updated Successfully', "data" => ""));
             }
             else
             {
@@ -132,7 +133,7 @@ class Contact extends CI_Controller {
 
                 $result = $this->common_model->insert('contact_lead', $data);
 
-                echo json_encode(array("status" => "success","message" => 'Contact Added Successfully.', "data" => $result));
+                echo json_encode(array("status" => "success","message" => 'Business Partner Added Successfully.', "data" => $result));
             }
             die;
         }
@@ -146,7 +147,7 @@ class Contact extends CI_Controller {
     {
         if($this->input->is_ajax_request())
         {
-            $companyId = $this->sessionData['company_id'];
+            $companyId = get_current_company();
             $id = $this->uri->segment(3);
             if(is_numeric($id) && !empty($id))
             {
@@ -202,11 +203,11 @@ class Contact extends CI_Controller {
                     $data = array('updated_by' => $userId,'status'=>'0','is_deleted' => '1','updated_date' => DATETIME);
                     $res_data = $this->common_model->update_data('contact_lead',$data,array('id' => $value));
                 }
-                echo json_encode(array("status" => "success","message" => 'Contact Deleted Successfully!!', "data" => ''));
+                echo json_encode(array("status" => "success","message" => 'Business Partner Deleted Successfully!!', "data" => ''));
             }
             else
             {
-                echo json_encode(array("status" => "error","message" => 'Contact Id doesn\'t exist.', "data" => ""));
+                echo json_encode(array("status" => "error","message" => 'Business Partner Id doesn\'t exist.', "data" => ""));
             }
         }
         else
@@ -237,11 +238,11 @@ class Contact extends CI_Controller {
                                 );
                     $res_data = $this->common_model->update_data('contact_lead',$data,array('id' => $value));
                 }
-                echo json_encode(array("status" => "success","message" => 'Contact Converted to lead Successfully!!', "data" => ''));
+                echo json_encode(array("status" => "success","message" => 'Business Partner Converted to lead Successfully!!', "data" => ''));
             }
             else
             {
-                echo json_encode(array("status" => "error","message" => 'Contact Id doesn\'t exist.', "data" => ""));
+                echo json_encode(array("status" => "error","message" => 'Business Partner Id doesn\'t exist.', "data" => ""));
             }
         }
         else
@@ -255,7 +256,7 @@ class Contact extends CI_Controller {
         if($this->input->is_ajax_request())
         {
             //print_r($_POST);die;
-            $companyId = $this->sessionData['company_id'];
+            $companyId = get_current_company();
             $id = $this->input->post('id');
             $account_id = $this->input->post('account_id');
             $column = $this->input->post('column');
@@ -267,12 +268,12 @@ class Contact extends CI_Controller {
                 $data = $this->common_model->customQueryCount("SELECT `id` FROM `contact_lead` WHERE `id` != '$id' AND `$column` = '$value' AND `company_id` = '$companyId' AND `account_id` = '$account_id'");
                 if(!empty($data))
                 {
-                    echo json_encode(array("status" => "error","message" => 'Contact already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
+                    echo json_encode(array("status" => "error","message" => 'Business Partner already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
 
                 }
                 else
                 {
-                    echo json_encode(array("status" => "success","message" => 'Contact verified Successfully!!', "data" => ''));
+                    echo json_encode(array("status" => "success","message" => 'Business Partner verified Successfully!!', "data" => ''));
                 }
             }
             else
@@ -280,11 +281,11 @@ class Contact extends CI_Controller {
                 $data = $this->common_model->customQueryCount("SELECT `id` FROM `contact_lead` WHERE `$column` = '$value' AND `company_id` = '$companyId' AND `account_id` = '$account_id'");
                 if(!empty($data))
                 {
-                    echo json_encode(array("status" => "error","message" => 'Contact already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
+                    echo json_encode(array("status" => "error","message" => 'Business Partner already exist with same '.$value.' choose another '.$msg[0], "data" => ""));
                 }
                 else
                 {
-                    echo json_encode(array("status" => "success","message" => 'Contact verified Successfully!!', "data" => ''));
+                    echo json_encode(array("status" => "success","message" => 'Business Partner verified Successfully!!', "data" => ''));
                 }
             }
         }

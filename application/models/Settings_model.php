@@ -292,4 +292,14 @@ class Settings_model extends CI_Model {
         $res = $this->db->update('company_email_smtp', $update_data);
         return 1;
     }
+    
+     public function get_current_company_details(){
+       $logged_in_company = get_current_company();
+       if($logged_in_company != 0){
+            $select_company_detail = "SELECT * FROM `companies` WHERE `id` = '$logged_in_company'"; 
+        } else {
+            $select_company_detail = "SELECT * FROM `companies`"; 
+        }
+        return $this->db->query($select_company_detail)->row_array();    
+    }
 }

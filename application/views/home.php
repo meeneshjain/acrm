@@ -11,14 +11,14 @@
                 <div class="row" style="margin-top: 5px;">
                     <?php if($is_super_admin == 1) { ?>
                     <div class="form-group m-form__group col-sm-6">
-                     <select required class="form-control m-input report_company_change" id="company_list" name="company_list">
+                     <select required class="form-control m-input report_company_change select2_selectbox" style="width:100%" id="company_list" name="company_list">
                         <option value="">Select a company</option>
                         <?php echo $company_options; ?>
                     </select>
                     </div>
                     <?php } ?>
                     <div class="form-group m-form__group <?php echo ($is_super_admin == 0 ) ? "col-sm-12": "col-sm-6" ?>">
-                    <select required class="form-control m-input report_rm_change" id="rm_employee_list" name="rm_employee_list">
+                    <select required class="form-control m-input report_rm_change select2_selectbox" style="width:100%" id="rm_employee_list" name="rm_employee_list">
                         <option value="">Select a Regional Manager</option>
                         <?php echo $rm_list; ?>
                     </select>

@@ -12,7 +12,7 @@ $(document).ready(function () {
 		$("#cont_account").removeAttr('disabled');
 
 		$("#cont_form").attr('action', base_url + 'contact/add_update_account')
-		$(".cont_modal_heading").html('ADD NEW CONTACT');
+		$(".cont_modal_heading").html('Add New Business Partner');
 		$("#cont_action_btn").html('<i class="fa fa-save"></i> Save');
 	});
 
@@ -30,7 +30,7 @@ $(document).ready(function () {
 					hide_loading("#cont_action_btn", btn_text);
 					$("#cont_form").parsley().reset();
 					$("#cont_form")[0].reset();
-					$("#cont_modal").modal('hide');					
+					$("#cont_modal").modal('hide');
 					reloadTable("#cont_list_dt_table");
 				}
 			}, function (res) {
@@ -51,10 +51,10 @@ $(document).ready(function () {
 				if (res.status == 'success') {
 					$("#cont_modal").modal('show');
 					$("#cont_form").attr('action', base_url + 'contact/add_update_account')
-					$(".cont_modal_heading").html('EDIT CONTACT DETAIL');
+					$(".cont_modal_heading").html('edit business partner detail');
 					$("#cont_action_btn").html('<i class="fa fa-save"></i> Update');
 
-					$("#cont_account").attr('disabled','disabled');
+					$("#cont_account").attr('disabled', 'disabled');
 
 					$("#cont_id").val(res.data[0].id);
 
@@ -81,9 +81,10 @@ $(document).ready(function () {
 					$("#cont_sstate").val(res.data[0].secondary_state);
 					$("#cont_scode").val(res.data[0].secondary_pincode);
 					$("#cont_scountry").val(res.data[0].secondary_country);
+					$("#pan_no").val(res.data[0].pan_no);
 
 					$("#cont_description").val(res.data[0].description);
-				
+
 				}
 				if (res.status == 'error') {
 					notify_alert('error', res.message, "Error");
@@ -115,31 +116,31 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".multiple_contact_delete").on("click",function(){
+	$(".multiple_contact_delete").on("click", function () {
 		if ($(".contchkbx:checked").length > 0) {
-	        if (confirm("Are you sure, You want to delete selected Contact?")) {
-	            idArr = [];
-	            $('.contchkbx').each(function (index, value) {
-	                if (this.checked == true) {
-	                    idArr.push(this.value);
-	                }
-	            });
+			if (confirm("Are you sure, You want to delete selected Contact?")) {
+				idArr = [];
+				$('.contchkbx').each(function (index, value) {
+					if (this.checked == true) {
+						idArr.push(this.value);
+					}
+				});
 
-	            call_service(base_url + "contact/multiple_delete_contact/?ids=" + idArr, function (response) {
-	                if (response.status == 'success') {
-	                    reloadTable("#cont_list_dt_table");
-	                    notify_alert('success', response.message, "Success")
-	                } else {
-	                    notify_alert('danger', response.message, "Error");
-	                }
-	            }, function () {
-	                notify_alert('danger', response.message, "Error");
-	            });
-	        }
-	    }
-	    else {
-	        notify_alert('error', 'Please select at least one contact.', 'Error');
-	    }
+				call_service(base_url + "contact/multiple_delete_contact/?ids=" + idArr, function (response) {
+					if (response.status == 'success') {
+						reloadTable("#cont_list_dt_table");
+						notify_alert('success', response.message, "Success")
+					} else {
+						notify_alert('danger', response.message, "Error");
+					}
+				}, function () {
+					notify_alert('danger', response.message, "Error");
+				});
+			}
+		}
+		else {
+			notify_alert('error', 'Please select at least one contact.', 'Error');
+		}
 	});
 
 	$("#cont_list_dt_table").on("click", ".changestats", function (e) {
@@ -147,44 +148,40 @@ $(document).ready(function () {
 		var id = $obj.attr('data-id');
 		var status = $obj.attr('data-status');
 		var msg;
-		if(status == 1){ msg = 'Inactive'; }else{msg = 'Active'; }
-		if (confirm("Are you sure, you want make "+msg+"?")) {
+		if (status == 1) { msg = 'Inactive'; } else { msg = 'Active'; }
+		if (confirm("Are you sure, you want make " + msg + "?")) {
 			$obj.html('<i class="fa fa-spinner fa-spin"></i> changing..');
-			$.getJSON("contact/changestats/"+id+"/"+status,function(res){
-				if(res.status == 'success')
-				{
-					if(status == 1){ 
-						$obj.html('Inactive').removeClass('m-badge--success').addClass('m-badge--danger').attr('data-status','0');
-					}else{
-						$obj.html('Active').removeClass('m-badge--danger').addClass('m-badge--success').attr('data-status','1');
+			$.getJSON("contact/changestats/" + id + "/" + status, function (res) {
+				if (res.status == 'success') {
+					if (status == 1) {
+						$obj.html('Inactive').removeClass('m-badge--success').addClass('m-badge--danger').attr('data-status', '0');
+					} else {
+						$obj.html('Active').removeClass('m-badge--danger').addClass('m-badge--success').attr('data-status', '1');
 					}
 					notify_alert('success', res.message, "Success");
 				}
-				if(res.status == 'error')
-				{
+				if (res.status == 'error') {
 					notify_alert('danger', res.message, "Error");
 				}
 			});
 		}
 	});
 
-	$("#clone_primary_address").on("change",function(){
-		if($(this).prop("checked") == true)
-		{
-    		$("#cont_saddress").val($("#cont_paddress").val());
+	$("#clone_primary_address").on("change", function () {
+		if ($(this).prop("checked") == true) {
+			$("#cont_saddress").val($("#cont_paddress").val());
 			$("#cont_scity").val($("#cont_pcity").val());
 			$("#cont_sstate").val($("#cont_pstate").val());
 			$("#cont_scode").val($("#cont_pcode").val());
 			$("#cont_scountry").val($("#cont_pcountry").val());
-        }
-        else if($(this).prop("checked") == false)
-        {
+		}
+		else if ($(this).prop("checked") == false) {
 			$("#cont_saddress").val('');
 			$("#cont_scity").val('');
 			$("#cont_sstate").val('');
 			$("#cont_scode").val('');
 			$("#cont_scountry").val('');
-        }
+		}
 	});
 
 
@@ -269,46 +266,43 @@ $(document).ready(function () {
     /*
 	## ASSIGN CONTACT TO USER
     */
-    $(".contact_to_lead_btn").on("click", function () {
+	$(".contact_to_lead_btn").on("click", function () {
 
-    	if ($(".contchkbx:checked").length > 0) 
-    	{
-	        	$("#contat_to_lead_form").parsley().reset();
-				$("#contat_to_lead_form")[0].reset();
-				$("#contact_to_lead_modal").modal('show');
-	    }
-	    else {
-	        notify_alert('error', 'Please select at least one contact.', 'Error');
-	    }
+		if ($(".contchkbx:checked").length > 0) {
+			$("#contat_to_lead_form").parsley().reset();
+			$("#contat_to_lead_form")[0].reset();
+			$("#contact_to_lead_modal").modal('show');
+		}
+		else {
+			notify_alert('error', 'Please select at least one contact.', 'Error');
+		}
 	});
 
 });
 
 
-function convert_contact_to_lead()
-{
-	if ($("#contat_to_lead_form").parsley().validate()) 
-	{
+function convert_contact_to_lead() {
+	if ($("#contat_to_lead_form").parsley().validate()) {
 		idArr = [];
-	    $('.contchkbx').each(function (index, value) {
-	        if (this.checked == true) {
-	            idArr.push(this.value);
-	        }
-	    });
+		$('.contchkbx').each(function (index, value) {
+			if (this.checked == true) {
+				idArr.push(this.value);
+			}
+		});
 
-	    var assign_to = $("#assign_to_user_list").val();
+		var assign_to = $("#assign_to_user_list").val();
 
-	    call_service(base_url + "contact/convert_contact_to_lead/?assign_to="+assign_to+"&ids=" + idArr, function (response) {
-	        if (response.status == 'success') {
-	            reloadTable("#cont_list_dt_table");
-	            notify_alert('success', response.message, "Success");
-	            $("#contact_to_lead_modal").modal('hide');
-	        } else {
-	            notify_alert('danger', response.message, "Error");
-	        }
-	    }, function () {
-	        notify_alert('danger', response.message, "Error");
-	    });
+		call_service(base_url + "contact/convert_contact_to_lead/?assign_to=" + assign_to + "&ids=" + idArr, function (response) {
+			if (response.status == 'success') {
+				reloadTable("#cont_list_dt_table");
+				notify_alert('success', response.message, "Success");
+				$("#contact_to_lead_modal").modal('hide');
+			} else {
+				notify_alert('danger', response.message, "Error");
+			}
+		}, function () {
+			notify_alert('danger', response.message, "Error");
+		});
 	}
 }
 
@@ -316,30 +310,28 @@ function convert_contact_to_lead()
  ****** CHECK CONTACT WITH SAME EMAIL AND NUMBER *******
 */
 
-function checkDuplicate(obj,column)
-{
+function checkDuplicate(obj, column) {
 
 	var id = $("#cont_id").val();
 	var account_id = $("#cont_account").val();
 	var searchValue = $(obj).val();
 
-	var data = {"id":id,"column":column,"value":searchValue,"account_id":account_id};
+	var data = { "id": id, "column": column, "value": searchValue, "account_id": account_id };
 
-	if(searchValue != '' && account_id != '')
-	{
+	if (searchValue != '' && account_id != '') {
 		$(".checkduplicatecontact").html(' <i class="fa fa-spinner fa-spin"></i> Please wait checking contact..');
 		$.post(
-				base_url+"contact/checkDuplicate",
-				data,
-				function(response) {
-    			if(response.status == 'success'){
-    				$(".checkduplicatecontact").html('');
-    				//$(".checkduplicatecontact").html('<i class="fa fa-check"></i> Account Verified!!');
-    			}
-    			if(response.status == 'error'){
-    				$(".checkduplicatecontact").html('<div class="alert alert-danger alert-dismissible fade show   m-alert m-alert--air" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button><strong>Error: </strong>'+response.message+'</div>');
-    				$(obj).val('').focus();
-    			}
-		}, 'JSON');
+			base_url + "contact/checkDuplicate",
+			data,
+			function (response) {
+				if (response.status == 'success') {
+					$(".checkduplicatecontact").html('');
+					//$(".checkduplicatecontact").html('<i class="fa fa-check"></i> Account Verified!!');
+				}
+				if (response.status == 'error') {
+					$(".checkduplicatecontact").html('<div class="alert alert-danger alert-dismissible fade show   m-alert m-alert--air" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button><strong>Error: </strong>' + response.message + '</div>');
+					$(obj).val('').focus();
+				}
+			}, 'JSON');
 	}
 }

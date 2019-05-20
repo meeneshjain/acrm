@@ -28,7 +28,7 @@ $(document).ready(function () {
 					hide_loading("#acnt_action_btn", btn_text);
 					$("#acnt_form").parsley().reset();
 					$("#acnt_form")[0].reset();
-					$("#acnt_modal").modal('hide');					
+					$("#acnt_modal").modal('hide');
 					reloadTable("#acnt_list_dt_table");
 				}
 			}, function (res) {
@@ -63,6 +63,7 @@ $(document).ready(function () {
 					$("#acnt_other_email").val(res.data[0].email_2);
 					$("#acnt_group").val(res.data[0].group_type);
 					$("#acnt_address").val(res.data[0].address);
+					$("#gst_no").val(res.data[0].gst_no);
 				}
 				if (res.status == 'error') {
 					notify_alert('error', res.message, "Error");
@@ -94,55 +95,53 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".multiple_account_delete").on("click",function(){
+	$(".multiple_account_delete").on("click", function () {
 		if ($(".acntchkbx:checked").length > 0) {
-	        if (confirm("Are you sure, You want to delete selected accounts?")) {
-	            idArr = [];
-	            $('.acntchkbx').each(function (index, value) {
-	                if (this.checked == true) {
-	                    idArr.push(this.value);
-	                }
-	            });
+			if (confirm("Are you sure, You want to delete selected accounts?")) {
+				idArr = [];
+				$('.acntchkbx').each(function (index, value) {
+					if (this.checked == true) {
+						idArr.push(this.value);
+					}
+				});
 
-	            call_service(base_url + "account/multiple_delete_account/?ids=" + idArr, function (response) {
-	                if (response.status == 'success') {
-	                    reloadTable("#acnt_list_dt_table");
-	                    notify_alert('success', response.message, "Success")
-	                } else {
-	                    notify_alert('danger', response.message, "Error");
-	                }
-	            }, function () {
-	                notify_alert('danger', response.message, "Error");
-	            });
-	        }
-	    }
-	    else {
-	        notify_alert('error', 'Please select at least one account.', 'Error');
-	    }
+				call_service(base_url + "account/multiple_delete_account/?ids=" + idArr, function (response) {
+					if (response.status == 'success') {
+						reloadTable("#acnt_list_dt_table");
+						notify_alert('success', response.message, "Success")
+					} else {
+						notify_alert('danger', response.message, "Error");
+					}
+				}, function () {
+					notify_alert('danger', response.message, "Error");
+				});
+			}
+		}
+		else {
+			notify_alert('error', 'Please select at least one account.', 'Error');
+		}
 	});
 
-	
+
 
 	$("#acnt_list_dt_table").on("click", ".changestats", function (e) {
 		$obj = $(this);
 		var id = $obj.attr('data-id');
 		var status = $obj.attr('data-status');
 		var msg;
-		if(status == 1){ msg = 'Inactive'; }else{msg = 'Active'; }
-		if (confirm("Are you sure, you want make "+msg+"?")) {
+		if (status == 1) { msg = 'Inactive'; } else { msg = 'Active'; }
+		if (confirm("Are you sure, you want make " + msg + "?")) {
 			$obj.html('<i class="fa fa-spinner fa-spin"></i> changing..');
-			$.getJSON("account/changestats/"+id+"/"+status,function(res){
-				if(res.status == 'success')
-				{
-					if(status == 1){ 
-						$obj.html('Inactive').removeClass('m-badge--success').addClass('m-badge--danger').attr('data-status','0');
-					}else{
-						$obj.html('Active').removeClass('m-badge--danger').addClass('m-badge--success').attr('data-status','1');
+			$.getJSON("account/changestats/" + id + "/" + status, function (res) {
+				if (res.status == 'success') {
+					if (status == 1) {
+						$obj.html('Inactive').removeClass('m-badge--success').addClass('m-badge--danger').attr('data-status', '0');
+					} else {
+						$obj.html('Active').removeClass('m-badge--danger').addClass('m-badge--success').attr('data-status', '1');
 					}
 					notify_alert('success', res.message, "Success");
 				}
-				if(res.status == 'error')
-				{
+				if (res.status == 'error') {
 					notify_alert('danger', res.message, "Error");
 				}
 			});
@@ -153,36 +152,34 @@ $(document).ready(function () {
 
 });
 
-	/*
-	 ****** CHECK ACCOUNT WITH SAME EMAIL AND NUMBER *******
-	*/
+/*
+ ****** CHECK ACCOUNT WITH SAME EMAIL AND NUMBER *******
+*/
 
-	function checkDuplicate(obj,column)
-	{
-		var id = $("#acnt_id").val();
-		var searchValue = $(obj).val();
-		var data = {"id":id,"column":column,"value":searchValue};
+function checkDuplicate(obj, column) {
+	var id = $("#acnt_id").val();
+	var searchValue = $(obj).val();
+	var data = { "id": id, "column": column, "value": searchValue };
 
-		if(searchValue != '')
-		{
-			$(".checkduplicateaccount").html(' <i class="fa fa-spinner fa-spin"></i> Please wait checking account..');
-			$.post(
-					base_url+"account/checkDuplicate",
-					data,
-					function(response) {
-	    			if(response.status == 'success'){
-	    				$(".checkduplicateaccount").html('<i class="fa fa-check"></i> Account Verified!!');
-	    				$(".checkduplicateaccount").removeClass('text-danger');
-	    				$(".checkduplicateaccount").addClass('text-success');
-	    				$(".checkduplicateaccount").show().fadeOut(10000);
-	    			}
-	    			if(response.status == 'error'){
-	    				$(".checkduplicateaccount").html('<i class="fa fa-warning"></i>'+response.message);
-	    				$(".checkduplicateaccount").removeClass('text-success');
-	    				$(".checkduplicateaccount").addClass('text-danger');
-	    				$(".checkduplicateaccount").show().fadeOut(10000);
-	    				$(obj).val('').focus();
-	    			}
+	if (searchValue != '') {
+		$(".checkduplicateaccount").html(' <i class="fa fa-spinner fa-spin"></i> Please wait checking account..');
+		$.post(
+			base_url + "account/checkDuplicate",
+			data,
+			function (response) {
+				if (response.status == 'success') {
+					$(".checkduplicateaccount").html('<i class="fa fa-check"></i> Account Verified!!');
+					$(".checkduplicateaccount").removeClass('text-danger');
+					$(".checkduplicateaccount").addClass('text-success');
+					$(".checkduplicateaccount").show().fadeOut(10000);
+				}
+				if (response.status == 'error') {
+					$(".checkduplicateaccount").html('<i class="fa fa-warning"></i>' + response.message);
+					$(".checkduplicateaccount").removeClass('text-success');
+					$(".checkduplicateaccount").addClass('text-danger');
+					$(".checkduplicateaccount").show().fadeOut(10000);
+					$(obj).val('').focus();
+				}
 			}, 'JSON');
-		}
 	}
+}

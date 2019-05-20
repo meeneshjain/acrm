@@ -6,7 +6,7 @@ $contact_permission = get_user_permission();
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                   Contact List
+                   Business Partner List
                 </h3>
            </div>
         </div>
@@ -20,7 +20,7 @@ $contact_permission = get_user_permission();
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    Contact List
+                                    Business Partner List
                                 </h3>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ $contact_permission = get_user_permission();
                                         Account Name
                                     </th>
                                     <th>
-                                        Contact Name
+                                        Business Partner Name
                                     </th>
                                     <th>
                                         Mobile
@@ -90,12 +90,12 @@ $contact_permission = get_user_permission();
     </div>
 </div>
 
-<div class="modal fade" id="contact_to_lead_modal" tabindex="-1" role="dialog" aria-labelledby="contact_to_lead_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="contact_to_lead_modal" role="dialog" aria-labelledby="contact_to_lead_label" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="contact_to_lead_label">
-                    Assign Contact
+                    Assign Business Partner
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
@@ -109,7 +109,7 @@ $contact_permission = get_user_permission();
                         <label for="recipient-name" class="form-control-label">
                             Assign to User:
                         </label>
-                        <select class="form-control m-input" required id="assign_to_user_list" name="user_ids[]">
+                        <select class="form-control m-input select2_selectbox" style="width:100%" required id="assign_to_user_list" name="user_ids[]">
                             <option value="">- Select User-</option>
                             <?php 
                             echo $user_list;
@@ -130,13 +130,13 @@ $contact_permission = get_user_permission();
     </div>
 </div>
 
-<div class="modal fade" id="cont_modal" tabindex="-1" role="dialog" aria-labelledby="cont_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="cont_modal" role="dialog" aria-labelledby="cont_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="cont_form" action=""  data-parsley-validate>
                 <div class="modal-header">
                     <h4 class="modal-title cont_modal_heading" id="cont_modal_lable">
-                        EDIT CONTACT DETAIL
+                        EDIT Business Partner DETAIL
                     </h4>
                     <button type="button" class="close close_modal_common" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
@@ -152,18 +152,22 @@ $contact_permission = get_user_permission();
                                 <label>
                                     Account Name
                                 </label>
-                                <select required id="cont_account" name="account_name" class="form-control m-input">
+                               <!--  <select required id="cont_account" name="account_name" class="form-control m-input">
                                     <option value=""> Select Account</option>
-                                    <?php
-                                    if(isset($account_list) && !empty($account_list))
-                                    {
-                                        foreach ($account_list as $key => $value) 
-                                        {
+                                    <?php  if(isset($account_list) && !empty($account_list))  {
+                                        foreach ($account_list as $key => $value)  {
                                             echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
                                         }
-                                    }
-                                    ?>
-                                </select>
+                                    } ?>
+                                </select> -->
+                                 <select required style="width: 100%" class="form-control select2_selectbox" id="cont_account" name="account_name" data-placeholder="Select Account">
+                                 <option value=""> Select Account</option>
+                                     <?php  if(isset($account_list) && !empty($account_list))  {
+                                        foreach ($account_list as $key => $value)  {
+                                            echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
+                                        }
+                                    } ?>
+								</select>
                             </div> 
                         </div>
 
@@ -238,6 +242,15 @@ $contact_permission = get_user_permission();
                                     Website
                                 </label>
                                 <input type="url" id="cont_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
+                            </div>
+                        </div>
+                        
+                         <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                <label>
+                                    PAN No.
+                                </label>
+                                <input type="text" id="pan_no" name="pan_no" class="form-control m-input" placeholder="Enter PAN">
                             </div>
                         </div>
 

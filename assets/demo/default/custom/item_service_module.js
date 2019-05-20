@@ -55,7 +55,7 @@ $(document).ready(function () {
         if (obj.val() != "") {
             call_service(base_url + "sales/get_account_contacts/" + obj.val(), function (res) {
                 if (res['status'] == 'success') {
-                    var out = '<option value="">Select Contact Person</option>\n';
+                    var out = '<option value="">Select Business Partner</option>\n';
                     for (var aci = 0; aci < res['contact_list'].length; aci++) {
                         out += '<option value="' + res['contact_list'][aci]['id'] + '" data-contact_number="' + res['contact_list'][aci]['contact_number'] + '" data-contact_name="' + res['contact_list'][aci]['full_name'] + '">' + res['contact_list'][aci]['full_name'] + '</option>\n';
                     }
@@ -65,7 +65,7 @@ $(document).ready(function () {
             });
             $("#account_name").val(obj.find('option:selected').attr('data-account_name'));
         } else {
-            $("#contact_person").html('<option value="">Select Contact Person</option>\n');
+            $("#contact_person").html('<option value="">Select Business Partner</option>\n');
         }
     });
 

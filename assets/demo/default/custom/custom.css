@@ -258,9 +258,9 @@ table.dataTable tbody tr {
     background: none !important;
 }
 
-.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+/* .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
 	color : #fff !important;
-}
+} */
 
 .m-form .m-form__actions {
     padding: 15px !important;
@@ -379,4 +379,10 @@ input.parsley-error, select.parsley-error, textarea.parsley-error {
 
 text.highcharts-credits {
     display: none;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff !important;
+    border: 1px solid #e1e1e1 !important;
+    border-radius: 4px;
 }

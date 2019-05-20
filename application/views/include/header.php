@@ -374,7 +374,7 @@ if(isset($settings['default_theme'])  && $settings['default_theme'] != ""){ ?>
                                                 <span class="m-menu__link-title">
                                                     <span class="m-menu__link-wrap">
                                                         <span class="m-menu__link-text">
-                                                            Contact
+                                                            Business Partner
                                                         </span>
                                                     </span>
                                                 </span>

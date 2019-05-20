@@ -115,8 +115,9 @@ class Sales extends CI_Controller {
              if(empty($account_id) && $account_id == "" && $account_id == 0){
                   $output = array("status" => "error","message" => 'Account ID missing ', "data" => "");
                 } else {
+                    $account_info = $this->sales_model->get_account_info($account_id);
                      $contact_list = $this->sales_model->get_account_contacts($account_id);
-				     $output = array("status" => "success","message" => 'Contact List Generated', 'contact_list'=>$contact_list);
+				     $output = array("status" => "success","message" => 'Contact List Generated', 'contact_list'=>$contact_list, 'account_info'=> $account_info);
                 }
         } else {
 		   	$output = array("status" => "error","message" => 'UNAUTHORIZED ACCESS', "data" => "");

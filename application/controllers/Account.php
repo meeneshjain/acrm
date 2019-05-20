@@ -89,6 +89,7 @@ class Account extends CI_Controller {
                             'email_2' => $this->input->post('email_2'),
                             'address' => $this->input->post('address'),
                             'description' => $this->input->post('description'),
+                            'gst_no' => $this->input->post('gst_no'),
                             'status' => '1',
                             'is_deleted' => '0',
                         );
@@ -131,7 +132,7 @@ class Account extends CI_Controller {
             if(is_numeric($id) && !empty($id))
             {
                 $userId = $this->sessionData['logged_in'];
-                $data = $this->common_model->getdata($selected = 'id,account_number,name,contact_no_1,contact_no_2,email_1,email_2,description,address,status,created_date','account', $where = array('id' => $id,'company_id' => $companyId), $limit = false, $offset = false, $orderby=false);
+                $data = $this->common_model->getdata($selected = 'id,account_number,name,contact_no_1,contact_no_2,email_1,email_2,description,address,status,created_date, gst_no','account', $where = array('id' => $id,'company_id' => $companyId), $limit = false, $offset = false, $orderby=false);
                 echo json_encode(array("status" => "success","message" => '', "data" => $data));
             }
             else

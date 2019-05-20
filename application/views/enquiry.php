@@ -74,7 +74,7 @@ $account_permission = get_user_permission();
     </div>
 </div>
 
-<div class="modal fade" id="enquiry_modal" tabindex="-1" role="dialog" aria-labelledby="enquiry_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="enquiry_modal" role="dialog" aria-labelledby="enquiry_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="enquiry_form" action=""  data-parsley-validate>
@@ -131,7 +131,7 @@ $account_permission = get_user_permission();
                                     State
                                 </label>
                                 <div class="m-input-icon m-input-icon--right">
-                                    <select id="enquiry_state" name="state" class="form-control m-input">
+                                    <select id="enquiry_state" name="state" class="form-control m-input select2_selectbox" style="width:100%">
                                         <option value="">--Select State--</option>
                                         <?php echo get_states();?>
                                     </select>
@@ -173,16 +173,12 @@ $account_permission = get_user_permission();
                                 if(isset($item_list) && !empty($item_list)){
                                 ?>
                                 <label>Select Items</label>
-                                <select class="form-control" id="_item_list">
+                                <select class="form-control select2_selectbox" style="width:100%" id="_item_list">
                                     <option value="">--Select Item--</option>
-                                    <?php
-                                    foreach ($item_list as $key => $value) {
+                                    <?php  foreach ($item_list as $key => $value) {
                                     echo '<option value="'.$value['id'].'">'.$value['name'].' ('.$value['code'].' )</option>';
                                     }
                                     ?>
-                                    <option value="2">Test Item2 (Item002)</option>
-                                    <option value="3">Test Item3 (Item003)</option>
-                                    <option value="4">Test Item4 (Item004)</option>
                                 </select>
                                 <br>
                             </div>
