@@ -38,13 +38,13 @@
                                         </label>
                                     </th>
                                     <th>
-                                        Lead Name
+                                        Opportunity Name
                                     </th>
                                     <th>
                                         Account Name
                                     </th>
                                     <th>
-                                        Lead Owner
+                                        Opportunity Owner
                                     </th>
                                     <th>
                                         Expected Close Date
@@ -203,6 +203,226 @@
                     Close
                 </button>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lead_modal" tabindex="-1" role="dialog" aria-labelledby="lead_modal_lable" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="lead_form" action=""  data-parsley-validate>
+                <div class="modal-header">
+                    <h4 class="modal-title lead_modal_heading" id="lead_modal_lable">
+                        EDIT CONTACT DETAIL
+                    </h4>
+                    <button type="button" class="close close_modal_common" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                <label>
+                                    Account Name
+                                </label>
+                                <select required id="lead_account" name="account_name" class="form-control m-input">
+                                    <option value=""> Select Account</option>
+                                    <?php
+                                    if(isset($account_list) && !empty($account_list))
+                                    {
+                                        foreach ($account_list as $key => $value) 
+                                        {
+                                            echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div> 
+                            <div class="col-lg-4">
+                                <label>
+                                    Lead Owner
+                                </label>
+                                    <select required id="lead_owner_id" name="owner_id" class="form-control">
+                                    <option>- Select User-</option>
+                                    <?php 
+                                    echo $user_list;
+                                    ?>
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-6">
+                                <label>
+                                    First Name
+                                </label>
+                                <input type="hidden" id="lead_id" name="id">
+                                <input type="text" required id="lead_fname" name="first_name" class="form-control m-input" placeholder="Enter contact Name">
+                            </div>
+
+                            <div class="col-lg-6">
+                                <label>
+                                    Last Name
+                                </label>
+                                <input type="text" id="lead_lname" name="last_name" class="form-control m-input" placeholder="Enter contact number">
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row"> 
+                            <div class="col-lg-6">
+                                <label>
+                                    Mobile
+                                </label>
+                                <input type="text" required id="lead_mobile_no" name="mobile" class="form-control m-input" placeholder="Enter mobile number">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>
+                                    Email
+                                </label>
+                                <input type="email" required id="lead_email_1" name="email_1" class="form-control m-input" placeholder="Enter email address">
+                            </div> 
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                <label>
+                                    Other Contact
+                                </label>
+                                <input type="text" id="lead_other_contact" name="other_contact" class="form-control m-input" placeholder="Enter contact Name">
+                            </div>
+                            <div class="col-lg-4">
+                                <label>
+                                    Other Email
+                                </label>
+                                <input type="email" id="lead_other_email" name="other_email" class="form-control m-input" placeholder="Enter contact Name">
+                            </div>
+                            <div class="col-lg-4">
+                                <label>
+                                    Fax
+                                </label>
+                                <input type="text" id="lead_fax" name="fax" class="form-control m-input" placeholder="Enter FAX number">
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-4">
+                                <label>
+                                    Title
+                                </label>
+                                <input type="text" id="lead_title" name="title" class="form-control m-input" placeholder="Enter title">
+                            </div>
+                            <div class="col-lg-4">
+                                <label>
+                                    Department
+                                </label>
+                                <input type="text" id="lead_department" name="department" class="form-control m-input" placeholder="Enter Department">
+                            </div>
+                            <div class="col-lg-4">
+                                <label>
+                                    Website
+                                </label>
+                                <input type="text" id="lead_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-6">
+                                <label>
+                                    Primary Address
+                                </label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <textarea  required class="form-control m-input" id="lead_paddress" name="primary_address" placeholder="Enter address" ></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>
+                                    Other Address (Same as primary <input type="checkbox" id="clone_primary_address">)
+                                </label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <textarea  class="form-control m-input" id="lead_saddress" name="secondary_address" placeholder="Enter address" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-3">
+                                <label>
+                                    City
+                                </label>
+                                <input type="text"  required id="lead_pcity" name="primary_city" class="form-control m-input" placeholder="Enter city">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    State
+                                </label>
+                                <input type="text"  required id="lead_pstate" name="primary_state" class="form-control m-input" placeholder="Enter state">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    City
+                                </label>
+                                <input type="text"  id="lead_scity" name="secondary_city" class="form-control m-input" placeholder="Enter city">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    State
+                                </label>
+                                <input type="text"  id="lead_sstate" name="secondary_state" class="form-control m-input" placeholder="Enter state">
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-3">
+                                <label>
+                                    Pincode
+                                </label>
+                                <input type="text"  required id="lead_pcode" name="primary_pincode" class="form-control m-input" placeholder="Enter pincode">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    Country
+                                </label>
+                                <input type="text"  required id="lead_pcountry" name="primary_country" class="form-control m-input" placeholder="Enter country">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    Pincode
+                                </label>
+                                <input type="text"  id="lead_scode" name="secondary_pincode" class="form-control m-input" placeholder="Enter pincode">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>
+                                    Country
+                                </label>
+                                <input type="text"  id="lead_scountry" name="secondary_country" class="form-control m-input" placeholder="Enter country">
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row">
+                            <div class="col-lg-12">
+                                <label>
+                                    Description
+                                </label>
+                                <div class="m-input-icon m-input-icon--right">
+                                    <textarea  required class="form-control m-input" id="lead_description" name="description" placeholder="Enter Description" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="lead_action_btn"  class="btn btn-primary">
+                        <i class="fa fa-check"></i> Update
+                    </button>
+
+                    <button type="button" class="btn btn-danger close_modal_common" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Close
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

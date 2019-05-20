@@ -138,16 +138,16 @@
                         <div class="form-group" style="margin-top: 7px;">
                             <label class="">Profile photo</label>
                             <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
-                                <div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
-                                <img data-folder_name="company" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" style="max-width: 220px;" >
+                                <div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
+                                        <img data-folder_name="users" src="<?php echo base_url('assets/images/no.jpg') ?>" alt="..." id="changed_images" style="max-width: 220px;" >
+                                    </div>
+                                    <a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
                                 </div>
-                                <a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
-                            </div>
                             </div>
                             <div class="col-sm-12">
                             <input type="file" id="upload_images_single" data-displayname="Profile Photo"  name="..." accept="image/*"   >
-                            <input type="hidden" name="uploaded_images" value="">
+                            <input type="hidden" id="uploaded_images" name="uploaded_images">
                             
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                             <label>
                             Password
                             </label>
-                            <input required type="text" id="password" name="password" class="form-control m-input" placeholder="Enter Last Name">
+                            <input required type="text" id="password" name="password" class="form-control m-input" placeholder="Enter Password">
                         </div>
                     </div>
                     
@@ -212,7 +212,7 @@
                             <label>
                                 Other Contact /Landline
                             </label>
-                            <input required type="text" id="contact_1" name="landline" class="form-control m-input only_number" placeholder="Enter contact number">
+                            <input type="text" id="contact_1" name="landline" class="form-control m-input only_number" placeholder="Enter contact number">
                         </div>
                         <div class="col-lg-4">
                             <label>

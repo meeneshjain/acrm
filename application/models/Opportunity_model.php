@@ -103,11 +103,14 @@ class Opportunity_model extends CI_Model {
         	$row[] = get_lead_source($aRow['opp_lead_source']);
         	$row[] = convert_db_date_time($aRow['created_date']);
 
+			$actn = '';
         	if(in_array('oprt_call',$opprtunity_permission)){
-				$row[] = '<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="OPPORTUNITY"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>';
+				$actn .= ' <button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air edit_cont" data-lead-id="'.$aRow['id'].'"><i class="fa fa-edit"></i></button>';
+				$actn .= '<button class="btn btn-info m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air calls_modal" data-name="'.$aRow['first_name']." ".$aRow['last_name'].'" data-type="OPPORTUNITY"  data-account="'.$aRow['name'] ."(".$aRow['account_number'].")".'" data-contact="'.$aRow['mobile']." ".$aRow['last_name'].'" data-lead-id="'.$aRow['id'].'" data-acnt-id="'.$aRow['acnt_id'].'"><i class="fa fa-clock-o"></i></button>';
 			}else{
 				$row[] = '';
 			}
+			$row[] = $actn;
         	$output['data'][] = $row;
         }
         return $output;

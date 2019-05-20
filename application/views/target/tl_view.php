@@ -39,7 +39,7 @@
                                                     Target Assign
                                                 </span>
                                                 <span class="m-widget6__text m--font-boldest m--font-brand">
-                                                    : <?php echo $my_target['target'][0]['target_left'];?>
+                                                    : <?php echo $my_target['target'][0]['target']-$my_target['target'][0]['target_left'];?>
                                                 </span>
                                             </div>
                                             <div class="m-widget6__item">
@@ -47,7 +47,7 @@
                                                     Target Left
                                                 </span>
                                                 <span class="m-widget6__text m--font-boldest m--font-brand">
-                                                    : <?php echo $my_target['target'][0]['target']-$my_target['target'][0]['target_left'];?>
+                                                    : <?php echo $my_target['target'][0]['target_left'];?>
                                                 </span>
                                             </div>
                                         </div>

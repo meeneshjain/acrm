@@ -123,7 +123,12 @@ function generate_drop_down($value, $text, $table, $type='html',$selected_value=
 	$obj =& get_instance();
 	$obj->load->database();
 	if($table == 'users'){
-		$query = $obj->db->query("SELECT $value, $text FROM $table WHERE `id` !='".$obj->session->userdata('logged_in')."'");
+		if($obj->session->userdata('is_admin') == 1){
+			$where = "WHERE `id` !='".$obj->session->userdata('logged_in')."'";
+		}else{
+			$where = "WHERE `id` !='".$obj->session->userdata('logged_in')."' AND `company_id` = '".get_current_company()."'";
+		}
+		$query = $obj->db->query("SELECT $value, $text FROM $table $where");
 	}else if($table == 'target_duration'){
 		$query = $obj->db->query("SELECT $value, $text FROM $table WHERE `is_deleted` ='0'");
 	}else{

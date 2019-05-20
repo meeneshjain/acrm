@@ -54,7 +54,7 @@ class Company_model extends CI_Model {
 		if($this->session->userdata('is_admin') == 1){
 			$this->db->where(array('is_deleted' => '0'));
 		}
-		if($this->session->userdata('user_role_id') == 1){
+		else { //	if($this->session->userdata('user_role_id') == 1){
 			$this->db->where(array('is_deleted' => '0', 'id' => get_current_company()));
 		}
 
@@ -72,6 +72,7 @@ class Company_model extends CI_Model {
         	"data" => array()
         );
 
+		$company_permission = get_user_permission();
         foreach ($dt_result->result_array() as $aRow) {
         	
         	$row = array();
@@ -93,10 +94,12 @@ class Company_model extends CI_Model {
         	if($this->session->userdata('is_admin') == 1){
 				$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button> <button onclick="deleteCompany(this,'.$aRow['id'].')" class="btn btn-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air"><i class="fa fa-trash-o"></i></button>';
         	}
-        	else{
-				$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button>';
-        	}
-
+        	else if(in_array('comp_e',$company_permission)){
+					$row[] = '<button class="btn btn-success m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air add_update_click edit_company" data-el_id="'.$aRow['id'].'" data-form_type="edit" onclick="getDetail(this,'.$aRow['id'].')" ><i class="fa fa-edit"></i></button>';
+			}else{
+				$row[] = '';
+			}
+				
         	$output['data'][] = $row;
         }
         return $output;

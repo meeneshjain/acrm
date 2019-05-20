@@ -195,7 +195,7 @@ $contact_permission = get_user_permission();
                                 <label>
                                     Email
                                 </label>
-                                <input type="text" required id="cont_email_1" onblur="checkDuplicate(this,'email_1')" name="email_1" class="form-control m-input" placeholder="Enter email address">
+                                <input type="email" required id="cont_email_1" onblur="checkDuplicate(this,'email_1')" name="email_1" class="form-control m-input" placeholder="Enter email address">
                             </div> 
                         </div>
 
@@ -210,7 +210,7 @@ $contact_permission = get_user_permission();
                                 <label>
                                     Other Email
                                 </label>
-                                <input type="text" id="cont_other_email" name="other_email" class="form-control m-input" placeholder="Enter contact Name">
+                                <input type="email" id="cont_other_email" name="other_email" class="form-control m-input" placeholder="Enter contact Name">
                             </div>
                             <div class="col-lg-4">
                                 <label>
@@ -237,7 +237,7 @@ $contact_permission = get_user_permission();
                                 <label>
                                     Website
                                 </label>
-                                <input type="text" id="cont_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
+                                <input type="url" id="cont_website" name="website_url" class="form-control m-input" placeholder="Enter website url">
                             </div>
                         </div>
 

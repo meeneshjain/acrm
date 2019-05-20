@@ -197,9 +197,23 @@
 												Your Profile
 											</div>
 											<div class="m-card-profile__pic">
-												<div class="m-card-profile__pic-wrapper">
-													<img src="<?php echo base_url('assets/app/media/img/users/user4.jpg');?>" alt=""/>
+													<?php
+													$profile_img = base_url().'assets/images/no.png';
+													$db_img = 'assets/images/no.png';
+													if(isset($userdetail['profile_pic']) && !empty($userdetail['profile_pic']))
+													{
+														$profile_img = base_url().$userdetail['profile_pic'];
+														$db_img = $userdetail['profile_pic'];
+													}
+													?>
+												<div class="fileinput fileinput-new thum_img_outer" data-provides="fileinput">
+													<div class="fileinput-new thumbnail thum_img" style="height: 120px;" data-trigger="fileinput">
+														<img data-folder_name="users" src="<?php echo $profile_img; ?>" alt="..." id="changed_images" style="max-width: 220px;" >
+													</div>
+													<a href="<?php echo base_url("home/remove_image"); ?>" class="btn btn-sm btn-pill btn-danger deleteImage hide" style="display:none"><i class="fa fa-times"></i></a>
 												</div>
+												<input type="file" id="upload_images_single" data-displayname="Profile Photo"  name="..." accept="image/*"   >
+                            					<br>
 
 											</div>
 											<div class="m-card-profile__details">
@@ -268,6 +282,7 @@
 																<label>
 																	First Name:
 																</label>
+																<input type="hidden" name="uploaded_images" value="<?php echo $db_img;?>">
 																<input type="hidden" name="id" value="<?php echo $userdetail['id'];?>">
 																<input type="text" required id="u_first_name" name="first_name" class="form-control m-input" placeholder="Enter first name" value="<?php echo $userdetail['first_name'];?>">
 																

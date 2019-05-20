@@ -29,8 +29,14 @@ class Account extends CI_Controller {
     {
         $account_permission = get_user_permission();
 
-        $companyId = $this->sessionData['company_id'];
-        $response =  $this->common_model->get_datatable_json("account as a",array( 'a.id', 'a.account_number', 'a.name', 'a.description', 'a.contact_no_1', 'a.email_1', 'a.created_date', 'a.status'),array('is_deleted' => '0','company_id' => $companyId),"'id', 'DESC'");
+        if($this->session->userdata('is_admin') == 1){
+            $companyId = $this->sessionData['company_id'];
+            $response =  $this->common_model->get_datatable_json("account as a",array( 'a.id', 'a.account_number', 'a.name', 'a.description', 'a.contact_no_1', 'a.email_1', 'a.created_date', 'a.status'),array('is_deleted' => '0'),"'id', 'DESC'");
+        }else{
+            $companyId = $this->sessionData['company_id'];
+            $response =  $this->common_model->get_datatable_json("account as a",array( 'a.id', 'a.account_number', 'a.name', 'a.description', 'a.contact_no_1', 'a.email_1', 'a.created_date', 'a.status'),array('is_deleted' => '0','company_id' => $companyId),"'id', 'DESC'");
+        }
+
 
         //echo '<PRE>';print_r($response['data']);die;
 

@@ -46,7 +46,12 @@ class User_model extends CI_Model {
 			$this->db->group_end();       
 		}
 
-		$this->db->where(array('us.status' => '1', 'us.is_deleted' => '0','company_id' => $companyId));
+		if($companyId == 'SA'){ // SA -Super Admin
+			$this->db->where(array('us.status' => '1', 'us.is_deleted' => '0'));
+		}else{
+			$this->db->where(array('us.status' => '1', 'us.is_deleted' => '0','company_id' => $companyId));
+		}
+
 		$this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $dt_columns)), false);
 		$this->db->from($dt_table);
         $this->db->join('companies as c', 'c.id=us.company_id', 'left');
@@ -187,7 +192,7 @@ class User_model extends CI_Model {
 	public function user_detail($companyId,$userId)
 	{
 		$data = array();
-		$user = $this->db->query("SELECT `u`.`id`,`u`.`email`,`u`.`user_role_id`,`u`.`company_id`,`u`.`first_name`,`u`.`last_name`,`u`.`mobile_no`,`u`.`landline`,`u`.`address`,`u`.`designation`,`u`.`dob`,`u`.`doj`,`u`.`status`,`u`.`is_deleted`,`u`.`created_date` FROM `users` as `u` WHERE `u`.`company_id` = '$companyId' AND `u`.`id` = '$userId'")->row_array();
+		$user = $this->db->query("SELECT `u`.`id`,`u`.`email`,`u`.`user_role_id`,`u`.`company_id`,`u`.`first_name`,`u`.`last_name`,`u`.`mobile_no`,`u`.`landline`,`u`.`address`,`u`.`designation`,`u`.`dob`,`u`.`doj`,`u`.`status`,`u`.`is_deleted`,`u`.`created_date`,`u`.`profile_pic` FROM `users` as `u` WHERE `u`.`company_id` = '$companyId' AND `u`.`id` = '$userId'")->row_array();
 		$data = $user;
 		$role = $this->db->query("SELECT `ur`.`id` as `role_id`,`ur`.`name` FROM `user_roles` as `ur` WHERE `ur`.`id` = '".$user['user_role_id']."'")->row_array();
 		$data['roledetail'] = $role;
@@ -220,6 +225,7 @@ class User_model extends CI_Model {
 			"landline" => $post_data['landline'],
 			"address" => $post_data['address'],
 			"dob" => $post_data['dob'],
+			'profile_pic'=> ($post_data['uploaded_images']) ? $post_data['uploaded_images'] : DEFAULT_IMAGE,
 			"address" => $post_data['address'],
 			'updated_date' => DATETIME,
 		);

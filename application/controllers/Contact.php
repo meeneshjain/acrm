@@ -43,7 +43,14 @@ class Contact extends CI_Controller {
     public function contactlist()
     {
         $this->load->model('contact_model');
-        $companyId = $this->sessionData['company_id'];
+        if($this->session->userdata('is_admin') == 1){
+            $companyId =  'SA'; // Super Admin
+        }else if($this->session->userdata('user_role_id') == 1){
+            $companyId =  'CA'; // Company Admin
+        }
+        else{
+            $companyId = $this->sessionData['company_id'];
+        }
         $response =  $this->contact_model->contactlist($companyId);
         echo json_encode($response);
         die;
