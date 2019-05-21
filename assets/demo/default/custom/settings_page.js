@@ -530,21 +530,69 @@ $(document).ready(function (event) {
         var button_title = '<i class="fa fa-save"></i> Import';
         var form_action = base_url + "settings/import_data";
         call_service(base_url + "settings/get_current_company_details/", function (res) {
-            //var import_key = obj.data("import_key");
             var import_label = obj.data("import_label");
+            $("#import_key").val(obj.data("import_key"));
             $("#import_data_option_form").attr('action', form_action);
             $("#import_data_option_lable").html(import_label);
             $("#update_import_data_option_btn").html(button_title);
             $("#import_data_modal").modal('show');
             if (res.status == 'success') {
                 if ($("#current_logged_id").val() == "0") {
-                   //   $("#current_company_loggedin").val(res.data.company_name);
+                    //   $("#current_company_loggedin").val(res.data.company_name);
+                    var company_opption_html = '<option>Select a company</option>';
+                    for (var i = 0; i < res.data.length; i++) {
+                        if (res.data[i] !== undefined) {
+                            company_opption_html += '<option value="' + res.data[i]['id'] + '">' + res.data[i]['company_name'] + '</option>';
+                        }
+                    }
+                    console.log(company_opption_html);
+                    $("#select_company_import").html(company_opption_html);
                 } else {
                     $("#current_company_loggedin").val(res.data.company_name);
                 }
             }
+        }, function (res) {
+
         });
     });
+
+    $(document).on("submit", "#import_data_option_form", function (event) {
+        event.preventDefault();
+        var formData = new FormData();
+        var form_obj = $(this);
+        formData.append('file', $('#importfile')[0].files[0]);
+        var btn_id = '#update_import_data_option_btn';
+        btn_text = $(btn_id).html();
+        if (form_obj.parsley().validate()) {
+            show_loading(btn_id, 'Importing..!');
+            var company_id = '';
+            if ($("#current_logged_id").val() == 1) {
+                company_id = $("#current_logged_id").val();
+            } else {
+                company_id = $("[name='select_company_import']").val();
+            }
+            $.ajax({
+                url: base_url + "settings/import_excel/" + $("#import_key").val() + '/' + company_id,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    hide_loading(btn_id, btn_text);
+
+                }, error: function (data) {
+                    hide_loading(btn_id, btn_text);
+
+                }
+            });
+        }
+
+
+
+
+    });
+
 
 }); // dom end 
 
