@@ -82,8 +82,8 @@ $(document).ready(function () {
 
 					$("#lead_id").val(res.data[0].id);
 
-					$("#lead_account").val(res.data[0].account_id);
-					$("#lead_owner_id").val(res.data[0].owner_id);
+					$("#lead_account").val(res.data[0].account_id).trigger('change');
+					$("#owner_id").val(res.data[0].owner_id).trigger('change');
 					$("#lead_fname").val(res.data[0].first_name);
 					$("#lead_lname").val(res.data[0].last_name);
 					$("#lead_mobile_no").val(res.data[0].mobile);

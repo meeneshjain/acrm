@@ -1,5 +1,5 @@
 	/*
-	 ******** SAVE / UPDATE LEAD ********
+	 ******** SAVE / UPDATE OPPORTUNITY ********
 	*/
 	$("#lead_action_btn").click(function () {
 		var obj = $(this);
@@ -23,7 +23,7 @@
 	});
     
     /*
-	 ******** EDIT LEAD ********
+	 ******** EDIT OPPORTUNITY ********
 	*/
 	$("#lead_list_dt_table").on("click", ".edit_cont", function (e) {
 		var id = $(this).attr('data-lead-id');
@@ -40,8 +40,8 @@
 
 					$("#lead_id").val(res.data[0].id);
 
-					$("#lead_account").val(res.data[0].account_id);
-					$("#lead_owner_id").val(res.data[0].owner_id);
+					$("#lead_account").val(res.data[0].account_id).trigger('change');
+					$("#lead_owner_id").val(res.data[0].owner_id).trigger('change');
 					$("#lead_fname").val(res.data[0].first_name);
 					$("#lead_lname").val(res.data[0].last_name);
 					$("#lead_mobile_no").val(res.data[0].mobile);
@@ -76,4 +76,23 @@
 				notify_alert('error', res.message, "Error");
 			}
 		);
+	});
+
+	$("#clone_primary_address").on("change",function(){
+		if($(this).prop("checked") == true)
+		{
+    		$("#lead_saddress").val($("#lead_paddress").val());
+			$("#lead_scity").val($("#lead_pcity").val());
+			$("#lead_sstate").val($("#lead_pstate").val());
+			$("#lead_scode").val($("#lead_pcode").val());
+			$("#lead_scountry").val($("#lead_pcountry").val());
+        }
+        else if($(this).prop("checked") == false)
+        {
+			$("#lead_saddress").val('');
+			$("#lead_scity").val('');
+			$("#lead_sstate").val('');
+			$("#lead_scode").val('');
+			$("#lead_scountry").val('');
+        }
 	});

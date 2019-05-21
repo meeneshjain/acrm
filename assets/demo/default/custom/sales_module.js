@@ -479,13 +479,22 @@ function get_sales_details(id, called_from) {
                 $("#ref_quote_no").val(header_data.sales_quote_ref_id);
             }
             $(".ref_quote_no_label label").html(header_data.sales_quote_ref_id);
-            $("#pay_terms").val(header_data.pay_terms);
+            /*$("#pay_terms").val(header_data.pay_terms);
             $("#remark").val(header_data.remarks);
             $("#total_amount").val(header_data.total_amount);
             $("#other_charges").val(header_data.other_charges);
             $("#total_tax").val(header_data.total_tax);
             $("#final_discount").val(header_data.discount);
-            $("#actual_total").val(header_data.actual_total);
+            $("#actual_total").val(header_data.actual_total);*/
+
+            $("#pay_terms").val(header_data.pay_terms);
+            $("#remark").val(header_data.remarks);
+            $("#total_amount").attr('value',header_data.total_amount);
+            $("#other_charges").attr('value',header_data.other_charges);
+            $("#total_tax").attr('value',header_data.total_tax);
+            $("#final_discount").attr('value',header_data.discount);
+            $("#actual_total").attr('value',header_data.actual_total);
+
             $("#sales_order_quotation_id").val(header_data.id);
             if (called_from != "quote") {
                 $("#sale_stages").val(header_data.stages);
@@ -597,4 +606,22 @@ function delete_sale(id) {
             notify_alert('danger', response.message, "Error");
         });
     }
+}
+
+function printSalesOrder(){
+    var mywindow = window.open('', 'Print PDF', 'height=700,width=900');
+    mywindow.document.write('<html><head><title>Sales Order/Quote</title>');
+
+    mywindow.document.write('<link href="'+base_url+'/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css">');
+    mywindow.document.write('<link href="'+base_url+'/assets/vendors/base/vendors.bundle.css?q=1558377706" rel="stylesheet" type="text/css">');
+    mywindow.document.write('<link href="'+base_url+'/assets/demo/default/custom/themes/css/purple_red.css" rel="stylesheet" type="text/css">');
+    mywindow.document.write('<link href="'+base_url+'/assets/demo/default/custom/custom.css?q=1558377706" rel="stylesheet" type="text/css">');
+    mywindow.document.write('<link href="'+base_url+'/assets/demo/default/custom/no-padding.css?q=1558377706" rel="stylesheet" type="text/css" rel="stylesheet" type="text/css">');
+    mywindow.document.write('<style> .select2-selection__arrow{ display:none !important;} .form-control {     background-color: #fff !important;   background-clip: padding-box !important;    border: 1px solid #FFF !important;} .form-control, .form-control[readonly] {    border-color: #FFF !important;    color: #575962 !important;} .select2-container--default .select2-selection--single {    background-color: #fff !important;  border: 1px solid #FFFF !important;    border-radius: 4px; }  .btn {  display: none !important; } .m-table.m-table--head-bg-success thead th {    background: #34bfa3 !important;    color: #fff;    border-bottom: 0;    border-top: 0;} .col-sm-12 {    flex: auto !important;    max-width: 100% !important;    width: 100% !important;    clear: both !important;}  hr{     border: 1px solid black;   width: 100%;   margin-top: 20px; } </style>');
+
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<div style="width:100% !important" class=" text-center"><h2>Sales Order/Quote</h2></div> <br> <hr>');
+    mywindow.document.write($('#modalDiv').clone().html());
+    mywindow.document.write('</body></html>');
+    setTimeout(function(){mywindow.print();},3000);
 }

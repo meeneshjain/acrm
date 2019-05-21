@@ -139,16 +139,16 @@ $(document).ready(function () {
 
                 // call details  - start
                 $("#priority").val(header_data.priority);
-                $("#problem_origin").val(header_data.problem_origin);
-                $("#problem_type").val(header_data.problem_type);
-                $("#problem_subtype").val(header_data.problem_subtype);
+                $("#problem_origin").val(header_data.problem_origin).trigger('change');
+                $("#problem_type").val(header_data.problem_type).trigger('change');
+                $("#problem_subtype").val(header_data.problem_subtype).trigger('change');
                 $("#call_subject").val(header_data.subject);
                 $("#call_description").val(header_data.description);
                 $("#technician").val(header_data.technician);
                 $("#given_by").val(header_data.given_by);
                 $("#given_to").val(header_data.given_to);
-                $("#call_type").val(header_data.call_type);
-                $("#call_status").val(header_data.call_status);
+                $("#call_type").val(header_data.call_type).trigger('change');
+                $("#call_status").val(header_data.call_status).trigger('change');
                 setTimeout(function () {
                     $("#call_status").trigger('change');
                 }, 500);
@@ -235,13 +235,13 @@ function fill_header_data(header_data) {
     }, 500);
     $("#item_code").val(header_data.item_id);
     $("#item_code").trigger('change');
-    $("#resolution_time_type").val(header_data.resolution_duration_type);
+    $("#resolution_time_type").val(header_data.resolution_duration_type).trigger('change');
     $("#resolution_time").val(header_data.resolution_time);
-    $("#response_time_type").val(header_data.response_duration_type);
+    $("#response_time_type").val(header_data.response_duration_type).trigger('change');
     $("#reponse_time").val(header_data.response_time);
     $("#serial_number").val(header_data.serial_number);
     $("#serviec_status").val(header_data.stage);
-    $("#free_services").val(header_data.free_services);
+    $("#free_services").val(header_data.free_services).trigger('change');
     $("#start_date").val(header_data.start_date);
     $("#end_date").val(header_data.end_date);
     $("#remark").val(header_data.remark);

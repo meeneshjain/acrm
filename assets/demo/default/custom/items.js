@@ -85,8 +85,8 @@ $(document).ready(function () {
 
 					$("#item_name").val(res.data[0].name);
 					$("#item_code").val(res.data[0].code);
-					$("#item_type").val(res.data[0].type);
-					$("#item_group").val(res.data[0].group_type);
+					$("#item_type").val(res.data[0].type).trigger('change');
+					$("#item_group").val(res.data[0].group_type).trigger('change');
 					$("#item_unit").val(res.data[0].unit);
 					$("#item_description").val(res.data[0].description);
 

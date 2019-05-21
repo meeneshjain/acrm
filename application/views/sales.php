@@ -1,6 +1,7 @@
 <?php
 $sales_permission = get_user_permission();
 ?>
+
 <div class="m-grid__item m-grid__item--fluid m-wrapper">
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
@@ -112,21 +113,22 @@ $sales_permission = get_user_permission();
                     <h4 class="modal-title" id="add_update_user_modal_label">
                     <?php echo $popup_title; ?>
                     </h4>
+                    <button onclick="printSalesOrder()" type="button">Print</button>
                     <button type="button" class="close close_modal_common" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             &times;
                         </span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
+                <div class="modal-body" id="modalDiv">
+                    <div>
                         <div class="form-group m-form__group row ref_quote_no_block">
-                             <label class="text-left col-lg-2 col-form-label ">
+                            <label class="text-left col-lg-2 col-form-label ">
                                 Reference Quotation Number
                             </label>
-                            <div class="col-lg-3 pull-right  ">
+                            <div class="col-lg-3 col-sm-3 pull-right  ">
                            <!--  <input type="text" id="ref_quote_no" name="ref_quote_no" class="form-control m-input ref_quote_no_block" placeholder="Reference Quotation Number"> -->
-                           <div class="ref_sales_order_input">
+                            <div class="ref_sales_order_input">
                               <!--  <select class="form-control m-input" id="ref_quote_no" name="ref_quote_no">
                                    <option value="">Select Sales Quotation Number</option>
                                 </select> -->
@@ -135,17 +137,17 @@ $sales_permission = get_user_permission();
                                 </select>
                             </div>
                             <div class="ref_quote_no_label" style="display:none;">
-                             <label class="text-left col-lg-2 col-form-label "></label>
+                             <label class="text-left col-lg-2 col-sm-2 col-form-label "></label>
                             </div>
                         </div>
                         
-                        <div class="col-lg-2 loader_block" style="display:none;">
+                        <div class="col-lg-2 col-sm-2 loader_block" style="display:none;">
                             <span><i class="fa fa-spinner fa-spin fa-2x mt-2"></i></span>
                         </div>
                         </div>
                         <div class="form-group m-form__group row">
-                            <label class="text-left col-lg-2 col-form-label">Account Code </label>
-                            <div class="col-lg-3">
+                            <label class="text-left col-lg-2 col-sm-2 col-form-label">Account Code </label>
+                            <div class="col-lg-3 col-sm-3">
                                <!--  <select required class="form-control m-input" id="account_code" name="account_code">
                                     <option value="">Account Code</option>
                                     <?php // echo $account_numbers; ?>
@@ -155,54 +157,54 @@ $sales_permission = get_user_permission();
                                   <?php echo $account_numbers; ?>
                                 </select>
                             </div>
-                            <div class="col-lg-2"></div>
-                            <label class="text-left col-lg-2 col-form-label">   Document Number  </label>
-                            <div class="col-lg-3 pull-right">
+                            <div class="col-lg-2 col-sm-2"></div>
+                            <label class="text-left col-lg-2 col-sm-2 col-form-label">   Document Number  </label>
+                            <div class="col-lg-3 col-sm-3 pull-right">
                                     <input type="text" id="doc_number" required readonly name="doc_number" class="form-control m-input" placeholder="Enter Document Number">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">Account Name </label>
-                            <div class="col-lg-3">
+                                <label class="text-left col-lg-2 col-sm-2 col-form-label">Account Name </label>
+                            <div class="col-lg-3 col-sm-3">
                                   <input type="text" id="account_name" name="account_name" required readonly class="form-control m-input" placeholder="Enter Account Name ">
                                 </div>
-                             <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label">
+                             <div class="col-lg-2 col-sm-2"></div>
+                                    <label class="text-left col-lg-2 col-sm-2 col-form-label">
                                         Document Date
                                     </label>
-                            <div class="col-lg-3 pull-right">
+                            <div class="col-lg-3 col-sm-3 pull-right">
                                     <input type="text" id="doc_date" readonly name="doc_date" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">Delivery Address </label>
-                            <div class="col-lg-3">
+                                <label class="text-left col-lg-2 col-sm-2 col-form-label">Delivery Address </label>
+                            <div class="col-lg-3 col-sm-3">
                                   <input type="text" id="delivery_address" name="delivery_address" class="form-control m-input" placeholder="Enter Delivery Address">
                                 </div>
-                              <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label">
+                              <div class="col-lg-2 col-sm-2"></div>
+                                    <label class="text-left col-lg-2 col-sm-2 col-form-label">
                                        Delivery Date
                                     </label>
-                            <div class="col-lg-3 pull-right">
+                            <div class="col-lg-3 col-sm-3 pull-right">
                                     <input type="text" id="delivery_date" readonly name="delivery_date" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="Enter Delivery Date">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">GST No. </label>
-                            <div class="col-lg-3">
+                                <label class="text-left col-lg-2 col-sm-2 col-form-label">GST No. </label>
+                            <div class="col-lg-3 col-sm-3">
                                   <input type="text" id="gst_number" name="gst_number" class="form-control m-input" placeholder="Enter GST. No">
                                 </div>
-                              <div class="col-lg-2"></div>
-                                    <label class="text-left col-lg-2 col-form-label">
+                              <div class="col-lg-2 col-sm-2"></div>
+                                    <label class="text-left col-lg-2 col-sm-2 col-form-label">
                                         Valid Till
                                     </label>
-                            <div class="col-lg-3 pull-right">
+                            <div class="col-lg-3 col-sm-3 pull-right">
                                     <input type="text" id="valid_till" readonly name="valid_till" class="form-control m-input crm_datepicker" value="<?php echo DATE ?>" placeholder="Enter Document Date">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">Business Partner </label>
-                            <div class="col-lg-3">
+                                <label class="text-left col-lg-2 col-sm-2 col-form-label">Business Partner </label>
+                            <div class="col-lg-3 col-sm-3">
                                  <!--  <select required class="form-control m-input" id="contact_person" required name="contact_person">
                                     <option value="">Select Business Partner</option>
                                 </select> -->
@@ -210,40 +212,40 @@ $sales_permission = get_user_permission();
                                   <option value="">Select Business Partner</option>
                                 </select>
                                 </div>
-                              <div class="col-lg-2"></div>
-                             <label class="text-left col-lg-2 col-form-label">Contact Number </label>
-                            <div class="col-lg-3">
+                              <div class="col-lg-2 col-sm-2"></div>
+                             <label class="text-left col-lg-2 col-sm-2 col-form-label">Contact Number </label>
+                            <div class="col-lg-3 col-sm-3">
                                   <input type="text" id="contact_no" required readonly name="contact_no" class="form-control m-input" placeholder="Enter Contact Number">
                                   <input type="hidden" id="contact_person_name" required readonly name="contact_name" class="form-control m-input" placeholder="">
                                 </div>
                         </div>
                         <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">PAN No. </label>
-                            <div class="col-lg-3">
+                                <label class="text-left col-lg-2 col-sm-2 col-form-label">PAN No. </label>
+                            <div class="col-lg-3 col-sm-3">
                                   <input type="text" id="pan_no" name="pan_no" class="form-control m-input" placeholder="Enter PAN No.">
                                 </div>
-                              <div class="col-lg-2"></div>
-                              <label class="text-left col-lg-2 col-form-label"> Sales Employee </label>
-                            <div class="col-lg-3 pull-right">
+                              <div class="col-lg-2 col-sm-2"></div>
+                              <label class="text-left col-lg-2 col-sm-2 col-form-label"> Sales Employee </label>
+                            <div class="col-lg-3 col-sm-3 pull-right">
                                 <input type="text" id="sales_employee" required name="sales_employee" class="form-control m-input" placeholder="Enter Sales Employee" value="<?php echo  $sales_employee_name; ?>">
                             </div>     
                         </div>
                          <div class="form-group m-form__group row">
-                                <label class="text-left col-lg-2 col-form-label">
+                                <label class="text-left col-lg-2 col-sm-2 col-form-label">
                                         Stages
                                     </label>
-                            <div class="col-lg-3 pull-right">
+                            <div class="col-lg-3 col-sm-3 pull-right">
                                 <select required class="form-control m-input" id="sale_stages" required name="status">
                                 </select>
                                 </div>
-                                 <div class="col-lg-2"></div>
+                                 <div class="col-lg-2 col-sm-2"></div>
                                 <!-- reference  -->
-                                <div class="text-left col-lg-2">
+                                <div class="text-left col-lg-2 col-sm-2">
                                 <label class="col-form-label revision_box_show sale_stages_sections"  style="display:none;">
                                      Is New Revision ?  
                                 </label>
                                 </div>
-                                <div class="col-lg-3 pull-right revision_box_show  sale_stages_sections" style="display:none;">
+                                <div class="col-lg-3 col-sm-3 pull-right revision_box_show  sale_stages_sections" style="display:none;">
                                 <span class="m-switch m-switch--icon pull-left">
                                         <label>
                                             <input type="checkbox" id="is_new_revision" name="is_new_revision" value="1">
@@ -254,13 +256,13 @@ $sales_permission = get_user_permission();
                             </div>
                         </div>
                         <div class="form-group m-form__group row">
-                            <div class="text-left col-lg-2">
+                            <div class="text-left col-lg-2 col-sm-2">
                                 <label class="col-form-label cancel_reason_box sale_stages_sections" style="display:none;"> Cancel Reason </label>    
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 col-sm-3">
                                   <textarea rows="3" id="cancel_reason" name="cancel_reason" required class="form-control m-input cancel_reason_box sale_stages_sections" style="display:none;" placeholder="Cancel Reason"></textarea>
                             </div>
-                                <div class="col-lg-2"></div>
+                                <div class="col-lg-2 col-sm-2"></div>
                                 
                         </div>
                     </div>
@@ -307,31 +309,31 @@ $sales_permission = get_user_permission();
                     <hr>  
                     </div>
                     <div class="form-group m-form__group row">
-                    <div class="col-md-6 row">
-                    <label class="text-left col-lg-3 col-form-label">Pay Terms</label>
-                        <div class="col-lg-7">
+                    <div class="col-md-6 col-sm-6 row">
+                    <label class="text-left col-lg-3 col-sm-3 col-form-label">Pay Terms</label>
+                        <div class="col-lg-7 col-sm-7">
                             <textarea type="text" rows="3" id="pay_terms" name="pay_terms" class="form-control m-input" placeholder="Enter Payment Terms"></textarea>
                         </div>
-                        <label class="text-left col-lg-3 col-form-label">Remark</label>
-                        <div class="col-lg-7">
+                        <label class="text-left col-lg-3 col-sm-3 col-form-label">Remark</label>
+                        <div class="col-lg-7 col-sm-7">
                             <textarea type="text" rows="3" id="remark" name="remark" class="form-control m-input" placeholder="Enter Remark"></textarea>
                         </div>
                         
                     </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4 row">
-                    <label class="text-left col-lg-5 col-form-label"> Total Amount </label>
-                    <div class="col-lg-7 pull-right">
-                            <input type="text" id="total_amount" readonly  name="total_amount" class="form-control m-input" placeholder="Total Amount">
+                    <div class="col-md-2 col-sm-2"></div>
+                    <div class="col-md-4 col-sm-4 row">
+                    <label class="text-left col-lg-5 col-sm-5 col-form-label"> Total Amount </label>
+                    <div class="col-lg-7 col-sm-7 pull-right">
+                            <input type="text" id="total_amount" readonly  name="total_amount" class="form-control m-input" placeholder="Total Amount" value="">
                         </div>
-                         <label class="text-left col-lg-5 col-form-label"> Other Charges </label>
-                    <div class="col-lg-7 pull-right">
-                            <input type="text" id="other_charges"  name="other_charges" class="form-control m-input actual_calculator" placeholder="Other Charges">
+                         <label class="text-left col-lg-5 col-sm-5 col-form-label"> Other Charges </label>
+                    <div class="col-lg-7 col-sm-7 pull-right">
+                            <input type="text" id="other_charges"  name="other_charges" class="form-control m-input actual_calculator" placeholder="Other Charges" value="">
                         </div>
                         <div class="input-group m-form__group">
-                         <label class="text-left col-lg-5 col-form-label"> Tax on other charges </label>
-                            <div class="col-lg-6 pull-right">
-                            <input type="text" id="total_tax"  name="total_tax" class="form-control m-input actual_calculator pull-left" placeholder="Tax on other charges">
+                         <label class="text-left col-lg-5 col-sm-5 col-form-label"> Tax on other charges </label>
+                            <div class="col-lg-6 col-sm-6 pull-right">
+                            <input type="text" id="total_tax"  name="total_tax" class="form-control m-input actual_calculator pull-left" placeholder="Tax on other charges" value="">
                             <div class="input-group-append" style="margin-top: -3px;">
                                 <span class="input-group-text" id="basic-addon2">
                                   %
@@ -340,9 +342,9 @@ $sales_permission = get_user_permission();
                         </div>
                         </div>
                         <div class="input-group m-form__group">
-                         <label class="text-left col-lg-5 col-form-label"> Discount </label>
-                    <div class="col-lg-6 pull-right">
-                            <input type="text" id="final_discount"  name="final_discount" class="actual_calculator form-control m-input pull-left" placeholder="Discount">
+                         <label class="text-left col-lg-5 col-sm-5 col-form-label"> Discount </label>
+                    <div class="col-lg-6 col-sm-6 pull-right">
+                            <input type="text" id="final_discount"  name="final_discount" class="actual_calculator form-control m-input pull-left" placeholder="Discount" value="">
                             <div class="input-group-append" style="margin-top: -3px;">
                                 <span class="input-group-text" id="basic-addon2">
                                   %
@@ -350,9 +352,9 @@ $sales_permission = get_user_permission();
                             </div>
                         </div>
                         </div>
-                         <label class="text-left col-lg-5 col-form-label"> Actual Total </label>
-                    <div class="col-lg-7 pull-right">
-                            <input type="text" id="actual_total"  readonly name="actual_total" class="form-control m-input" placeholder="Actual Total">
+                         <label class="text-left col-lg-5 col-sm-5 col-form-label"> Actual Total </label>
+                    <div class="col-lg-7 col-sm-7 pull-right">
+                            <input type="text" id="actual_total"  readonly name="actual_total" class="form-control m-input" placeholder="Actual Total" value="">
                         </div>
                     </div>
                     </div>

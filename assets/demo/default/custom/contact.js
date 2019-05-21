@@ -58,7 +58,8 @@ $(document).ready(function () {
 
 					$("#cont_id").val(res.data[0].id);
 
-					$("#cont_account").val(res.data[0].account_id);
+					//$("#cont_account").find("option[value='"+ res.data[0].account_id +"']").prop("selected", true);
+					$("#cont_account").val(res.data[0].account_id).trigger('change');;
 					$("#cont_fname").val(res.data[0].first_name);
 					$("#cont_lname").val(res.data[0].last_name);
 					$("#cont_mobile_no").val(res.data[0].mobile);

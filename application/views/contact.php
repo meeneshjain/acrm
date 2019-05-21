@@ -161,7 +161,6 @@ $contact_permission = get_user_permission();
                                     } ?>
                                 </select> -->
                                  <select required style="width: 100%" class="form-control select2_selectbox" id="cont_account" name="account_name" data-placeholder="Select Account">
-                                 <option value=""> Select Account</option>
                                      <?php  if(isset($account_list) && !empty($account_list))  {
                                         foreach ($account_list as $key => $value)  {
                                             echo "<option value=".$value->id.">".$value->name." (".$value->account_number.")</option>";
