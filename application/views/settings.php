@@ -386,7 +386,7 @@
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="import_data_option_form"
-                data-parsley-validate action="">
+                data-parsley-validate action="" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title" id="import_data_option_lable"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -406,18 +406,39 @@
                         </div>
                     </div>
                     <?php } else { ?>
-                        <div class="form-group m-form__group row">
+                    <div class="form-group m-form__group row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <label for="current_company_loggedin">
                                 Company
                             </label>
-                            <input  readonly class="form-control" id="current_company_loggedin" name="current_company_loggedin" value="">
+                            <input  readonly class="form-control" id="current_company_loggedin" name="select_company_import" value="">
                         </div>
                     </div>
                     <?php } ?>
+                    <div class="form-group m-form__group row">
+                          <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label for="exampleInputEmail1">
+                                Upload File
+                            </label>
+                            <div></div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="importfile">
+                                <label class="custom-file-label" for="importfile">
+                                    Choose excel file
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
+                <div class="pull-left pull-left col-sm-8">
+                      <a href="<?php echo base_url('uploads/item_master.xlsx'); ?>" download class="btn btn-info">
+                        <i class="fa fa-cloud-download"></i> Download Sample
+                    </a>
+                </div>
                       <input  type="hidden" class="form-control" id="current_logged_id" name="current_logged_id" value="<?php echo get_current_company(); ?>">
+                      <input type="hidden" id="import_key" name="import_key" value="">
                     <button type="submit" id="update_import_data_option_btn" class="btn btn-primary">
                         <i class="fa fa-check"></i> Update
                     </button>

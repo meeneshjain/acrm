@@ -384,4 +384,32 @@ class Settings extends CI_Controller {
         echo json_encode($output); 
     }
     
+    public function import_excel($type, $company_id){
+        $post_data = $this->input->post(NULL, TRUE);
+        print_r($_FILES);
+        if($_FILES['file']['error'] == 0){
+            $name = $_FILES['file']['name'];
+            $tmp_name = $_FILES['file']['tmp_name'];
+            $ext = pathinfo($name,PATHINFO_EXTENSION);
+
+            $rand = generate_random_string();
+            $renamedfile = $rand.".".$ext;
+            $target_path = trim(UPLOAD_PDF.$renamedfile);
+            if(move_uploaded_file($tmp_name,$target_path))	{
+              echo $target_path;
+              require_once PLUGIN_PATH.'PHPExcel.php';
+              $excelReader = PHPExcel_IOFactory::createReaderForFile($target_path);
+              $excelObj = $excelReader->load($tmpfname);
+            $worksheet = $excelObj->getSheet(0);
+            print_r($worksheet); die;
+            } else {
+                $output = array("status" => "info","message" => 'Invalid Logged in company.', "data" => "");        
+            }
+        } else {
+            $output = array("status" => "info","message" => 'Invalid Logged in company.', "data" => "");    
+        }
+        echo json_encode($output); 
+        die;
+    }
+    
 }

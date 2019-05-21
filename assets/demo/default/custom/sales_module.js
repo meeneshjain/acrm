@@ -137,6 +137,9 @@ $(document).ready(function () {
 
         $(".item_detail_section").append(output);
         $("." + select2_class).select2({ placeholder: $(this).data("placeholder") });
+        setTimeout(function () {
+            $("." + select2_class).val("").trigger("change");
+        }, 10);
     });
 
     $(document).on("click", ".remove_crrent_row", function () {
@@ -161,6 +164,7 @@ $(document).ready(function () {
             obj.parents(".item_list_data").slideUp(function () {
                 $(this).remove();
                 final_total();
+                $(".account_code").val("").trigger("change");
             });
         }
 
@@ -194,6 +198,7 @@ $(document).ready(function () {
             $("#account_name").val(obj.find('option:selected').attr('data-account_name'));
         } else {
             $("#contact_person").html('<option value="">Select Business Partner</option>\n');
+            $("#contact_person").val("").trigger("change");
         }
     });
 
@@ -529,7 +534,8 @@ function get_sales_details(id, called_from) {
                     }
                     block_count++;
                     var select22_class = "select22_id_" + block_count;
-                    output += `<tr class="item_list_data" data-is_saved="1">
+                    var price_list_class = "price_list_id" + block_count;
+                    output = `<tr class="item_list_data" data-is_saved="1">
                     <td> <div class="form-control m-input" >` + block_count + `</div> </td>
                     <td>  <select id="item_code_`+ block_count + `" name="item_detail[` + block_count + `][id]" required class="form-control m-input item_code_list ` + select22_class + `" style="width: 100%" data-placeholder="Item Code">
                     `+ item_options + `
@@ -542,7 +548,7 @@ function get_sales_details(id, called_from) {
                     <input type="text" id="quantity_`+ block_count + `" data-item_price_quantity="price_` + block_count + `" name="item_detail[` + block_count + `][quantity]" required class="form-control m-input item_price_quantity" placeholder="Quantity" value="` + item_data['quantity'] + `">
                     </td>
                     <td>
-                    <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" style="width: 100%" class="form-control m-input price_list_select ` + select22_class + `" data-placeholder="Price">
+                    <select id="price_`+ block_count + `" required data-item_pricelist="item_code_` + block_count + `" name="item_detail[` + block_count + `][price]" style="width: 100%" class="form-control m-input price_list_select ` + price_list_class + `" data-placeholder="Price">
                     `+ selected_price_list + `
                     </select>
                     </td>
@@ -564,10 +570,11 @@ function get_sales_details(id, called_from) {
                             <i class="fa fa-minus"></i></a>
                     </td>
                     </tr>`;
+                    $(".item_detail_section").append(output);
+                    $("." + select22_class).select2({ placeholder: $(this).data("placeholder") });
+                    $("." + price_list_class).select2({ placeholder: $(this).data("placeholder") });
                 }
 
-                $(".item_detail_section").html(output);
-                $("." + select22_class).select2({ placeholder: $(this).data("placeholder") });
             }
 
         }

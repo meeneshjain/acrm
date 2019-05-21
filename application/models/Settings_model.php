@@ -296,10 +296,16 @@ class Settings_model extends CI_Model {
      public function get_current_company_details(){
        $logged_in_company = get_current_company();
        if($logged_in_company != 0){
-            $select_company_detail = "SELECT * FROM `companies` WHERE `id` = '$logged_in_company'"; 
+            $select_company_detail = "SELECT * FROM `companies` WHERE status = 1 AND is_deleted = '0' AND `id` = '$logged_in_company'"; 
+            $res = $this->db->query($select_company_detail)->row_array();    
         } else {
-            $select_company_detail = "SELECT * FROM `companies`"; 
+            $select_company_detail = "SELECT * FROM `companies` WHERE status = 1 AND is_deleted = '0'"; 
+            $res = $this->db->query($select_company_detail)->result_array();  
         }
-        return $this->db->query($select_company_detail)->row_array();    
+        return $res;
+    }
+    
+    public function import_excel(){
+        
     }
 }
