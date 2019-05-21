@@ -113,7 +113,8 @@ $sales_permission = get_user_permission();
                     <h4 class="modal-title" id="add_update_user_modal_label">
                     <?php echo $popup_title; ?>
                     </h4>
-                    <button onclick="printSalesOrder()" type="button">Print</button>
+                    <span class="col-sm-9"><button class="pull-right btn btn-xs btn-brand" onclick="printSalesOrder()" type="button" title="Print Popup Content"><i class="fa fa-print"></i></button></span>
+                    
                     <button type="button" class="close close_modal_common" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             &times;
