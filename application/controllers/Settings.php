@@ -375,7 +375,7 @@ class Settings extends CI_Controller {
     }
     
     public function get_current_company_details(){
-         $company_info = $this->settings_model->get_current_company_details();
+        $company_info = $this->settings_model->get_current_company_details();
         if($company_info){
             $output = array("status" => "success","message" => "", "data" => $company_info);    
         } else {
@@ -386,7 +386,6 @@ class Settings extends CI_Controller {
     
     public function import_excel($type, $company_id){
         $post_data = $this->input->post(NULL, TRUE);
-        print_r($_FILES);
         if($_FILES['file']['error'] == 0){
             $name = $_FILES['file']['name'];
             $tmp_name = $_FILES['file']['tmp_name'];
@@ -396,17 +395,29 @@ class Settings extends CI_Controller {
             $renamedfile = $rand.".".$ext;
             $target_path = trim(UPLOAD_PDF.$renamedfile);
             if(move_uploaded_file($tmp_name,$target_path))	{
-              echo $target_path;
-              require_once PLUGIN_PATH.'PHPExcel.php';
-              $excelReader = PHPExcel_IOFactory::createReaderForFile($target_path);
-              $excelObj = $excelReader->load($tmpfname);
-            $worksheet = $excelObj->getSheet(0);
-            print_r($worksheet); die;
+              // echo $target_path;
+               $this->load->library('excel');
+               try {
+                    $inputFileType = PHPExcel_IOFactory::identify($target_path);
+                    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+                    $objPHPExcel = $objReader->load($target_path);
+                } catch (Exception $e) {
+                    die('Error loading file "' . pathinfo($target_path, PATHINFO_BASENAME)
+                            . '": ' . $e->getMessage());
+                }
+                $excel_sheet_data = $objPHPExcel->getActiveSheet()->toArray(null, true, true, false);
+                $total_sheet_columns = count($excel_sheet_data);
+                if($total_sheet_columns > 0){
+                    $import_data = $this->settings_model->import_excel_data($excel_sheet_data , $company_id);
+                    $output = array("status" => "success","message" => "", "success_import" => $import_data['success_import'], "failed_count" => $import_data['failed_count']); 
+                } else {
+                    $output = array("status" => "error","message" => 'Invalid Excel.', "data" => "");            
+                }
             } else {
-                $output = array("status" => "info","message" => 'Invalid Logged in company.', "data" => "");        
+                $output = array("status" => "error","message" => 'Invalid Logged in company.', "data" => "");        
             }
         } else {
-            $output = array("status" => "info","message" => 'Invalid Logged in company.', "data" => "");    
+            $output = array("status" => "error","message" => 'Invalid Logged in company.', "data" => "");    
         }
         echo json_encode($output); 
         die;

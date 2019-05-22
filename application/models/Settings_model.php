@@ -305,7 +305,50 @@ class Settings_model extends CI_Model {
         return $res;
     }
     
-    public function import_excel(){
-        
+    public function import_excel_data($excel_sheet_data, $company_id){
+        $upload_success_count = 0;
+        $failed_count = 0;
+        array_shift($excel_sheet_data);
+        foreach($excel_sheet_data as $row_data){
+            
+            $code        = $row_data[0];
+            $name        = $row_data[1];
+            $description = $row_data[2];
+            $group_type  = $row_data[3];
+            $item_type   = $row_data[4];
+            $uom         = $row_data[5];
+            $is_gst      = $row_data[6];
+            $gst_rate    = $row_data[7];
+            
+            $check_code_company = $this->db->query("SELECT code from items WHERE code= '$code' AND company_id = '$company_id'");
+            if($check_code_company->num_rows() == 0){
+                $insert_gst_is = ($is_gst == 'Y') ? 1 : 0;
+                 $insert_item_data = array(
+                 "company_id" => $company_id,
+                 "code" => $code,
+                 "name" => $name,
+                 "description" => $description,
+                 "group_type" => $group_type,
+                 "type" => $item_type,
+                 "unit" => $uom,
+                 "is_gst" => $insert_gst_is,
+                 "gst_tax_rate" => $gst_rate,
+                 "status" => 1,
+                 "is_deleted" => 0,
+                 "created_date" => DATETIME,
+                 "updated_date" => DATETIME,
+                 );       
+                 $insert_item = $this->db->insert('items', $insert_item_data);
+                 $item_id = $this->db->insert_id();
+                 if($item_id > 0){
+                     $upload_success_count++;
+                 } else {
+                    $failed_count++;     
+                 }
+            } else {
+                $failed_count++;
+            }
+        }
+        return array("success_import" => $upload_success_count, "failed_count" => $failed_count);
     }
 }

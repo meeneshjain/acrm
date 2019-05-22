@@ -577,23 +577,20 @@ $(document).ready(function (event) {
                 data: formData,
                 processData: false,
                 contentType: false,
+                dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
                     hide_loading(btn_id, btn_text);
-
+                    notify_alert(data.status, 'Import excel successful, Total Success count ' + data.success_import + ' & Total rows failed ' + data.failed_count);
+                    setTimeout(function () {
+                        $("#import_data_modal").modal('hide');
+                    }, 500);
                 }, error: function (data) {
                     hide_loading(btn_id, btn_text);
-
                 }
             });
         }
-
-
-
-
     });
-
-
 }); // dom end 
 
 function template_loader() {
