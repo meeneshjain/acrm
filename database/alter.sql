@@ -893,3 +893,6 @@ INSERT INTO `state` (`id`, `country_id`, `name`, `status`) VALUES
 ALTER TABLE `account` ADD `gst_no` varchar(100) COLLATE 'latin1_swedish_ci' NOT NULL AFTER `optional_contact`;
 
 ALTER TABLE `contact_lead`ADD `pan_no` varchar(100) NOT NULL AFTER `convert_lead_date`;
+
+ALTER TABLE `sales_order`
+CHANGE `pay_terms` `pay_terms` text COLLATE 'utf8_general_ci' NOT NULL AFTER `pan_card_no`;
