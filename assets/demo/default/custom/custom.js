@@ -191,7 +191,7 @@ $(document).ready(function () {
             'buttonText': "<i class='fa fa-upload'></i> " + button_text,
             'buttonClass': 'btn btn-primary ',
             'fileType': ["image\/gif", "image\/jpeg", "image\/png"],
-            'fileObjName': 'image_upload',
+            'fileObjName': 'file_upload',
             'uploadScript': base_url + 'home/upload/' + $("#changed_images").data("folder_name"),
             'onUploadComplete': function (file, data) {
                 if (data != "e2") {

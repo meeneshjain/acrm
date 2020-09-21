@@ -499,6 +499,7 @@ class Items_model extends CI_Model {
 			$row[] =  $aRow['start_date'];
 			$row[] =  $aRow['end_date'];
 			$priority = $aRow['priority'];
+			$priority_class = "text-primary";
 			if($priority == "low"){
 				$priority_class = "text-primary";
 			} else if($priority == "medium"){
